@@ -2934,8 +2934,9 @@ buildDynamicMonthFilter();
 </script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<script>
     const firebaseConfig = {
         apiKey: "AIzaSyDflDPLKU5UvsvWnAygAdsI0TjqR8qwUSM",
         authDomain: "kpss-2026-ec46f.firebaseapp.com",
@@ -2957,7 +2958,6 @@ buildDynamicMonthFilter();
     const originalSetItem = localStorage.setItem;
     const originalRemoveItem = localStorage.removeItem;
 
-    // Firebase'in dizileri bozmasını engelleyen koruma kalkanı
     function normalizeData(val) {
         if (Array.isArray(val)) return val;
         if (val && typeof val === 'object') {
@@ -2979,7 +2979,7 @@ buildDynamicMonthFilter();
         err.style.color = "var(--t3)"; err.innerText = "Kayıt yapılıyor...";
         
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => { err.style.color = "var(--green)"; err.innerText = "Kayıt başarılı!"; })
+        .then(() => { err.style.color = "var(--green)"; err.innerText = "Kayıt başarılı! Giriş yapabilirsiniz."; })
         .catch((error) => {
             err.style.color = "var(--red)";
             err.innerText = "Hata: " + (error.code === 'auth/email-already-in-use' ? "Bu e-posta zaten kayıtlı." : error.message);
@@ -3001,7 +3001,7 @@ buildDynamicMonthFilter();
 
     function logoutUser() {
         if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { 
-            isSyncingFromCloud = true; // BULUTTAKİ VERİLERİN SİLİNMESİNİ DURDURUR! SADECE TELEFONU TEMİZLER.
+            isSyncingFromCloud = true; 
             Object.keys(localStorage).filter(k => k.startsWith('my_')).forEach(k => {
                 originalRemoveItem.call(localStorage, k);
             });
@@ -3021,7 +3021,6 @@ buildDynamicMonthFilter();
                 isSyncingFromCloud = true;
                 let changed = false;
 
-                // 1. Cihazda olup bulutta OLMAYAN verileri sil
                 Object.keys(localStorage).forEach(key => {
                     if (key.startsWith('my_') && !data[key]) {
                         originalRemoveItem.call(localStorage, key);
@@ -3029,7 +3028,6 @@ buildDynamicMonthFilter();
                     }
                 });
 
-                // 2. Buluttaki verileri düzeltip cihaza yaz
                 Object.keys(data).forEach(key => {
                     let normalized = normalizeData(data[key]);
                     let cloudStr = JSON.stringify(normalized);
@@ -3041,7 +3039,6 @@ buildDynamicMonthFilter();
 
                 isSyncingFromCloud = false;
 
-                // Ekranı güncelle
                 if (changed && typeof updateHisseListesi === 'function') {
                     updateHisseListesi();
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
