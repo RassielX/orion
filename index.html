@@ -2936,6 +2936,7 @@ buildDynamicMonthFilter();
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script>
+    <script>
     const firebaseConfig = {
         apiKey: "AIzaSyDflDPLKU5UvsvWnAygAdsI0TjqR8qwUSM",
         authDomain: "kpss-2026-ec46f.firebaseapp.com",
@@ -2953,6 +2954,21 @@ buildDynamicMonthFilter();
     let currentUser = null;
     let isSyncingFromCloud = false;
     let userRef = null;
+
+    const originalSetItem = localStorage.setItem;
+    const originalRemoveItem = localStorage.removeItem;
+
+    // Firebase'in dizileri bozmasını engelleyen koruma kalkanı
+    function normalizeData(val) {
+        if (Array.isArray(val)) return val;
+        if (val && typeof val === 'object') {
+            let keys = Object.keys(val);
+            if (keys.length > 0 && keys.every(k => !isNaN(k))) {
+                return Object.values(val);
+            }
+        }
+        return val;
+    }
 
     function registerUser() {
         const email = document.getElementById('authEmail').value;
@@ -2984,15 +3000,17 @@ buildDynamicMonthFilter();
         .catch((error) => { err.style.color = "var(--red)"; err.innerText = "Hata: E-posta veya şifre yanlış."; });
     }
 
-   function logoutUser() {
+    function logoutUser() {
         if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { 
-            // ÇIKIŞ YAPARKEN CİHAZIN HAFIZASINI SİL Kİ BAŞKASINA GEÇMESİN
-            Object.keys(localStorage).filter(k => k.startsWith('my_')).forEach(k => localStorage.removeItem(k));
+            isSyncingFromCloud = true; // BULUTTAKİ VERİLERİN SİLİNMESİNİ DURDURUR! SADECE TELEFONU TEMİZLER.
+            Object.keys(localStorage).filter(k => k.startsWith('my_')).forEach(k => {
+                originalRemoveItem.call(localStorage, k);
+            });
             auth.signOut().then(() => { location.reload(); }); 
         }
     }
 
-   auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
         if (user) {
             currentUser = user;
             document.getElementById('authModal').classList.remove('active');
@@ -3000,11 +3018,11 @@ buildDynamicMonthFilter();
             
             userRef = cloudDB.ref('orion_users/' + user.uid);
             userRef.on('value', (snapshot) => {
-                const data = snapshot.val() || {}; // Bulut boşsa (yeni hesapsa) boş kabul et
+                const data = snapshot.val() || {}; 
                 isSyncingFromCloud = true;
                 let changed = false;
 
-                // 1. Cihazda olup bulutta OLMAYAN verileri sil (Eski hesaptan kalan verileri yok eder)
+                // 1. Cihazda olup bulutta OLMAYAN verileri sil
                 Object.keys(localStorage).forEach(key => {
                     if (key.startsWith('my_') && !data[key]) {
                         originalRemoveItem.call(localStorage, key);
@@ -3012,9 +3030,10 @@ buildDynamicMonthFilter();
                     }
                 });
 
-                // 2. Buluttaki (Kendi kasandaki) verileri cihaza yaz
+                // 2. Buluttaki verileri düzeltip cihaza yaz
                 Object.keys(data).forEach(key => {
-                    let cloudStr = JSON.stringify(data[key]);
+                    let normalized = normalizeData(data[key]);
+                    let cloudStr = JSON.stringify(normalized);
                     if (localStorage.getItem(key) !== cloudStr) {
                         originalSetItem.call(localStorage, key, cloudStr);
                         changed = true;
@@ -3023,7 +3042,7 @@ buildDynamicMonthFilter();
 
                 isSyncingFromCloud = false;
 
-                // Veri değiştiyse/temizlendiyse ekranı yeni hesaba göre baştan çiz
+                // Ekranı güncelle
                 if (changed && typeof updateHisseListesi === 'function') {
                     updateHisseListesi();
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
@@ -3038,7 +3057,6 @@ buildDynamicMonthFilter();
         }
     });
 
-    const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
         originalSetItem.apply(this, arguments); 
         if (key.startsWith('my_') && !isSyncingFromCloud && userRef) {
@@ -3046,10 +3064,11 @@ buildDynamicMonthFilter();
         }
     };
 
-    const originalRemoveItem = localStorage.removeItem;
     localStorage.removeItem = function(key) {
         originalRemoveItem.apply(this, arguments);
-        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) { userRef.child(key).remove(); }
+        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) { 
+            userRef.child(key).remove(); 
+        }
     };
 </script>
 </body>
