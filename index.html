@@ -727,6 +727,22 @@ body {
 </head>
 <body>
 
+    <div class="modal-overlay active" id="authModal" style="background: rgba(7, 11, 18, 0.98); z-index: 999999;">
+    <div class="modal-content" style="width: 420px; padding: 40px; text-align: center; box-shadow: 0 0 100px rgba(59, 130, 246, 0.2);">
+        <div style="font-size: 48px; margin-bottom: 10px;">🌌</div>
+        <h2 style="color: var(--blue); margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;">ORION</h2>
+        <p style="color: var(--t3); font-size: 12px; margin-bottom: 25px;">Kişisel verileriniz şifrelenerek saklanır.</p>
+        <div class="input-group" style="margin-bottom: 15px; text-align: left;">
+            <input type="email" id="authEmail" placeholder="E-posta Adresi" style="width: 100%; text-align:center; font-size: 14px; padding: 12px;">
+        </div>
+        <div class="input-group" style="margin-bottom: 25px; text-align: left;">
+            <input type="password" id="authPassword" placeholder="Şifre (En az 6 hane)" style="width: 100%; text-align:center; font-size: 14px; padding: 12px;">
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px; height: 44px; font-size: 12px;" onclick="loginUser()">GİRİŞ YAP</button>
+        <button class="btn" style="width: 100%; height: 44px; font-size: 12px; background:transparent; border: 1px solid var(--t3); color: var(--t3);" onclick="registerUser()">YENİ KAYIT</button>
+        <div id="authError" style="color: var(--red); font-size: 12px; margin-top: 15px; font-weight: 600;"></div>
+    </div>
+</div>
 <div id="toast-container"></div>
 
 <datalist id="kayitliHisseler"></datalist>
@@ -777,6 +793,7 @@ body {
         </div>
         <div class="app-title"><strong>ORION</strong> <span class="app-title-sep">/</span> Portföy Komuta Merkezi</div>
         <div class="app-header-btns" style="gap:10px; align-items:center;">
+            <button class="btn btn-danger" style="padding:0 10px; height:28px; font-size:10px; letter-spacing:.4px; background: transparent; border: 1px solid var(--red);" onclick="logoutUser()">ÇIKIŞ</button>
             <span style="font-size:12px; color:var(--t3); opacity:.8;">🌙</span>
             <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Tema Değiştir (Koyu / Açık)"></button>
             <span style="font-size:12px; color:var(--t3); opacity:.8;">☀️</span>
@@ -2917,60 +2934,108 @@ buildDynamicMonthFilter();
 </script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 <script>
-    // 1. FIREBASE AYARLARI (KOPYALADIĞIN KISMI BURANIN ÜZERİNE YAPIŞTIRACAKSIN)
     const firebaseConfig = {
-        // BURAYI SİL VE KENDİ KOPYALADIĞIN KODU YAPIŞTIR
+        apiKey: "AIzaSyDflDPLKU5UvsvWnAygAdsI0TjqR8qwUSM",
+        authDomain: "kpss-2026-ec46f.firebaseapp.com",
+        databaseURL: "https://kpss-2026-ec46f-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "kpss-2026-ec46f",
+        storageBucket: "kpss-2026-ec46f.firebasestorage.app",
+        messagingSenderId: "1077675000074",
+        appId: "1:1077675000074:web:9c10cdf2ceb38abd2b7af3"
     };
 
-    // Bulutu Başlat
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
     const cloudDB = firebase.database();
-    const orionRef = cloudDB.ref('orion_portfoy_verileri');
+    const auth = firebase.auth();
 
+    let currentUser = null;
     let isSyncingFromCloud = false;
+    let userRef = null;
 
-    // 2. SİHİRLİ KISIM: SENİN ESKİ SİSTEMİNİ BOZMADAN HAVADA VERİYİ YAKALAYIP BULUTA ATAR
+    function registerUser() {
+        const email = document.getElementById('authEmail').value;
+        const pass = document.getElementById('authPassword').value;
+        const err = document.getElementById('authError');
+        if(!email || !pass) { err.innerText = "Lütfen e-posta ve şifre girin."; return; }
+        if(pass.length < 6) { err.innerText = "Şifre en az 6 hane olmalıdır."; return; }
+        
+        err.style.color = "var(--t3)"; err.innerText = "Kayıt yapılıyor...";
+        
+        auth.createUserWithEmailAndPassword(email, pass)
+        .then(() => { err.style.color = "var(--green)"; err.innerText = "Kayıt başarılı!"; })
+        .catch((error) => {
+            err.style.color = "var(--red)";
+            err.innerText = "Hata: " + (error.code === 'auth/email-already-in-use' ? "Bu e-posta zaten kayıtlı." : error.message);
+        });
+    }
+
+    function loginUser() {
+        const email = document.getElementById('authEmail').value;
+        const pass = document.getElementById('authPassword').value;
+        const err = document.getElementById('authError');
+        if(!email || !pass) { err.innerText = "Lütfen e-posta ve şifre girin."; return; }
+        
+        err.style.color = "var(--t3)"; err.innerText = "Giriş yapılıyor...";
+
+        auth.signInWithEmailAndPassword(email, pass)
+        .then(() => { err.style.color = "var(--green)"; err.innerText = "Başarılı!"; })
+        .catch((error) => { err.style.color = "var(--red)"; err.innerText = "Hata: E-posta veya şifre yanlış."; });
+    }
+
+    function logoutUser() {
+        if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { auth.signOut().then(() => { location.reload(); }); }
+    }
+
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById('authModal').classList.remove('active');
+            toast('Hoş geldin, veriler eşitleniyor...', 'success');
+            
+            userRef = cloudDB.ref('orion_users/' + user.uid);
+            userRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    isSyncingFromCloud = true;
+                    let changed = false;
+                    Object.keys(data).forEach(key => {
+                        let cloudStr = JSON.stringify(data[key]);
+                        if (localStorage.getItem(key) !== cloudStr) {
+                            originalSetItem.call(localStorage, key, cloudStr);
+                            changed = true;
+                        }
+                    });
+                    isSyncingFromCloud = false;
+
+                    if (changed && typeof updateHisseListesi === 'function') {
+                        updateHisseListesi();
+                        ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
+                        renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
+                        updateDashboard();
+                    }
+                }
+            });
+        } else {
+            currentUser = null; userRef = null;
+            document.getElementById('authModal').classList.add('active');
+        }
+    });
+
     const originalSetItem = localStorage.setItem;
     localStorage.setItem = function(key, value) {
-        originalSetItem.apply(this, arguments); // Kendi bilgisayarına kaydet
-        if (key.startsWith('my_') && !isSyncingFromCloud) {
-            try { orionRef.child(key).set(JSON.parse(value)); } catch(e) {} // Aynı anda buluta fırlat
+        originalSetItem.apply(this, arguments); 
+        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) {
+            try { userRef.child(key).set(JSON.parse(value)); } catch(e) {} 
         }
     };
 
     const originalRemoveItem = localStorage.removeItem;
     localStorage.removeItem = function(key) {
         originalRemoveItem.apply(this, arguments);
-        if (key.startsWith('my_') && !isSyncingFromCloud) {
-            orionRef.child(key).remove(); // Sildiğinde buluttan da sil
-        }
+        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) { userRef.child(key).remove(); }
     };
-
-    // 3. BULUTTA BİR DEĞİŞİKLİK OLURSA (ÖRN. TELEFONDAN İŞLEM YAPARSAN) PC'Yİ ANINDA GÜNCELLE
-    orionRef.on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-            isSyncingFromCloud = true;
-            let changed = false;
-            Object.keys(data).forEach(key => {
-                let cloudStr = JSON.stringify(data[key]);
-                if (localStorage.getItem(key) !== cloudStr) {
-                    originalSetItem.call(localStorage, key, cloudStr);
-                    changed = true;
-                }
-            });
-            isSyncingFromCloud = false;
-
-            // Eğer telefondan bir şey değiştirdiysen, bilgisayarın ekranı otomatik yenilensin
-            if (changed && typeof updateHisseListesi === 'function') {
-                updateHisseListesi();
-                ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
-                renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
-                updateDashboard();
-            }
-        }
-    });
 </script>
 </body>
 </html>
