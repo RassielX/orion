@@ -2984,11 +2984,15 @@ buildDynamicMonthFilter();
         .catch((error) => { err.style.color = "var(--red)"; err.innerText = "Hata: E-posta veya şifre yanlış."; });
     }
 
-    function logoutUser() {
-        if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { auth.signOut().then(() => { location.reload(); }); }
+   function logoutUser() {
+        if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { 
+            // ÇIKIŞ YAPARKEN CİHAZIN HAFIZASINI SİL Kİ BAŞKASINA GEÇMESİN
+            Object.keys(localStorage).filter(k => k.startsWith('my_')).forEach(k => localStorage.removeItem(k));
+            auth.signOut().then(() => { location.reload(); }); 
+        }
     }
 
-    auth.onAuthStateChanged((user) => {
+   auth.onAuthStateChanged((user) => {
         if (user) {
             currentUser = user;
             document.getElementById('authModal').classList.remove('active');
@@ -2996,29 +3000,40 @@ buildDynamicMonthFilter();
             
             userRef = cloudDB.ref('orion_users/' + user.uid);
             userRef.on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    isSyncingFromCloud = true;
-                    let changed = false;
-                    Object.keys(data).forEach(key => {
-                        let cloudStr = JSON.stringify(data[key]);
-                        if (localStorage.getItem(key) !== cloudStr) {
-                            originalSetItem.call(localStorage, key, cloudStr);
-                            changed = true;
-                        }
-                    });
-                    isSyncingFromCloud = false;
+                const data = snapshot.val() || {}; // Bulut boşsa (yeni hesapsa) boş kabul et
+                isSyncingFromCloud = true;
+                let changed = false;
 
-                    if (changed && typeof updateHisseListesi === 'function') {
-                        updateHisseListesi();
-                        ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
-                        renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
-                        updateDashboard();
+                // 1. Cihazda olup bulutta OLMAYAN verileri sil (Eski hesaptan kalan verileri yok eder)
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('my_') && !data[key]) {
+                        originalRemoveItem.call(localStorage, key);
+                        changed = true;
                     }
+                });
+
+                // 2. Buluttaki (Kendi kasandaki) verileri cihaza yaz
+                Object.keys(data).forEach(key => {
+                    let cloudStr = JSON.stringify(data[key]);
+                    if (localStorage.getItem(key) !== cloudStr) {
+                        originalSetItem.call(localStorage, key, cloudStr);
+                        changed = true;
+                    }
+                });
+
+                isSyncingFromCloud = false;
+
+                // Veri değiştiyse/temizlendiyse ekranı yeni hesaba göre baştan çiz
+                if (changed && typeof updateHisseListesi === 'function') {
+                    updateHisseListesi();
+                    ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
+                    renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
+                    updateDashboard();
                 }
             });
         } else {
-            currentUser = null; userRef = null;
+            currentUser = null; 
+            userRef = null;
             document.getElementById('authModal').classList.add('active');
         }
     });
