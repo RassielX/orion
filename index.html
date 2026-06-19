@@ -977,7 +977,10 @@ body {
             <div class="form-row">
                 <div class="input-group" style="flex: 0.8;"><label>Kategori</label><select id="masterCat" onchange="updateMasterFormUI()" style="border-color: var(--amber);"><option value="bist">BİST</option><option value="fon">Fonlar</option><option value="nasdaq">Nasdaq</option><option value="avrupa">Avrupa</option><option value="trade">GÜNLÜK AL-SAT</option><option value="arz">HALKA ARZ</option><option value="temettu">Temettü</option></select></div>
                 <div class="input-group"><label>Tarih</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('masterDate', -1)">◀</button><input type="date" id="masterDate" style="padding: 8px 10px;"><button class="btn-stepper" onclick="stepDate('masterDate', 1)">▶</button></div></div>
-                <input type="text" id="masterVarlik" list="kayitliHisseler" autocomplete="off" placeholder="Hisse/Fon Kodu" oninput="showQuickAssetInfo()">
+                <div class="input-group">
+                    <label>Varlık</label>
+                    <input type="text" id="masterVarlik" list="kayitliHisseler" autocomplete="off" placeholder="Hisse/Fon Kodu" oninput="showQuickAssetInfo()">
+                </div>
                 <div class="input-group" id="grpMasterAdet"><label>Adet</label><input type="number" id="masterAdet" placeholder="0" step="0.01"></div>
                 <div class="input-group"><label id="lblMasterMaliyet">ALIŞ FİYATI / MALİYET</label><input type="number" id="masterMaliyet" placeholder="0.00" step="0.01"></div>
                 <div class="input-group" id="grpMasterGuncel"><label>Güncel Fiyat</label><input type="number" id="masterGuncel" placeholder="0.00" step="0.01"></div>
@@ -995,8 +998,7 @@ body {
             </div>
             <div style="display:flex; gap:10px; margin-top:4px;">
                 <button class="btn btn-warning" style="height:28px; font-size:9.5px; padding:0 12px;" onclick="autoFillEkle()">+ ÜZERİNE EKLE</button>
-                <button class="btn btn-danger" style="height:28px; font-size:9.5px; padding:0 12px; background:linear-gradient(135deg, #ef4444, #b91c1c); color:#fff;" onclick="autoFillSat()">- TÜMÜNÜ SAT</button>
-            </div>
+<button class="btn btn-danger" style="height:28px; font-size:9.5px; padding:0 12px; background:linear-gradient(135deg, #ef4444, #b91c1c); color:#fff;" onclick="autoFillSat()">- SAT</button>            </div>
         </div>
         <div class="filter-bar">
             <label style="color:var(--amber);">📖 İŞLEM DEFTERİ (KÜMÜLATİF)</label>
@@ -1460,31 +1462,23 @@ body {
                     <div class="canvas-container" style="height: 180px; flex: none;"><canvas id="siriusCatChart"></canvas></div>
                 </div>
                 
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
-                    <div style="color: var(--t2); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 16px 16px 8px; text-align:center;">HACİM VE KÂR DETAYI</div>
-                    <div style="flex: 1; padding: 0 16px 16px; overflow-y: auto;">
-                        <table style="width: 100%; text-align: left; border-collapse: collapse; font-size: 11.5px; color: #FFFFFF;">
-                            <thead style="background: transparent;">
-                                <tr>
-                                    <th style="padding: 8px 4px; color: var(--t3); font-size: 9px; border-bottom: 1px solid rgba(255,255,255,0.05); background: transparent;">VARLIK</th>
-                                    <th style="padding: 8px 4px; color: var(--t3); font-size: 9px; text-align:right; border-bottom: 1px solid rgba(255,255,255,0.05); background: transparent;">HACİM (TL)</th>
-                                    <th style="padding: 8px 4px; color: var(--t3); font-size: 9px; text-align:right; border-bottom: 1px solid rgba(255,255,255,0.05); background: transparent;">NET K/Z</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${top5.map((a, index) => `
-                                <tr style="${index !== top5.length - 1 ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : ''}">
-                                    <td style="padding: 8px 4px; font-weight: 800; letter-spacing: 0.5px;">${a.varlik} <span style="color:var(--t3); font-size:9px; font-weight:600; margin-left:4px;">${a.cat.toUpperCase()}</span></td>
-                                    <td style="padding: 8px 4px; font-family: var(--mono); text-align:right; font-weight: 600;">${formatNumberStr(a.tutar)}</td>
-                                    <td style="padding: 8px 4px; text-align:right; border-bottom: none;">${formatKar(a.kar)}</td>
-                                </tr>
-                                `).join('')}
-                                ${top5.length === 0 ? '<tr><td colspan="3" style="text-align:center; padding: 20px; color:var(--t3);">Aktif varlık bulunamadı.</td></tr>' : ''}
-                            </tbody>
-                        </table>
+               <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; display: flex; flex-direction: column;">
+                    <div style="color: var(--t2); font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px; text-align:center;">HACİM VE KÂR DETAYI</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 180px; padding-right: 4px;">
+                        ${top5.map((a) => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                            <div style="display: flex; flex-direction: column; gap: 4px;">
+                                <div style="font-weight: 800; font-size: 13px; color: #fff;">${a.varlik} <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--t3); margin-left: 6px;">${a.cat.toUpperCase()}</span></div>
+                                <div style="font-size: 11px; color: var(--t3); font-weight: 600;">Hacim: <span style="font-family: var(--mono); color: var(--t2);">${formatTL(a.tutar)}</span></div>
+                            </div>
+                            <div style="text-align: right; font-size: 14px; font-weight: 800;">
+                                ${formatKar(a.kar)}
+                            </div>
+                        </div>
+                        `).join('')}
+                        ${top5.length === 0 ? '<div style="text-align:center; padding: 20px; color:var(--t3);">Aktif varlık bulunamadı.</div>' : ''}
                     </div>
                 </div>
-            </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 16px; margin-top: 16px;">
                 <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); padding: 14px; border-radius: 12px; display: flex; flex-direction:column; justify-content: center;">
@@ -2357,13 +2351,11 @@ body {
         toast('Üzerine Ekleme: Alınan yeni adet ve maliyeti girin.', 'info');
     }
 
-    function autoFillSat() {
-        // Satış için sistemi hazırlar: Elindeki tüm adedi yazar ve maliyeti 0 yapar (FIFO Kuralı)
-        let hamAdet = document.getElementById('qInfoAdet').innerText.replace(/\./g, '').replace(',', '.');
-        document.getElementById('masterAdet').value = parseFloat(hamAdet);
+   function autoFillSat() {
+        document.getElementById('masterAdet').value = ''; 
         document.getElementById('masterMaliyet').value = '0';
-        document.getElementById('masterSatis').focus();
-        toast('Satış Modu: Kalan tüm adet forma çekildi. Sadece satış fiyatını yazıp kaydedin!', 'warning');
+        document.getElementById('masterAdet').focus();
+        toast('Satış Modu: Satılacak adedi ve satış fiyatını girin.', 'warning');
     }
 
     function updateMasterFormUI() { 
