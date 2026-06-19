@@ -977,13 +977,25 @@ body {
             <div class="form-row">
                 <div class="input-group" style="flex: 0.8;"><label>Kategori</label><select id="masterCat" onchange="updateMasterFormUI()" style="border-color: var(--amber);"><option value="bist">BİST</option><option value="fon">Fonlar</option><option value="nasdaq">Nasdaq</option><option value="avrupa">Avrupa</option><option value="trade">GÜNLÜK AL-SAT</option><option value="arz">HALKA ARZ</option><option value="temettu">Temettü</option></select></div>
                 <div class="input-group"><label>Tarih</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('masterDate', -1)">◀</button><input type="date" id="masterDate" style="padding: 8px 10px;"><button class="btn-stepper" onclick="stepDate('masterDate', 1)">▶</button></div></div>
-                <div class="input-group"><label>Varlık</label><input type="text" id="masterVarlik" list="kayitliHisseler" autocomplete="off" placeholder="Hisse/Fon Kodu"></div>
+                <input type="text" id="masterVarlik" list="kayitliHisseler" autocomplete="off" placeholder="Hisse/Fon Kodu" oninput="showQuickAssetInfo()">
                 <div class="input-group" id="grpMasterAdet"><label>Adet</label><input type="number" id="masterAdet" placeholder="0" step="0.01"></div>
                 <div class="input-group"><label id="lblMasterMaliyet">ALIŞ FİYATI / MALİYET</label><input type="number" id="masterMaliyet" placeholder="0.00" step="0.01"></div>
                 <div class="input-group" id="grpMasterGuncel"><label>Güncel Fiyat</label><input type="number" id="masterGuncel" placeholder="0.00" step="0.01"></div>
                 <div class="input-group" id="grpMasterSatis"><label style="color:var(--amber);">Satış Fiyatı</label><input type="number" id="masterSatis" placeholder="Opsiyonel" step="0.01"></div>
                 <button class="btn btn-success" id="btnMasterSave" onclick="saveMasterForm()">Kaydet</button>
                 <button class="btn btn-danger" id="btnMasterCancel" style="display:none;" onclick="resetMasterForm()">İptal</button>
+            </div>
+        </div>
+        <div id="quickAssetInfo" style="display:none; background: var(--surface-3); border: 1px dashed var(--blue); border-radius: var(--r); padding: 12px 18px; margin-bottom: 14px; align-items: center; justify-content: space-between; animation: fadeUp .3s ease;">
+            <div style="display:flex; gap: 24px; align-items: center; flex-wrap:wrap;">
+                <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">SEÇİLİ VARLIK</span><strong id="qInfoVarlik" style="color:var(--blue); font-size:16px; font-family:var(--mono);">SASA</strong></div>
+                <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">AKTİF ADET</span><strong id="qInfoAdet" style="color:var(--t1); font-size:15px; font-family:var(--mono);">0</strong></div>
+                <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">ORT. MALİYET</span><strong id="qInfoMaliyet" style="color:var(--t1); font-size:15px; font-family:var(--mono);">0.00</strong></div>
+                <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">AÇIK KÂR/ZARAR</span><div id="qInfoKar" style="font-size:15px;">0,00 TL</div></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:4px;">
+                <button class="btn btn-warning" style="height:28px; font-size:9.5px; padding:0 12px;" onclick="autoFillEkle()">+ ÜZERİNE EKLE</button>
+                <button class="btn btn-danger" style="height:28px; font-size:9.5px; padding:0 12px; background:linear-gradient(135deg, #ef4444, #b91c1c); color:#fff;" onclick="autoFillSat()">- TÜMÜNÜ SAT</button>
             </div>
         </div>
         <div class="filter-bar">
@@ -2291,6 +2303,68 @@ body {
     function showImportStatus(msg, type) { const c={loading:'var(--t3)',success:'var(--green)',error:'var(--red)'}; document.getElementById('importStatusMsg').innerHTML=`<div style="color:${c[type]};font-size:12px;font-weight:800;">${msg}</div>`; document.getElementById('importResultArea').style.display='block'; }
     function refreshDataSummary() { const cats=[{key:'my_bist_v9', label:'BIST', color:'var(--green)', t:'portfoy'}, {key:'my_emtia_v9', label:'EMTİA', color:'var(--blue)', t:'portfoy'}, {key:'my_fon_v9', label:'FONLAR', color:'var(--amber)', t:'portfoy'}, {key:'my_nasdaq_v9', label:'NASDAQ', color:'#A855F7', t:'portfoy'}, {key:'my_avrupa_v9', label:'AVRUPA', color:'#EC4899', t:'portfoy'}, {key:'my_trade_data_v9', label:'AL-SAT', color:'var(--t3)', t:'array'}, {key:'my_temettu_data_v9', label:'TEMETTÜ', color:'var(--green)', t:'array'}, {key:'my_arz_data_v9', label:'HALKA ARZ', color:'var(--blue)', t:'array'}]; document.getElementById('existingDataSummary').innerHTML = cats.map(c=>{ let count=0; try { const p=JSON.parse(localStorage.getItem(c.key)||'{}'); count = c.t==='portfoy' ? Object.values(p).reduce((s,a)=>s+a.length,0) : (p.length||0); } catch(e){} return `<div style="background:var(--surface-3);border:1px solid var(--border);border-left:4px solid ${c.color};border-radius:8px;padding:12px;"><div style="color:${c.color};font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:6px;">${c.label}</div><div style="font-size:20px;font-weight:800;font-family:var(--mono);">${count}</div></div>`; }).join(''); }
     function confirmClearAll() { if(confirm('⚠️ TÜM VERİLER SİLİNECEK! Emin misiniz?')) { Object.keys(localStorage).filter(k=>k.startsWith('my_')).forEach(k=>localStorage.removeItem(k)); location.reload(); } }
+// ============================================================
+    // HİSSE YAZINCA ÇIKAN HIZLI ASİSTAN RADARI
+    // ============================================================
+    function showQuickAssetInfo() {
+        let cat = document.getElementById('masterCat').value;
+        let varlik = document.getElementById('masterVarlik').value.toUpperCase().trim();
+        let panel = document.getElementById('quickAssetInfo');
+        
+        // Sadece BIST, FON, NASDAQ, AVRUPA kategorilerinde ve hisse adı yazıldıysa çalışır
+        if (!varlik || ['trade', 'arz', 'temettu'].includes(cat) || varlik.length < 2) {
+            panel.style.display = 'none';
+            return;
+        }
+
+        let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+        let aktifAdet = 0;
+        let toplamMaliyet = 0;
+        let sonGuncel = 0;
+        let kur = cat === 'nasdaq' ? (parseFloat(document.getElementById('usdTryRate')?.value)||1) : (cat === 'avrupa' ? (parseFloat(document.getElementById('eurTryRate')?.value)||1) : 1);
+        let sembol = cat === 'nasdaq' ? '$' : (cat === 'avrupa' ? '€' : 'TL');
+
+        // Tüm tarihleri tarayıp bu hissenin aktif lotlarını toplar
+        Object.keys(db).forEach(date => {
+            db[date].forEach(item => {
+                if (item.varlik === varlik && !item.isSatildi) {
+                    aktifAdet += Number(item.adet);
+                    toplamMaliyet += Number(item.alisTutari);
+                    sonGuncel = Number(item.guncel);
+                }
+            });
+        });
+
+        if (aktifAdet > 0.0001) { // Eğer elde hisse varsa paneli aç
+            let ortMaliyet = toplamMaliyet / aktifAdet;
+            let kar = ((aktifAdet * sonGuncel) - toplamMaliyet) * kur; // TL Cinsinden Kâr
+            
+            document.getElementById('qInfoVarlik').innerText = varlik;
+            document.getElementById('qInfoAdet').innerText = new Intl.NumberFormat('tr-TR').format(aktifAdet);
+            document.getElementById('qInfoMaliyet').innerText = formatNumberStr(ortMaliyet) + ' ' + sembol;
+            document.getElementById('qInfoKar').innerHTML = formatKar(kar);
+            
+            panel.style.display = 'flex';
+        } else {
+            panel.style.display = 'none'; // Elde yoksa paneli gizle
+        }
+    }
+
+   function autoFillEkle() {
+        document.getElementById('masterMaliyet').value = '';
+        document.getElementById('masterSatis').value = '';
+        document.getElementById('masterAdet').focus();
+        toast('Üzerine Ekleme: Alınan yeni adet ve maliyeti girin.', 'info');
+    }
+
+    function autoFillSat() {
+        // Satış için sistemi hazırlar: Elindeki tüm adedi yazar ve maliyeti 0 yapar (FIFO Kuralı)
+        let hamAdet = document.getElementById('qInfoAdet').innerText.replace(/\./g, '').replace(',', '.');
+        document.getElementById('masterAdet').value = parseFloat(hamAdet);
+        document.getElementById('masterMaliyet').value = '0';
+        document.getElementById('masterSatis').focus();
+        toast('Satış Modu: Kalan tüm adet forma çekildi. Sadece satış fiyatını yazıp kaydedin!', 'warning');
+    }
 
     function updateMasterFormUI() { 
         let cat = document.getElementById('masterCat').value; 
@@ -2301,6 +2375,9 @@ body {
         grpGuncel.style.display = 'flex'; grpSatis.style.display = 'flex'; grpAdet.style.display = 'flex'; lblMaliyet.innerText = 'ALIŞ FİYATI / MALİYET'; 
         if (cat === 'temettu') { grpGuncel.style.display = 'none'; grpSatis.style.display = 'none'; grpAdet.style.display = 'none'; lblMaliyet.innerText = 'NET TEMETTÜ TUTARI (TL)'; } 
         else if (cat === 'trade' || cat === 'arz') { grpGuncel.style.display = 'none'; } 
+        
+        // Asistanı kategori değiştiğinde de tetikler
+        showQuickAssetInfo();
     }
     
     function resetMasterForm() { 
@@ -2311,6 +2388,7 @@ body {
         let btn = document.getElementById('btnMasterSave'); 
         if(btn) { btn.innerText = "Kaydet"; btn.classList.remove('btn-warning'); btn.classList.add('btn-success'); } 
         document.getElementById('btnMasterCancel').style.display = 'none'; 
+        document.getElementById('quickAssetInfo').style.display = 'none';
     }
 
     function executeFIFO_Sell(cat, sellDate, varlik, sellAdet, sellPrice) {
