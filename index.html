@@ -86,9 +86,49 @@
         [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .table-responsive { background-color: rgba(255, 255, 255, 0.7); }
         [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
+        /* Açık temada verilerin ve tabloların okunurluğunu artıran kontrast */
+        [data-theme="light"] body { color: #020617; }
+        [data-theme="light"] .app-title, 
+        [data-theme="light"] .app-title strong,
+        [data-theme="light"] .stat-card h4, 
+        [data-theme="light"] .summary-bar .title,
+        [data-theme="light"] .chart-box h3,
+        [data-theme="light"] .form-title,
+        [data-theme="light"] .hedef-panel h4 { color: #020617 !important; font-weight: 900 !important; }
+        [data-theme="light"] table td, 
+        [data-theme="light"] .val, 
+        [data-theme="light"] .metric span,
+        [data-theme="light"] .stat-list span { color: #0f172a !important; font-weight: 800 !important; }
+        [data-theme="light"] table th { color: #1e293b !important; background: rgba(226, 232, 240, 1) !important; font-weight: 900 !important; }
+        [data-theme="light"] .text-muted { color: #475569 !important; }
         /* Açık temada sekmelerin kontrastını artırır */
         [data-theme="light"] .tab-btn { font-weight: 800; opacity: 0.85; filter: saturate(0.8) contrast(1.2); }
         [data-theme="light"] .tab-btn.active { opacity: 1; filter: saturate(1) contrast(1.5); }
+        /* --- AÇIK TEMA KESKİN KONTRAST (BAŞLIKLAR VE TABLOLAR) --- */
+        [data-theme="light"] body { color: #020617; }
+        [data-theme="light"] .app-title, 
+        [data-theme="light"] .app-title strong,
+        [data-theme="light"] .stat-card h4, 
+        [data-theme="light"] .summary-bar .title,
+        [data-theme="light"] .chart-box h3,
+        [data-theme="light"] .form-title,
+        [data-theme="light"] .hedef-panel h4 {
+            color: #020617 !important;
+            font-weight: 900 !important;
+        }
+        [data-theme="light"] table td, 
+        [data-theme="light"] .val, 
+        [data-theme="light"] .metric span,
+        [data-theme="light"] .stat-list span {
+            color: #0f172a !important;
+            font-weight: 800 !important;
+        }
+        [data-theme="light"] table th {
+            color: #1e293b !important;
+            background: rgba(226, 232, 240, 1) !important;
+            font-weight: 900 !important;
+        }
+        [data-theme="light"] .text-muted { color: #475569 !important; }
 
         /* --- EN ALT TELİF İMZASI CSS --- */
         .footer-copy {
@@ -902,8 +942,13 @@ body {
     </div>
 
     <div id="ozet-tab" class="tab-content active">
-<div id="endeks-bar" style="margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 15px rgba(0,0,0,0.2);">            <div class="tradingview-widget-container">
-              <div class="tradingview-widget-container__widget"></div>
+<div id="endeks-bar" style="position: relative; margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 15px rgba(0,0,0,0.2);">
+            <div style="position: absolute; inset: 0; z-index: 0; opacity: 0.65; pointer-events: none;">
+                <div class="chart-line line-blue" style="height: 100%; background-size: 50vw 100%; top: -5px;"></div>
+                <div class="chart-line line-green" style="height: 100%; background-size: 50vw 100%; top: 5px;"></div>
+                <div class="chart-line line-amber" style="height: 100%; background-size: 50vw 100%; top: 15px;"></div>
+            </div>
+            <div class="tradingview-widget-container" style="position: relative; z-index: 1;">              <div class="tradingview-widget-container__widget"></div>
               <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
               {
               "symbols": [
@@ -1334,13 +1379,13 @@ body {
             localStorage.setItem('portfoy_theme', 'light');
             toast('Açık tema aktif', 'info', 2000);
         }
-        setTimeout(() => {
+       setTimeout(() => {
             const isDark = html.getAttribute('data-theme') !== 'light';
             Chart.defaults.color = isDark ? '#64748B' : '#94A3B8';
             Chart.defaults.borderColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
             updateDashboard();
 
-            // Tema değiştiğinde borsa bandını yenile
+            // Borsa bandı tema değişince güncellenir
             let widgetScript = document.querySelector('#endeks-bar script');
             if (widgetScript) {
                 let barContainer = document.getElementById('endeks-bar');
@@ -1351,8 +1396,9 @@ body {
                 let config = JSON.parse(widgetScript.innerHTML);
                 config.colorTheme = isDark ? 'dark' : 'light';
                 newScript.innerHTML = JSON.stringify(config);
-                barContainer.innerHTML = '<div class="tradingview-widget-container__widget"></div>';
-                barContainer.appendChild(newScript);
+                // İçerideki div'i koru, sadece script'i yenile
+                barContainer.querySelector('.tradingview-widget-container').innerHTML = '<div class="tradingview-widget-container__widget"></div>';
+                barContainer.querySelector('.tradingview-widget-container').appendChild(newScript);
             }
         }, 50);
     }
