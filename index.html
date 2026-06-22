@@ -141,16 +141,17 @@
         html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
 body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            font-size: 13px;
-            background-color: #070b12; /* Derin uzay siyahı */
-            /* 3125.jpg fotoğrafındaki gibi belirgin ve zarif gümüş dalgalar */
-            color: var(--t1);
-            height: 100vh;
-            overflow: hidden;
-            padding: 10px 12px;
-            transition: background .4s, color .4s;
-            position: relative;
+            body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    background-color: var(--bg);
+    color: var(--t1);
+    height: 100vh;
+    overflow: hidden;
+    padding: 10px 12px;
+    transition: background .4s, color .4s;
+    position: relative;
+}
         }
 
         body::before {
@@ -942,34 +943,32 @@ body {
     </div>
 
     <div id="ozet-tab" class="tab-content active">
-<div id="endeks-bar" style="position: relative; margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 15px rgba(0,0,0,0.2);">
-            <div style="position: absolute; inset: 0; z-index: 0; opacity: 0.65; pointer-events: none;">
-                <div class="chart-line line-blue" style="height: 100%; background-size: 50vw 100%; top: -5px;"></div>
-                <div class="chart-line line-green" style="height: 100%; background-size: 50vw 100%; top: 5px;"></div>
-                <div class="chart-line line-amber" style="height: 100%; background-size: 50vw 100%; top: 15px;"></div>
-            </div>
-            <div class="tradingview-widget-container" style="position: relative; z-index: 1;">              <div class="tradingview-widget-container__widget"></div>
-              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-              {
-              "symbols": [
+<div id="endeks-bar" style="position: relative; margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">
+    <div style="position: absolute; inset: 0; z-index: 0; opacity: 0.2; pointer-events: none;">
+        <div class="line-blue" style="position: absolute; width: 200%; height: 100%; animation: chartFlow 25s linear infinite;"></div>
+        <div class="line-green" style="position: absolute; width: 200%; height: 100%; animation: chartFlow 35s linear infinite;"></div>
+    </div>
+    
+    <div class="tradingview-widget-container" style="position: relative; z-index: 1;">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+            "symbols": [
                 { "proName": "BIST:XU030", "title": "BIST 30" },
                 { "proName": "BIST:XU100", "title": "BIST 100" },
                 { "proName": "FX:USDTRY", "title": "USD/TRY" },
                 { "proName": "FX:EURTRY", "title": "EUR/TRY" },
-                { "proName": "OANDA:XAUUSD", "title": "ALTIN (Ons)" },
-                { "proName": "CAPITALCOM:US100", "title": "NASDAQ 100" },
-                { "proName": "CAPITALCOM:US500", "title": "S&P 500" },
-                { "proName": "CAPITALCOM:DE40", "title": "DAX (Avrupa)" }
-              ],
-              "showSymbolLogo": true,
-              "colorTheme": (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'),
-              "isTransparent": true,
-              "displayMode": "adaptive",
-              "locale": "tr"
-            }
-              </script>
-            </div>
-        </div>
+                { "proName": "OANDA:XAUUSD", "title": "ALTIN (Ons)" }
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'),
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "locale": "tr"
+        }
+        </script>
+    </div>
+</div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="color:var(--t3); font-size:11px; letter-spacing:.6px; font-weight:800; text-transform:uppercase;">Genel Portföy Özeti</div>
