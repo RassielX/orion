@@ -84,8 +84,102 @@
         [data-theme="light"] .stat-card { background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-color: rgba(0,0,0,0.08); }
         [data-theme="light"] .hedef-panel { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(0,0,0,0.08); }
         [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
-        [data-theme="light"] .table-responsive { background-color: rgba(255, 255, 255, 0.7); }
+        [data-theme="light"] .table-responsive { background-color: rgba(255,255,255,0.18) !important; }
+        [data-theme="light"] .summary-bar { background: rgba(255,255,255,0.20); }
+        [data-theme="light"] .chart-box { background: rgba(255,255,255,0.18); }
+        [data-theme="light"] .trade-form { background: rgba(255,255,255,0.20); }
+        [data-theme="light"] .filter-bar { background: rgba(255,255,255,0.20) !important; }
+        [data-theme="light"] .stat-card { background: linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(240,245,255,0.20) 100%) !important; }
+        [data-theme="light"] .hedef-panel { background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(240,245,255,0.16) 100%) !important; }
+        [data-theme="light"] .modal-content { background: rgba(255,255,255,0.88); }
+        /* Açık tema metin kontrast iyileştirmesi */
+        [data-theme="light"] .tab-btn { color: #475569 !important; }
+        [data-theme="light"] .tab-btn[data-tab="ozet-tab"] { color: #0369a1 !important; }
+        [data-theme="light"] .tab-btn[data-tab="ana-portfoy-tab"] { color: #b45309 !important; }
+        [data-theme="light"] .tab-btn[data-tab="bist-tab"] { color: #047857 !important; }
+        [data-theme="light"] .tab-btn[data-tab="emtia-tab"] { color: #92400e !important; }
+        [data-theme="light"] .tab-btn[data-tab="fon-tab"] { color: #6d28d9 !important; }
+        [data-theme="light"] .tab-btn[data-tab="nasdaq-tab"] { color: #9d174d !important; }
+        [data-theme="light"] .tab-btn[data-tab="avrupa-tab"] { color: #1d4ed8 !important; }
+        [data-theme="light"] .tab-btn[data-tab="alsat-tab"] { color: #c2410c !important; }
+        [data-theme="light"] .tab-btn[data-tab="temettu-tab"] { color: #065f46 !important; }
+        [data-theme="light"] .tab-btn[data-tab="halkaarz-tab"] { color: #4338ca !important; }
+        [data-theme="light"] .tab-btn[data-tab="toplam-kar-tab"] { color: #7e22ce !important; }
+        [data-theme="light"] .tab-btn[data-tab="import-tab"] { color: #374151 !important; }
+        [data-theme="light"] .input-group label { color: #374151 !important; }
+        [data-theme="light"] .trade-form .form-title { color: #1e3a5f !important; }
+        [data-theme="light"] .filter-bar label { color: #374151 !important; }
+        [data-theme="light"] .stat-card h4 { color: #475569 !important; }
+        [data-theme="light"] .stat-card .val { color: #0f172a !important; }
+        [data-theme="light"] th { background: rgba(226,232,240,0.75) !important; color: #334155 !important; }
+        [data-theme="light"] td { color: #0f172a !important; }
+        [data-theme="light"] .summary-bar .title { color: #1e3a5f !important; }
+        [data-theme="light"] .summary-bar .metric { color: #475569 !important; }
+        [data-theme="light"] .summary-bar .metric span { color: #0f172a !important; }
         [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
+        /* --- ENDEKS BAR & ORION TICKER --- */
+        #endeks-bar {
+            position: relative;
+            background: rgba(7, 11, 18, 0.18);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.06);
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+[data-theme="light"] #endeks-bar {
+    background: rgba(255,255,255,0.55) !important;
+    border-color: rgba(0,0,0,0.10) !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.9) !important;
+}
+#orion-ticker-wrap { overflow: hidden; position: relative; }
+#orion-ticker-track {
+    display: inline-flex; align-items: center;
+    white-space: nowrap; height: 44px;
+    animation: orionScroll 60s linear infinite;
+}
+#orion-ticker-track:hover { animation-play-state: paused; }
+@keyframes orionScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.orion-tick-item {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 22px; height: 44px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    cursor: default; transition: background .2s;
+    flex-shrink: 0;
+}
+.orion-tick-item:hover { background: rgba(255,255,255,0.04); }
+[data-theme="light"] .orion-tick-item { border-right-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .orion-tick-item:hover { background: rgba(0,0,0,0.03); }
+.orion-tick-label {
+    font-size: 10px; font-weight: 800; letter-spacing: .6px;
+    color: var(--t3); text-transform: uppercase;
+}
+[data-theme="light"] .orion-tick-label { color: #475569; }
+.orion-tick-price {
+    font-size: 13px; font-weight: 800;
+    color: var(--t1); font-family: var(--mono);
+}
+[data-theme="light"] .orion-tick-price { color: #0f172a; }
+.orion-tick-chg {
+    font-size: 10.5px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+}
+.orion-tick-chg.pos { color: #10b981; background: rgba(16,185,129,0.12); }
+.orion-tick-chg.neg { color: #ef4444; background: rgba(239,68,68,0.12); }
+.orion-tick-chg.neu { color: var(--t3); background: rgba(255,255,255,0.06); }
+[data-theme="light"] .orion-tick-chg.neu { background: rgba(0,0,0,0.05); }
+.orion-tick-loading {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 20px; height: 44px; color: var(--t3);
+    font-size: 12px; font-weight: 600;
+}
+
 
         /* --- EN ALT TELİF İMZASI CSS --- */
         .footer-copy {
@@ -95,60 +189,43 @@
         }
         /* ─── RESET ─── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-
-body {
+        html {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow: hidden;
+            height: 100%;
+        }
+        body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             font-size: 13px;
-            background-color: #070b12; /* Derin uzay siyahı */
-            /* 3125.jpg fotoğrafındaki gibi belirgin ve zarif gümüş dalgalar */
+            background-color: #070b12;
             color: var(--t1);
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
-            padding: 10px 12px;
+            padding: 14px 18px;
             transition: background .4s, color .4s;
             position: relative;
         }
 
-        body::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(7, 11, 18, 0.85) 100%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ─── HAREKETLİ GRAFİK ÇİZGİLERİ (BORSA EFEKTİ) ─── */
-        .chart-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0; pointer-events: none; opacity: 0.35;
-        }
-        .chart-line {
-            position: absolute; width: 200vw; height: 100vh;
-            background-repeat: repeat-x; background-size: 50vw 100vh;
-        }
-        .line-blue {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,250 C100,100 150,400 250,250 C350,100 400,400 500,250' fill='none' stroke='%233b82f6' stroke-width='1.5' /%3E%3C/svg%3E");
-            animation: chartFlow 25s linear infinite;
-        }
-        .line-green {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,250 C100,350 150,150 250,250 C350,350 400,150 500,250' fill='none' stroke='%2310b981' stroke-width='1' /%3E%3C/svg%3E");
-            animation: chartFlow 35s linear infinite;
-        }
-        .line-amber {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,250 C125,200 125,300 250,250 C375,200 375,300 500,250' fill='none' stroke='%23f59e0b' stroke-width='0.8' /%3E%3C/svg%3E");
-            animation: chartFlow 45s linear infinite;
-        }
-        @keyframes chartFlow {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50vw); }
-        }
+        /* ─── YILDIZ/PARLAYICI ARKA PLAN CANVAS ─── */
+#starCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
 
         [data-theme="light"] body {
-            background-color: #F3F6FA;
-            background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1440 800' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='rgba(0, 0, 0, 0.03)' fill='none' stroke-width='1.5'%3E%3Cpath d='M-100,600 C200,400 400,800 800,500 C1200,200 1300,500 1500,400' /%3E%3Cpath d='M-100,620 C200,420 400,820 800,520 C1200,220 1300,520 1500,420' /%3E%3Cpath d='M-100,640 C200,440 400,840 800,540 C1200,240 1300,540 1500,440' /%3E%3C/g%3E%3C/svg%3E");
+            background-color: #b8cde8;
         }
+
+        /* ─── AÇIK TEMADA YILDIZ GÖRÜNÜRLÜĞܠ─── */
+        [data-theme="light"] #starCanvas {
+            opacity: 1;
+        }
+
         /* ─── GENEL ANİMASYON & GEÇİŞLER ─── */
         .container, .stat-card, .trade-form, .filter-bar, .summary-bar,
         .chart-box, .table-responsive, .modal-content, .hedef-panel, .hedef-item,
@@ -186,41 +263,68 @@ body {
         @keyframes toastOut { from{opacity:1;transform:translateX(0)}               to{opacity:0;transform:translateX(20px)} }
 
         /* ─── ANA KAPSAYICI ─── */
-       /* ─── ANA KAPSAYICI ─── */
         .container {
-            width: 100%; height: calc(100vh - 20px);
-            background: rgba(12, 16, 24, 0.65);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border);
+            width: 100%; height: calc(100vh - 28px);
+            background: rgba(12, 16, 24, 0.10);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: var(--r-xl);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-            padding: 16px 20px 14px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+            padding: 12px 18px 10px;
             display: flex; flex-direction: column; gap: 0;
             overflow: hidden;
             position: relative;
             z-index: 1;
         }
         [data-theme="light"] .container {
-            background: rgba(255, 255, 255, 0.65);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(0,0,0,0.07);
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
         /* ─── UYGULAMA BAŞLIĞI ─── */
         .app-header {
             display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 12px; flex-shrink: 0;
+            margin-bottom: 6px; flex-shrink: 0; gap: 12px;
         }
-        .app-title {
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--t3);
+        /* ORION logosu + başlık */
+        .orion-brand {
+            display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex-shrink: 0;
+        }
+        .orion-brand-name {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #38BDF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-transform: uppercase;
+            line-height: 1;
+            text-shadow: none;
         }
-        .app-title strong { color: var(--t1); letter-spacing: 0.5px; }
-        .app-title-sep { color: var(--border-2); margin: 0 8px; font-weight: 400; }
+        [data-theme="light"] .orion-brand-name {
+            background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #0369a1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .orion-brand-sub-btns {
+            display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+        }
         .app-header-btns { display: flex; gap: 6px; }
+        /* Merkez başlık */
+        .header-center-title {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+            color: var(--t4); text-transform: uppercase; white-space: nowrap;
+            pointer-events: none;
+        }
+        [data-theme="light"] .header-center-title { color: #64748b; }
+        .app-header { position: relative; }
 
         /* Tema toggle butonu */
         .theme-toggle {
@@ -238,18 +342,52 @@ body {
         }
         [data-theme="light"] .theme-toggle::after { transform: translateX(18px); background: var(--amber); box-shadow: 0 0 8px var(--amber-dim); }
 
+        /* ─── PİYASA VERİ PANELİ (ÖZET SEKMESİ) ─── */
+        .market-data-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+            flex-shrink: 0;
+            margin-bottom: 8px;
+        }
+        .market-data-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: var(--r);
+            padding: 10px 12px;
+            display: flex; flex-direction: column; gap: 3px;
+            cursor: default;
+            transition: border-color .2s, background .2s;
+            min-width: 0;
+        }
+        .market-data-card:hover { border-color: var(--border-hi); background: rgba(255,255,255,0.05); }
+        [data-theme="light"] .market-data-card {
+            background: rgba(255,255,255,0.55);
+            border-color: rgba(0,0,0,0.08);
+        }
+        [data-theme="light"] .market-data-card:hover { background: rgba(255,255,255,0.80); }
+        .mdc-label { font-size: 9px; font-weight: 800; letter-spacing: .6px; color: var(--t3); text-transform: uppercase; }
+        [data-theme="light"] .mdc-label { color: #64748b; }
+        .mdc-price { font-size: 13px; font-weight: 800; color: var(--t1); font-family: var(--mono); }
+        [data-theme="light"] .mdc-price { color: #0f172a; }
+        .mdc-chg { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 3px; align-self: flex-start; }
+        .mdc-chg.pos { color: #10b981; background: rgba(16,185,129,0.12); }
+        .mdc-chg.neg { color: #ef4444; background: rgba(239,68,68,0.12); }
+        .mdc-chg.neu { color: var(--t3); background: rgba(255,255,255,0.06); }
+        [data-theme="light"] .mdc-chg.neu { background: rgba(0,0,0,0.05); }
+
         /* ─── SEKMELER (ORTALANMIŞ VE RENKLENDİRİLMİŞ) ─── */
         .tabs {
-            display: flex; gap: 4px; flex-shrink: 0;
+            display: flex; gap: 2px; flex-shrink: 0;
             justify-content: center;
             border-bottom: 2px solid var(--border);
-            margin-bottom: 14px; overflow-x: auto;
+            margin-bottom: 8px; overflow-x: auto;
         }
         .tabs::-webkit-scrollbar { height: 0; }
         .tab-btn {
-            padding: 10px 18px 10px;
+            padding: 7px 14px 7px;
             cursor: pointer; border: none; background: transparent;
-            font-size: 12.5px; font-weight: 700; color: var(--t3);
+            font-size: 11.5px; font-weight: 700; color: var(--t3);
             letter-spacing: .4px;
             border-radius: 8px 8px 0 0;
             border-bottom: 3px solid transparent;
@@ -281,22 +419,22 @@ body {
         [data-theme="light"] .tab-btn.active { background: var(--surface-2); text-shadow: none; border-bottom-color: currentColor; }
 
         /* ─── TAB İÇERİKLERİ ─── */
-        .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 10px; }
+        .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 8px; overflow: hidden; }
         .tab-content.active { display: flex; animation: fadeUp .3s cubic-bezier(.4,0,.2,1); }
         @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
         /* ─── STAT KARTLARI ─── */
         .dashboard {
             display: grid; grid-template-columns: repeat(4,1fr);
-            gap: 12px; flex-shrink: 0;
+            gap: 8px; flex-shrink: 0;
         }
         .stat-card {
-            background: linear-gradient(180deg, rgba(30, 41, 59, 0.35) 0%, rgba(15, 23, 42, 0.55) 100%);
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.10) 0%, rgba(15, 23, 42, 0.16) 100%);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,0.13);
             border-radius: var(--r-lg);
-            padding: 18px 20px;
+            padding: 12px 16px;
             display: flex; flex-direction: column;
             position: relative; overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.4);
@@ -311,18 +449,18 @@ body {
         }
         .stat-card:hover { border-color: var(--border-hi); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
         .stat-card h4 {
-            font-size: 11.5px;
+            font-size: 10.5px;
             font-weight: 700;
             letter-spacing: .5px;
             color: var(--t3);
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
         .stat-card .val {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--t1);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             font-family: var(--mono);
             letter-spacing: -.5px;
             line-height: 1.1;
@@ -353,27 +491,26 @@ body {
         }
 
         /* ─── HEDEF PANELİ ─── */
-        /* ─── HEDEF PANELİ ─── */
         .hedef-panel {
-            background: linear-gradient(180deg, rgba(17, 24, 39, 0.6) 0%, rgba(12, 16, 24, 0.8) 100%);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-top: 1px solid rgba(255,255,255,0.12); /* Üst ışık hüzmesi */
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.10) 0%, rgba(12, 16, 24, 0.18) 100%);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255,255,255,0.12);
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
             border-radius: var(--r-lg);
-            padding: 16px 20px;
+            padding: 10px 16px;
             flex-shrink: 0;
         }
         .hedef-panel > h4 {
-            font-size: 12px; font-weight: 800; color: var(--t2);
-            letter-spacing: .5px; margin-bottom: 14px; text-transform: uppercase;
+            font-size: 11px; font-weight: 800; color: var(--t2);
+            letter-spacing: .5px; margin-bottom: 8px; text-transform: uppercase;
         }
-        .hedef-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 12px; }
+        .hedef-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 8px; }
         .hedef-item {
-            background: rgba(255,255,255,0.02); 
+            background: rgba(255,255,255,0.02);
             border-radius: var(--r);
-            border: 1px solid rgba(255,255,255,0.04); 
-            padding: 14px 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 8px 12px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
@@ -383,15 +520,15 @@ body {
             transform: translateY(-1px);
         }
         .hedef-item label {
-            display: block; font-size: 10px; font-weight: 700;
-            color: var(--t3); letter-spacing: .4px; margin-bottom: 6px; text-transform: uppercase;
+            display: block; font-size: 9.5px; font-weight: 700;
+            color: var(--t3); letter-spacing: .4px; margin-bottom: 4px; text-transform: uppercase;
         }
         .hedef-item input {
             width:100%; background:transparent; border:none;
-            color: var(--t1); font-size: 16px; font-weight: 700;
+            color: var(--t1); font-size: 14px; font-weight: 700;
             font-family: var(--mono); outline: none;
         }
-        .hedef-item .sub { font-size: 11px; color: var(--t3); margin-top: 6px; font-weight: 600; }
+        .hedef-item .sub { font-size: 10px; color: var(--t3); margin-top: 4px; font-weight: 600; }
 
         /* ─── HEDEF ÇUBUĞU ─── */
         .goal-bar-label {
@@ -412,44 +549,47 @@ body {
 
         /* ─── ÖZET BAR ─── */
         .summary-bar {
-            background: var(--surface-2);
+            background: rgba(17, 24, 39, 0.08);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
-            padding: 12px 18px;
+            padding: 8px 14px;
             display: flex; align-items: center; justify-content: space-between;
             flex-shrink: 0;
         }
-        .summary-bar .title { font-size: 13px; font-weight: 700; color: var(--t2); }
-        .summary-bar .metrics { display: flex; gap: 24px; align-items: center; }
+        .summary-bar .title { font-size: 12px; font-weight: 700; color: var(--t2); }
+        .summary-bar .metrics { display: flex; gap: 18px; align-items: center; }
         .summary-bar .metric {
             display: flex; flex-direction: column; align-items: flex-end;
-            font-size: 10.5px; font-weight: 700; color: var(--t3);
+            font-size: 10px; font-weight: 700; color: var(--t3);
             letter-spacing: .4px; text-transform: uppercase;
         }
         .summary-bar .metric span {
-            font-size: 16px; font-weight: 800;
-            color: var(--t1); font-family: var(--mono); margin-top: 4px;
+            font-size: 14px; font-weight: 800;
+            color: var(--t1); font-family: var(--mono); margin-top: 2px;
         }
 
         /* ─── GRAFİK KUTULARI ─── */
-        .charts-container { display: flex; gap: 12px; flex: 1; min-height: 0; }
+        .charts-container { display: flex; gap: 10px; flex: 1; min-height: 0; }
         .chart-box {
-            flex: 1; background: var(--surface-2);
+            flex: 1; background: rgba(17, 24, 39, 0.08);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
-            padding: 16px; display: flex; flex-direction: column; min-height: 0;
+            padding: 10px 14px; display: flex; flex-direction: column; min-height: 0;
         }
         .chart-box h3 {
-            font-size: 11px; font-weight: 800; color: var(--t3);
+            font-size: 10px; font-weight: 800; color: var(--t3);
             letter-spacing: 1px; text-transform: uppercase; text-align: center;
-            margin-bottom: 12px; flex-shrink: 0;
+            margin-bottom: 8px; flex-shrink: 0;
         }
         .canvas-container { position: relative; flex: 1; min-height: 0; }
 
         /* ─── FİLTRE BARI ─── */
         .filter-bar {
-            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-            background: var(--surface-2);
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            background: rgba(17, 24, 39, 0.08);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
-            padding: 10px 16px; flex-shrink: 0;
+            padding: 7px 14px; flex-shrink: 0;
         }
         .filter-bar label {
             font-size: 11px; font-weight: 800; color: var(--t3);
@@ -469,9 +609,10 @@ body {
 
         /* ─── FORM ─── */
         .trade-form {
-            background: var(--surface-2);
+            background: rgba(17, 24, 39, 0.08);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
-            padding: 14px 18px; flex-shrink: 0;
+            padding: 10px 14px; flex-shrink: 0;
         }
         .trade-form .form-title {
             font-size: 11px; font-weight: 800; color: var(--t2);
@@ -541,36 +682,36 @@ body {
         .btn-danger:hover { background: var(--red); color: #fff; box-shadow: 0 4px 12px rgba(239,68,68,0.3); }
 
         /* ─── TABLOLAR ─── */
-       /* ─── TABLOLAR ─── */
         .table-responsive {
             overflow: auto; flex: 1; min-height: 0;
-            border-radius: var(--r-lg); 
+            border-radius: var(--r-lg);
             border: 1px solid var(--border);
-            background-color: rgba(17, 24, 39, 0.4); /* Şeffaf tablo arkaplanı */
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.2);
+            background-color: rgba(17, 24, 39, 0.06);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
             position: relative;
         }
         table {
             width: 100%; border-collapse: separate; border-spacing: 0;
-            font-size: 12px; text-align: center; min-width: 900px;
-            table-layout: fixed; /* Sütunları ekrana eşit dağıtır, sağda boşluk bırakmaz */
+            font-size: 11.5px; text-align: center; min-width: 860px;
+            table-layout: fixed;
         }
         th {
-            background: rgba(24, 32, 51, 0.7);
-            backdrop-filter: blur(12px);
-            color: var(--t3); font-size: 10px; font-weight: 800;
+            background: rgba(12, 18, 32, 0.55);
+            backdrop-filter: blur(16px);
+            color: var(--t3); font-size: 9.5px; font-weight: 800;
             letter-spacing: .6px; text-transform: uppercase;
-            padding: 12px 8px;
+            padding: 9px 6px;
             border-bottom: 1px solid var(--border-2);
-            position: sticky; top: 0; z-index: 5; 
+            position: sticky; top: 0; z-index: 5;
             text-align: center;
         }
         [data-theme="light"] th { background: rgba(226, 232, 240, 0.85); }
         td {
-            padding: 12px 8px;
+            padding: 9px 6px;
             border-bottom: 1px solid var(--border);
-            color: var(--t1); font-weight: 600; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; /* Taşan yazıları ... yapar */
+            color: var(--t1); font-weight: 600;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             vertical-align: middle; text-align: center; transition: background .2s;
         }
         th:first-child, td:first-child { text-align: left; padding-left: 20px; width: 15%; }
@@ -620,12 +761,13 @@ body {
         }
         .modal-overlay.active { display: flex; animation: fadeUp .25s ease; }
         .modal-content {
-            background: var(--surface-2);
+            background: rgba(12, 16, 24, 0.82);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-hi);
             border-radius: var(--r-xl); width: 860px; max-width: 95%;
             max-height: 88vh; overflow-y: auto;
             padding: 28px 30px;
-            box-shadow: 0 0 80px var(--blue-glow), var(--shadow);
+            box-shadow: 0 0 80px var(--blue-glow), 0 30px 60px rgba(0,0,0,0.7);
             position: relative; display: flex; flex-direction: column;
         }
         .modal-close {
@@ -779,17 +921,49 @@ body {
     </div>
 </div>
 <div id="toast-container"></div>
-<div class="chart-bg">
-    <div class="chart-line line-blue"></div>
-    <div class="chart-line line-green"></div>
-    <div class="chart-line line-amber"></div>
-</div>
+<canvas id="starCanvas"></canvas>
+
 <datalist id="kayitliHisseler"></datalist>
 
 <div class="modal-overlay" id="siriusModal">
     <div class="modal-content" style="width: 1100px; max-width:98%; max-height:92vh; background: #080A0F; border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 60px rgba(245,158,11,0.1) inset, 0 20px 50px rgba(0,0,0,0.8); padding: 0; border-radius: var(--r-xl); overflow-y: auto;">
         <button class="modal-close" style="color: rgba(255,255,255,0.5); top: 16px; right: 20px; z-index: 10; font-size: 28px;" onclick="closeModal('siriusModal')">×</button>
         <div id="siriusReportContent"></div>
+    </div>
+</div>
+
+<!-- ═══════════════════ HİSSE ANALİZİ MODALİ ═══════════════════ -->
+<div class="modal-overlay" id="hisseAnaliziModal">
+    <div class="modal-content" style="width:900px; max-width:96%; max-height:92vh; overflow-y:auto;">
+        <button class="modal-close" onclick="closeModal('hisseAnaliziModal')">×</button>
+        <div class="modal-header">
+            <div class="modal-icon">📡</div>
+            <div class="modal-title">Hisse Analizi &amp; Haber Taraması<br>
+                <span style="font-size:10px; color:var(--t3); font-weight:600;">BİST · NASDAQ · AVRUPA — CANLI VERİ</span>
+            </div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:12px 14px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
+            <div class="input-group" style="flex:1; min-width:200px;">
+                <label>HİSSE / SEMBOL KODU</label>
+                <input type="text" id="finnhubSymbol" placeholder="THYAO · AAPL · EREGL · TSLA" style="font-family:var(--mono); font-size:14px; font-weight:800; text-transform:uppercase; letter-spacing:1px;" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter') fetchHisseAnalizi()">
+            </div>
+            <div class="input-group" style="flex:0 0 auto; justify-content:flex-end;">
+                <label>&nbsp;</label>
+                <button class="btn btn-success" style="height:36px; padding:0 24px; font-size:12px; font-weight:800; letter-spacing:.8px;" onclick="fetchHisseAnalizi()">🔍 ANALİZ ET</button>
+            </div>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
+            <span style="font-size:10px; color:var(--t3); padding:3px 8px; background:var(--surface-3); border-radius:4px; border:1px solid var(--border);">🇹🇷 BİST: THYAO, GARAN, ASELS, EREGL, SASA...</span>
+            <span style="font-size:10px; color:var(--t3); padding:3px 8px; background:var(--surface-3); border-radius:4px; border:1px solid var(--border);">🇺🇸 ABD: AAPL, TSLA, NVDA, MSFT, AMZN...</span>
+            <span style="font-size:10px; color:var(--t3); padding:3px 8px; background:var(--surface-3); border-radius:4px; border:1px solid var(--border);">🥇 Emtia: GC=F (Altın), BTC-USD, SI=F (Gümüş)</span>
+        </div>
+        <div id="hisseAnaliziResult">
+            <div style="text-align:center; padding:50px; color:var(--t3);">
+                <div style="font-size:40px; margin-bottom:14px; filter:grayscale(0.3);">📡</div>
+                <div style="font-size:14px; font-weight:700; color:var(--t2); margin-bottom:6px;">Sembol girerek analiz başlatın</div>
+                <div style="font-size:11px; color:var(--t3);">BİST, NASDAQ, Avrupa ve emtia desteklenir</div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -827,10 +1001,17 @@ body {
 
 <div class="container">
     <div class="app-header">
-        <div class="app-header-btns">
-            <button class="btn btn-primary" style="padding:0 12px; height:28px; font-size:10px; letter-spacing:.4px;" onclick="showShortcuts()" title="Klavye Kısayolları">⌨</button>
+        <!-- Sol: ORION marka + butolar altında -->
+        <div class="orion-brand">
+            <span class="orion-brand-name">ORION</span>
+            <div class="orion-brand-sub-btns">
+                <button class="btn btn-primary" style="padding:0 10px; height:26px; font-size:9.5px; letter-spacing:.4px;" onclick="showShortcuts()" title="Klavye Kısayolları">⌨ Kısayollar</button>
+                <button class="btn" style="padding:0 9px; height:26px; font-size:9.5px; letter-spacing:.4px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); color:#38BDF8;" onclick="fetchOrionTicker(true); loadMarketDataPanel();" title="Piyasa Verilerini Yenile">🔄 Piyasa</button>
+            </div>
         </div>
-        <div class="app-title"><strong>ORION</strong> <span class="app-title-sep">/</span> Portföy Komuta Merkezi</div>
+        <!-- Orta: Komuta Merkezi başlık -->
+        <div class="header-center-title">Yatırım Komuta Merkezi</div>
+        <!-- Sağ: tema toggle + çıkış -->
         <div class="app-header-btns" style="gap:10px; align-items:center;">
             <button class="btn btn-danger" style="padding:0 10px; height:28px; font-size:10px; letter-spacing:.4px; background: transparent; border: 1px solid var(--red);" onclick="logoutUser()">ÇIKIŞ</button>
             <span style="font-size:12px; color:var(--t3); opacity:.8;">🌙</span>
@@ -899,35 +1080,22 @@ body {
     </div>
 
     <div id="ozet-tab" class="tab-content active">
-        <div id="endeks-bar" style="margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">
-            <div class="tradingview-widget-container">
-              <div class="tradingview-widget-container__widget"></div>
-              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-              {
-              "symbols": [
-                { "proName": "BIST:XU030", "title": "BIST 30" },
-                { "proName": "BIST:XU100", "title": "BIST 100" },
-                { "proName": "FX:USDTRY", "title": "USD/TRY" },
-                { "proName": "FX:EURTRY", "title": "EUR/TRY" },
-                { "proName": "OANDA:XAUUSD", "title": "ALTIN (Ons)" },
-                { "proName": "CAPITALCOM:US100", "title": "NASDAQ 100" },
-                { "proName": "CAPITALCOM:US500", "title": "S&P 500" },
-                { "proName": "CAPITALCOM:DE40", "title": "DAX (Avrupa)" }
-              ],
-              "showSymbolLogo": true,
-              "colorTheme": "dark",
-              "isTransparent": true,
-              "displayMode": "adaptive",
-              "locale": "tr"
-            }
-              </script>
+        <div id="endeks-bar">
+            <div id="orion-ticker-wrap" style="overflow:hidden; position:relative; height:44px;">
+                <div id="orion-ticker-track" style="display:flex; align-items:center; gap:0; position:absolute; left:0; top:0; height:44px; white-space:nowrap;"></div>
             </div>
+        </div>
+
+        <!-- PİYASA VERİ PANELİ -->
+        <div class="market-data-panel" id="marketDataPanel">
+            <!-- JS ile doldurulacak -->
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="color:var(--t3); font-size:11px; letter-spacing:.6px; font-weight:800; text-transform:uppercase;">Genel Portföy Özeti</div>
             <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
                 <button class="btn btn-warning" onclick="generateSiriusReport()" style="background:linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.05)); border:1px solid var(--amber); color:var(--amber);">🤖 Sirius Analiz</button>
+                <button class="btn btn-primary" onclick="openHisseAnalizi('')" style="border:1px solid rgba(56,189,248,0.5); color:#38BDF8; background:rgba(56,189,248,0.08);">🔍 Hisse Analizi</button>
             </div>
         </div>
 
@@ -1209,6 +1377,80 @@ body {
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
     // ============================================================
+    // ============================================================
+// YILDIZ / PARLAYICI ARKA PLAN ANİMASYONU
+// ============================================================
+(function() {
+    const canvas = document.getElementById('starCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const STAR_COUNT = 280;
+
+    function isDark() {
+        return document.documentElement.getAttribute('data-theme') !== 'light';
+    }
+
+    function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function createStars() {
+        stars = [];
+        for (let i = 0; i < STAR_COUNT; i++) {
+            stars.push({
+                x:      Math.random() * canvas.width,
+                y:      Math.random() * canvas.height,
+                r:      Math.random() * 2.2 + 0.4,
+                speed:  Math.random() * 0.12 + 0.015,
+                offset: Math.random() * Math.PI * 2,
+                freq:   Math.random() * 0.02 + 0.005,
+                drift:  (Math.random() - 0.5) * 0.08
+            });
+        }
+    }
+
+    let frame = 0;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const dark = isDark();
+        frame++;
+
+        stars.forEach(s => {
+            // Twinkle: sinüs dalgasıyla opaklık
+            const alpha = dark
+                ? 0.25 + 0.70 * Math.abs(Math.sin(frame * s.freq + s.offset))
+                : 0.55 + 0.44 * Math.abs(Math.sin(frame * s.freq + s.offset));
+            // Renk: koyu=beyaz/mavi, açık=koyu lacivert (kontraslı ve belirgin)
+            const color = dark
+                ? `rgba(180, 210, 255, ${alpha})`
+                : `rgba(15, 40, 100, ${alpha})`;
+
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            // Çok yavaş sürükleme (parallax hissi)
+            s.y -= s.speed;
+            s.x += s.drift;
+
+            // Ekranın üstüne çıkarsa alttan tekrar gir
+            if (s.y < -2)  { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+            if (s.x < -2)  { s.x = canvas.width  + 2; }
+            if (s.x > canvas.width + 2) { s.x = -2; }
+        });
+
+        requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); createStars(); });
+    resize();
+    createStars();
+    draw();
+})();
+
     function toast(msg, type = 'info', duration = 3200) {
         const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
         const c = document.getElementById('toast-container');
@@ -1332,13 +1574,247 @@ body {
             localStorage.setItem('portfoy_theme', 'light');
             toast('Açık tema aktif', 'info', 2000);
         }
-        setTimeout(() => {
-            const isDark = html.getAttribute('data-theme') !== 'light';
-            Chart.defaults.color = isDark ? '#64748B' : '#94A3B8';
-            Chart.defaults.borderColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
+               setTimeout(() => {
+            const isDarkNow = html.getAttribute('data-theme') !== 'light';
+            Chart.defaults.color = isDarkNow ? '#64748B' : '#94A3B8';
+            Chart.defaults.borderColor = isDarkNow ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
             updateDashboard();
+            rebuildTickerWidget();
         }, 50);
     }
+
+    // ═══════════════════════════════════════════════════════════════
+    // ORION TICKER — Çoklu proxy zinciri + statik fallback
+    // Döviz: open.er-api.com (CORS açık)
+    // BİST/Endeks: stooq.com → allorigins proxy → statik fallback
+    // ═══════════════════════════════════════════════════════════════
+    let orionTickerCache = null;
+    let orionTickerTime  = 0;
+    const ORION_CACHE_MS = 15 * 60 * 1000;
+
+    // Statik fallback — CORS tamamen başarısız olunca gösterilir
+    const ORION_FALLBACK = [
+        { label: 'USD/TRY',    flag: '💵', price: 0, chg: 0, fallback: true },
+        { label: 'EUR/TRY',    flag: '💶', price: 0, chg: 0, fallback: true },
+        { label: 'BIST 100',   flag: '🇹🇷', price: 0, chg: 0, fallback: true },
+        { label: 'ALTIN',      flag: '🥇', price: 0, chg: 0, fallback: true },
+        { label: 'BTC/USD',    flag: '₿',  price: 0, chg: 0, fallback: true },
+        { label: 'NASDAQ 100', flag: '🇺🇸', price: 0, chg: 0, fallback: true },
+        { label: 'S&P 500',    flag: '🇺🇸', price: 0, chg: 0, fallback: true },
+        { label: 'DAX',        flag: '🇩🇪', price: 0, chg: 0, fallback: true },
+    ];
+
+    async function fetchWithProxy(url, timeout = 7000) {
+        // 1. allorigins — en güvenilir ücretsiz proxy
+        try {
+            const proxy1 = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            const r = await fetch(proxy1, { signal: AbortSignal.timeout(timeout) });
+            if (r.ok) return r;
+        } catch(e) {}
+        // 2. corsproxy.io
+        try {
+            const proxy2 = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+            const r = await fetch(proxy2, { signal: AbortSignal.timeout(timeout) });
+            if (r.ok) return r;
+        } catch(e) {}
+        // 3. Doğrudan (son çare)
+        try {
+            const r = await fetch(url, { signal: AbortSignal.timeout(timeout) });
+            if (r.ok) return r;
+        } catch(e) {}
+        return null;
+    }
+
+    async function fetchOrionTicker(forceRefresh) {
+        const now = Date.now();
+        if (!forceRefresh && orionTickerCache && (now - orionTickerTime) < ORION_CACHE_MS) {
+            renderOrionTicker(orionTickerCache);
+            return orionTickerCache;
+        }
+        const track = document.getElementById('orion-ticker-track');
+        if (track) track.innerHTML = '<div class="orion-tick-loading"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>';
+
+        const results = [];
+
+        // ── 1. Döviz — open.er-api.com ──────────────────────────────
+        try {
+            const erRes = await fetch('https://open.er-api.com/v6/latest/USD', { signal: AbortSignal.timeout(10000) });
+            if (erRes.ok) {
+                const erData = await erRes.json();
+                const rates  = erData.rates || {};
+                const usdTry = rates.TRY || 0;
+                const eurUsd = rates.EUR ? (1 / rates.EUR) : 0;
+                const eurTry = eurUsd > 0 ? eurUsd * usdTry : 0;
+                if (usdTry > 0) { results.push({ label: 'USD/TRY', flag: '💵', price: usdTry, chg: 0 }); }
+                if (eurTry > 0) { results.push({ label: 'EUR/TRY', flag: '💶', price: eurTry, chg: 0 }); }
+                // Kur inputlarını güncelle
+                const usdIn = document.getElementById('usdTryRate');
+                const eurIn = document.getElementById('eurTryRate');
+                if (usdIn && usdTry > 0) usdIn.value = usdTry.toFixed(4);
+                if (eurIn && eurTry > 0) eurIn.value = eurTry.toFixed(4);
+            }
+        } catch(e) {}
+
+        // ── 2. Yahoo Finance v8 chart API (CORS yok, proxy gerekebilir) ──
+        const yahooSymbols = [
+            { yahoo: 'XU100.IS',  label: 'BIST 100',   flag: '🇹🇷' },
+            { yahoo: 'XU030.IS',  label: 'BIST 30',    flag: '🇹🇷' },
+            { yahoo: 'GC=F',      label: 'ALTIN',      flag: '🥇'  },
+            { yahoo: 'BTC-USD',   label: 'BTC/USD',    flag: '₿'   },
+            { yahoo: '^NDX',      label: 'NASDAQ 100', flag: '🇺🇸' },
+            { yahoo: '^GSPC',     label: 'S&P 500',    flag: '🇺🇸' },
+            { yahoo: '^GDAXI',    label: 'DAX',        flag: '🇩🇪' },
+            { yahoo: 'THYAO.IS',  label: 'THYAO',      flag: '✈️'  },
+            { yahoo: 'GARAN.IS',  label: 'GARAN',      flag: '🏦'  },
+            { yahoo: 'ASELS.IS',  label: 'ASELS',      flag: '🛡️'  },
+            { yahoo: 'EREGL.IS',  label: 'EREGL',      flag: '⚙️'  },
+        ];
+
+        // Batch: tüm semboller tek seferde Yahoo quote API ile
+        try {
+            const syms = yahooSymbols.map(s => s.yahoo).join(',');
+            const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent,shortName`;
+            const res = await fetchWithProxy(quoteUrl, 12000);
+            if (res) {
+                const data = await res.json();
+                const quotes = data?.quoteResponse?.result || [];
+                quotes.forEach(q => {
+                    const sym = yahooSymbols.find(s => s.yahoo === q.symbol);
+                    if (!sym) return;
+                    const price = q.regularMarketPrice;
+                    const chg   = q.regularMarketChangePercent || 0;
+                    if (price && price > 0) {
+                        results.push({ label: sym.label, flag: sym.flag, price, chg });
+                    }
+                });
+            }
+        } catch(e) {}
+
+        // Batch başarısız olduysa tek tek Stooq CSV ile dene (fallback)
+        const missing = yahooSymbols.filter(s => !results.find(r => r.label === s.label));
+        if (missing.length > 0) {
+            const stooqMap = {
+                'BIST 100': 'xu100.pl', 'BIST 30': 'xu030.pl',
+                'ALTIN': 'gc.f', 'BTC/USD': 'btc.v',
+                'NASDAQ 100': '^ndx', 'S&P 500': '^spx',
+                'DAX': '^dax', 'THYAO': 'thyao.pl',
+                'GARAN': 'garan.pl', 'ASELS': 'asels.pl', 'EREGL': 'eregl.pl'
+            };
+            await Promise.allSettled(missing.map(async s => {
+                const stooqSym = stooqMap[s.label];
+                if (!stooqSym) return;
+                try {
+                    const url = `https://stooq.com/q/l/?s=${stooqSym}&f=sd2t2ohlcv&h&e=csv`;
+                    const res = await fetchWithProxy(url, 8000);
+                    if (!res) return;
+                    const text = await res.text();
+                    const lines = text.trim().split('\n');
+                    if (lines.length < 2) return;
+                    const cols = lines[1].split(',');
+                    const close = parseFloat(cols[6]);
+                    const open  = parseFloat(cols[3]);
+                    if (isNaN(close) || close <= 0) return;
+                    const chg = open > 0 ? ((close - open) / open) * 100 : 0;
+                    results.push({ label: s.label, flag: s.flag, price: close, chg });
+                } catch(e) {}
+            }));
+        }
+
+        // ── 3. Sırala ──────────────────────────────────────────────
+        const labelOrder = ['USD/TRY', 'EUR/TRY', ...yahooSymbols.map(s => s.label)];
+        const ordered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
+
+        // ── 4. Hiç veri gelmediyse fallback göster ─────────────────
+        if (ordered.length === 0) {
+            if (track) track.innerHTML = '<div class="orion-tick-loading" style="color:var(--amber);">⚠️ Canlı veri alınamadı — Kur girişlerini manuel güncelleyin</div>';
+            return;
+        }
+
+        orionTickerCache = ordered;
+        orionTickerTime  = now;
+        renderOrionTicker(ordered);
+        // Panel'i de güncelle
+        if (document.getElementById('marketDataPanel')) loadMarketDataPanel();
+        return ordered;
+    }
+
+    function renderOrionTicker(items) {
+        const track = document.getElementById('orion-ticker-track');
+        if (!track) return;
+        if (!items || items.length === 0) {
+            track.innerHTML = '<div class="orion-tick-loading" style="color:var(--amber);">⚠️ Piyasa verisi alınamadı</div>';
+            return;
+        }
+
+        const fmt = (n, dec=2) => n == null ? '—' :
+            new Intl.NumberFormat('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+
+        const makeItem = item => {
+            const chgClass = item.chg > 0 ? 'pos' : item.chg < 0 ? 'neg' : 'neu';
+            const chgSign  = item.chg > 0 ? '+' : '';
+            const isTRY = item.label.includes('TRY');
+            const dec   = isTRY ? 4 : 2;
+            return `<div class="orion-tick-item">
+                <span style="font-size:14px;">${item.flag}</span>
+                <span class="orion-tick-label">${item.label}</span>
+                <span class="orion-tick-price">${item.price > 0 ? fmt(item.price, dec) : '—'}</span>
+                <span class="orion-tick-chg ${item.price > 0 ? chgClass : 'neu'}">${item.price > 0 ? chgSign + fmt(item.chg, 2) + '%' : 'N/A'}</span>
+            </div>`;
+        };
+
+        // İki kopya — sonsuz kaydırma
+        const html = items.map(makeItem).join('') + items.map(makeItem).join('');
+        track.innerHTML = html;
+    }
+
+    function rebuildTickerWidget() {
+        fetchOrionTicker(true);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // PİYASA VERİ PANELİ (ÖZET SEKMESİ)
+    // ═══════════════════════════════════════════════════════════════
+    function loadMarketDataPanel() {
+        const panel = document.getElementById('marketDataPanel');
+        if (!panel) return;
+
+        // Loading göster
+        panel.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--t3); font-size:11px; font-weight:600;"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>`;
+
+        const fmt = (n, dec=2) => n == null || isNaN(n) ? '—' :
+            new Intl.NumberFormat('tr-TR', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+
+        const makeCard = (flag, label, price, chg, dec=2) => {
+            const chgClass = chg > 0 ? 'pos' : chg < 0 ? 'neg' : 'neu';
+            const chgSign  = chg > 0 ? '+' : '';
+            return `<div class="market-data-card">
+                <div class="mdc-label">${flag} ${label}</div>
+                <div class="mdc-price">${price > 0 ? fmt(price, dec) : '—'}</div>
+                <div class="mdc-chg ${price > 0 ? chgClass : 'neu'}">${price > 0 ? chgSign + fmt(chg, 2) + '%' : 'N/A'}</div>
+            </div>`;
+        };
+
+        // Ticker cache'den al, yoksa çek
+        const buildPanel = (items) => {
+            if (!items || items.length === 0) {
+                panel.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:10px; color:var(--amber); font-size:11px; font-weight:600;">⚠️ Piyasa verisi alınamadı — Ticker'dan manuel yenileyin</div>`;
+                return;
+            }
+            // USD/TRY ve EUR/TRY zaten üstteki ticker'da gösteriliyor — panel'den çıkar
+            const filtered = items.filter(item => item.label !== 'USD/TRY' && item.label !== 'EUR/TRY');
+            const decMap = {};
+            panel.innerHTML = filtered.map(item =>
+                makeCard(item.flag, item.label, item.price, item.chg, decMap[item.label] || 2)
+            ).join('');
+        };
+
+        if (orionTickerCache && (Date.now() - orionTickerTime) < ORION_CACHE_MS) {
+            buildPanel(orionTickerCache);
+        } else {
+            fetchOrionTicker(true).then(() => buildPanel(orionTickerCache));
+        }
+    }
+
     function loadTheme() {
         const saved = localStorage.getItem('portfoy_theme');
         if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
@@ -1390,6 +1866,281 @@ body {
         if(el.onchange) { el.onchange(); } else { el.dispatchEvent(new Event('change')); }
     }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    // --- HİSSE ANALİZİ — YAHOO FINANCE (API KEY GEREKMİYOR) ---
+    const FINNHUB_KEY = 'd8skt6pr01qh5rerp9igd8skt6pr01qh5rerp9j0';
+
+    function openHisseAnalizi(prefillSymbol) {
+        document.getElementById('hisseAnaliziModal').classList.add('active');
+        if (prefillSymbol) {
+            document.getElementById('finnhubSymbol').value = prefillSymbol.toUpperCase();
+            setTimeout(() => fetchHisseAnalizi(), 200);
+        }
+    }
+
+    async function fetchHisseAnalizi() {
+        let symbol = document.getElementById('finnhubSymbol').value.trim().toUpperCase();
+        if (!symbol) { toast('Hisse kodu girin!', 'error'); return; }
+
+        let resultEl = document.getElementById('hisseAnaliziResult');
+
+        // Sembol türünü belirle
+        const isBIST = !symbol.includes('.') && !symbol.startsWith('^') &&
+                       !['GC=F','BTC-USD','SI=F','CL=F','USDTRY=X','EURTRY=X'].includes(symbol) &&
+                       symbol.length <= 6 && /^[A-Z0-9]+$/.test(symbol);
+        const isEmtia = ['GC=F','BTC-USD','SI=F','CL=F','ETH-USD'].includes(symbol);
+        const ySym = isBIST ? symbol + '.IS' : symbol;
+
+        resultEl.innerHTML = `<div style="text-align:center; padding:50px; color:var(--t3);">
+            <div style="font-size:32px; margin-bottom:12px; animation:spin 1s linear infinite;">⏳</div>
+            <div style="font-size:13px; font-weight:700; color:var(--t2);">${symbol} için veri çekiliyor...</div>
+            <div style="font-size:11px; margin-top:6px; color:var(--t3);">Yahoo Finance & Finnhub</div>
+        </div>`;
+
+        let news = [], sent = {}, prof = {}, quote = {};
+
+        try {
+            // ── Paralel veri çekme ───────────────────────────────────
+            const proxyBase = 'https://api.allorigins.win/raw?url=';
+
+            // 1. Quote verisi (fiyat, değişim, hacim, piyasa değeri)
+            const quoteUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ySym)}?interval=1d&range=30d`;
+            const quoteProxied = proxyBase + encodeURIComponent(quoteUrl);
+
+            // 2. Haber arama
+            const newsUrl = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(isBIST ? symbol : ySym)}&newsCount=30&quotesCount=1`;
+            const newsProxied = proxyBase + encodeURIComponent(newsUrl);
+
+            // 3. Finnhub sentiment (ücretsiz key ile)
+            const sentUrl = `https://finnhub.io/api/v1/news-sentiment?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
+            const profUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
+
+            const [quoteRes, newsRes, sentRes, profRes] = await Promise.allSettled([
+                fetch(quoteProxied, { signal: AbortSignal.timeout(10000) }).then(r => r.ok ? r.json() : null),
+                fetch(newsProxied,  { signal: AbortSignal.timeout(10000) }).then(r => r.ok ? r.json() : null),
+                fetch(sentUrl,      { signal: AbortSignal.timeout(8000)  }).then(r => r.ok ? r.json() : null),
+                fetch(profUrl,      { signal: AbortSignal.timeout(8000)  }).then(r => r.ok ? r.json() : null),
+            ]);
+
+            // Quote parse
+            if (quoteRes.status === 'fulfilled' && quoteRes.value?.chart?.result?.[0]) {
+                const ch = quoteRes.value.chart.result[0];
+                const meta = ch.meta || {};
+                const closes = ch.indicators?.quote?.[0]?.close || [];
+                const timestamps = ch.timestamp || [];
+                const lastClose = closes.filter(Boolean).at(-1) || 0;
+                const prevClose = meta.chartPreviousClose || closes.filter(Boolean).at(-2) || 0;
+                const chgPct = prevClose > 0 ? ((lastClose - prevClose) / prevClose * 100) : 0;
+                quote = {
+                    price: lastClose,
+                    prevClose,
+                    chgPct,
+                    currency: meta.currency || 'TRY',
+                    exchange: meta.exchangeName || (isBIST ? 'BIST' : ''),
+                    shortName: meta.shortName || meta.symbol || ySym,
+                    volume: meta.regularMarketVolume || 0,
+                    marketCap: meta.marketCap || 0,
+                    fiftyTwoWeekHigh: meta.fiftyTwoWeekHigh || 0,
+                    fiftyTwoWeekLow:  meta.fiftyTwoWeekLow  || 0,
+                    closes,
+                    timestamps,
+                };
+                prof = { name: quote.shortName, exchange: quote.exchange, currency: quote.currency, finnhubIndustry: '' };
+            }
+
+            // Haber parse
+            if (newsRes.status === 'fulfilled' && newsRes.value?.news) {
+                news = newsRes.value.news.map(n => ({
+                    headline: n.title || '',
+                    summary:  '',
+                    url:      n.link || '',
+                    source:   n.publisher || 'Yahoo Finance',
+                    datetime: n.providerPublishTime || null
+                })).filter(n => n.headline);
+            }
+
+            // Finnhub sentiment
+            if (sentRes.status === 'fulfilled' && sentRes.value && !sentRes.value.error) sent = sentRes.value;
+            // Finnhub profil (sektör bilgisi)
+            if (profRes.status === 'fulfilled' && profRes.value && profRes.value.name) {
+                prof.finnhubIndustry = profRes.value.finnhubIndustry || '';
+                prof.name = profRes.value.name || prof.name;
+                prof.logo = profRes.value.logo || null;
+                prof.weburl = profRes.value.weburl || null;
+            }
+
+            renderHisseAnaliziResult(symbol, news, sent, prof, quote);
+
+        } catch(e) {
+            resultEl.innerHTML = `<div style="text-align:center; padding:40px; color:var(--red);">
+                <div style="font-size:28px; margin-bottom:12px;">⚠️</div>
+                <div style="font-weight:700;">Bağlantı Hatası</div>
+                <div style="margin-top:8px; font-size:12px; color:var(--t3);">${e.message}</div>
+            </div>`;
+        }
+    }
+
+    function renderHisseAnaliziResult(symbol, news, sent, prof, quote = {}) {
+        let resultEl = document.getElementById('hisseAnaliziResult');
+        const fmtN = (n, dec=2) => n != null && !isNaN(n)
+            ? new Intl.NumberFormat('tr-TR', {minimumFractionDigits:dec, maximumFractionDigits:dec}).format(n) : '—';
+
+        // ── 1. FİYAT KARTI ──────────────────────────────────────────
+        let priceHtml = '';
+        if (quote && quote.price > 0) {
+            const chgColor = quote.chgPct >= 0 ? '#10b981' : '#ef4444';
+            const chgSign  = quote.chgPct >= 0 ? '▲' : '▼';
+            const hi52 = quote.fiftyTwoWeekHigh > 0 ? fmtN(quote.fiftyTwoWeekHigh) : '—';
+            const lo52 = quote.fiftyTwoWeekLow  > 0 ? fmtN(quote.fiftyTwoWeekLow)  : '—';
+            const vol  = quote.volume > 0
+                ? (quote.volume >= 1e9 ? fmtN(quote.volume/1e9,2)+'B' : quote.volume >= 1e6 ? fmtN(quote.volume/1e6,2)+'M' : fmtN(quote.volume,0))
+                : '—';
+            priceHtml = `
+            <div style="display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center; margin-bottom:14px; padding:14px 18px;
+                        background:linear-gradient(135deg, var(--surface-2) 0%, rgba(59,130,246,0.06) 100%);
+                        border-radius:var(--r); border:1px solid var(--border); border-left:4px solid ${chgColor};">
+                <div>
+                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+                        ${prof.logo ? `<img src="${prof.logo}" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;">` : `<div style="width:36px;height:36px;border-radius:8px;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#3b82f6;">${symbol.charAt(0)}</div>`}
+                        <div>
+                            <div style="font-size:18px; font-weight:900; color:var(--t1); letter-spacing:.5px;">${prof.name || symbol}</div>
+                            <div style="font-size:10px; color:var(--t3); font-weight:600; letter-spacing:.5px;">${prof.exchange || ''} ${prof.finnhubIndustry ? '· '+prof.finnhubIndustry : ''} · ${quote.currency || ''}</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
+                    <div style="text-align:right;">
+                        <div style="font-size:28px; font-weight:900; color:var(--t1); font-family:var(--mono); line-height:1;">${fmtN(quote.price)}</div>
+                        <div style="font-size:13px; font-weight:800; color:${chgColor}; font-family:var(--mono);">${chgSign} ${fmtN(Math.abs(quote.chgPct), 2)}%</div>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:10px;">
+                        <div style="color:var(--t3);">52H Yüksek</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${hi52}</div>
+                        <div style="color:var(--t3);">52H Düşük</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${lo52}</div>
+                        <div style="color:var(--t3);">Hacim</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${vol}</div>
+                        <div style="color:var(--t3);">Önceki Kap.</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${fmtN(quote.prevClose)}</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-bottom:14px; padding:10px 14px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
+                <div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;">📈 30 GÜNLÜK FİYAT TRENDİ</div>
+                <div class="canvas-container" style="height:90px;"><canvas id="hisseAnaliziTrendChart"></canvas></div>
+            </div>`;
+        } else if (prof && prof.name) {
+            priceHtml = `<div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; padding:12px 16px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
+                ${prof.logo ? `<img src="${prof.logo}" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;">` : ''}
+                <div>
+                    <div style="font-size:16px; font-weight:800; color:var(--t1);">${prof.name}</div>
+                    <div style="font-size:11px; color:var(--t3); font-weight:600;">${prof.exchange||''} · ${prof.finnhubIndustry||''} · ${prof.currency||''}</div>
+                </div>
+            </div>`;
+        }
+
+        // ── 2. SENTIMENT ────────────────────────────────────────────
+        let sentHtml = '';
+        if (sent && sent.sentiment) {
+            const bullPct = ((sent.sentiment.bullishPercent || 0) * 100).toFixed(1);
+            const bearPct = ((sent.sentiment.bearishPercent || 0) * 100).toFixed(1);
+            const score   = sent.companyNewsScore != null ? sent.companyNewsScore.toFixed(2) : '—';
+            const buzz    = sent.buzz?.articlesInLastWeek ?? '—';
+            const bullW   = Math.round(parseFloat(bullPct));
+            sentHtml = `
+            <div style="margin-bottom:14px; padding:12px 16px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
+                <div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px;">🧠 PIYASA DUYARLILIĞI (SENTIMENT)</div>
+                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px;">
+                    <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); border-radius:8px; padding:10px; text-align:center;">
+                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">BOĞA</div>
+                        <div style="font-size:22px; font-weight:900; color:#10b981; font-family:var(--mono);">${bullPct}%</div>
+                    </div>
+                    <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:10px; text-align:center;">
+                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">AYI</div>
+                        <div style="font-size:22px; font-weight:900; color:#ef4444; font-family:var(--mono);">${bearPct}%</div>
+                    </div>
+                    <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px; text-align:center;">
+                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">HABER SKORU</div>
+                        <div style="font-size:22px; font-weight:900; color:#3b82f6; font-family:var(--mono);">${score}</div>
+                    </div>
+                    <div style="background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.2); border-radius:8px; padding:10px; text-align:center;">
+                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">7 GÜN HABER</div>
+                        <div style="font-size:22px; font-weight:900; color:#8b5cf6; font-family:var(--mono);">${buzz}</div>
+                    </div>
+                </div>
+                <div style="font-size:9px; color:var(--t3); margin-bottom:4px;">BOĞA / AYI ORANI</div>
+                <div style="height:8px; background:rgba(239,68,68,0.25); border-radius:4px; overflow:hidden;">
+                    <div style="height:100%; width:${bullW}%; background:linear-gradient(90deg,#10b981,#34d399); border-radius:4px; transition:width .6s ease;"></div>
+                </div>
+            </div>`;
+        }
+
+        // ── 3. HABERLER ─────────────────────────────────────────────
+        let newsHtml = '';
+        if (news.length === 0) {
+            newsHtml = `<div style="text-align:center; padding:30px; color:var(--t3);">
+                <div style="font-size:28px; margin-bottom:10px;">📭</div>
+                <div style="font-size:13px; font-weight:600;">Bu sembol için son dönemde haber bulunamadı.</div>
+                <div style="font-size:11px; margin-top:6px; opacity:.7;">BİST: THYAO · GARAN · ASELS (uzantı gerekmez)</div>
+            </div>`;
+        } else {
+            const shown = news.slice(0, 30);
+            newsHtml = `<div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;">📰 SON HABERLER (${news.length} haber)</div>`;
+            newsHtml += shown.map(n => {
+                const dt = n.datetime
+                    ? new Date(n.datetime * 1000).toLocaleDateString('tr-TR', {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})
+                    : '';
+                const borderColor = n.sentiment === 'positive' ? '#10b981' : n.sentiment === 'negative' ? '#ef4444' : 'var(--blue)';
+                return `<div style="padding:10px 14px; margin-bottom:7px; background:var(--surface-3); border-radius:8px; border:1px solid var(--border); border-left:3px solid ${borderColor};">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:5px;">
+                        <div style="font-size:12px; font-weight:700; color:var(--t1); line-height:1.4;">${n.headline || '—'}</div>
+                        <div style="font-size:9.5px; color:var(--t4); white-space:nowrap; font-family:var(--mono); flex-shrink:0;">${dt}</div>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <span style="font-size:10px; color:var(--t4); font-weight:600; background:var(--surface-2); padding:2px 8px; border-radius:3px;">${n.source || ''}</span>
+                        ${n.url ? `<a href="${n.url}" target="_blank" rel="noopener" style="font-size:10px; color:var(--blue); font-weight:700; text-decoration:none; padding:3px 10px; border:1px solid rgba(59,130,246,0.3); border-radius:4px; background:rgba(59,130,246,0.06);">🔗 Habere Git</a>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        resultEl.innerHTML = priceHtml + sentHtml + newsHtml;
+
+        // ── 4. TREND GRAFİĞİ (canvas render) ───────────────────────
+        if (quote && quote.closes && quote.closes.length > 1) {
+            const canvas = document.getElementById('hisseAnaliziTrendChart');
+            if (canvas) {
+                if (window._hisseTrendChart) { try { window._hisseTrendChart.destroy(); } catch(e) {} }
+                const validCloses = quote.closes.filter(Boolean);
+                const labels = validCloses.map((_, i) => '');
+                const firstVal = validCloses[0];
+                const lastVal  = validCloses[validCloses.length - 1];
+                const isUp = lastVal >= firstVal;
+                const lineColor = isUp ? '#10b981' : '#ef4444';
+                window._hisseTrendChart = new Chart(canvas.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels,
+                        datasets: [{
+                            data: validCloses,
+                            borderColor: lineColor,
+                            borderWidth: 2,
+                            fill: true,
+                            backgroundColor: isUp ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)',
+                            pointRadius: 0,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: {
+                            callbacks: { label: ctx => fmtN(ctx.parsed.y) }
+                        }},
+                        scales: {
+                            x: { display: false },
+                            y: { display: true, ticks: { color: '#64748B', font: { size: 9 }, maxTicksLimit: 4 }, grid: { color: 'rgba(255,255,255,0.04)' } }
+                        }
+                    }
+                });
+            }
+        }
+    }
 
     // --- SİRİUS YAPAY ZEKA RAPORU (SCROLLSUZ, YATAY VE ANA FONT UYUMLU) ---
     function generateSiriusReport() {
@@ -1462,90 +2213,136 @@ body {
 
         let winRate = (winningAssets + losingAssets) > 0 ? Math.round((winningAssets / (winningAssets + losingAssets)) * 100) : 0;
         
-        // Modal HTML (Yatay mimari, ekrana tam oturan, scrollsuz)
+        // Çeşitlilik skoru
+        const catCount = Object.values(kategoriDagilimi).filter(v => v > 0).length;
+        const diversityScore = catCount >= 4 ? 'YÜKSEK' : catCount >= 3 ? 'ORTA' : 'DÜŞÜK';
+        const diversityColor = catCount >= 4 ? '#10b981' : catCount >= 3 ? '#f59e0b' : '#ef4444';
+        const totalNet = totalAcikKar + totalRealizeKar;
+        const winRateColor = winRate >= 60 ? '#10b981' : winRate >= 40 ? '#f59e0b' : '#ef4444';
+
+        // Tüm varlıkları K/Z sıralı listele (max 10)
+        const sortedByKarList = Object.values(groupedAssets).sort((a,b) => b.kar - a.kar);
+        const topGainers = sortedByKarList.filter(a => a.kar > 0).slice(0,3);
+        const topLosers = [...sortedByKarList].reverse().filter(a => a.kar < 0).slice(0,3);
+
+        // Modal HTML — Modern, detaylı, scrollable
         let html = `
-        <div style="padding: 24px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
-                <div>
-                    <h3 style="color: var(--amber); font-size: 20px; letter-spacing: 2px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; display:flex; align-items:center; gap:8px;"><span style="font-size:24px;">🤖</span> SIRIUS İLERİ DÜZEY ANALİZ</h3>
-                    <div style="color: var(--t3); font-size: 11px; font-weight: 600; letter-spacing: 1px;">YAPAY ZEKA DESTEKLİ PORTFÖY RÖNTGENİ VE ÖNGÖRÜ</div>
+        <div style="background: linear-gradient(135deg, #080A0F 0%, #0D1117 100%); min-height:100%; padding: 0;">
+          <!-- HEADER -->
+          <div style="background: linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(59,130,246,0.1) 100%); border-bottom: 1px solid rgba(245,158,11,0.2); padding: 20px 28px 16px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
+              <div>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+                  <span style="font-size:28px;">🤖</span>
+                  <div>
+                    <h2 style="color:#F5A623; font-size:18px; font-weight:900; letter-spacing:2px; margin:0;">SIRIUS ANALİZ MERKEZİ</h2>
+                    <div style="color:rgba(255,255,255,0.4); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;">İleri Düzey Portföy Röntgeni · ${new Date().toLocaleDateString('tr-TR')}</div>
+                  </div>
                 </div>
-                <div style="text-align:right; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.2); padding: 8px 16px; border-radius: 12px;">
-                    <div style="color: var(--blue); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 2px;">KÂRLILIK ORANI (WIN RATE)</div>
-                    <div style="font-size: 22px; font-weight: 800; color: #FFFFFF; font-family: var(--mono);">%${winRate}</div>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:10px; padding:10px 16px; text-align:center; min-width:80px;">
+                  <div style="color:#10b981; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:2px;">WIN RATE</div>
+                  <div style="font-size:22px; font-weight:900; color:${winRateColor}; font-family:var(--mono);">%${winRate}</div>
                 </div>
+                <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.3); border-radius:10px; padding:10px 16px; text-align:center; min-width:80px;">
+                  <div style="color:#38BDF8; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:2px;">ÇEŞİTLİLİK</div>
+                  <div style="font-size:14px; font-weight:900; color:${diversityColor}; font-family:var(--mono);">${diversityScore}</div>
+                </div>
+                <div style="background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.3); border-radius:10px; padding:10px 16px; text-align:center; min-width:80px;">
+                  <div style="color:#A78BFA; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:2px;">AKTİF VARLIK</div>
+                  <div style="font-size:22px; font-weight:900; color:#A78BFA; font-family:var(--mono);">${Object.keys(groupedAssets).length}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 20px 28px; display:flex; flex-direction:column; gap:18px;">
+
+            <!-- KPİ BANDI -->
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+              <div style="background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(59,130,246,0.04)); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 16px;">
+                <div style="color:#38BDF8; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">PORTFÖY BÜYÜKLÜĞÜ</div>
+                <div style="font-size:17px; font-weight:900; color:#fff; font-family:var(--mono); line-height:1.2;">${formatTL(totalPortfolio)}</div>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04)); border:1px solid rgba(245,158,11,0.25); border-radius:12px; padding:14px 16px;">
+                <div style="color:#F5A623; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">AÇIK POZİSYON KÂRI</div>
+                <div style="font-size:17px; font-weight:900; font-family:var(--mono); line-height:1.2;">${formatKar(totalAcikKar)}</div>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(16,185,129,0.04)); border:1px solid rgba(16,185,129,0.25); border-radius:12px; padding:14px 16px;">
+                <div style="color:#10b981; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">REALİZE EDİLMİŞ KÂR</div>
+                <div style="font-size:17px; font-weight:900; font-family:var(--mono); line-height:1.2;">${formatKar(totalRealizeKar)}</div>
+              </div>
+              <div style="background:linear-gradient(135deg,rgba(139,92,246,0.12),rgba(139,92,246,0.04)); border:1px solid rgba(139,92,246,0.25); border-radius:12px; padding:14px 16px;">
+                <div style="color:#A78BFA; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">TOPLAM NET K/Z</div>
+                <div style="font-size:17px; font-weight:900; font-family:var(--mono); line-height:1.2;">${formatKar(totalNet)}</div>
+              </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;">
-                <div class="sirius-stat-box" style="padding: 16px;">
-                    <div style="color: var(--t3); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 6px;">TOPLAM BÜYÜKLÜK</div>
-                    <div style="font-size: 20px; font-weight: 800; color: #FFFFFF; font-family: var(--mono);">${formatTL(totalPortfolio)}</div>
-                </div>
-                <div class="sirius-stat-box" style="padding: 16px;">
-                    <div style="color: var(--t3); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 6px;">AÇIK P. KÂRI</div>
-                    <div style="font-size: 20px; font-weight: 800; font-family: var(--mono);">${formatKar(totalAcikKar)}</div>
-                </div>
-                <div class="sirius-stat-box" style="padding: 16px;">
-                    <div style="color: var(--t3); font-size: 10px; font-weight: 800; letter-spacing: 1px; margin-bottom: 6px;">REALİZE KÂR</div>
-                    <div style="font-size: 20px; font-weight: 800; font-family: var(--mono);">${formatKar(totalRealizeKar)}</div>
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 16px;">
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; display: flex; flex-direction: column;">
-                    <div style="color: var(--t2); font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; text-align:center;">HACİM LİDERLERİ (İLK 5)</div>
-                    <div class="canvas-container" style="height: 180px; flex: none;"><canvas id="siriusChart"></canvas></div>
-                </div>
-
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; display: flex; flex-direction: column;">
-                    <div style="color: var(--t2); font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; text-align:center;">KATEGORİ DAĞILIMI</div>
-                    <div class="canvas-container" style="height: 180px; flex: none;"><canvas id="siriusCatChart"></canvas></div>
-                </div>
-                
-               <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; display: flex; flex-direction: column;">
-                    <div style="color: var(--t2); font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px; text-align:center;">HACİM VE KÂR DETAYI</div>
-                    <div style="display: flex; flex-direction: column; gap: 8px; overflow-y: auto; max-height: 180px; padding-right: 4px;">
-                        ${top5.map((a) => `
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-                            <div style="display: flex; flex-direction: column; gap: 4px;">
-                                <div style="font-weight: 800; font-size: 13px; color: #fff;">${a.varlik} <span style="font-size: 9px; padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--t3); margin-left: 6px;">${a.cat.toUpperCase()}</span></div>
-                                <div style="font-size: 11px; color: var(--t3); font-weight: 600;">Hacim: <span style="font-family: var(--mono); color: var(--t2);">${formatTL(a.tutar)}</span></div>
-                            </div>
-                            <div style="text-align: right; font-size: 14px; font-weight: 800;">
-                                ${formatKar(a.kar)}
-                            </div>
+            <!-- GRAFİKLER + DETAY -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:14px;">
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">📊 HACİM LİDERLERİ</div>
+                <div class="canvas-container" style="height:170px; flex:none;"><canvas id="siriusChart"></canvas></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">🥧 KATEGORİ PAYI</div>
+                <div class="canvas-container" style="height:170px; flex:none;"><canvas id="siriusCatChart"></canvas></div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:6px;">
+                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:4px; text-transform:uppercase;">📋 TÜM AKTİF POZİSYONLAR</div>
+                <div style="overflow-y:auto; max-height:190px; display:flex; flex-direction:column; gap:5px; padding-right:2px;">
+                  ${sortedByTutar.length === 0 ? '<div style="text-align:center;padding:20px;color:rgba(255,255,255,0.3);font-size:12px;">Aktif varlık yok</div>' :
+                    sortedByTutar.map(a => {
+                      const pct = totalPortfolio > 0 ? ((a.tutar/totalPortfolio)*100).toFixed(1) : '0.0';
+                      const catColors = {bist:'#10b981',nasdaq:'#8b5cf6',avrupa:'#ec4899',emtia:'#3b82f6',fon:'#f59e0b'};
+                      const cc = catColors[a.cat] || '#94A3B8';
+                      return `<div style="display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px; border-left:3px solid ${cc};">
+                        <div>
+                          <div style="font-weight:800; font-size:12px; color:#fff;">${a.varlik} <span style="font-size:8px; color:rgba(255,255,255,0.4);">${a.cat.toUpperCase()}</span></div>
+                          <div style="font-size:10px; color:rgba(255,255,255,0.4);">%${pct} · ${formatTL(a.tutar)}</div>
                         </div>
-                        `).join('')}
-                        ${top5.length === 0 ? '<div style="text-align:center; padding: 20px; color:var(--t3);">Aktif varlık bulunamadı.</div>' : ''}
-                    </div>
+                        <div style="font-size:12px; font-weight:800;">${formatKar(a.kar)}</div>
+                      </div>`;
+                    }).join('')
+                  }
                 </div>
-            
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
-                <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.2); padding: 14px; border-radius: 12px; display: flex; flex-direction:column; justify-content: center;">
-                    <div style="color: var(--green); font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-bottom: 6px;">YILDIZ VARLIK</div>
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                        <div style="font-size: 15px; font-weight: 800; color: #FFFFFF;">${bestAsset ? bestAsset.varlik : 'YOK'}</div>
-                        <div style="font-size: 14px; font-weight: 800; font-family: var(--mono); text-align:right;">${bestAsset ? formatKar(bestAsset.kar) : '-'}</div>
-                    </div>
-                </div>
-                
-                <div style="background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2); padding: 14px; border-radius: 12px; display: flex; flex-direction:column; justify-content: center;">
-                    <div style="color: var(--red); font-size: 9px; font-weight: 800; letter-spacing: 1px; margin-bottom: 6px;">ZAYIF HALKA (DİKKAT)</div>
-                    <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                        <div style="font-size: 15px; font-weight: 800; color: #FFFFFF;">${worstAsset ? worstAsset.varlik : 'YOK'}</div>
-                        <div style="font-size: 14px; font-weight: 800; font-family: var(--mono); text-align:right;">${worstAsset ? formatKar(worstAsset.kar) : '-'}</div>
-                    </div>
-                </div>
+              </div>
             </div>
 
-            <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 12px; padding: 18px; margin-top: 16px;">
-                 <p style="color: var(--t1); font-size: 12.5px; line-height: 1.6; font-weight: 500; margin: 0;">
-                    <strong style="color: var(--amber); letter-spacing: 0.5px;">SIRIUS ÖNGÖRÜSÜ:</strong> 
-                    Kazanma oranınız (%${winRate}) ${winRate > 60 ? 'oldukça başarılı.' : 'geliştirilebilir. Zarardaki pozisyonlar için stop-loss seviyelerini gözden geçirin.'} 
-                    ${bestAsset ? `Özellikle ${bestAsset.varlik} tarafındaki momentumu iyi yakalamışsınız.` : ''} 
-                    Riski farklı kategorilere dağıtmak dalgalı piyasalarda koruyucu kalkan görevi görür.
-                 </p>
+            <!-- EN İYİ / EN KÖTÜ + KÂR LİSTESİ -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
+              <div style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:14px;">
+                <div style="color:#10b981; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">⭐ KÂR LİDERLERİ</div>
+                ${topGainers.length === 0 ? '<div style="color:rgba(255,255,255,0.3);font-size:11px;">Kârlı varlık yok</div>' :
+                  topGainers.map((a,i) => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <div style="font-weight:800; font-size:12px; color:#fff;">${i===0?'🥇':i===1?'🥈':'🥉'} ${a.varlik}</div>
+                    <div style="font-size:12px; font-weight:800; color:#10b981;">${formatKar(a.kar)}</div>
+                  </div>`).join('')
+                }
+              </div>
+              <div style="background:rgba(239,68,68,0.05); border:1px solid rgba(239,68,68,0.2); border-radius:12px; padding:14px;">
+                <div style="color:#ef4444; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">⚠️ ZARAR POZİSYONLAR</div>
+                ${topLosers.length === 0 ? '<div style="color:rgba(255,255,255,0.3);font-size:11px;">Zararda varlık yok 🎉</div>' :
+                  topLosers.map(a => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <div style="font-weight:800; font-size:12px; color:#fff;">🔴 ${a.varlik}</div>
+                    <div style="font-size:12px; font-weight:800; color:#ef4444;">${formatKar(a.kar)}</div>
+                  </div>`).join('')
+                }
+              </div>
+              <div style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:14px;">
+                <div style="color:#F5A623; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">🧠 SIRIUS ÖNGÖRÜSÜ</div>
+                <p style="color:rgba(255,255,255,0.8); font-size:11.5px; line-height:1.7; font-weight:500; margin:0;">
+                  Kazanma oranınız <strong style="color:${winRateColor};">%${winRate}</strong> — ${winRate >= 65 ? '✅ Güçlü bir performans sergiliyorsunuz.' : winRate >= 45 ? '⚠️ Ortalama bir performans. Stop-loss seviyelerini gözden geçirin.' : '🔴 Zayıf performans. Portföy stratejinizi revize edin.'}
+                  ${bestAsset ? ` <strong style="color:#10b981;">${bestAsset.varlik}</strong> momentumu güçlü.` : ''}
+                  ${worstAsset ? ` <strong style="color:#ef4444;">${worstAsset.varlik}</strong> için çıkış stratejisi değerlendirin.` : ''}
+                  Çeşitlilik skoru: <strong style="color:${diversityColor};">${diversityScore}</strong> (${catCount}/5 kategori).
+                </p>
+              </div>
             </div>
+
+          </div>
+        </div>
         `;
 
         document.getElementById('siriusReportContent').innerHTML = html;
@@ -1681,19 +2478,86 @@ body {
         totalRealized = totalSatisKar + totalTemettu;
         let unrealized = totalGuncel - totalMaliyet;
 
-        document.getElementById('assetModalTitle').innerHTML = `${varlik} <br><span style="font-size:10px; color:var(--t2); font-weight:700; letter-spacing:.5px;">DETAYLI PERFORMANS RADARI</span>`;
-        
-        let totalKarZarar = unrealized + totalRealized;
-        let getiriYuzde = totalMaliyet > 0 ? ((totalGuncel - totalMaliyet) / totalMaliyet * 100) : 0;
-        let ortMaliyet = totalAdet > 0 ? (totalMaliyet / totalAdet) : 0;
-        
+        const katLabel = { bist:'🇹🇷 BİST', nasdaq:'🇺🇸 NASDAQ', emtia:'🥇 Emtia', avrupa:'🇪🇺 Avrupa', fon:'📦 Fon' };
+        document.getElementById('assetModalTitle').innerHTML = `
+            ${varlik}
+            <span style="font-size:10px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); padding:2px 8px; border-radius:4px; color:#38BDF8; letter-spacing:.4px; vertical-align:middle; margin-left:6px;">${katLabel[type] || type.toUpperCase()}</span>
+            <br><span style="font-size:10px; color:var(--t2); font-weight:700; letter-spacing:.5px;">DETAYLI PERFORMANS RADARI</span>`;
+
+        const totalKarZarar = unrealized + totalRealized;
+        const getiriYuzde   = totalMaliyet > 0 ? ((totalGuncel - totalMaliyet) / totalMaliyet * 100) : 0;
+        const ortMaliyet    = totalAdet > 0 ? (totalMaliyet / totalAdet) : 0;
+        const guncelFiyat   = totalAdet > 0 ? (totalGuncel / totalAdet) : 0;
+        const satisSayisi   = history.filter(h => h.islem === 'SATIŞ').length;
+        const temettuSayisi = history.filter(h => h.islem === 'TEMETTÜ').length;
+        const fiyatFarkYuzde = ortMaliyet > 0 ? ((guncelFiyat - ortMaliyet) / ortMaliyet * 100) : 0;
+
+        // Portföydeki ağırlık
+        let portfolioTotal = 0;
+        const usdK = parseFloat(document.getElementById('usdTryRate')?.value) || 1;
+        const eurK = parseFloat(document.getElementById('eurTryRate')?.value) || 1;
+        ['bist','nasdaq','emtia','avrupa','fon'].forEach(cat => {
+            const kur = cat === 'nasdaq' ? usdK : (cat === 'avrupa' ? eurK : 1);
+            const d2 = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+            const dates2 = Object.keys(d2).sort();
+            if (dates2.length > 0) {
+                d2[dates2[dates2.length-1]].filter(r => !r.isSatildi).forEach(r => {
+                    portfolioTotal += Number(r.guncelTutar) * kur;
+                });
+            }
+        });
+        const agirlik = portfolioTotal > 0 ? (totalGuncel / portfolioTotal * 100) : 0;
+
+        // En iyi / kötü satış
+        const satisList   = history.filter(h => h.islem === 'SATIŞ');
+        const enIyiSatis  = satisList.length > 0 ? satisList.reduce((a,b) => b.kar > a.kar ? b : a) : null;
+
         document.getElementById('assetModalStats').innerHTML = `
-            <div class="stat-card" style="padding:12px; box-shadow:none;"><h4 style="font-size:10px;">AKTİF BÜYÜKLÜK</h4><div class="val" style="font-size:16px;">${formatTL(totalGuncel)}</div><div class="stat-list">ADET: <span>${totalAdet}</span></div></div>
-            <div class="stat-card" style="padding:12px; box-shadow:none;"><h4 style="font-size:10px;">ORT. MALİYET</h4><div class="val" style="font-size:16px;">${formatTL(ortMaliyet)}</div><div class="stat-list">TOP. MALİYET: <span>${formatTL(totalMaliyet)}</span></div></div>
-            <div class="stat-card" style="padding:12px; box-shadow:none;"><h4 style="font-size:10px;">AÇIK KÂR (BEKLEYEN)</h4><div class="val" style="font-size:16px;">${formatKar(unrealized)}</div><div class="stat-list">GETİRİ: <span>${formatYuzde(getiriYuzde)}</span></div></div>
-            <div class="stat-card" style="padding:12px; box-shadow:none;"><h4 style="font-size:10px;">REALİZE SATIŞ KÂRI</h4><div class="val" style="font-size:16px;">${formatKar(totalSatisKar)}</div><div class="stat-list">İŞLEM SAYISI: <span>${history.filter(h=>h.islem==='SATIŞ').length}</span></div></div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(16,185,129,.4);"><h4 style="font-size:10px; color:var(--green);">TEMETTÜ GELİRİ</h4><div class="val" style="font-size:16px;">${formatKar(totalTemettu)}</div><div class="stat-list">ÖDEME SAYISI: <span>${history.filter(h=>h.islem==='TEMETTÜ').length}</span></div></div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(139,92,246,.5); justify-content:center; align-items:center; background:linear-gradient(135deg,var(--surface-2),rgba(139,92,246,.06));"><h4 style="font-size:10px; color:var(--purple); text-align:center;">TOPLAM NET K/Z</h4><div class="val" style="font-size:18px; text-align:center;">${formatKar(totalKarZarar)}</div></div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(59,130,246,.5);">
+                <h4 style="font-size:9.5px; color:var(--blue);">AKTİF BÜYÜKLÜK</h4>
+                <div class="val" style="font-size:17px;">${formatTL(totalGuncel)}</div>
+                <div class="stat-list" style="margin-top:4px; gap:2px;">
+                    <span style="color:var(--t4);">Adet:</span> <span style="font-weight:700;">${new Intl.NumberFormat('tr-TR').format(totalAdet)}</span>
+                    <span style="color:var(--t4); margin-left:8px;">Portföy Pay:</span> <span style="font-weight:700; color:var(--blue);">${formatYuzde(agirlik)}</span>
+                </div>
+            </div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(245,158,11,.5);">
+                <h4 style="font-size:9.5px; color:var(--amber);">ORT. MALİYET / GÜNCEL</h4>
+                <div class="val" style="font-size:17px;">${formatTL(ortMaliyet)}</div>
+                <div class="stat-list" style="margin-top:4px; gap:2px;">
+                    <span style="color:var(--t4);">Güncel Fiyat:</span> <span style="font-weight:700;">${formatTL(guncelFiyat)}</span>
+                    <span style="margin-left:8px; font-weight:700; color:${fiyatFarkYuzde>=0?'#10b981':'#ef4444'};">${fiyatFarkYuzde>=0?'▲':'▼'} ${Math.abs(fiyatFarkYuzde).toFixed(2)}%</span>
+                </div>
+            </div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid ${unrealized>=0?'rgba(16,185,129,.5)':'rgba(239,68,68,.5)'};">
+                <h4 style="font-size:9.5px; color:${unrealized>=0?'var(--green)':'var(--red)'};">AÇIK KÂR/ZARAR</h4>
+                <div class="val" style="font-size:17px;">${formatKar(unrealized)}</div>
+                <div class="stat-list" style="margin-top:4px; gap:2px;">
+                    <span style="color:var(--t4);">Getiri:</span> <span style="font-weight:700;">${formatYuzde(getiriYuzde)}</span>
+                    <span style="color:var(--t4); margin-left:8px;">Top. Maliyet:</span> <span style="font-weight:700;">${formatTL(totalMaliyet)}</span>
+                </div>
+            </div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(59,130,246,.4);">
+                <h4 style="font-size:9.5px; color:var(--blue);">REALİZE SATIŞ KÂRI</h4>
+                <div class="val" style="font-size:17px;">${formatKar(totalSatisKar)}</div>
+                <div class="stat-list" style="margin-top:4px; gap:2px;">
+                    <span style="color:var(--t4);">İşlem Sayısı:</span> <span style="font-weight:700;">${satisSayisi}</span>
+                    ${enIyiSatis ? `<span style="color:var(--t4); margin-left:8px;">En İyi:</span> <span style="font-weight:700; color:#10b981;">${formatTL(enIyiSatis.kar)}</span>` : ''}
+                </div>
+            </div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(16,185,129,.5);">
+                <h4 style="font-size:9.5px; color:var(--green);">TEMETTÜ GELİRİ</h4>
+                <div class="val" style="font-size:17px;">${formatKar(totalTemettu)}</div>
+                <div class="stat-list" style="margin-top:4px; gap:2px;">
+                    <span style="color:var(--t4);">Ödeme Sayısı:</span> <span style="font-weight:700;">${temettuSayisi}</span>
+                    ${temettuSayisi > 0 && totalAdet > 0 ? `<span style="color:var(--t4); margin-left:8px;">His. Başı:</span> <span style="font-weight:700;">${formatTL(totalTemettu/totalAdet)}</span>` : ''}
+                </div>
+            </div>
+            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(139,92,246,.6); background:linear-gradient(135deg,var(--surface-2),rgba(139,92,246,.06));">
+                <h4 style="font-size:9.5px; color:var(--purple); text-align:center;">TOPLAM NET K/Z</h4>
+                <div class="val" style="font-size:20px; text-align:center;">${formatKar(totalKarZarar)}</div>
+                <div style="text-align:center; font-size:9.5px; color:var(--t3); margin-top:4px;">Açık + Realize + Temettü</div>
+            </div>
         `;
 
         history.sort((a,b) => new Date(b.tarih) - new Date(a.tarih));
@@ -2422,6 +3286,61 @@ body {
         document.getElementById('quickAssetInfo').style.display = 'none';
     }
 
+    function editFromLedger(cat, varlik, sonTarih) {
+        switchTab('ana-portfoy-tab');
+        document.getElementById('masterCat').value = cat;
+        updateMasterFormUI();
+        document.getElementById('masterDate').value = sonTarih;
+        document.getElementById('masterVarlik').value = varlik;
+
+        if (['bist','fon','nasdaq','avrupa'].includes(cat)) {
+            let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+            let dates = Object.keys(db).sort();
+            let found = null; let foundDate = null;
+            for (let d of [...dates].reverse()) {
+                let lot = (db[d] || []).find(item => item.varlik === varlik && !item.isSatildi);
+                if (lot) { found = lot; foundDate = d; break; }
+            }
+            if (found) {
+                masterEditingId = found.id; masterEditingCat = cat; masterEditingDate = foundDate;
+                document.getElementById('masterDate').value = foundDate;
+                document.getElementById('masterAdet').value = found.adet;
+                document.getElementById('masterMaliyet').value = found.maliyet;
+                document.getElementById('masterGuncel').value = found.guncel;
+                document.getElementById('masterSatis').value = found.satis || '';
+            }
+        } else if (cat === 'trade') {
+            let db = JSON.parse(localStorage.getItem('my_trade_data_v9')) || [];
+            let found = db.filter(d => d.hisse === varlik && d.isBekliyor).sort((a,b)=>new Date(b.tarih)-new Date(a.tarih))[0];
+            if (found) {
+                masterEditingId = found.id; masterEditingCat = cat; masterEditingDate = found.tarih;
+                document.getElementById('masterDate').value = found.tarih;
+                document.getElementById('masterVarlik').value = found.hisse;
+                document.getElementById('masterAdet').value = found.adet;
+                document.getElementById('masterMaliyet').value = found.alis;
+                document.getElementById('masterSatis').value = found.isBekliyor ? '' : (found.satis || '');
+            }
+        } else if (cat === 'arz') {
+            let db = JSON.parse(localStorage.getItem('my_arz_data_v9')) || [];
+            let found = db.filter(d => d.hisse === varlik).sort((a,b)=>new Date(b.tarih)-new Date(a.tarih))[0];
+            if (found) {
+                masterEditingId = found.id; masterEditingCat = cat; masterEditingDate = found.tarih;
+                document.getElementById('masterDate').value = found.tarih;
+                document.getElementById('masterVarlik').value = found.hisse;
+                document.getElementById('masterAdet').value = found.adet;
+                document.getElementById('masterMaliyet').value = found.maliyet;
+                document.getElementById('masterSatis').value = found.satis || '';
+            }
+        }
+
+        let btn = document.getElementById('btnMasterSave');
+        if (btn) { btn.innerText = '💾 Güncelle'; btn.classList.remove('btn-success'); btn.classList.add('btn-warning'); }
+        document.getElementById('btnMasterCancel').style.display = 'inline-flex';
+        showQuickAssetInfo();
+        toast(`${varlik} düzenleme moduna alındı`, 'info');
+        document.querySelector('.trade-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function executeFIFO_Sell(cat, sellDate, varlik, sellAdet, sellPrice) {
         let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; let dates = Object.keys(db).filter(d => d <= sellDate).sort();
         let kalanSatis = sellAdet; let totalActive = 0;
@@ -2433,11 +3352,12 @@ body {
             for (let lot of activeLots) {
                 if (kalanSatis <= 0) break;
                 if (Number(lot.adet) <= kalanSatis) {
-                    kalanSatis -= Number(lot.adet); lot.isSatildi = true; lot.satis = sellPrice; lot.guncel = sellPrice; lot.guncelTutar = Number(lot.adet) * sellPrice; lot.karTL = lot.guncelTutar - Number(lot.alisTutari); lot.karYuzde = (lot.karTL / Number(lot.alisTutari)) * 100;
+                    kalanSatis -= Number(lot.adet); lot.isSatildi = true; lot.satis = sellPrice; lot.guncel = sellPrice; lot.guncelTutar = Number(lot.adet) * sellPrice; lot.karTL = lot.guncelTutar - Number(lot.alisTutari); lot.karYuzde = Number(lot.alisTutari) > 0 ? (lot.karTL / Number(lot.alisTutari)) * 100 : 0;
                 } else {
                     let satilanAdet = kalanSatis; let kalanAdet = Number(lot.adet) - satilanAdet;
-                    lot.adet = kalanAdet; lot.alisTutari = kalanAdet * Number(lot.maliyet); lot.guncelTutar = kalanAdet * lot.guncel; lot.karTL = lot.guncelTutar - lot.alisTutari; lot.karYuzde = (lot.karTL / lot.alisTutari) * 100;
-                    db[d].push({ id: Date.now() + Math.random(), varlik: varlik, adet: satilanAdet, maliyet: lot.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satilanAdet * Number(lot.maliyet), guncelTutar: satilanAdet * sellPrice, karTL: (satilanAdet * sellPrice) - (satilanAdet * Number(lot.maliyet)), karYuzde: ((sellPrice - Number(lot.maliyet))/Number(lot.maliyet))*100 });
+                    lot.adet = kalanAdet; lot.alisTutari = kalanAdet * Number(lot.maliyet); lot.guncelTutar = kalanAdet * lot.guncel; lot.karTL = lot.guncelTutar - lot.alisTutari; lot.karYuzde = lot.alisTutari > 0 ? (lot.karTL / lot.alisTutari) * 100 : 0;
+                    let _lotMaliyet = Number(lot.maliyet); let _satAlis = satilanAdet * _lotMaliyet; let _satSatis = satilanAdet * sellPrice;
+                    db[d].push({ id: Date.now() + Math.random(), varlik: varlik, adet: satilanAdet, maliyet: _lotMaliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: _satAlis, guncelTutar: _satSatis, karTL: _satSatis - _satAlis, karYuzde: _lotMaliyet > 0 ? ((sellPrice - _lotMaliyet) / _lotMaliyet) * 100 : 0 });
                     kalanSatis = 0;
                 }
             }
@@ -2459,18 +3379,19 @@ body {
                     let oldRecord = db[masterEditingDate][idx]; let oldAdet = Number(oldRecord.adet);
                     if (tAdet < oldAdet && !oldRecord.isSatildi) {
                         if (tSatis <= 0) return alert("SATIŞ FİYATI girin.");
-                        oldRecord.varlik = tVarlik; oldRecord.adet = tAdet; oldRecord.maliyet = tMaliyet; oldRecord.guncel = tGuncel; oldRecord.alisTutari = tAdet * tMaliyet; oldRecord.guncelTutar = tAdet * tGuncel; oldRecord.karTL = oldRecord.guncelTutar - oldRecord.alisTutari; oldRecord.karYuzde = (oldRecord.karTL / oldRecord.alisTutari) * 100;
+                        oldRecord.varlik = tVarlik; oldRecord.adet = tAdet; oldRecord.maliyet = tMaliyet; oldRecord.guncel = tGuncel; oldRecord.alisTutari = tAdet * tMaliyet; oldRecord.guncelTutar = tAdet * tGuncel; oldRecord.karTL = oldRecord.guncelTutar - oldRecord.alisTutari; oldRecord.karYuzde = (tAdet * tMaliyet) > 0 ? (oldRecord.karTL / (tAdet * tMaliyet)) * 100 : 0;
                         db[masterEditingDate].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: oldAdet - tAdet, maliyet: tMaliyet, guncel: tSatis, satis: tSatis, isSatildi: true, alisTutari: (oldAdet - tAdet)*tMaliyet, guncelTutar: (oldAdet - tAdet)*tSatis, karTL: ((oldAdet - tAdet)*tSatis) - ((oldAdet - tAdet)*tMaliyet), karYuzde: ((tSatis - tMaliyet)/tMaliyet)*100 });
                     } else {
                         oldRecord.varlik = tVarlik; oldRecord.adet = tAdet; oldRecord.maliyet = tMaliyet; oldRecord.guncel = tGuncel;
                         if(oldRecord.isSatildi) { if(tSatis > 0) oldRecord.satis = tSatis; oldRecord.guncelTutar = tAdet * Number(oldRecord.satis); } 
                         else { oldRecord.guncelTutar = tAdet * tGuncel; if(tSatis > 0) { oldRecord.satis = tSatis; oldRecord.guncel = tSatis; oldRecord.isSatildi = true; oldRecord.guncelTutar = tAdet * tSatis; } }
-                        oldRecord.alisTutari = tAdet * tMaliyet; oldRecord.karTL = Number(oldRecord.guncelTutar) - Number(oldRecord.alisTutari); oldRecord.karYuzde = (oldRecord.karTL / oldRecord.alisTutari) * 100;
+                        oldRecord.alisTutari = tAdet * tMaliyet; oldRecord.karTL = Number(oldRecord.guncelTutar) - Number(oldRecord.alisTutari); oldRecord.karYuzde = (tAdet * tMaliyet) > 0 ? (oldRecord.karTL / (tAdet * tMaliyet)) * 100 : 0;
                     }
                 } localStorage.setItem(dbName, JSON.stringify(db));
             } else {
                 if (tSatis > 0 && tMaliyet === 0) { executeFIFO_Sell(cat, tTarih, tVarlik, tAdet, tSatis); } else {
-                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: tAdet*tMaliyet, guncelTutar: (tSatis>0?tAdet*tSatis:tAdet*tGuncel), karTL: (tSatis>0?(tAdet*tSatis)-(tAdet*tMaliyet):(tAdet*tGuncel)-(tAdet*tMaliyet)), karYuzde: ((tGuncel-tMaliyet)/tMaliyet)*100 }); localStorage.setItem(dbName, JSON.stringify(db));
+                    let _alisTut = tAdet*tMaliyet; let _guncelTut = tSatis>0?tAdet*tSatis:tAdet*tGuncel; let _karTL = _guncelTut - _alisTut; let _karYuzde = tMaliyet>0 ? ((tSatis>0?tSatis:tGuncel)-tMaliyet)/tMaliyet*100 : 0;
+                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: _alisTut, guncelTutar: _guncelTut, karTL: _karTL, karYuzde: _karYuzde }); localStorage.setItem(dbName, JSON.stringify(db));
                 }
             }
         } else if (cat === 'trade') {
@@ -2658,7 +3579,10 @@ body {
                     <td>${r.aktifAdet > 0 ? formatNumberStr(ortMaliyet) + ' ' + r.sembol : '-'}</td>
                     <td>${r.aktifAdet > 0 ? formatNumberStr(r.toplamMaliyet) + ' TL' : '-'}</td>
                     <td style="font-weight:900;">${kKar === 0 ? '-' : formatKar(kKar)}</td>
-                    <td><button class="btn-primary" style="padding:4px 10px; font-size:9px;" onclick="openAssetDetail('${r.cat==='trade'||r.cat==='arz'?'bist':r.cat}', '${r.varlik}')">İncele</button></td>
+                    <td style="display:flex; gap:4px; justify-content:center;">
+                        <button class="btn-primary" style="padding:4px 8px; font-size:9px;" onclick="openAssetDetail('${r.cat==='trade'||r.cat==='arz'?'bist':r.cat}', '${r.varlik}')">İncele</button>
+                        <button class="btn btn-warning" style="padding:4px 8px; font-size:9px; height:auto;" onclick="editFromLedger('${r.cat}', '${r.varlik}', '${r.sonTarih}')">Düzenle</button>
+                    </td>
                 </tr>`;
             });
         }
@@ -2687,7 +3611,7 @@ body {
         let maliyet = parseFloat(document.getElementById(type + 'Maliyet').value) || 0; let guncel = parseFloat(document.getElementById(type + 'Guncel').value) || 0;
         if (!varlik || newAdet <= 0) return;
         let dbName = `my_${type}_v9`; let db = JSON.parse(localStorage.getItem(dbName)) || {}; let idx = db[editingDate].findIndex(d => String(d.id) === String(editingId)); if(idx === -1) return;
-        let r = db[editingDate][idx]; r.varlik = varlik; r.adet = newAdet; r.maliyet = maliyet; r.guncel = guncel; r.alisTutari = newAdet*maliyet; r.guncelTutar = newAdet*guncel; r.karTL = r.guncelTutar - r.alisTutari; r.karYuzde = (r.karTL/r.alisTutari)*100;
+        let r = db[editingDate][idx]; r.varlik = varlik; r.adet = newAdet; r.maliyet = maliyet; r.guncel = guncel; r.alisTutari = newAdet*maliyet; r.guncelTutar = newAdet*guncel; r.karTL = r.guncelTutar - r.alisTutari; r.karYuzde = r.alisTutari > 0 ? (r.karTL/r.alisTutari)*100 : 0;
         localStorage.setItem(dbName, JSON.stringify(db)); document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = ''; document.getElementById(type + 'Maliyet').value = ''; document.getElementById(type + 'Guncel').value = '';
         let btn = document.getElementById(`btnEkleSat_${type}`); if(btn) { btn.innerHTML = "Ekle"; btn.setAttribute('onclick', `addAsset('${type}')`); btn.classList.remove('btn-warning'); btn.classList.add('btn-success'); }
         editingId = null; renderAsset(type); updateDashboard(); renderIslemGecmisi();
@@ -3015,6 +3939,11 @@ buildDynamicMonthFilter();
         loadTheme();
         loadHedef();
         
+        // Orion Ticker'ı başlat
+        setTimeout(() => fetchOrionTicker(false), 500);
+        // 15 dakikada bir otomatik güncelle
+        setInterval(() => fetchOrionTicker(false), 15 * 60 * 1000);
+
         setTimeout(() => refreshAllMarketData(), 1500);
 
         assetCategories.forEach(cat => {
@@ -3039,6 +3968,9 @@ buildDynamicMonthFilter();
         assetCategories.forEach(cat => renderAsset(cat));
         renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
         updateDashboard();
+
+        // Piyasa veri panelini ticker yüklendikten sonra başlat
+        setTimeout(() => loadMarketDataPanel(), 2500);
     });
 </script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
