@@ -86,49 +86,6 @@
         [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .table-responsive { background-color: rgba(255, 255, 255, 0.7); }
         [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
-        /* Açık temada verilerin ve tabloların okunurluğunu artıran kontrast */
-        [data-theme="light"] body { color: #020617; }
-        [data-theme="light"] .app-title, 
-        [data-theme="light"] .app-title strong,
-        [data-theme="light"] .stat-card h4, 
-        [data-theme="light"] .summary-bar .title,
-        [data-theme="light"] .chart-box h3,
-        [data-theme="light"] .form-title,
-        [data-theme="light"] .hedef-panel h4 { color: #020617 !important; font-weight: 900 !important; }
-        [data-theme="light"] table td, 
-        [data-theme="light"] .val, 
-        [data-theme="light"] .metric span,
-        [data-theme="light"] .stat-list span { color: #0f172a !important; font-weight: 800 !important; }
-        [data-theme="light"] table th { color: #1e293b !important; background: rgba(226, 232, 240, 1) !important; font-weight: 900 !important; }
-        [data-theme="light"] .text-muted { color: #475569 !important; }
-        /* Açık temada sekmelerin kontrastını artırır */
-        [data-theme="light"] .tab-btn { font-weight: 800; opacity: 0.85; filter: saturate(0.8) contrast(1.2); }
-        [data-theme="light"] .tab-btn.active { opacity: 1; filter: saturate(1) contrast(1.5); }
-        /* --- AÇIK TEMA KESKİN KONTRAST (BAŞLIKLAR VE TABLOLAR) --- */
-        [data-theme="light"] body { color: #020617; }
-        [data-theme="light"] .app-title, 
-        [data-theme="light"] .app-title strong,
-        [data-theme="light"] .stat-card h4, 
-        [data-theme="light"] .summary-bar .title,
-        [data-theme="light"] .chart-box h3,
-        [data-theme="light"] .form-title,
-        [data-theme="light"] .hedef-panel h4 {
-            color: #020617 !important;
-            font-weight: 900 !important;
-        }
-        [data-theme="light"] table td, 
-        [data-theme="light"] .val, 
-        [data-theme="light"] .metric span,
-        [data-theme="light"] .stat-list span {
-            color: #0f172a !important;
-            font-weight: 800 !important;
-        }
-        [data-theme="light"] table th {
-            color: #1e293b !important;
-            background: rgba(226, 232, 240, 1) !important;
-            font-weight: 900 !important;
-        }
-        [data-theme="light"] .text-muted { color: #475569 !important; }
 
         /* --- EN ALT TELİF İMZASI CSS --- */
         .footer-copy {
@@ -141,17 +98,16 @@
         html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
 body {
-            body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    font-size: 13px;
-    background-color: var(--bg);
-    color: var(--t1);
-    height: 100vh;
-    overflow: hidden;
-    padding: 10px 12px;
-    transition: background .4s, color .4s;
-    position: relative;
-}
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: 13px;
+            background-color: #070b12; /* Derin uzay siyahı */
+            /* 3125.jpg fotoğrafındaki gibi belirgin ve zarif gümüş dalgalar */
+            color: var(--t1);
+            height: 100vh;
+            overflow: hidden;
+            padding: 10px 12px;
+            transition: background .4s, color .4s;
+            position: relative;
         }
 
         body::before {
@@ -943,32 +899,30 @@ body {
     </div>
 
     <div id="ozet-tab" class="tab-content active">
-<div id="endeks-bar" style="position: relative; margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">
-    <div style="position: absolute; inset: 0; z-index: 0; opacity: 0.2; pointer-events: none;">
-        <div class="line-blue" style="position: absolute; width: 200%; height: 100%; animation: chartFlow 25s linear infinite;"></div>
-        <div class="line-green" style="position: absolute; width: 200%; height: 100%; animation: chartFlow 35s linear infinite;"></div>
-    </div>
-    
-    <div class="tradingview-widget-container" style="position: relative; z-index: 1;">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-        {
-            "symbols": [
+        <div id="endeks-bar" style="margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">
+            <div class="tradingview-widget-container">
+              <div class="tradingview-widget-container__widget"></div>
+              <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+              {
+              "symbols": [
                 { "proName": "BIST:XU030", "title": "BIST 30" },
                 { "proName": "BIST:XU100", "title": "BIST 100" },
                 { "proName": "FX:USDTRY", "title": "USD/TRY" },
                 { "proName": "FX:EURTRY", "title": "EUR/TRY" },
-                { "proName": "OANDA:XAUUSD", "title": "ALTIN (Ons)" }
-            ],
-            "showSymbolLogo": true,
-            "colorTheme": (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'),
-            "isTransparent": true,
-            "displayMode": "adaptive",
-            "locale": "tr"
-        }
-        </script>
-    </div>
-</div>
+                { "proName": "OANDA:XAUUSD", "title": "ALTIN (Ons)" },
+                { "proName": "CAPITALCOM:US100", "title": "NASDAQ 100" },
+                { "proName": "CAPITALCOM:US500", "title": "S&P 500" },
+                { "proName": "CAPITALCOM:DE40", "title": "DAX (Avrupa)" }
+              ],
+              "showSymbolLogo": true,
+              "colorTheme": "dark",
+              "isTransparent": true,
+              "displayMode": "adaptive",
+              "locale": "tr"
+            }
+              </script>
+            </div>
+        </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
             <div style="color:var(--t3); font-size:11px; letter-spacing:.6px; font-weight:800; text-transform:uppercase;">Genel Portföy Özeti</div>
@@ -1378,27 +1332,11 @@ body {
             localStorage.setItem('portfoy_theme', 'light');
             toast('Açık tema aktif', 'info', 2000);
         }
-       setTimeout(() => {
+        setTimeout(() => {
             const isDark = html.getAttribute('data-theme') !== 'light';
             Chart.defaults.color = isDark ? '#64748B' : '#94A3B8';
             Chart.defaults.borderColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
             updateDashboard();
-
-            // Borsa bandı tema değişince güncellenir
-            let widgetScript = document.querySelector('#endeks-bar script');
-            if (widgetScript) {
-                let barContainer = document.getElementById('endeks-bar');
-                let newScript = document.createElement('script');
-                newScript.type = 'text/javascript';
-                newScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-                newScript.async = true;
-                let config = JSON.parse(widgetScript.innerHTML);
-                config.colorTheme = isDark ? 'dark' : 'light';
-                newScript.innerHTML = JSON.stringify(config);
-                // İçerideki div'i koru, sadece script'i yenile
-                barContainer.querySelector('.tradingview-widget-container').innerHTML = '<div class="tradingview-widget-container__widget"></div>';
-                barContainer.querySelector('.tradingview-widget-container').appendChild(newScript);
-            }
         }, 50);
     }
     function loadTheme() {
