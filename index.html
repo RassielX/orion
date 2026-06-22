@@ -80,7 +80,19 @@
             --shadow:    0 10px 25px -5px rgba(0,0,0,0.08);
             --shadow-sm: 0 4px 10px -2px rgba(0,0,0,0.05);
         }
+/* --- AÇIK TEMA KUTU DÜZELTMELERİ --- */
+        [data-theme="light"] .stat-card { background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .hedef-panel { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(0,0,0,0.08); }
+        [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
+        [data-theme="light"] .table-responsive { background-color: rgba(255, 255, 255, 0.7); }
+        [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
 
+        /* --- EN ALT TELİF İMZASI CSS --- */
+        .footer-copy {
+            position: absolute; bottom: 8px; left: 0; width: 100%;
+            font-size: 11px; color: rgba(255,255,255,0.3); text-align: center;
+            letter-spacing: 1px; z-index: 10; font-weight: 500; pointer-events: none;
+        }
         /* ─── RESET ─── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -99,7 +111,15 @@ body {
         }
 
         body::before {
-            /* ─── HAREKETLİ GRAFİK ÇİZGİLERİ (BORSA EFEKTİ) ─── */
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 40%, rgba(7, 11, 18, 0.85) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── HAREKETLİ GRAFİK ÇİZGİLERİ (BORSA EFEKTİ) ─── */
         .chart-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; pointer-events: none; opacity: 0.35;
@@ -124,13 +144,6 @@ body {
             from { transform: translateX(0); }
             to { transform: translateX(-50vw); }
         }
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 40%, rgba(7, 11, 18, 0.85) 100%);
-            pointer-events: none;
-            z-index: 0;
-             }
 
         [data-theme="light"] body {
             background-color: #F3F6FA;
@@ -1190,7 +1203,8 @@ body {
     </div>
 
 </div>
-
+<!-- EN ALT TELİF İMZASI -->
+<div class="footer-copy">© 2026 Orion Yatırım Merkezi – Tüm Hakları Saklıdır.</div>
 <script>
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
