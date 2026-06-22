@@ -86,6 +86,9 @@
         [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
         [data-theme="light"] .table-responsive { background-color: rgba(255, 255, 255, 0.7); }
         [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
+        /* Açık temada sekmelerin kontrastını artırır */
+        [data-theme="light"] .tab-btn { font-weight: 800; opacity: 0.85; filter: saturate(0.8) contrast(1.2); }
+        [data-theme="light"] .tab-btn.active { opacity: 1; filter: saturate(1) contrast(1.5); }
 
         /* --- EN ALT TELİF İMZASI CSS --- */
         .footer-copy {
@@ -899,8 +902,7 @@ body {
     </div>
 
     <div id="ozet-tab" class="tab-content active">
-        <div id="endeks-bar" style="margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid rgba(255,255,255,0.06); background: rgba(0,0,0,0.2); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">
-            <div class="tradingview-widget-container">
+<div id="endeks-bar" style="margin-bottom:16px; border-radius:var(--r-lg); overflow:hidden; border:1px solid var(--border); background: var(--surface-2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 2px 15px rgba(0,0,0,0.2);">            <div class="tradingview-widget-container">
               <div class="tradingview-widget-container__widget"></div>
               <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
               {
@@ -915,7 +917,7 @@ body {
                 { "proName": "CAPITALCOM:DE40", "title": "DAX (Avrupa)" }
               ],
               "showSymbolLogo": true,
-              "colorTheme": "dark",
+              "colorTheme": (document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark'),
               "isTransparent": true,
               "displayMode": "adaptive",
               "locale": "tr"
@@ -1337,6 +1339,21 @@ body {
             Chart.defaults.color = isDark ? '#64748B' : '#94A3B8';
             Chart.defaults.borderColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
             updateDashboard();
+
+            // Tema değiştiğinde borsa bandını yenile
+            let widgetScript = document.querySelector('#endeks-bar script');
+            if (widgetScript) {
+                let barContainer = document.getElementById('endeks-bar');
+                let newScript = document.createElement('script');
+                newScript.type = 'text/javascript';
+                newScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+                newScript.async = true;
+                let config = JSON.parse(widgetScript.innerHTML);
+                config.colorTheme = isDark ? 'dark' : 'light';
+                newScript.innerHTML = JSON.stringify(config);
+                barContainer.innerHTML = '<div class="tradingview-widget-container__widget"></div>';
+                barContainer.appendChild(newScript);
+            }
         }, 50);
     }
     function loadTheme() {
