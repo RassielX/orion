@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Portföy — Yatırım Paneli v6</title>
     <meta name="apple-mobile-web-app-title" content="ORION">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,36 +62,99 @@
 
         /* ─── LIGHT TEMA ─── */
         [data-theme="light"] {
-            --bg:         #F3F6FA;
-            --surface:    #FFFFFF;
-            --surface-2:  #F8FAFC;
-            --surface-3:  #E2E8F0;
-            --surface-4:  #CBD5E1;
+            --bg:         #a8c4e0;
+            --surface:    rgba(255,255,255,0.28);
+            --surface-2:  rgba(240,248,255,0.25);
+            --surface-3:  rgba(220,235,255,0.22);
+            --surface-4:  rgba(200,220,245,0.20);
 
-            --border:     rgba(0,0,0,0.08);
-            --border-2:   rgba(0,0,0,0.14);
-            --border-hi:  rgba(59,130,246,0.35);
+            --border:     rgba(255,255,255,0.35);
+            --border-2:   rgba(255,255,255,0.48);
+            --border-hi:  rgba(59,130,246,0.50);
 
             --t1: #0F172A;
-            --t2: #334155;
-            --t3: #64748B;
-            --t4: #94A3B8;
+            --t2: #1E3A5F;
+            --t3: #3D5A80;
+            --t4: #6B8BAE;
 
-            --shadow:    0 10px 25px -5px rgba(0,0,0,0.08);
-            --shadow-sm: 0 4px 10px -2px rgba(0,0,0,0.05);
+            --shadow:    0 10px 25px -5px rgba(0,0,0,0.15);
+            --shadow-sm: 0 4px 10px -2px rgba(0,0,0,0.10);
         }
-/* --- AÇIK TEMA KUTU DÜZELTMELERİ --- */
-        [data-theme="light"] .stat-card { background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%); border-color: rgba(0,0,0,0.08); }
-        [data-theme="light"] .hedef-panel { background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(0,0,0,0.08); }
-        [data-theme="light"] .hedef-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.06); }
-        [data-theme="light"] .table-responsive { background-color: rgba(255,255,255,0.18) !important; }
-        [data-theme="light"] .summary-bar { background: rgba(255,255,255,0.20); }
-        [data-theme="light"] .chart-box { background: rgba(255,255,255,0.18); }
-        [data-theme="light"] .trade-form { background: rgba(255,255,255,0.20); }
-        [data-theme="light"] .filter-bar { background: rgba(255,255,255,0.20) !important; }
-        [data-theme="light"] .stat-card { background: linear-gradient(180deg, rgba(255,255,255,0.30) 0%, rgba(240,245,255,0.20) 100%) !important; }
-        [data-theme="light"] .hedef-panel { background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(240,245,255,0.16) 100%) !important; }
-        [data-theme="light"] .modal-content { background: rgba(255,255,255,0.88); }
+        /* ─── AÇIK TEMA — GERÇEK CAM/FROSTED GLASS ─── */
+        [data-theme="light"] body {
+            background-color: var(--bg) !important;
+        }
+        [data-theme="light"] .container {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.32) !important;
+            backdrop-filter: blur(24px) !important;
+            -webkit-backdrop-filter: blur(24px) !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        [data-theme="light"] .stat-card {
+            background: rgba(255,255,255,0.22) !important;
+            border-color: rgba(255,255,255,0.38) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.45) !important;
+        }
+        [data-theme="light"] .hedef-panel {
+            background: rgba(255,255,255,0.20) !important;
+            border-color: rgba(255,255,255,0.35) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+        }
+        [data-theme="light"] .hedef-item {
+            background: rgba(255,255,255,0.22) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+        }
+        [data-theme="light"] .table-responsive {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .summary-bar {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .chart-box {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .trade-form {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .filter-bar {
+            background: rgba(255,255,255,0.18) !important;
+            border-color: rgba(255,255,255,0.30) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .modal-content {
+            background: rgba(240,248,255,0.75) !important;
+            border-color: rgba(255,255,255,0.50) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+        }
+        [data-theme="light"] .import-card {
+            background: rgba(255,255,255,0.20) !important;
+            border-color: rgba(255,255,255,0.35) !important;
+        }
+        [data-theme="light"] .market-data-card {
+            background: rgba(255,255,255,0.20) !important;
+            border-color: rgba(255,255,255,0.35) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
         /* Açık tema metin kontrast iyileştirmesi */
         [data-theme="light"] .tab-btn { color: #475569 !important; }
         [data-theme="light"] .tab-btn[data-tab="ozet-tab"] { color: #0369a1 !important; }
@@ -135,6 +198,18 @@
     border-color: rgba(0,0,0,0.10) !important;
     box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.9) !important;
 }
+/* TradingView widget sarmalayıcı */
+#tv-ticker-wrap {
+    width: 100%;
+    min-height: 46px;
+    overflow: hidden;
+    border-radius: var(--r-lg);
+}
+#tv-ticker-wrap .tradingview-widget-container__widget {
+    width: 100% !important;
+    height: 46px !important;
+}
+/* Orion fallback — TV yüklenemezse gösterilir */
 #orion-ticker-wrap { overflow: hidden; position: relative; }
 #orion-ticker-track {
     display: inline-flex; align-items: center;
@@ -155,7 +230,13 @@
 }
 .orion-tick-item:hover { background: rgba(255,255,255,0.04); }
 [data-theme="light"] .orion-tick-item { border-right-color: rgba(0,0,0,0.06); }
-[data-theme="light"] .orion-tick-item:hover { background: rgba(0,0,0,0.03); }
+[data-theme="light"] .orion-tick-item:hover { background: rgba(0,0,0,0.04); }
+[data-theme="light"] #endeks-bar {
+    background: rgba(255,255,255,0.52) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-color: rgba(0,0,0,0.10) !important;
+}
 .orion-tick-label {
     font-size: 10px; font-weight: 800; letter-spacing: .6px;
     color: var(--t3); text-transform: uppercase;
@@ -192,20 +273,41 @@
         html {
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
-            overflow: hidden;
             height: 100%;
+        }
+        /* Masaüstü: scroll yok, uygulama tam ekran */
+        @media (min-width: 901px) {
+            html { overflow: hidden; }
+            body { overflow: hidden; height: 100vh; }
+        }
+        /* Mobil: scroll serbest */
+        @media (max-width: 900px) {
+            html {
+                overflow-x: hidden;
+                overflow-y: auto;
+                height: auto;
+                -webkit-text-size-adjust: 100%;
+            }
+            body {
+                overflow-x: hidden;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior-y: auto;
+                touch-action: pan-y;
+                min-height: 100vh;
+                height: auto;
+            }
         }
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             font-size: 13px;
             background-color: #070b12;
             color: var(--t1);
-            height: 100vh;
             width: 100vw;
-            overflow: hidden;
             padding: 14px 18px;
             transition: background .4s, color .4s;
             position: relative;
+            touch-action: manipulation;
         }
 
         /* ─── YILDIZ/PARLAYICI ARKA PLAN CANVAS ─── */
@@ -218,12 +320,58 @@
 }
 
         [data-theme="light"] body {
-            background-color: #b8cde8;
+            background: var(--bg) !important;
         }
 
         /* ─── AÇIK TEMADA YILDIZ GÖRÜNÜRLÜĞܠ─── */
         [data-theme="light"] #starCanvas {
             opacity: 1;
+        }
+        /* Açık temada frosted-glass container'lar yıldızları göstersin */
+        [data-theme="light"] .container {
+            background: rgba(255,255,255,0.16) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        [data-theme="light"] .stat-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(220,235,255,0.20) 100%) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+        }
+        [data-theme="light"] .hedef-panel {
+            background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(220,235,255,0.18) 100%) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+        }
+        [data-theme="light"] .hedef-item {
+            background: rgba(255,255,255,0.20) !important;
+        }
+        [data-theme="light"] .chart-box {
+            background: rgba(255,255,255,0.18) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+        [data-theme="light"] .summary-bar {
+            background: rgba(255,255,255,0.18) !important;
+            backdrop-filter: blur(10px) !important;
+            -webkit-backdrop-filter: blur(10px) !important;
+        }
+        [data-theme="light"] .table-responsive {
+            background: rgba(255,255,255,0.16) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .trade-form {
+            background: rgba(255,255,255,0.18) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+        }
+        [data-theme="light"] .filter-bar {
+            background: rgba(255,255,255,0.18) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
         }
 
         /* ─── GENEL ANİMASYON & GEÇİŞLER ─── */
@@ -278,11 +426,11 @@
             z-index: 1;
         }
         [data-theme="light"] .container {
-            background: rgba(255,255,255,0.07);
-            border-color: rgba(0,0,0,0.07);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+            background: rgba(255,255,255,0.18);
+            border-color: rgba(0,0,0,0.10);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         /* ─── UYGULAMA BAŞLIĞI ─── */
@@ -422,6 +570,11 @@
         .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 8px; overflow: hidden; }
         .tab-content.active { display: flex; animation: fadeUp .3s cubic-bezier(.4,0,.2,1); }
         @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        /* Mobilde tab içerikleri scroll edilebilir */
+        @media (max-width: 900px) {
+            .tab-content { overflow: visible !important; min-height: unset !important; }
+            .tab-content.active { overflow: visible !important; }
+        }
 
         /* ─── STAT KARTLARI ─── */
         .dashboard {
@@ -844,61 +997,343 @@
         /* ═══════════════════════════════════════════════════
            MOBİL UYUMLULUK (RESPONSIVE) DÜZELTMELERİ
         ═══════════════════════════════════════════════════ */
+
+        /* ── TABLET (900px altı) ── */
         @media (max-width: 900px) {
-            /* 1. Ekranı kaydırılabilir yap ve çerçeveleri kaldır */
-            body { 
-                height: auto !important; 
-                overflow-y: auto !important; 
-                overflow-x: hidden !important; 
-                padding: 0 !important; 
+            /* Sayfa scroll çalışsın */
+            html {
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                height: auto !important;
+                -webkit-overflow-scrolling: touch !important;
             }
-            .container { 
-                height: auto !important; 
-                min-height: 100vh; 
-                border-radius: 0; 
-                border: none; 
-                padding: 16px 12px;
-                box-shadow: none;
+            body {
+                height: auto !important;
+                min-height: 100vh;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                -webkit-overflow-scrolling: touch !important;
+                overscroll-behavior-y: auto !important;
+                touch-action: pan-y !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+            .container {
+                height: auto !important;
+                min-height: 100vh;
+                border-radius: 0 !important;
+                border: none !important;
+                padding: 14px 10px 20px !important;
+                box-shadow: none !important;
                 overflow: visible !important;
+                overflow-x: hidden !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                touch-action: pan-y !important;
             }
 
-            /* 2. Üst başlıklar ve sekmeler (Kaydırılabilir menü) */
-            .app-header { flex-direction: column; gap: 14px; align-items: flex-start; }
-            .app-header-btns { width: 100%; justify-content: space-between; }
-            .tabs { justify-content: flex-start; padding-bottom: 5px; margin-bottom: 20px; }
-            
-            /* 3. Ana Kartlar (2'li ızgara) ve Grafikler (Alt alta) */
-            .dashboard { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+            /* Header */
+            .app-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+                position: relative;
+            }
+            .header-center-title {
+                position: static !important;
+                transform: none !important;
+                font-size: 10px;
+                width: 100%;
+                text-align: center;
+                order: -1;
+            }
+            .app-header-btns {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            /* Tab bar kaydırılabilir */
+            .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                padding-bottom: 4px;
+                margin-bottom: 12px;
+                scrollbar-width: none;
+                touch-action: pan-x;
+            }
+            .tabs::-webkit-scrollbar { display: none; }
+            .tab-btn { white-space: nowrap; flex-shrink: 0; }
+
+            /* Ticker bar */
+            #endeks-bar { margin-bottom: 8px; }
+            #orion-ticker-track { height: 40px; }
+            .orion-tick-item { padding: 0 14px; height: 40px; }
+
+            /* Dashboard kartlar */
+            .dashboard {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 8px;
+            }
+            .stat-card { padding: 10px 12px !important; }
+            .stat-card .val { font-size: 16px !important; }
+
+            /* Hedef paneli */
             .hedef-grid { grid-template-columns: 1fr !important; }
-            .charts-container { flex-direction: column; gap: 16px; }
-            .chart-box { min-height: 280px; width: 100% !important; max-width: 100% !important; }
-            
-            /* 4. Formlar ve Butonlar (Yan yana ezilmek yerine alt alta sıralansın) */
-            .form-row { flex-direction: column; align-items: stretch !important; }
-            .form-row .input-group, .form-row .btn { width: 100% !important; flex: none !important; }
-            
-            /* 5. Filtreler ve Arama Barları */
-            .filter-bar { flex-direction: column; align-items: stretch !important; }
-            .filter-bar .date-stepper, .filter-bar select, .filter-bar button { width: 100%; margin: 4px 0 !important; }
-            .filter-bar div[style*="margin-left: auto"] { margin-left: 0 !important; flex-direction: column; width: 100%; }
-            
-            /* 6. Analiz Ekranları ve Modallar (Ekrana sığsın) */
-            .modal-content { width: 95% !important; padding: 20px 14px !important; }
+            .hedef-panel { padding: 10px 12px !important; }
+
+            /* Piyasa veri paneli */
+            .market-data-panel {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+
+            /* Grafikler */
+            .charts-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .chart-box {
+                min-height: 240px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+
+            /* Formlar */
+            .form-row {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 8px !important;
+            }
+            .form-row .input-group,
+            .form-row .btn { width: 100% !important; flex: none !important; }
+
+            /* Filtre barı */
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 6px !important;
+            }
+            .filter-bar .date-stepper,
+            .filter-bar select,
+            .filter-bar button { width: 100% !important; margin: 0 !important; }
+            .filter-bar div[style*="margin-left: auto"] {
+                margin-left: 0 !important;
+                flex-direction: column;
+                width: 100%;
+                gap: 6px;
+            }
+
+            /* Tablolar yatay scroll */
+            .table-responsive {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+                max-width: 100%;
+            }
+            .table-responsive table { min-width: 600px; }
+
+            /* Özet bar */
+            .summary-bar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start !important;
+            }
+            .summary-bar .metrics {
+                flex-wrap: wrap;
+                gap: 10px;
+                width: 100%;
+            }
+
+            /* Modallar */
+            .modal-content {
+                width: 96% !important;
+                max-width: 96% !important;
+                padding: 18px 12px !important;
+                max-height: 94vh !important;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+                overscroll-behavior: contain !important;
+            }
+            .modal-overlay {
+                padding: 10px 8px;
+                overflow-y: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
             #assetModalStats { grid-template-columns: 1fr 1fr !important; }
-            #assetDetailModal > div > div:nth-child(3) { display: flex !important; flex-direction: column !important; }
-            
-            /* Sirius AI Raporu mobil grid düzeltmeleri */
+            #assetDetailModal .charts-container { flex-direction: column !important; }
+
+            /* Sirius modal */
             #siriusReportContent > div > div:nth-child(2),
             #siriusReportContent > div > div:nth-child(3),
-            #siriusReportContent > div > div:nth-child(4) { 
-                grid-template-columns: 1fr !important; 
+            #siriusReportContent > div > div:nth-child(4) {
+                grid-template-columns: 1fr !important;
             }
+
+            /* Hisse analiz modal */
+            .ha-header-card { grid-template-columns: auto 1fr !important; }
+            .ha-header-card > div:last-child { grid-column: 1 / -1; text-align: left !important; margin-top: 4px; }
+            .ha-meta-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .ha-fundamentals-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .ha-sent-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+            /* İmport tab */
+            #import-tab [style*="grid-template-columns:repeat(2"] {
+                grid-template-columns: 1fr !important;
+            }
+            #existingDataSummary { grid-template-columns: repeat(2, 1fr) !important; }
         }
 
-        /* Çok küçük ekranlar (Dar telefonlar) için son dokunuş */
-        @media (max-width: 480px) {
+        /* ── KÜÇÜK TELEFON (600px altı) ── */
+        @media (max-width: 600px) {
+            body { padding: 0 !important; }
+            .container { padding: 10px 8px 16px !important; }
+
+            .dashboard { grid-template-columns: 1fr !important; }
+            .market-data-panel { grid-template-columns: repeat(2, 1fr) !important; }
+
+            .app-header { gap: 8px; }
+            .orion-brand-name { font-size: 22px !important; letter-spacing: 3px !important; }
+            .orion-brand-sub-btns { flex-wrap: wrap; gap: 4px; }
+
+            .tabs { margin-bottom: 10px; }
+            .tab-btn { padding: 6px 9px; font-size: 10.5px; }
+
+            .stat-card .val { font-size: 15px !important; }
+            .hedef-grid { grid-template-columns: 1fr !important; }
+
+            .modal-content { width: 99% !important; padding: 14px 10px !important; }
+            #assetModalStats { grid-template-columns: 1fr !important; }
+
+            .ha-meta-grid { grid-template-columns: 1fr 1fr !important; }
+            .ha-fundamentals-grid { grid-template-columns: 1fr !important; }
+            .ha-sent-grid { grid-template-columns: 1fr 1fr !important; }
+            .ha-price-big { font-size: 24px !important; }
+
+            .summary-bar .metrics { gap: 8px; }
+            .summary-bar .metric span { font-size: 12px !important; }
+
+            #existingDataSummary { grid-template-columns: 1fr 1fr !important; }
+        }
+
+        /* ── ÇOK DAR TELEFON (380px altı) ── */
+        @media (max-width: 380px) {
             .dashboard { grid-template-columns: 1fr !important; }
             #assetModalStats { grid-template-columns: 1fr !important; }
+            .tab-btn { padding: 5px 7px; font-size: 10px; }
+            .orion-brand-name { font-size: 18px !important; }
+            .market-data-panel { grid-template-columns: 1fr 1fr !important; }
+            .ha-sent-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+
+        /* ─── HİSSE ANALİZ MODAL — MODERN TASARIM CSS ─── */
+        .ha-header-card {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, var(--surface-2) 0%, rgba(59,130,246,0.07) 100%);
+            border-radius: var(--r-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+        .ha-header-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at top right, rgba(59,130,246,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .ha-price-big {
+            font-size: 32px; font-weight: 900;
+            font-family: var(--mono); color: var(--t1);
+            line-height: 1; letter-spacing: -1px;
+        }
+        .ha-chg-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px; border-radius: 6px;
+            font-size: 13px; font-weight: 800;
+            font-family: var(--mono); margin-top: 4px;
+        }
+        .ha-chg-badge.pos { color: #10b981; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.25); }
+        .ha-chg-badge.neg { color: #ef4444; background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.25); }
+        .ha-chg-badge.neu { color: var(--t3); background: rgba(255,255,255,0.06); border: 1px solid var(--border); }
+        .ha-meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-bottom: 14px;
+        }
+        .ha-meta-card {
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 10px 12px;
+            display: flex; flex-direction: column; gap: 3px;
+        }
+        .ha-meta-label { font-size: 9px; font-weight: 800; color: var(--t3); text-transform: uppercase; letter-spacing: .5px; }
+        .ha-meta-value { font-size: 14px; font-weight: 800; color: var(--t1); font-family: var(--mono); }
+        .ha-meta-sub   { font-size: 10px; font-weight: 600; color: var(--t3); }
+        .ha-section-title {
+            font-size: 10px; font-weight: 800; color: var(--t3);
+            text-transform: uppercase; letter-spacing: .8px;
+            margin-bottom: 10px; padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .ha-fundamentals-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            margin-bottom: 14px;
+        }
+        .ha-fund-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 12px;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            font-size: 11px;
+        }
+        .ha-fund-key  { color: var(--t3); font-weight: 600; }
+        .ha-fund-val  { color: var(--t1); font-weight: 800; font-family: var(--mono); }
+        .ha-sent-bar-wrap { margin-bottom: 14px; }
+        .ha-sent-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-bottom: 10px;
+        }
+        .ha-sent-card {
+            border-radius: var(--r); padding: 10px 12px; text-align: center;
+            border: 1px solid;
+        }
+        .ha-sent-card .lbl { font-size: 9px; font-weight: 800; color: var(--t3); text-transform: uppercase; margin-bottom: 4px; }
+        .ha-sent-card .val { font-size: 22px; font-weight: 900; font-family: var(--mono); line-height: 1.1; }
+        .ha-news-item {
+            padding: 10px 14px; margin-bottom: 7px;
+            background: var(--surface-3);
+            border-radius: 8px; border: 1px solid var(--border);
+            border-left: 3px solid var(--blue);
+            transition: background .2s, border-color .2s;
+        }
+        .ha-news-item:hover { background: var(--surface-4); border-color: var(--border-2); }
+        .ha-news-item.pos { border-left-color: #10b981; }
+        .ha-news-item.neg { border-left-color: #ef4444; }
+        .ha-trend-box {
+            padding: 12px 14px;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            margin-bottom: 14px;
+        }
+        @media (max-width: 900px) {
+            .ha-meta-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .ha-fundamentals-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .ha-sent-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .ha-header-card { grid-template-columns: auto 1fr !important; }
+            .ha-header-card > div:last-child { grid-column: 1 / -1; }
+        }
+        @media (max-width: 480px) {
+            .ha-meta-grid { grid-template-columns: 1fr 1fr !important; }
+            .ha-fundamentals-grid { grid-template-columns: 1fr !important; }
+            .ha-sent-grid { grid-template-columns: 1fr 1fr !important; }
         }
     </style>
 </head>
@@ -926,8 +1361,8 @@
 <datalist id="kayitliHisseler"></datalist>
 
 <div class="modal-overlay" id="siriusModal">
-    <div class="modal-content" style="width: 1100px; max-width:98%; max-height:92vh; background: #080A0F; border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 60px rgba(245,158,11,0.1) inset, 0 20px 50px rgba(0,0,0,0.8); padding: 0; border-radius: var(--r-xl); overflow-y: auto;">
-        <button class="modal-close" style="color: rgba(255,255,255,0.5); top: 16px; right: 20px; z-index: 10; font-size: 28px;" onclick="closeModal('siriusModal')">×</button>
+    <div class="modal-content" id="siriusModalContent" style="width: 1100px; max-width:98%; max-height:92vh; border: 1px solid rgba(245,158,11,0.3); box-shadow: 0 0 60px rgba(245,158,11,0.08) inset, 0 20px 50px rgba(0,0,0,0.6); padding: 0; border-radius: var(--r-xl); overflow-y: auto;">
+        <button class="modal-close" style="top: 16px; right: 20px; z-index: 10; font-size: 28px;" onclick="closeModal('siriusModal')">×</button>
         <div id="siriusReportContent"></div>
     </div>
 </div>
@@ -968,33 +1403,60 @@
 </div>
 
 <div class="modal-overlay" id="assetDetailModal">
-    <div class="modal-content" style="width:1050px;">
-        <button class="modal-close" onclick="closeModal('assetDetailModal')">×</button>
-        <div class="modal-header">
-            <div class="modal-icon">📊</div>
-            <div class="modal-title" id="assetModalTitle">Hisse Adı<br><span style="font-size:10px; color:var(--t2); font-weight:600; letter-spacing:.4px;">DETAYLI PERFORMANS ANALİZİ</span></div>
-        </div>
-        
-        <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:12px; margin-bottom:18px;" id="assetModalStats">
+    <div class="modal-content" style="width:1100px; max-width:97%; max-height:94vh; overflow-y:auto; padding:0;">
+        <!-- Modal Header -->
+        <div style="padding:20px 24px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:var(--surface); z-index:10; backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);">
+            <div style="display:flex; align-items:center; gap:14px;">
+                <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(139,92,246,0.2));display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid rgba(59,130,246,0.3);">📊</div>
+                <div>
+                    <div id="assetModalTitle" style="font-size:18px;font-weight:900;color:var(--t1);letter-spacing:.3px;line-height:1.2;">Hisse Adı</div>
+                    <div style="font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-top:2px;">Detaylı Performans Analizi</div>
+                </div>
+            </div>
+            <button class="modal-close" onclick="closeModal('assetDetailModal')" style="position:static;">×</button>
         </div>
 
-        <div style="display:grid; grid-template-columns:2fr 1fr; gap:14px; margin-bottom:18px;">
-            <div class="chart-box" style="border-color:var(--blue); min-height: 220px; flex-shrink:0; margin-bottom:0;">
-                <div style="font-size:11px; font-weight:800; color:var(--t3); letter-spacing:.5px; text-align:center; margin-bottom:12px; text-transform:uppercase;">📈 Değer Trendi (TL)</div>
-                <div class="canvas-container"><canvas id="assetTrendChart"></canvas></div>
+        <div style="padding:18px 24px 24px;">
+            <!-- İstatistik Kartları — 6'lı grid -->
+            <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:10px; margin-bottom:16px;" id="assetModalStats"></div>
+
+            <!-- Grafikler — Trend geniş, Pie dar -->
+            <div style="display:grid; grid-template-columns:2fr 1fr; gap:12px; margin-bottom:16px;" id="assetChartGrid">
+                <div class="chart-box" style="border-color:var(--blue); min-height:200px; flex-shrink:0; margin-bottom:0; padding:14px 16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                        <span style="font-size:11px;font-weight:800;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;">📈 Değer Trendi (TL)</span>
+                        <span id="assetTrendSummary" style="font-size:10px;font-weight:700;color:var(--t3);font-family:var(--mono);"></span>
+                    </div>
+                    <div class="canvas-container" style="min-height:160px;"><canvas id="assetTrendChart"></canvas></div>
+                </div>
+                <div class="chart-box" style="border-color:var(--purple); min-height:200px; flex-shrink:0; margin-bottom:0; padding:14px 16px;">
+                    <div style="font-size:11px;font-weight:800;color:var(--t3);letter-spacing:.5px;text-align:center;margin-bottom:10px;text-transform:uppercase;">🥧 K/Z Dağılımı</div>
+                    <div class="canvas-container" style="min-height:160px;"><canvas id="assetPieChart"></canvas></div>
+                </div>
             </div>
-            <div class="chart-box" style="border-color:var(--purple); min-height: 220px; flex-shrink:0; margin-bottom:0;">
-                <div style="font-size:11px; font-weight:800; color:var(--t3); letter-spacing:.5px; text-align:center; margin-bottom:12px; text-transform:uppercase;">🥧 K/Z Dağılımı</div>
-                <div class="canvas-container"><canvas id="assetPieChart"></canvas></div>
+
+            <!-- İşlem Geçmişi -->
+            <div style="display:flex;align-items:center;justify-content:space-between;margin:0 0 10px;">
+                <div style="font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;gap:8px;">
+                    📋 İşlem Geçmişi
+                    <span id="assetHistoryCount" style="font-size:9px;background:var(--blue-dim);color:var(--blue);padding:2px 7px;border-radius:10px;font-weight:800;"></span>
+                </div>
             </div>
-        </div>
-        
-        <div style="font-size:12.5px; font-weight:800; color:var(--blue); letter-spacing:.5px; margin:16px 0 12px; text-transform:uppercase;">📋 İşlem Geçmişi — Satışlar & Temettüler</div>
-        <div class="table-responsive" style="max-height: 220px; flex: none;">
-            <table style="width: 100%;">
-                <thead><tr><th>Tarih</th><th>İşlem</th><th>Adet</th><th>Fiyat / Tutar</th><th>Kâr/Zarar</th></tr></thead>
-                <tbody id="assetModalHistory"></tbody>
-            </table>
+            <div class="table-responsive" style="max-height:240px; flex:none; border-radius:var(--r);">
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="width:90px;">Tarih</th>
+                            <th>İşlem</th>
+                            <th style="width:80px;">Adet</th>
+                            <th>Fiyat / Tutar</th>
+                            <th>Kâr/Zarar</th>
+                            <th>Not</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assetModalHistory"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -1081,8 +1543,15 @@
 
     <div id="ozet-tab" class="tab-content active">
         <div id="endeks-bar">
-            <div id="orion-ticker-wrap" style="overflow:hidden; position:relative; height:44px;">
-                <div id="orion-ticker-track" style="display:flex; align-items:center; gap:0; position:absolute; left:0; top:0; height:44px; white-space:nowrap;"></div>
+            <!-- TradingView Ticker Tape — canlı piyasa bandı (tema dinamik) -->
+            <div id="tv-ticker-wrap" class="tradingview-widget-container" style="width:100%;height:46px;overflow:hidden;">
+                <div class="tradingview-widget-container__widget"></div>
+            </div>
+            <!-- Orion Ticker — TV yüklenemezse yedek olarak kalır -->
+            <div id="orion-ticker-wrap" style="display:none;">
+                <div id="orion-ticker-track">
+                    <div class="orion-tick-loading"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>
+                </div>
             </div>
         </div>
 
@@ -1421,11 +1890,11 @@
             // Twinkle: sinüs dalgasıyla opaklık
             const alpha = dark
                 ? 0.25 + 0.70 * Math.abs(Math.sin(frame * s.freq + s.offset))
-                : 0.55 + 0.44 * Math.abs(Math.sin(frame * s.freq + s.offset));
-            // Renk: koyu=beyaz/mavi, açık=koyu lacivert (kontraslı ve belirgin)
+                : 0.45 + 0.50 * Math.abs(Math.sin(frame * s.freq + s.offset));
+            // Renk: koyu=beyaz/mavi, açık=koyu mavi/mor (açık temada görünür)
             const color = dark
                 ? `rgba(180, 210, 255, ${alpha})`
-                : `rgba(15, 40, 100, ${alpha})`;
+                : `rgba(50, 70, 150, ${alpha})`;
 
             ctx.beginPath();
             ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
@@ -1580,11 +2049,61 @@
             Chart.defaults.borderColor = isDarkNow ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
             updateDashboard();
             rebuildTickerWidget();
+            buildTradingViewTicker();
         }, 50);
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // ORION TICKER — Çoklu proxy zinciri + statik fallback
+    function buildTradingViewTicker() {
+        const wrap = document.getElementById('tv-ticker-wrap');
+        if (!wrap) return;
+        // Önceki widget scriptini temizle
+        const oldScript = wrap.querySelector('script[data-tv-ticker]');
+        if (oldScript) oldScript.remove();
+        const widgetDiv = wrap.querySelector('.tradingview-widget-container__widget');
+        if (widgetDiv) widgetDiv.innerHTML = '';
+
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        const theme  = isDark ? 'dark' : 'light';
+
+        const config = {
+            symbols: [
+                { proName: 'BIST:XU100',        title: 'BIST 100'    },
+                { proName: 'BIST:XU030',        title: 'BIST 30'     },
+                { proName: 'FX:USDTRY',         title: 'USD/TRY'     },
+                { proName: 'FX:EURTRY',         title: 'EUR/TRY'     },
+                { proName: 'OANDA:XAUUSD',      title: 'ALTIN ONS'   },
+                { proName: 'CAPITALCOM:US100',   title: 'NASDAQ 100'  },
+                { proName: 'CAPITALCOM:US500',   title: 'S&P 500'     },
+                { proName: 'CAPITALCOM:DE40',    title: 'DAX'         },
+                { proName: 'CAPITALCOM:FR40',    title: 'CAC 40'      },
+                { proName: 'CAPITALCOM:UK100',   title: 'FTSE 100'    },
+                { proName: 'CAPITALCOM:EU50',    title: 'EURO STOXX'  },
+                { proName: 'BITSTAMP:BTCUSD',    title: 'BTC/USD'     }
+            ],
+            showSymbolLogo: true,
+            colorTheme: theme,
+            isTransparent: true,
+            displayMode: 'adaptive',
+            locale: 'tr'
+        };
+
+        const script = document.createElement('script');
+        script.setAttribute('data-tv-ticker', '1');
+        script.type = 'text/javascript';
+        script.src  = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify(config);
+        wrap.appendChild(script);
+
+        // Widget yüklenince TV wrap'ı göster, Orion wrap'ı gizle
+        const orionWrap = document.getElementById('orion-ticker-wrap');
+        if (orionWrap) orionWrap.style.display = 'none';
+        wrap.style.display = 'block';
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // ORION TICKER — Güçlendirilmiş çoklu proxy zinciri + kalıcı cache fallback
     // Döviz: open.er-api.com (CORS açık)
     // BİST/Endeks: stooq.com → allorigins proxy → statik fallback
     // ═══════════════════════════════════════════════════════════════
@@ -1597,30 +2116,55 @@
         { label: 'USD/TRY',    flag: '💵', price: 0, chg: 0, fallback: true },
         { label: 'EUR/TRY',    flag: '💶', price: 0, chg: 0, fallback: true },
         { label: 'BIST 100',   flag: '🇹🇷', price: 0, chg: 0, fallback: true },
-        { label: 'ALTIN',      flag: '🥇', price: 0, chg: 0, fallback: true },
-        { label: 'BTC/USD',    flag: '₿',  price: 0, chg: 0, fallback: true },
+        { label: 'BIST 30',    flag: '🇹🇷', price: 0, chg: 0, fallback: true },
         { label: 'NASDAQ 100', flag: '🇺🇸', price: 0, chg: 0, fallback: true },
         { label: 'S&P 500',    flag: '🇺🇸', price: 0, chg: 0, fallback: true },
         { label: 'DAX',        flag: '🇩🇪', price: 0, chg: 0, fallback: true },
+        { label: 'CAC 40',     flag: '🇫🇷', price: 0, chg: 0, fallback: true },
+        { label: 'FTSE 100',   flag: '🇬🇧', price: 0, chg: 0, fallback: true },
+        { label: 'EURO STOXX', flag: '🇪🇺', price: 0, chg: 0, fallback: true },
+        { label: 'ALTIN ONS',  flag: '🥇', price: 0, chg: 0, fallback: true },
+        { label: 'GUMUS',      flag: '🥈', price: 0, chg: 0, fallback: true },
+        { label: 'BTC/USD',    flag: '\u20BF',    price: 0, chg: 0, fallback: true },
     ];
 
-    async function fetchWithProxy(url, timeout = 7000) {
-        // 1. allorigins — en güvenilir ücretsiz proxy
+    async function fetchWithProxy(url, timeout = 8000) {
+        const proxies = [
+            u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+            u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+            u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
+            u => `https://thingproxy.freeboard.io/fetch/${u}`,
+            u => u  // doğrudan son çare
+        ];
+        // Önce paralel dene — ilk başarılı olanı döndür
         try {
-            const proxy1 = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            const r = await fetch(proxy1, { signal: AbortSignal.timeout(timeout) });
-            if (r.ok) return r;
+            const raceResult = await Promise.any(
+                proxies.slice(0, 3).map(makeUrl =>
+                    fetch(makeUrl(url), { signal: AbortSignal.timeout(timeout) })
+                        .then(r => { if (!r.ok) throw new Error('not_ok'); return r; })
+                )
+            );
+            if (raceResult) return raceResult;
         } catch(e) {}
-        // 2. corsproxy.io
-        try {
-            const proxy2 = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-            const r = await fetch(proxy2, { signal: AbortSignal.timeout(timeout) });
-            if (r.ok) return r;
-        } catch(e) {}
-        // 3. Doğrudan (son çare)
+        // Paralel başarısızsa doğrudan dene
         try {
             const r = await fetch(url, { signal: AbortSignal.timeout(timeout) });
             if (r.ok) return r;
+        } catch(e) {}
+        return null;
+    }
+
+    // localStorage'dan son başarılı ticker verisini yükle (offline fallback)
+    function loadTickerFromStorage() {
+        try {
+            const saved = localStorage.getItem('orion_ticker_cache');
+            const savedTime = parseInt(localStorage.getItem('orion_ticker_time') || '0');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                    return { data: parsed, time: savedTime };
+                }
+            }
         } catch(e) {}
         return null;
     }
@@ -1636,7 +2180,7 @@
 
         const results = [];
 
-        // ── 1. Döviz — open.er-api.com ──────────────────────────────
+        // ── 1. Döviz — open.er-api.com (CORS açık, proxy gerekmez) ─────────────
         try {
             const erRes = await fetch('https://open.er-api.com/v6/latest/USD', { signal: AbortSignal.timeout(10000) });
             if (erRes.ok) {
@@ -1645,9 +2189,8 @@
                 const usdTry = rates.TRY || 0;
                 const eurUsd = rates.EUR ? (1 / rates.EUR) : 0;
                 const eurTry = eurUsd > 0 ? eurUsd * usdTry : 0;
-                if (usdTry > 0) { results.push({ label: 'USD/TRY', flag: '💵', price: usdTry, chg: 0 }); }
-                if (eurTry > 0) { results.push({ label: 'EUR/TRY', flag: '💶', price: eurTry, chg: 0 }); }
-                // Kur inputlarını güncelle
+                if (usdTry > 0) results.push({ label: 'USD/TRY', flag: '💵', price: usdTry, chg: 0 });
+                if (eurTry > 0) results.push({ label: 'EUR/TRY', flag: '💶', price: eurTry, chg: 0 });
                 const usdIn = document.getElementById('usdTryRate');
                 const eurIn = document.getElementById('eurTryRate');
                 if (usdIn && usdTry > 0) usdIn.value = usdTry.toFixed(4);
@@ -1655,85 +2198,162 @@
             }
         } catch(e) {}
 
-        // ── 2. Yahoo Finance v8 chart API (CORS yok, proxy gerekebilir) ──
-        const yahooSymbols = [
-            { yahoo: 'XU100.IS',  label: 'BIST 100',   flag: '🇹🇷' },
-            { yahoo: 'XU030.IS',  label: 'BIST 30',    flag: '🇹🇷' },
-            { yahoo: 'GC=F',      label: 'ALTIN',      flag: '🥇'  },
-            { yahoo: 'BTC-USD',   label: 'BTC/USD',    flag: '₿'   },
-            { yahoo: '^NDX',      label: 'NASDAQ 100', flag: '🇺🇸' },
-            { yahoo: '^GSPC',     label: 'S&P 500',    flag: '🇺🇸' },
-            { yahoo: '^GDAXI',    label: 'DAX',        flag: '🇩🇪' },
-            { yahoo: 'THYAO.IS',  label: 'THYAO',      flag: '✈️'  },
-            { yahoo: 'GARAN.IS',  label: 'GARAN',      flag: '🏦'  },
-            { yahoo: 'ASELS.IS',  label: 'ASELS',      flag: '🛡️'  },
-            { yahoo: 'EREGL.IS',  label: 'EREGL',      flag: '⚙️'  },
-        ];
-
-        // Batch: tüm semboller tek seferde Yahoo quote API ile
+        // ── 2. Altın fiyatları — çoklu kaynak (TL bazlı) ───────────────────────
+        // Kaynak A: Harem Altın dash-data (JSON, proxy üzerinden)
+        let goldFetched = false;
         try {
-            const syms = yahooSymbols.map(s => s.yahoo).join(',');
-            const quoteUrl = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent,shortName`;
-            const res = await fetchWithProxy(quoteUrl, 12000);
-            if (res) {
-                const data = await res.json();
-                const quotes = data?.quoteResponse?.result || [];
-                quotes.forEach(q => {
-                    const sym = yahooSymbols.find(s => s.yahoo === q.symbol);
-                    if (!sym) return;
-                    const price = q.regularMarketPrice;
-                    const chg   = q.regularMarketChangePercent || 0;
-                    if (price && price > 0) {
-                        results.push({ label: sym.label, flag: sym.flag, price, chg });
-                    }
-                });
+            const haremDashUrl = 'https://www.haremaltin.com/dash-data';
+            const r = await fetchWithProxy(haremDashUrl, 9000);
+            if (r) {
+                const d = await r.json();
+                // Harem format: { data: { ALTIN: {alis,satis}, CEYREK_YENI: {alis,satis}, YARIM: {alis,satis}, TEK_YENI: {alis,satis}, ... } }
+                const data = d?.data || d;
+                const gram   = parseFloat(data?.ALTIN?.satis    || data?.HAS?.satis    || 0);
+                const ceyrek = parseFloat(data?.CEYREK_YENI?.satis || data?.CEYREK?.satis || 0);
+                const yarim  = parseFloat(data?.YARIM?.satis    || 0);
+                const tam    = parseFloat(data?.TEK_YENI?.satis  || data?.TEK?.satis    || 0);
+                const ons    = parseFloat(data?.ONS?.satis       || 0);
+                if (gram   > 0) { results.push({ label: 'HAS ALTIN', flag: '🔶', price: gram,   chg: 0, unit: '₺/g' }); goldFetched = true; }
+                if (ceyrek > 0) { results.push({ label: 'ÇEYREK',    flag: '🪙', price: ceyrek, chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (yarim  > 0) { results.push({ label: 'YARIM',     flag: '🪙', price: yarim,  chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (tam    > 0) { results.push({ label: 'TAM ALTIN', flag: '🪙', price: tam,    chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (ons    > 0) { results.push({ label: 'ALTIN ONS', flag: '🥇', price: ons,    chg: 0, unit: '₺'   }); goldFetched = true; }
             }
         } catch(e) {}
 
-        // Batch başarısız olduysa tek tek Stooq CSV ile dene (fallback)
-        const missing = yahooSymbols.filter(s => !results.find(r => r.label === s.label));
-        if (missing.length > 0) {
-            const stooqMap = {
-                'BIST 100': 'xu100.pl', 'BIST 30': 'xu030.pl',
-                'ALTIN': 'gc.f', 'BTC/USD': 'btc.v',
-                'NASDAQ 100': '^ndx', 'S&P 500': '^spx',
-                'DAX': '^dax', 'THYAO': 'thyao.pl',
-                'GARAN': 'garan.pl', 'ASELS': 'asels.pl', 'EREGL': 'eregl.pl'
-            };
-            await Promise.allSettled(missing.map(async s => {
-                const stooqSym = stooqMap[s.label];
-                if (!stooqSym) return;
-                try {
-                    const url = `https://stooq.com/q/l/?s=${stooqSym}&f=sd2t2ohlcv&h&e=csv`;
-                    const res = await fetchWithProxy(url, 8000);
-                    if (!res) return;
-                    const text = await res.text();
-                    const lines = text.trim().split('\n');
-                    if (lines.length < 2) return;
-                    const cols = lines[1].split(',');
-                    const close = parseFloat(cols[6]);
-                    const open  = parseFloat(cols[3]);
-                    if (isNaN(close) || close <= 0) return;
-                    const chg = open > 0 ? ((close - open) / open) * 100 : 0;
-                    results.push({ label: s.label, flag: s.flag, price: close, chg });
-                } catch(e) {}
-            }));
+        // Kaynak B: Altın fiyatları hesapla — USD/TRY döviz × ONS USD (Stooq/Yahoo'dan gelecek)
+        // Bu adım Stooq sonrası tamamlanacak (aşağıda hesap yapılacak)
+
+        // ── 3. Stooq CSV — birincil kaynak (BIST, endeksler, emtia) ────────────
+        // Stooq sembol → label mapping
+        const stooqTargets = [
+            { sym: 'xu100.pl',   label: 'BIST 100',   flag: '🇹🇷' },
+            { sym: 'xu030.pl',   label: 'BIST 30',    flag: '🇹🇷' },
+            { sym: 'gc.f',       label: 'ALTIN ONS',  flag: '🥇'  },
+            { sym: 'si.f',       label: 'GÜMÜŞ',      flag: '🥈'  },
+            { sym: '^ndx',       label: 'NASDAQ 100', flag: '🇺🇸' },
+            { sym: '^spx',       label: 'S&P 500',    flag: '🇺🇸' },
+            { sym: '^dax',       label: 'DAX',        flag: '🇩🇪' },
+            { sym: '^cac',       label: 'CAC 40',     flag: '🇫🇷' },
+            { sym: '^ftse',      label: 'FTSE 100',   flag: '🇬🇧' },
+            { sym: '^stoxx50e',  label: 'EURO STOXX', flag: '🇪🇺' },
+            { sym: 'btc.v',      label: 'BTC/USD',    flag: '₿'   },
+        ];
+
+        // Zaten var olanları alma — Harem'den alınmışsa tekrar çekme
+        const toFetchStooq = stooqTargets.filter(s => !results.find(r => r.label === s.label));
+
+        await Promise.allSettled(toFetchStooq.map(async s => {
+            try {
+                const url = `https://stooq.com/q/l/?s=${encodeURIComponent(s.sym)}&f=sd2t2ohlcv&h&e=csv`;
+                const res = await fetchWithProxy(url, 9000);
+                if (!res) return;
+                const text = await res.text();
+                const lines = text.trim().split('\n');
+                if (lines.length < 2) return;
+                const cols  = lines[1].split(',');
+                const close = parseFloat(cols[6]);
+                const open  = parseFloat(cols[3]);
+                if (isNaN(close) || close <= 0) return;
+                const chg = open > 0 ? ((close - open) / open) * 100 : 0;
+                results.push({ label: s.label, flag: s.flag, price: close, chg });
+            } catch(e) {}
+        }));
+
+        // ── 4. Yahoo Finance — Stooq'dan eksik kalanlar için yedek ────────────
+        const yahooMap = [
+            { yahoo: 'XU100.IS',  label: 'BIST 100'   },
+            { yahoo: 'XU030.IS',  label: 'BIST 30'    },
+            { yahoo: 'GC=F',      label: 'ALTIN ONS'  },
+            { yahoo: 'SI=F',      label: 'GÜMÜŞ'      },
+            { yahoo: '^NDX',      label: 'NASDAQ 100' },
+            { yahoo: '^GSPC',     label: 'S&P 500'    },
+            { yahoo: '^GDAXI',    label: 'DAX'        },
+            { yahoo: '^FCHI',     label: 'CAC 40'     },
+            { yahoo: '^FTSE',     label: 'FTSE 100'   },
+            { yahoo: '^STOXX50E', label: 'EURO STOXX' },
+            { yahoo: 'BTC-USD',   label: 'BTC/USD'    },
+        ];
+        const stillMissing = yahooMap.filter(s => !results.find(r => r.label === s.label));
+        if (stillMissing.length > 0) {
+            try {
+                const syms    = stillMissing.map(s => s.yahoo).join(',');
+                const yUrl    = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
+                const yUrl2   = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
+                let yRes = await fetchWithProxy(yUrl, 10000) || await fetchWithProxy(yUrl2, 10000);
+                if (yRes) {
+                    const yData  = await yRes.json();
+                    const quotes = yData?.quoteResponse?.result || [];
+                    quotes.forEach(q => {
+                        const sym = yahooMap.find(s => s.yahoo === q.symbol);
+                        if (!sym) return;
+                        const price = q.regularMarketPrice;
+                        const chg   = q.regularMarketChangePercent || 0;
+                        if (price && price > 0 && !results.find(r => r.label === sym.label)) {
+                            const flagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'₿' };
+                            results.push({ label: sym.label, flag: flagMap[sym.label] || '📊', price, chg });
+                        }
+                    });
+                }
+            } catch(e) {}
         }
 
-        // ── 3. Sırala ──────────────────────────────────────────────
-        const labelOrder = ['USD/TRY', 'EUR/TRY', ...yahooSymbols.map(s => s.label)];
+        // ── 4b. Altın TL hesabı — Harem başarısızsa ONS+döviz ile hesapla ───
+        if (!goldFetched) {
+            const onsItem  = results.find(r => r.label === 'ALTIN ONS');
+            const usdTryItem = results.find(r => r.label === 'USD/TRY');
+            if (onsItem && usdTryItem && onsItem.price > 0 && usdTryItem.price > 0) {
+                const onsUsd  = onsItem.price;
+                const usdTry  = usdTryItem.price;
+                const gramTL  = (onsUsd / 31.1035) * usdTry; // 1 troy ons = 31.1035 gram
+                const ceyrekTL = gramTL * 1.6066;  // 0.25 altın = ~1.6066 gram (22 ayar)
+                const yarimTL  = gramTL * 3.2133;
+                const tamTL    = gramTL * 6.4266;
+                if (gramTL > 0)   results.push({ label: 'HAS ALTIN', flag: '🔶', price: Math.round(gramTL),   chg: onsItem.chg, unit: '₺/g' });
+                if (ceyrekTL > 0) results.push({ label: 'ÇEYREK',    flag: '🪙', price: Math.round(ceyrekTL), chg: onsItem.chg, unit: '₺' });
+                if (yarimTL > 0)  results.push({ label: 'YARIM',     flag: '🪙', price: Math.round(yarimTL),  chg: onsItem.chg, unit: '₺' });
+                if (tamTL > 0)    results.push({ label: 'TAM ALTIN', flag: '🪙', price: Math.round(tamTL),    chg: onsItem.chg, unit: '₺' });
+            }
+        }
+
+        // ── 5. Sırala ────────────────────────────────────────────────────────
+        const labelOrder = [
+            'USD/TRY', 'EUR/TRY',
+            'BIST 100', 'BIST 30',
+            'NASDAQ 100', 'S&P 500',
+            'DAX', 'CAC 40', 'FTSE 100', 'EURO STOXX',
+            'ALTIN ONS', 'HAS ALTIN', 'ÇEYREK', 'YARIM', 'TAM ALTIN',
+            'GÜMÜŞ', 'BTC/USD'
+        ];
         const ordered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
 
-        // ── 4. Hiç veri gelmediyse fallback göster ─────────────────
+        // ── 6. Hiç veri gelmediyse localStorage fallback ──────────────────────
         if (ordered.length === 0) {
-            if (track) track.innerHTML = '<div class="orion-tick-loading" style="color:var(--amber);">⚠️ Canlı veri alınamadı — Kur girişlerini manuel güncelleyin</div>';
+            const stored = loadTickerFromStorage();
+            if (stored && stored.data.length > 0) {
+                const ageMin = Math.round((now - stored.time) / 60000);
+                renderOrionTicker(stored.data);
+                const bar = document.getElementById('endeks-bar');
+                if (bar && track) {
+                    bar.style.position = 'relative';
+                    const badge = document.createElement('div');
+                    badge.style.cssText = 'position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:9px;color:var(--t3);font-weight:700;background:var(--surface-3);padding:2px 8px;border-radius:4px;z-index:5;';
+                    badge.textContent = `⚠ ${ageMin}dk önce`;
+                    bar.appendChild(badge);
+                }
+                return stored.data;
+            }
+            if (track) track.innerHTML = '<div class="orion-tick-loading" style="color:var(--t3);">— Piyasa verisi bekleniyor</div>';
             return;
         }
 
         orionTickerCache = ordered;
         orionTickerTime  = now;
+        try {
+            localStorage.setItem('orion_ticker_cache', JSON.stringify(ordered));
+            localStorage.setItem('orion_ticker_time', now.toString());
+        } catch(e) {}
         renderOrionTicker(ordered);
-        // Panel'i de güncelle
         if (document.getElementById('marketDataPanel')) loadMarketDataPanel();
         return ordered;
     }
@@ -1752,13 +2372,21 @@
         const makeItem = item => {
             const chgClass = item.chg > 0 ? 'pos' : item.chg < 0 ? 'neg' : 'neu';
             const chgSign  = item.chg > 0 ? '+' : '';
-            const isTRY = item.label.includes('TRY');
-            const dec   = isTRY ? 4 : 2;
+            const isTRY    = item.label.includes('TRY');
+            const isBTC    = item.label.includes('BTC');
+            const isGold   = ['ALTIN ONS','HAS ALTIN','ÇEYREK','YARIM','TAM ALTIN','GÜMÜŞ'].includes(item.label);
+            // Büyük TL fiyatları (gram altın, çeyrek vb.) → ondalıksız göster
+            const isBigTL  = item.unit && item.unit.includes('₺') && item.price > 500;
+            const dec      = isTRY ? 4 : isBTC ? 0 : isBigTL ? 0 : 2;
+            const unitLabel= item.unit ? `<span style="font-size:8px;color:var(--t3);margin-left:1px;">${item.unit}</span>` : '';
+            const chgHtml  = item.chg !== 0
+                ? `<span class="orion-tick-chg ${chgClass}">${chgSign}${fmt(item.chg, 2)}%</span>`
+                : `<span class="orion-tick-chg neu">—</span>`;
             return `<div class="orion-tick-item">
-                <span style="font-size:14px;">${item.flag}</span>
+                <span style="font-size:14px;line-height:1;">${item.flag}</span>
                 <span class="orion-tick-label">${item.label}</span>
-                <span class="orion-tick-price">${item.price > 0 ? fmt(item.price, dec) : '—'}</span>
-                <span class="orion-tick-chg ${item.price > 0 ? chgClass : 'neu'}">${item.price > 0 ? chgSign + fmt(item.chg, 2) + '%' : 'N/A'}</span>
+                <span class="orion-tick-price">${item.price > 0 ? fmt(item.price, dec) : '—'}${unitLabel}</span>
+                ${item.price > 0 ? chgHtml : '<span class="orion-tick-chg neu">N/A</span>'}
             </div>`;
         };
 
@@ -1901,25 +2529,52 @@
 
         try {
             // ── Paralel veri çekme ───────────────────────────────────
-            const proxyBase = 'https://api.allorigins.win/raw?url=';
-
-            // 1. Quote verisi (fiyat, değişim, hacim, piyasa değeri)
+            // 1. Quote verisi — çoklu proxy zinciri
             const quoteUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ySym)}?interval=1d&range=30d`;
-            const quoteProxied = proxyBase + encodeURIComponent(quoteUrl);
+            const quoteUrl2 = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ySym)}?interval=1d&range=30d`;
 
-            // 2. Haber arama
-            const newsUrl = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(isBIST ? symbol : ySym)}&newsCount=30&quotesCount=1`;
-            const newsProxied = proxyBase + encodeURIComponent(newsUrl);
+            // 2. Haber arama — birden fazla query dene
+            const newsSearchTerm = isBIST ? symbol : ySym;
+            const newsUrl  = `https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(newsSearchTerm)}&newsCount=30&quotesCount=1`;
+            const newsUrl2 = `https://query2.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(newsSearchTerm)}&newsCount=30&quotesCount=1`;
 
-            // 3. Finnhub sentiment (ücretsiz key ile)
+            // 3. Finnhub sentiment
             const sentUrl = `https://finnhub.io/api/v1/news-sentiment?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
             const profUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
 
+            // Quote: proxy zinciriyle dene
+            const quoteFetch = async () => {
+                for (const url of [quoteUrl, quoteUrl2]) {
+                    const r = await fetchWithProxy(url, 12000);
+                    if (r) { try { return await r.json(); } catch(e) {} }
+                }
+                return null;
+            };
+
+            // Haber: proxy zinciriyle dene, BIST için ekstra aramalar
+            const newsFetch = async () => {
+                const urlsToTry = [newsUrl, newsUrl2];
+                // BIST için .IS uzantılı da dene
+                if (isBIST) {
+                    urlsToTry.push(`https://query1.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(symbol+'.IS')}&newsCount=30&quotesCount=1`);
+                }
+                for (const url of urlsToTry) {
+                    const r = await fetchWithProxy(url, 10000);
+                    if (r) {
+                        try {
+                            const j = await r.json();
+                            if (j?.news && j.news.length > 0) return j;
+                        } catch(e) {}
+                    }
+                }
+                return null;
+            };
+
             const [quoteRes, newsRes, sentRes, profRes] = await Promise.allSettled([
-                fetch(quoteProxied, { signal: AbortSignal.timeout(10000) }).then(r => r.ok ? r.json() : null),
-                fetch(newsProxied,  { signal: AbortSignal.timeout(10000) }).then(r => r.ok ? r.json() : null),
-                fetch(sentUrl,      { signal: AbortSignal.timeout(8000)  }).then(r => r.ok ? r.json() : null),
-                fetch(profUrl,      { signal: AbortSignal.timeout(8000)  }).then(r => r.ok ? r.json() : null),
+                quoteFetch(),
+                newsFetch(),
+                fetch(sentUrl, { signal: AbortSignal.timeout(8000) }).then(r => r.ok ? r.json() : null).catch(() => null),
+                fetch(profUrl, { signal: AbortSignal.timeout(8000) }).then(r => r.ok ? r.json() : null).catch(() => null),
             ]);
 
             // Quote parse
@@ -1949,13 +2604,14 @@
             }
 
             // Haber parse
-            if (newsRes.status === 'fulfilled' && newsRes.value?.news) {
-                news = newsRes.value.news.map(n => ({
-                    headline: n.title || '',
-                    summary:  '',
-                    url:      n.link || '',
-                    source:   n.publisher || 'Yahoo Finance',
-                    datetime: n.providerPublishTime || null
+            const newsVal = newsRes.status === 'fulfilled' ? newsRes.value : null;
+            if (newsVal?.news && newsVal.news.length > 0) {
+                news = newsVal.news.map(n => ({
+                    headline: n.title || n.headline || '',
+                    summary:  n.summary || '',
+                    url:      n.link || n.url || '',
+                    source:   n.publisher || n.source || 'Yahoo Finance',
+                    datetime: n.providerPublishTime || n.datetime || null
                 })).filter(n => n.headline);
             }
 
@@ -1984,58 +2640,115 @@
         let resultEl = document.getElementById('hisseAnaliziResult');
         const fmtN = (n, dec=2) => n != null && !isNaN(n)
             ? new Intl.NumberFormat('tr-TR', {minimumFractionDigits:dec, maximumFractionDigits:dec}).format(n) : '—';
+        const fmtBig = (n) => {
+            if (n == null || isNaN(n)) return '—';
+            if (Math.abs(n) >= 1e12) return fmtN(n/1e12, 2) + ' T';
+            if (Math.abs(n) >= 1e9)  return fmtN(n/1e9,  2) + ' B';
+            if (Math.abs(n) >= 1e6)  return fmtN(n/1e6,  2) + ' M';
+            return fmtN(n, 0);
+        };
 
-        // ── 1. FİYAT KARTI ──────────────────────────────────────────
+        // â”€â”€ 1. HEADER KARTI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         let priceHtml = '';
         if (quote && quote.price > 0) {
-            const chgColor = quote.chgPct >= 0 ? '#10b981' : '#ef4444';
-            const chgSign  = quote.chgPct >= 0 ? '▲' : '▼';
-            const hi52 = quote.fiftyTwoWeekHigh > 0 ? fmtN(quote.fiftyTwoWeekHigh) : '—';
-            const lo52 = quote.fiftyTwoWeekLow  > 0 ? fmtN(quote.fiftyTwoWeekLow)  : '—';
-            const vol  = quote.volume > 0
-                ? (quote.volume >= 1e9 ? fmtN(quote.volume/1e9,2)+'B' : quote.volume >= 1e6 ? fmtN(quote.volume/1e6,2)+'M' : fmtN(quote.volume,0))
-                : '—';
+            const isPos      = quote.chgPct >= 0;
+            const chgColor   = isPos ? '#10b981' : '#ef4444';
+            const chgClass   = isPos ? 'pos' : 'neg';
+            const chgSign    = isPos ? '▲' : '▼';
+            const hi52       = quote.fiftyTwoWeekHigh > 0 ? fmtN(quote.fiftyTwoWeekHigh) : '—';
+            const lo52       = quote.fiftyTwoWeekLow  > 0 ? fmtN(quote.fiftyTwoWeekLow)  : '—';
+            const vol        = quote.volume > 0
+                ? (quote.volume >= 1e9 ? fmtN(quote.volume/1e9,2)+'B' : quote.volume >= 1e6 ? fmtN(quote.volume/1e6,2)+'M' : fmtN(quote.volume,0)) : '—';
+            const logoHtml   = prof.logo
+                ? `<img src="${prof.logo}" style="width:44px;height:44px;border-radius:10px;object-fit:contain;background:#fff;padding:3px;box-shadow:0 2px 8px rgba(0,0,0,0.3);">`
+                : `<div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,rgba(59,130,246,0.25),rgba(139,92,246,0.25));display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#3b82f6;border:1px solid rgba(59,130,246,0.3);">${symbol.charAt(0)}</div>`;
+
+            // 52 hafta pozisyon yüzdesi
+            const range52Pct = (quote.fiftyTwoWeekHigh > quote.fiftyTwoWeekLow)
+                ? Math.round(((quote.price - quote.fiftyTwoWeekLow) / (quote.fiftyTwoWeekHigh - quote.fiftyTwoWeekLow)) * 100)
+                : null;
+
             priceHtml = `
-            <div style="display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center; margin-bottom:14px; padding:14px 18px;
-                        background:linear-gradient(135deg, var(--surface-2) 0%, rgba(59,130,246,0.06) 100%);
-                        border-radius:var(--r); border:1px solid var(--border); border-left:4px solid ${chgColor};">
+            <div class="ha-header-card" style="border-left:4px solid ${chgColor};">
+                <div>${logoHtml}</div>
                 <div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
-                        ${prof.logo ? `<img src="${prof.logo}" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;">` : `<div style="width:36px;height:36px;border-radius:8px;background:rgba(59,130,246,0.15);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#3b82f6;">${symbol.charAt(0)}</div>`}
-                        <div>
-                            <div style="font-size:18px; font-weight:900; color:var(--t1); letter-spacing:.5px;">${prof.name || symbol}</div>
-                            <div style="font-size:10px; color:var(--t3); font-weight:600; letter-spacing:.5px;">${prof.exchange || ''} ${prof.finnhubIndustry ? '· '+prof.finnhubIndustry : ''} · ${quote.currency || ''}</div>
-                        </div>
+                    <div style="font-size:19px;font-weight:900;color:var(--t1);letter-spacing:.5px;line-height:1.2;">${prof.name || symbol}</div>
+                    <div style="font-size:10px;color:var(--t3);font-weight:600;letter-spacing:.5px;margin-top:2px;">
+                        ${symbol} · ${prof.exchange || ''} ${prof.finnhubIndustry ? '· ' + prof.finnhubIndustry : ''} · ${quote.currency || ''}
+                    </div>
+                    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;">
+                        ${prof.weburl ? `<a href="${prof.weburl}" target="_blank" rel="noopener" style="font-size:9.5px;color:var(--blue);font-weight:700;text-decoration:none;padding:2px 8px;border:1px solid rgba(59,130,246,0.3);border-radius:4px;background:rgba(59,130,246,0.07);">🌐 Web</a>` : ''}
+                        ${prof.country ? `<span style="font-size:9.5px;color:var(--t3);padding:2px 8px;border:1px solid var(--border);border-radius:4px;background:var(--surface-3);">📍 ${prof.country}</span>` : ''}
+                        ${prof.ipo ? `<span style="font-size:9.5px;color:var(--t3);padding:2px 8px;border:1px solid var(--border);border-radius:4px;background:var(--surface-3);">📅 IPO: ${prof.ipo}</span>` : ''}
                     </div>
                 </div>
-                <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; align-items:center;">
-                    <div style="text-align:right;">
-                        <div style="font-size:28px; font-weight:900; color:var(--t1); font-family:var(--mono); line-height:1;">${fmtN(quote.price)}</div>
-                        <div style="font-size:13px; font-weight:800; color:${chgColor}; font-family:var(--mono);">${chgSign} ${fmtN(Math.abs(quote.chgPct), 2)}%</div>
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 14px; font-size:10px;">
-                        <div style="color:var(--t3);">52H Yüksek</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${hi52}</div>
-                        <div style="color:var(--t3);">52H Düşük</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${lo52}</div>
-                        <div style="color:var(--t3);">Hacim</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${vol}</div>
-                        <div style="color:var(--t3);">Önceki Kap.</div><div style="color:var(--t2); font-weight:700; font-family:var(--mono); text-align:right;">${fmtN(quote.prevClose)}</div>
-                    </div>
+                <div style="text-align:right;min-width:160px;">
+                    <div class="ha-price-big">${fmtN(quote.price)}</div>
+                    <div class="ha-chg-badge ${chgClass}">${chgSign} ${fmtN(Math.abs(quote.chgPct),2)}%</div>
+                    <div style="font-size:10px;color:var(--t3);margin-top:6px;">Önceki: <span style="color:var(--t2);font-family:var(--mono);font-weight:700;">${fmtN(quote.prevClose)}</span></div>
                 </div>
             </div>
-            <div style="margin-bottom:14px; padding:10px 14px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
-                <div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;">📈 30 GÜNLÜK FİYAT TRENDİ</div>
-                <div class="canvas-container" style="height:90px;"><canvas id="hisseAnaliziTrendChart"></canvas></div>
-            </div>`;
-        } else if (prof && prof.name) {
-            priceHtml = `<div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; padding:12px 16px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
-                ${prof.logo ? `<img src="${prof.logo}" style="width:36px;height:36px;border-radius:8px;object-fit:contain;background:#fff;padding:2px;">` : ''}
-                <div>
-                    <div style="font-size:16px; font-weight:800; color:var(--t1);">${prof.name}</div>
-                    <div style="font-size:11px; color:var(--t3); font-weight:600;">${prof.exchange||''} · ${prof.finnhubIndustry||''} · ${prof.currency||''}</div>
+
+            <!-- Meta Kartlar: 4 temel veri -->
+            <div class="ha-meta-grid">
+                <div class="ha-meta-card">
+                    <div class="ha-meta-label">📈 52H Yüksek</div>
+                    <div class="ha-meta-value" style="color:#10b981;">${hi52}</div>
+                    ${range52Pct != null ? `<div class="ha-meta-sub">Konumu: %${range52Pct}</div>` : ''}
                 </div>
+                <div class="ha-meta-card">
+                    <div class="ha-meta-label">📉 52H Düşük</div>
+                    <div class="ha-meta-value" style="color:#ef4444;">${lo52}</div>
+                    ${range52Pct != null ? `<div class="ha-meta-sub" style="height:4px;background:var(--surface-4);border-radius:2px;margin-top:4px;overflow:hidden;"><div style="height:100%;width:${range52Pct}%;background:linear-gradient(90deg,#ef4444,#10b981);border-radius:2px;"></div></div>` : ''}
+                </div>
+                <div class="ha-meta-card">
+                    <div class="ha-meta-label">📊 İşlem Hacmi</div>
+                    <div class="ha-meta-value">${vol}</div>
+                    <div class="ha-meta-sub">${quote.currency || ''}</div>
+                </div>
+                <div class="ha-meta-card">
+                    <div class="ha-meta-label">🏦 Piyasa Değeri</div>
+                    <div class="ha-meta-value">${prof.marketCapitalization > 0 ? fmtBig(prof.marketCapitalization * 1e6) : 'â€”'}</div>
+                    <div class="ha-meta-sub">USD</div>
+                </div>
+            </div>
+
+            <!-- Temel Göstergeler -->
+            ${(prof.peRatioTTM > 0 || prof.pbRatioTTM > 0 || prof.dividendYieldIndicatedAnnual > 0 || prof.epsBasicExclExtraItemsTTM != null || prof.priceToSalesRatioTTM > 0 || prof.roeTTM != null) ? `
+            <div style="margin-bottom:14px;">
+                <div class="ha-section-title">📋 Temel Göstergeler</div>
+                <div class="ha-fundamentals-grid">
+                    ${prof.peRatioTTM > 0 ? `<div class="ha-fund-item"><span class="ha-fund-key">F/K Oranı (TTM)</span><span class="ha-fund-val">${fmtN(prof.peRatioTTM)}</span></div>` : ''}
+                    ${prof.pbRatioTTM > 0 ? `<div class="ha-fund-item"><span class="ha-fund-key">F/DD Oranı</span><span class="ha-fund-val">${fmtN(prof.pbRatioTTM)}</span></div>` : ''}
+                    ${prof.priceToSalesRatioTTM > 0 ? `<div class="ha-fund-item"><span class="ha-fund-key">F/S Oranı</span><span class="ha-fund-val">${fmtN(prof.priceToSalesRatioTTM)}</span></div>` : ''}
+                    ${prof.dividendYieldIndicatedAnnual > 0 ? `<div class="ha-fund-item"><span class="ha-fund-key">Temettü Verimi</span><span class="ha-fund-val" style="color:#10b981;">%${fmtN(prof.dividendYieldIndicatedAnnual)}</span></div>` : ''}
+                    ${prof.epsBasicExclExtraItemsTTM != null ? `<div class="ha-fund-item"><span class="ha-fund-key">EPS (TTM)</span><span class="ha-fund-val">${fmtN(prof.epsBasicExclExtraItemsTTM)}</span></div>` : ''}
+                    ${prof.roeTTM != null ? `<div class="ha-fund-item"><span class="ha-fund-key">ROE (TTM)</span><span class="ha-fund-val" style="color:#3b82f6;">%${fmtN(prof.roeTTM * 100)}</span></div>` : ''}
+                    ${prof.revenueGrowthQuarterlyYoy != null ? `<div class="ha-fund-item"><span class="ha-fund-key">Gelir Büyümesi (YoY)</span><span class="ha-fund-val" style="color:${prof.revenueGrowthQuarterlyYoy >= 0 ? '#10b981' : '#ef4444'};">%${fmtN(prof.revenueGrowthQuarterlyYoy * 100)}</span></div>` : ''}
+                    ${prof.netMarginTTM != null ? `<div class="ha-fund-item"><span class="ha-fund-key">Net Kar Marjı</span><span class="ha-fund-val">%${fmtN(prof.netMarginTTM * 100)}</span></div>` : ''}
+                    ${prof.currentRatioAnnual != null ? `<div class="ha-fund-item"><span class="ha-fund-key">Cari Oran</span><span class="ha-fund-val">${fmtN(prof.currentRatioAnnual)}</span></div>` : ''}
+                </div>
+            </div>` : ''}
+
+            <!-- Trend Grafiği -->
+            <div class="ha-trend-box">
+                <div class="ha-section-title">📈 30 Günlük Fiyat Trendi</div>
+                <div class="canvas-container" style="height:110px;"><canvas id="hisseAnaliziTrendChart"></canvas></div>
+            </div>`;
+
+        } else if (prof && prof.name) {
+            priceHtml = `
+            <div class="ha-header-card">
+                <div>${prof.logo ? `<img src="${prof.logo}" style="width:44px;height:44px;border-radius:10px;object-fit:contain;background:#fff;padding:3px;">` : ''}</div>
+                <div>
+                    <div style="font-size:18px;font-weight:900;color:var(--t1);">${prof.name}</div>
+                    <div style="font-size:11px;color:var(--t3);font-weight:600;margin-top:3px;">${prof.exchange||''} · ${prof.finnhubIndustry||''} · ${prof.currency||''}</div>
+                </div>
+                <div></div>
             </div>`;
         }
 
-        // ── 2. SENTIMENT ────────────────────────────────────────────
+        // â”€â”€ 2. SENTIMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         let sentHtml = '';
         if (sent && sent.sentiment) {
             const bullPct = ((sent.sentiment.bullishPercent || 0) * 100).toFixed(1);
@@ -2043,58 +2756,63 @@
             const score   = sent.companyNewsScore != null ? sent.companyNewsScore.toFixed(2) : '—';
             const buzz    = sent.buzz?.articlesInLastWeek ?? '—';
             const bullW   = Math.round(parseFloat(bullPct));
+            const scoreColor = sent.companyNewsScore > 0.6 ? '#10b981' : sent.companyNewsScore < 0.4 ? '#ef4444' : '#f59e0b';
             sentHtml = `
-            <div style="margin-bottom:14px; padding:12px 16px; background:var(--surface-3); border-radius:var(--r); border:1px solid var(--border);">
-                <div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:10px;">🧠 PIYASA DUYARLILIĞI (SENTIMENT)</div>
-                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px;">
-                    <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2); border-radius:8px; padding:10px; text-align:center;">
-                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">BOĞA</div>
-                        <div style="font-size:22px; font-weight:900; color:#10b981; font-family:var(--mono);">${bullPct}%</div>
+            <div class="ha-sent-bar-wrap">
+                <div class="ha-section-title">🧠 Piyasa Duyarlılığı (Sentiment)</div>
+                <div class="ha-sent-grid">
+                    <div class="ha-sent-card" style="background:rgba(16,185,129,0.10);border-color:rgba(16,185,129,0.25);">
+                        <div class="lbl">BOĞA</div>
+                        <div class="val" style="color:#10b981;">${bullPct}%</div>
                     </div>
-                    <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:10px; text-align:center;">
-                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">AYI</div>
-                        <div style="font-size:22px; font-weight:900; color:#ef4444; font-family:var(--mono);">${bearPct}%</div>
+                    <div class="ha-sent-card" style="background:rgba(239,68,68,0.10);border-color:rgba(239,68,68,0.25);">
+                        <div class="lbl">AYI</div>
+                        <div class="val" style="color:#ef4444;">${bearPct}%</div>
                     </div>
-                    <div style="background:rgba(59,130,246,0.1); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:10px; text-align:center;">
-                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">HABER SKORU</div>
-                        <div style="font-size:22px; font-weight:900; color:#3b82f6; font-family:var(--mono);">${score}</div>
+                    <div class="ha-sent-card" style="background:rgba(59,130,246,0.10);border-color:rgba(59,130,246,0.25);">
+                        <div class="lbl">HABER SKORU</div>
+                        <div class="val" style="color:${scoreColor};">${score}</div>
                     </div>
-                    <div style="background:rgba(139,92,246,0.1); border:1px solid rgba(139,92,246,0.2); border-radius:8px; padding:10px; text-align:center;">
-                        <div style="font-size:9px; color:var(--t3); font-weight:700; margin-bottom:4px;">7 GÜN HABER</div>
-                        <div style="font-size:22px; font-weight:900; color:#8b5cf6; font-family:var(--mono);">${buzz}</div>
+                    <div class="ha-sent-card" style="background:rgba(139,92,246,0.10);border-color:rgba(139,92,246,0.25);">
+                        <div class="lbl">7 GÜN HABER</div>
+                        <div class="val" style="color:#8b5cf6;">${buzz}</div>
                     </div>
                 </div>
-                <div style="font-size:9px; color:var(--t3); margin-bottom:4px;">BOĞA / AYI ORANI</div>
-                <div style="height:8px; background:rgba(239,68,68,0.25); border-radius:4px; overflow:hidden;">
-                    <div style="height:100%; width:${bullW}%; background:linear-gradient(90deg,#10b981,#34d399); border-radius:4px; transition:width .6s ease;"></div>
+                <div style="font-size:9px;color:var(--t3);margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;">Boğa / Ayı Dengesi</div>
+                <div style="height:10px;background:rgba(239,68,68,0.20);border-radius:5px;overflow:hidden;position:relative;">
+                    <div style="height:100%;width:${bullW}%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:5px;transition:width .8s cubic-bezier(.4,0,.2,1);"></div>
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:2px;height:100%;background:rgba(255,255,255,0.2);"></div>
                 </div>
             </div>`;
         }
 
-        // ── 3. HABERLER ─────────────────────────────────────────────
+        // â”€â”€ 3. HABERLER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         let newsHtml = '';
         if (news.length === 0) {
-            newsHtml = `<div style="text-align:center; padding:30px; color:var(--t3);">
-                <div style="font-size:28px; margin-bottom:10px;">📭</div>
-                <div style="font-size:13px; font-weight:600;">Bu sembol için son dönemde haber bulunamadı.</div>
-                <div style="font-size:11px; margin-top:6px; opacity:.7;">BİST: THYAO · GARAN · ASELS (uzantı gerekmez)</div>
+            newsHtml = `<div style="text-align:center;padding:30px;color:var(--t3);">
+                <div style="font-size:30px;margin-bottom:10px;">🔭</div>
+                <div style="font-size:13px;font-weight:700;color:var(--t2);">Bu sembol için haber bulunamadı.</div>
+                <div style="font-size:11px;margin-top:6px;opacity:.7;">BİST için: THYAO · GARAN · ASELS (uzantı gerekmez)</div>
             </div>`;
         } else {
             const shown = news.slice(0, 30);
-            newsHtml = `<div style="font-size:10px; font-weight:700; color:var(--t3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px;">📰 SON HABERLER (${news.length} haber)</div>`;
+            newsHtml = `<div class="ha-section-title">📰 Son Haberler <span style="font-size:9px;background:var(--blue-dim);color:var(--blue);padding:2px 7px;border-radius:10px;font-weight:800;margin-left:4px;">${news.length}</span></div>`;
             newsHtml += shown.map(n => {
                 const dt = n.datetime
                     ? new Date(n.datetime * 1000).toLocaleDateString('tr-TR', {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})
                     : '';
-                const borderColor = n.sentiment === 'positive' ? '#10b981' : n.sentiment === 'negative' ? '#ef4444' : 'var(--blue)';
-                return `<div style="padding:10px 14px; margin-bottom:7px; background:var(--surface-3); border-radius:8px; border:1px solid var(--border); border-left:3px solid ${borderColor};">
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:5px;">
-                        <div style="font-size:12px; font-weight:700; color:var(--t1); line-height:1.4;">${n.headline || '—'}</div>
-                        <div style="font-size:9.5px; color:var(--t4); white-space:nowrap; font-family:var(--mono); flex-shrink:0;">${dt}</div>
+                const sentClass = n.sentiment === 'positive' ? 'pos' : n.sentiment === 'negative' ? 'neg' : '';
+                return `<div class="ha-news-item ${sentClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px;">
+                        <div style="font-size:12px;font-weight:700;color:var(--t1);line-height:1.45;">${n.headline || '—'}</div>
+                        <div style="font-size:9.5px;color:var(--t4);white-space:nowrap;font-family:var(--mono);flex-shrink:0;">${dt}</div>
                     </div>
-                    <div style="display:flex; align-items:center; justify-content:space-between;">
-                        <span style="font-size:10px; color:var(--t4); font-weight:600; background:var(--surface-2); padding:2px 8px; border-radius:3px;">${n.source || ''}</span>
-                        ${n.url ? `<a href="${n.url}" target="_blank" rel="noopener" style="font-size:10px; color:var(--blue); font-weight:700; text-decoration:none; padding:3px 10px; border:1px solid rgba(59,130,246,0.3); border-radius:4px; background:rgba(59,130,246,0.06);">🔗 Habere Git</a>` : ''}
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                        <div style="display:flex;gap:6px;align-items:center;">
+                            <span style="font-size:10px;color:var(--t4);font-weight:700;background:var(--surface-2);padding:2px 8px;border-radius:3px;">${n.source || ''}</span>
+                            ${n.sentiment ? `<span style="font-size:9px;font-weight:800;padding:1px 6px;border-radius:3px;${n.sentiment==='positive'?'color:#10b981;background:rgba(16,185,129,0.12);':n.sentiment==='negative'?'color:#ef4444;background:rgba(239,68,68,0.12);':'color:var(--t3);background:var(--surface-3);'}">${n.sentiment==='positive'?'▲ POZİTİF':n.sentiment==='negative'?'▼ NEGATİF':'─ NÖTR'}</span>` : ''}
+                        </div>
+                        ${n.url ? `<a href="${n.url}" target="_blank" rel="noopener" style="font-size:10px;color:var(--blue);font-weight:700;text-decoration:none;padding:3px 10px;border:1px solid rgba(59,130,246,0.3);border-radius:4px;background:rgba(59,130,246,0.07);white-space:nowrap;flex-shrink:0;">🔗 Habere Git</a>` : ''}
                     </div>
                 </div>`;
             }).join('');
@@ -2102,47 +2820,67 @@
 
         resultEl.innerHTML = priceHtml + sentHtml + newsHtml;
 
-        // ── 4. TREND GRAFİĞİ (canvas render) ───────────────────────
+        // â”€â”€ 4. TREND GRAFİĞİ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         if (quote && quote.closes && quote.closes.length > 1) {
             const canvas = document.getElementById('hisseAnaliziTrendChart');
             if (canvas) {
                 if (window._hisseTrendChart) { try { window._hisseTrendChart.destroy(); } catch(e) {} }
                 const validCloses = quote.closes.filter(Boolean);
-                const labels = validCloses.map((_, i) => '');
                 const firstVal = validCloses[0];
                 const lastVal  = validCloses[validCloses.length - 1];
                 const isUp = lastVal >= firstVal;
                 const lineColor = isUp ? '#10b981' : '#ef4444';
+                const gradStart = isUp ? 'rgba(16,185,129,0.25)' : 'rgba(239,68,68,0.25)';
+                const gradEnd   = isUp ? 'rgba(16,185,129,0.02)' : 'rgba(239,68,68,0.02)';
                 window._hisseTrendChart = new Chart(canvas.getContext('2d'), {
                     type: 'line',
                     data: {
-                        labels,
+                        labels: validCloses.map((_, i) => ''),
                         datasets: [{
                             data: validCloses,
                             borderColor: lineColor,
-                            borderWidth: 2,
+                            borderWidth: 2.5,
                             fill: true,
-                            backgroundColor: isUp ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)',
+                            backgroundColor: ctx => {
+                                const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, ctx.chart.height);
+                                g.addColorStop(0, gradStart);
+                                g.addColorStop(1, gradEnd);
+                                return g;
+                            },
                             pointRadius: 0,
-                            tension: 0.3
+                            pointHoverRadius: 4,
+                            tension: 0.4
                         }]
                     },
                     options: {
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false }, tooltip: {
-                            callbacks: { label: ctx => fmtN(ctx.parsed.y) }
-                        }},
+                        interaction: { intersect: false, mode: 'index' },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(12,16,24,0.92)',
+                                titleColor: '#8BA6CC',
+                                bodyColor: '#EFF4FF',
+                                borderColor: 'rgba(255,255,255,0.1)',
+                                borderWidth: 1,
+                                padding: 8,
+                                callbacks: { label: ctx => ' ' + fmtN(ctx.parsed.y) }
+                            }
+                        },
                         scales: {
                             x: { display: false },
-                            y: { display: true, ticks: { color: '#64748B', font: { size: 9 }, maxTicksLimit: 4 }, grid: { color: 'rgba(255,255,255,0.04)' } }
+                            y: {
+                                display: true,
+                                position: 'right',
+                                ticks: { color: '#64748B', font: { size: 9, family: 'IBM Plex Mono' }, maxTicksLimit: 4 },
+                                grid: { color: 'rgba(255,255,255,0.04)' }
+                            }
                         }
                     }
                 });
             }
         }
     }
-
-    // --- SİRİUS YAPAY ZEKA RAPORU (SCROLLSUZ, YATAY VE ANA FONT UYUMLU) ---
     function generateSiriusReport() {
         let allAssets = [];
         let usdKur = parseFloat(document.getElementById('usdTryRate')?.value) || 1;
@@ -2225,18 +2963,37 @@
         const topGainers = sortedByKarList.filter(a => a.kar > 0).slice(0,3);
         const topLosers = [...sortedByKarList].reverse().filter(a => a.kar < 0).slice(0,3);
 
+        // Tema renk paleti
+        const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
+        const siriusBg        = isLightTheme ? 'linear-gradient(135deg, rgba(240,248,255,0.95) 0%, rgba(220,235,255,0.92) 100%)' : 'linear-gradient(135deg, #080A0F 0%, #0D1117 100%)';
+        const siriusHeaderBg  = isLightTheme ? 'linear-gradient(90deg, rgba(245,158,11,0.10) 0%, rgba(139,92,246,0.07) 50%, rgba(59,130,246,0.07) 100%)' : 'linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(59,130,246,0.1) 100%)';
+        const siriusText      = isLightTheme ? '#0F172A' : '#EFF4FF';
+        const siriusTextSub   = isLightTheme ? 'rgba(30,58,95,0.55)' : 'rgba(255,255,255,0.4)';
+        const siriusCardBg    = isLightTheme ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.03)';
+        const siriusCardBorder= isLightTheme ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.07)';
+        const siriusDivider   = isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
+        const siriusItemBg    = isLightTheme ? 'rgba(255,255,255,0.50)' : 'rgba(255,255,255,0.03)';
+        const siriusItemText  = isLightTheme ? '#0F172A' : '#ffffff';
+        const siriusSubText   = isLightTheme ? '#475569' : 'rgba(255,255,255,0.4)';
+
+        // Modal arka planını güncelle
+        const siriusModalEl = document.getElementById('siriusModalContent');
+        if (siriusModalEl) {
+            siriusModalEl.style.background = isLightTheme ? 'rgba(240,248,255,0.95)' : '#080A0F';
+        }
+
         // Modal HTML — Modern, detaylı, scrollable
         let html = `
-        <div style="background: linear-gradient(135deg, #080A0F 0%, #0D1117 100%); min-height:100%; padding: 0;">
+        <div style="background: ${siriusBg}; min-height:100%; padding: 0;">
           <!-- HEADER -->
-          <div style="background: linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(59,130,246,0.1) 100%); border-bottom: 1px solid rgba(245,158,11,0.2); padding: 20px 28px 16px;">
+          <div style="background: ${siriusHeaderBg}; border-bottom: 1px solid rgba(245,158,11,0.2); padding: 20px 28px 16px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px;">
               <div>
                 <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
                   <span style="font-size:28px;">🤖</span>
                   <div>
                     <h2 style="color:#F5A623; font-size:18px; font-weight:900; letter-spacing:2px; margin:0;">SIRIUS ANALİZ MERKEZİ</h2>
-                    <div style="color:rgba(255,255,255,0.4); font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;">İleri Düzey Portföy Röntgeni · ${new Date().toLocaleDateString('tr-TR')}</div>
+                    <div style="color:${siriusTextSub}; font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;">İleri Düzey Portföy Röntgeni · ${new Date().toLocaleDateString('tr-TR')}</div>
                   </div>
                 </div>
               </div>
@@ -2263,7 +3020,7 @@
             <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
               <div style="background:linear-gradient(135deg,rgba(59,130,246,0.12),rgba(59,130,246,0.04)); border:1px solid rgba(59,130,246,0.25); border-radius:12px; padding:14px 16px;">
                 <div style="color:#38BDF8; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">PORTFÖY BÜYÜKLÜĞÜ</div>
-                <div style="font-size:17px; font-weight:900; color:#fff; font-family:var(--mono); line-height:1.2;">${formatTL(totalPortfolio)}</div>
+                <div style="font-size:17px; font-weight:900; color:${siriusText}; font-family:var(--mono); line-height:1.2;">${formatTL(totalPortfolio)}</div>
               </div>
               <div style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(245,158,11,0.04)); border:1px solid rgba(245,158,11,0.25); border-radius:12px; padding:14px 16px;">
                 <div style="color:#F5A623; font-size:9px; font-weight:800; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">AÇIK POZİSYON KÂRI</div>
@@ -2281,26 +3038,26 @@
 
             <!-- GRAFİKLER + DETAY -->
             <div style="display:grid; grid-template-columns:1fr 1fr 1.3fr; gap:14px;">
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column;">
-                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">📊 HACİM LİDERLERİ</div>
+              <div style="background:${siriusCardBg}; border:1px solid ${siriusCardBorder}; border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+                <div style="color:${siriusSubText}; font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">📊 HACİM LİDERLERİ</div>
                 <div class="canvas-container" style="height:170px; flex:none;"><canvas id="siriusChart"></canvas></div>
               </div>
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column;">
-                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">🥧 KATEGORİ PAYI</div>
+              <div style="background:${siriusCardBg}; border:1px solid ${siriusCardBorder}; border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+                <div style="color:${siriusSubText}; font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:10px; text-transform:uppercase;">🥧 KATEGORİ PAYI</div>
                 <div class="canvas-container" style="height:170px; flex:none;"><canvas id="siriusCatChart"></canvas></div>
               </div>
-              <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:6px;">
-                <div style="color:rgba(255,255,255,0.6); font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:4px; text-transform:uppercase;">📋 TÜM AKTİF POZİSYONLAR</div>
+              <div style="background:${siriusCardBg}; border:1px solid ${siriusCardBorder}; border-radius:12px; padding:16px; display:flex; flex-direction:column; gap:6px;">
+                <div style="color:${siriusSubText}; font-size:10px; font-weight:800; letter-spacing:1px; text-align:center; margin-bottom:4px; text-transform:uppercase;">📋 TÜM AKTİF POZİSYONLAR</div>
                 <div style="overflow-y:auto; max-height:190px; display:flex; flex-direction:column; gap:5px; padding-right:2px;">
-                  ${sortedByTutar.length === 0 ? '<div style="text-align:center;padding:20px;color:rgba(255,255,255,0.3);font-size:12px;">Aktif varlık yok</div>' :
+                  ${sortedByTutar.length === 0 ? `<div style="text-align:center;padding:20px;color:${siriusSubText};font-size:12px;">Aktif varlık yok</div>` :
                     sortedByTutar.map(a => {
                       const pct = totalPortfolio > 0 ? ((a.tutar/totalPortfolio)*100).toFixed(1) : '0.0';
                       const catColors = {bist:'#10b981',nasdaq:'#8b5cf6',avrupa:'#ec4899',emtia:'#3b82f6',fon:'#f59e0b'};
                       const cc = catColors[a.cat] || '#94A3B8';
-                      return `<div style="display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:rgba(255,255,255,0.03); border-radius:7px; border-left:3px solid ${cc};">
+                      return `<div style="display:flex; justify-content:space-between; align-items:center; padding:7px 10px; background:${siriusItemBg}; border-radius:7px; border-left:3px solid ${cc};">
                         <div>
-                          <div style="font-weight:800; font-size:12px; color:#fff;">${a.varlik} <span style="font-size:8px; color:rgba(255,255,255,0.4);">${a.cat.toUpperCase()}</span></div>
-                          <div style="font-size:10px; color:rgba(255,255,255,0.4);">%${pct} · ${formatTL(a.tutar)}</div>
+                          <div style="font-weight:800; font-size:12px; color:${siriusItemText};">${a.varlik} <span style="font-size:8px; color:${siriusSubText};">${a.cat.toUpperCase()}</span></div>
+                          <div style="font-size:10px; color:${siriusSubText};">%${pct} · ${formatTL(a.tutar)}</div>
                         </div>
                         <div style="font-size:12px; font-weight:800;">${formatKar(a.kar)}</div>
                       </div>`;
@@ -2314,25 +3071,25 @@
             <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
               <div style="background:rgba(16,185,129,0.05); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:14px;">
                 <div style="color:#10b981; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">⭐ KÂR LİDERLERİ</div>
-                ${topGainers.length === 0 ? '<div style="color:rgba(255,255,255,0.3);font-size:11px;">Kârlı varlık yok</div>' :
-                  topGainers.map((a,i) => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <div style="font-weight:800; font-size:12px; color:#fff;">${i===0?'🥇':i===1?'🥈':'🥉'} ${a.varlik}</div>
+                ${topGainers.length === 0 ? `<div style="color:${siriusSubText};font-size:11px;">Kârlı varlık yok</div>` :
+                  topGainers.map((a,i) => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid ${siriusDivider};">
+                    <div style="font-weight:800; font-size:12px; color:${siriusItemText};">${i===0?'🥇':i===1?'🥈':'🥉'} ${a.varlik}</div>
                     <div style="font-size:12px; font-weight:800; color:#10b981;">${formatKar(a.kar)}</div>
                   </div>`).join('')
                 }
               </div>
               <div style="background:rgba(239,68,68,0.05); border:1px solid rgba(239,68,68,0.2); border-radius:12px; padding:14px;">
                 <div style="color:#ef4444; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">⚠️ ZARAR POZİSYONLAR</div>
-                ${topLosers.length === 0 ? '<div style="color:rgba(255,255,255,0.3);font-size:11px;">Zararda varlık yok 🎉</div>' :
-                  topLosers.map(a => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
-                    <div style="font-weight:800; font-size:12px; color:#fff;">🔴 ${a.varlik}</div>
+                ${topLosers.length === 0 ? `<div style="color:${siriusSubText};font-size:11px;">Zararda varlık yok 🎉</div>` :
+                  topLosers.map(a => `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid ${siriusDivider};">
+                    <div style="font-weight:800; font-size:12px; color:${siriusItemText};">🔴 ${a.varlik}</div>
                     <div style="font-size:12px; font-weight:800; color:#ef4444;">${formatKar(a.kar)}</div>
                   </div>`).join('')
                 }
               </div>
               <div style="background:rgba(245,158,11,0.05); border:1px solid rgba(245,158,11,0.2); border-radius:12px; padding:14px;">
                 <div style="color:#F5A623; font-size:9px; font-weight:800; letter-spacing:1px; margin-bottom:10px; text-transform:uppercase;">🧠 SIRIUS ÖNGÖRÜSÜ</div>
-                <p style="color:rgba(255,255,255,0.8); font-size:11.5px; line-height:1.7; font-weight:500; margin:0;">
+                <p style="color:${siriusText}; font-size:11.5px; line-height:1.7; font-weight:500; margin:0;">
                   Kazanma oranınız <strong style="color:${winRateColor};">%${winRate}</strong> — ${winRate >= 65 ? '✅ Güçlü bir performans sergiliyorsunuz.' : winRate >= 45 ? '⚠️ Ortalama bir performans. Stop-loss seviyelerini gözden geçirin.' : '🔴 Zayıf performans. Portföy stratejinizi revize edin.'}
                   ${bestAsset ? ` <strong style="color:#10b981;">${bestAsset.varlik}</strong> momentumu güçlü.` : ''}
                   ${worstAsset ? ` <strong style="color:#ef4444;">${worstAsset.varlik}</strong> için çıkış stratejisi değerlendirin.` : ''}
@@ -2373,12 +3130,12 @@
                     options: { 
                         maintainAspectRatio: false, 
                         plugins: { legend: { display: false } }, 
-                        scales: { 
-                            y: { beginAtZero: true, grid: {color:'rgba(255,255,255,0.05)'}, ticks: { color: '#94A3B8', font: {size: 10, family: "'Inter', sans-serif"} } }, 
-                            x: { 
-                                grid: {display:false}, 
-                                ticks: { 
-                                    color: '#cbd5e1', 
+                        scales: {
+                            y: { beginAtZero: true, grid: {color: isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)'}, ticks: { color: isLightTheme ? '#475569' : '#94A3B8', font: {size: 10, family: "'Inter', sans-serif"} } },
+                            x: {
+                                grid: {display:false},
+                                ticks: {
+                                    color: isLightTheme ? '#334155' : '#cbd5e1',
                                     font: {weight:800, size: 10, family: "'Inter', sans-serif"},
                                     maxRotation: 0, // <-- DÜZ YAZI İÇİN BURASI
                                     minRotation: 0, // <-- DÜZ YAZI İÇİN BURASI
@@ -2418,7 +3175,7 @@
                             data: cData,
                             backgroundColor: cColors,
                             borderWidth: 2,
-                            borderColor: '#080A0F',
+                            borderColor: isLightTheme ? 'rgba(240,248,255,0.95)' : '#080A0F',
                             hoverOffset: 4
                         }]
                     },
@@ -2426,7 +3183,7 @@
                         maintainAspectRatio: false,
                         cutout: '65%',
                         plugins: {
-                            legend: { position: 'right', labels: { color: '#cbd5e1', font: {size: 10, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 10 } }
+                            legend: { position: 'right', labels: { color: isLightTheme ? '#334155' : '#cbd5e1', font: {size: 10, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 10 } }
                         }
                     }
                 });
@@ -2436,44 +3193,104 @@
 
     // --- HİSSE DETAY RADARI ---
     function openAssetDetail(type, varlik) {
+        // type mapping: tablolardan 'bist' gelebilir ama varlık trade/arz'a ait olabilir
+        // Önce gerçek tipi bul
+        const resolvedType = _resolveAssetType(type, varlik);
+        return _openAssetDetailResolved(resolvedType, varlik);
+    }
+
+    function _resolveAssetType(type, varlik) {
+        // trade/arz/temettu doğrudan geçildiyse koru
+        if (['trade','arz','temettu'].includes(type)) return type;
+        // assetCategories içindeyse doğrudan kullan
+        if (['bist','nasdaq','emtia','avrupa','fon'].includes(type)) {
+            // Varlığın bu kategoride kaydı var mı kontrol et
+            const db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
+            const hasSome = Object.values(db).some(arr => arr.some(r => r.varlik === varlik));
+            if (hasSome) return type;
+        }
+        // Tüm kategorilerde ara
+        for (const cat of ['bist','nasdaq','emtia','avrupa','fon']) {
+            const db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+            if (Object.values(db).some(arr => arr.some(r => r.varlik === varlik))) return cat;
+        }
+        // trade/arz ara
+        const tradeDB = JSON.parse(localStorage.getItem('my_trade_data_v9')) || [];
+        if (tradeDB.some(r => r.hisse === varlik)) return 'trade';
+        const arzDB = JSON.parse(localStorage.getItem('my_arz_data_v9')) || [];
+        if (arzDB.some(r => r.hisse === varlik)) return 'arz';
+        return type; // fallback
+    }
+
+    function _openAssetDetailResolved(type, varlik) {
         let history = []; let trendData = []; let trendLabels = [];
         let totalRealized = 0; let totalAdet = 0; let totalMaliyet = 0; let totalGuncel = 0;
         let totalSatisKar = 0; let totalTemettu = 0;
 
-        let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
-        let dates = Object.keys(db).sort();
-        
-        dates.forEach(date => {
-            let records = db[date].filter(d => d.varlik === varlik);
-            let dayGuncelTutar = 0;
-            records.forEach(r => {
-                if (r.isSatildi) {
-                    history.push({ tarih: date, islem: 'SATIŞ', adet: r.adet, fiyat: r.satis, kar: Number(r.karTL) || 0 });
-                    totalSatisKar += Number(r.karTL) || 0;
+        // trade/arz tipi için: my_trade_data_v9 / my_arz_data_v9 array'inden oku
+        if (type === 'trade' || type === 'arz') {
+            const key = type === 'arz' ? 'my_arz_data_v9' : 'my_trade_data_v9';
+            const tradeArr = JSON.parse(localStorage.getItem(key)) || [];
+            const varlikRecords = tradeArr.filter(d => (d.hisse || d.varlik) === varlik);
+            varlikRecords.forEach(d => {
+                const kar = Number(d.karTL) || 0;
+                const adet = Number(d.adet) || 0;
+                const alisTutari = Number(d.alisTutari) || 0;
+                if (!d.isBekliyor) {
+                    history.push({ tarih: d.tarih, islem: type === 'arz' ? 'HALKA ARZ' : 'AL-SAT', adet: adet, fiyat: d.satis || d.alis, kar: kar, not: d.not || '' });
+                    totalSatisKar += kar;
                 } else {
-                    dayGuncelTutar += Number(r.guncelTutar) || 0;
+                    totalAdet += adet;
+                    totalMaliyet += alisTutari;
                 }
             });
-            if(dayGuncelTutar > 0 || records.length > 0) {
-                trendLabels.push(date.split('-').reverse().join('.'));
-                trendData.push(dayGuncelTutar);
+            // Trend: bekleyen kayıtların toplam maliyetini tarihe göre grupla
+            const grouped = {};
+            varlikRecords.filter(d => d.isBekliyor).forEach(d => {
+                grouped[d.tarih] = (grouped[d.tarih] || 0) + (Number(d.alisTutari) || 0);
+            });
+            Object.keys(grouped).sort().forEach(dt => {
+                trendLabels.push(dt.split('-').reverse().join('.'));
+                trendData.push(grouped[dt]);
+            });
+        } else {
+            let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
+            let dates = Object.keys(db).sort();
+            
+            dates.forEach(date => {
+                let records = db[date].filter(d => d.varlik === varlik);
+                let dayGuncelTutar = 0;
+                records.forEach(r => {
+                    if (r.isSatildi) {
+                        history.push({ tarih: date, islem: 'SATIŞ', adet: r.adet, fiyat: r.satis, kar: Number(r.karTL) || 0, not: r.not || '' });
+                        totalSatisKar += Number(r.karTL) || 0;
+                    } else {
+                        dayGuncelTutar += Number(r.guncelTutar) || 0;
+                    }
+                });
+                if(dayGuncelTutar > 0 || records.length > 0) {
+                    trendLabels.push(date.split('-').reverse().join('.'));
+                    trendData.push(dayGuncelTutar);
+                }
+            });
+
+            if (dates.length > 0) {
+                let db2 = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
+                let dates2 = Object.keys(db2).sort();
+                let activeRecords = db2[dates2[dates2.length - 1]].filter(d => d.varlik === varlik && !d.isSatildi);
+                activeRecords.forEach(r => {
+                    totalAdet += Number(r.adet) || 0;
+                    totalMaliyet += Number(r.alisTutari) || 0;
+                    totalGuncel += Number(r.guncelTutar) || 0;
+                });
             }
-        });
+        }
         
         let temettus = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || [];
         temettus.filter(t => t.hisse === varlik).forEach(t => {
-            history.push({ tarih: t.tarih, islem: 'TEMETTÜ', adet: '-', fiyat: t.netTutar, kar: Number(t.netTutar) || 0 });
+            history.push({ tarih: t.tarih, islem: 'TEMETTÜ', adet: '-', fiyat: t.netTutar, kar: Number(t.netTutar) || 0, not: '' });
             totalTemettu += Number(t.netTutar) || 0;
         });
-
-        if (dates.length > 0) {
-            let activeRecords = db[dates[dates.length - 1]].filter(d => d.varlik === varlik && !d.isSatildi);
-            activeRecords.forEach(r => {
-                totalAdet += Number(r.adet) || 0;
-                totalMaliyet += Number(r.alisTutari) || 0;
-                totalGuncel += Number(r.guncelTutar) || 0;
-            });
-        }
         
         totalRealized = totalSatisKar + totalTemettu;
         let unrealized = totalGuncel - totalMaliyet;
@@ -2512,57 +3329,92 @@
         const satisList   = history.filter(h => h.islem === 'SATIŞ');
         const enIyiSatis  = satisList.length > 0 ? satisList.reduce((a,b) => b.kar > a.kar ? b : a) : null;
 
+        // ── Kâr/Zarar rengi ──
+        const karColor  = (v) => v >= 0 ? '#10b981' : '#ef4444';
+        const karIcon   = (v) => v >= 0 ? '▲' : '▼';
+
         document.getElementById('assetModalStats').innerHTML = `
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(59,130,246,.5);">
-                <h4 style="font-size:9.5px; color:var(--blue);">AKTİF BÜYÜKLÜK</h4>
-                <div class="val" style="font-size:17px;">${formatTL(totalGuncel)}</div>
-                <div class="stat-list" style="margin-top:4px; gap:2px;">
-                    <span style="color:var(--t4);">Adet:</span> <span style="font-weight:700;">${new Intl.NumberFormat('tr-TR').format(totalAdet)}</span>
-                    <span style="color:var(--t4); margin-left:8px;">Portföy Pay:</span> <span style="font-weight:700; color:var(--blue);">${formatYuzde(agirlik)}</span>
+            <!-- Kart 1: Aktif Büyüklük -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid rgba(59,130,246,.6); box-shadow:none;">
+                <h4 style="font-size:9px; color:var(--blue); margin-bottom:6px; letter-spacing:.5px;">AKTİF BÜYÜKLÜK</h4>
+                <div class="val" style="font-size:16px; margin-bottom:4px;">${formatTL(totalGuncel)}</div>
+                <div style="font-size:10px; color:var(--t3); display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;"><span>Adet</span><span style="color:var(--t1); font-weight:700; font-family:var(--mono);">${new Intl.NumberFormat('tr-TR').format(totalAdet)}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Portföy Payı</span><span style="color:var(--blue); font-weight:700; font-family:var(--mono);">${formatYuzde(agirlik)}</span></div>
                 </div>
             </div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(245,158,11,.5);">
-                <h4 style="font-size:9.5px; color:var(--amber);">ORT. MALİYET / GÜNCEL</h4>
-                <div class="val" style="font-size:17px;">${formatTL(ortMaliyet)}</div>
-                <div class="stat-list" style="margin-top:4px; gap:2px;">
-                    <span style="color:var(--t4);">Güncel Fiyat:</span> <span style="font-weight:700;">${formatTL(guncelFiyat)}</span>
-                    <span style="margin-left:8px; font-weight:700; color:${fiyatFarkYuzde>=0?'#10b981':'#ef4444'};">${fiyatFarkYuzde>=0?'▲':'▼'} ${Math.abs(fiyatFarkYuzde).toFixed(2)}%</span>
+            <!-- Kart 2: Maliyet/Güncel -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid rgba(245,158,11,.6); box-shadow:none;">
+                <h4 style="font-size:9px; color:var(--amber); margin-bottom:6px; letter-spacing:.5px;">ORT. MALİYET / GÜNCEL</h4>
+                <div class="val" style="font-size:16px; margin-bottom:4px;">${formatTL(ortMaliyet)}</div>
+                <div style="font-size:10px; color:var(--t3); display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;"><span>Güncel Fiyat</span><span style="color:var(--t1); font-weight:700; font-family:var(--mono);">${formatTL(guncelFiyat)}</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Fiyat Farkı</span><span style="color:${karColor(fiyatFarkYuzde)}; font-weight:800; font-family:var(--mono);">${karIcon(fiyatFarkYuzde)} ${Math.abs(fiyatFarkYuzde).toFixed(2)}%</span></div>
                 </div>
             </div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid ${unrealized>=0?'rgba(16,185,129,.5)':'rgba(239,68,68,.5)'};">
-                <h4 style="font-size:9.5px; color:${unrealized>=0?'var(--green)':'var(--red)'};">AÇIK KÂR/ZARAR</h4>
-                <div class="val" style="font-size:17px;">${formatKar(unrealized)}</div>
-                <div class="stat-list" style="margin-top:4px; gap:2px;">
-                    <span style="color:var(--t4);">Getiri:</span> <span style="font-weight:700;">${formatYuzde(getiriYuzde)}</span>
-                    <span style="color:var(--t4); margin-left:8px;">Top. Maliyet:</span> <span style="font-weight:700;">${formatTL(totalMaliyet)}</span>
+            <!-- Kart 3: Açık K/Z -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid ${unrealized>=0?'rgba(16,185,129,.6)':'rgba(239,68,68,.6)'}; box-shadow:none;">
+                <h4 style="font-size:9px; color:${unrealized>=0?'var(--green)':'var(--red)'}; margin-bottom:6px; letter-spacing:.5px;">AÇIK KÂR/ZARAR</h4>
+                <div class="val" style="font-size:16px; margin-bottom:4px; color:${karColor(unrealized)};">${formatKar(unrealized)}</div>
+                <div style="font-size:10px; color:var(--t3); display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;"><span>Net Getiri</span><span style="color:${karColor(getiriYuzde)}; font-weight:800; font-family:var(--mono);">${karIcon(getiriYuzde)} ${Math.abs(getiriYuzde).toFixed(2)}%</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>Top. Maliyet</span><span style="color:var(--t2); font-weight:700; font-family:var(--mono);">${formatTL(totalMaliyet)}</span></div>
                 </div>
             </div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(59,130,246,.4);">
-                <h4 style="font-size:9.5px; color:var(--blue);">REALİZE SATIŞ KÂRI</h4>
-                <div class="val" style="font-size:17px;">${formatKar(totalSatisKar)}</div>
-                <div class="stat-list" style="margin-top:4px; gap:2px;">
-                    <span style="color:var(--t4);">İşlem Sayısı:</span> <span style="font-weight:700;">${satisSayisi}</span>
-                    ${enIyiSatis ? `<span style="color:var(--t4); margin-left:8px;">En İyi:</span> <span style="font-weight:700; color:#10b981;">${formatTL(enIyiSatis.kar)}</span>` : ''}
+            <!-- Kart 4: Realize Satış -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid rgba(56,189,248,.6); box-shadow:none;">
+                <h4 style="font-size:9px; color:#38BDF8; margin-bottom:6px; letter-spacing:.5px;">REALİZE SATIŞ KÂRI</h4>
+                <div class="val" style="font-size:16px; margin-bottom:4px; color:${karColor(totalSatisKar)};">${formatKar(totalSatisKar)}</div>
+                <div style="font-size:10px; color:var(--t3); display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;"><span>İşlem Sayısı</span><span style="color:var(--t1); font-weight:700; font-family:var(--mono);">${satisSayisi}</span></div>
+                    ${enIyiSatis ? `<div style="display:flex; justify-content:space-between;"><span>En İyi Satış</span><span style="color:#10b981; font-weight:700; font-family:var(--mono);">${formatTL(enIyiSatis.kar)}</span></div>` : ''}
                 </div>
             </div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(16,185,129,.5);">
-                <h4 style="font-size:9.5px; color:var(--green);">TEMETTÜ GELİRİ</h4>
-                <div class="val" style="font-size:17px;">${formatKar(totalTemettu)}</div>
-                <div class="stat-list" style="margin-top:4px; gap:2px;">
-                    <span style="color:var(--t4);">Ödeme Sayısı:</span> <span style="font-weight:700;">${temettuSayisi}</span>
-                    ${temettuSayisi > 0 && totalAdet > 0 ? `<span style="color:var(--t4); margin-left:8px;">His. Başı:</span> <span style="font-weight:700;">${formatTL(totalTemettu/totalAdet)}</span>` : ''}
+            <!-- Kart 5: Temettü -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid rgba(16,185,129,.6); box-shadow:none;">
+                <h4 style="font-size:9px; color:var(--green); margin-bottom:6px; letter-spacing:.5px;">TEMETTÜ GELİRİ</h4>
+                <div class="val" style="font-size:16px; margin-bottom:4px; color:${totalTemettu>0?'#10b981':'var(--t1)'};">${formatKar(totalTemettu)}</div>
+                <div style="font-size:10px; color:var(--t3); display:flex; flex-direction:column; gap:2px;">
+                    <div style="display:flex; justify-content:space-between;"><span>Ödeme Sayısı</span><span style="color:var(--t1); font-weight:700; font-family:var(--mono);">${temettuSayisi}</span></div>
+                    ${temettuSayisi > 0 && totalAdet > 0 ? `<div style="display:flex; justify-content:space-between;"><span>Hisse Başı</span><span style="color:#10b981; font-weight:700; font-family:var(--mono);">${formatTL(totalTemettu/totalAdet)}</span></div>` : ''}
                 </div>
             </div>
-            <div class="stat-card" style="padding:12px; box-shadow:none; border-top:3px solid rgba(139,92,246,.6); background:linear-gradient(135deg,var(--surface-2),rgba(139,92,246,.06));">
-                <h4 style="font-size:9.5px; color:var(--purple); text-align:center;">TOPLAM NET K/Z</h4>
-                <div class="val" style="font-size:20px; text-align:center;">${formatKar(totalKarZarar)}</div>
-                <div style="text-align:center; font-size:9.5px; color:var(--t3); margin-top:4px;">Açık + Realize + Temettü</div>
+            <!-- Kart 6: Toplam Net -->
+            <div class="stat-card" style="padding:12px 14px; border-top:3px solid rgba(139,92,246,.7); background:linear-gradient(135deg,var(--surface-2),rgba(139,92,246,.06)); box-shadow:none; justify-content:center; align-items:center;">
+                <h4 style="font-size:9px; color:var(--purple); margin-bottom:6px; letter-spacing:.5px; text-align:center;">TOPLAM NET K/Z</h4>
+                <div class="val" style="font-size:22px; text-align:center; color:${karColor(totalKarZarar)}; text-shadow:0 0 20px ${totalKarZarar>=0?'rgba(16,185,129,0.3)':'rgba(239,68,68,0.3)'};">${formatKar(totalKarZarar)}</div>
+                <div style="text-align:center; font-size:9px; color:var(--t3); margin-top:4px; font-weight:600;">Açık + Realize + Temettü</div>
             </div>
         `;
 
+        // Trend özeti
+        const trendSummaryEl = document.getElementById('assetTrendSummary');
+        if (trendSummaryEl && trendData.length > 1) {
+            const first = trendData[0], last = trendData[trendData.length-1];
+            const diff = last - first;
+            const pct  = first > 0 ? ((diff/first)*100).toFixed(1) : 0;
+            trendSummaryEl.textContent = `${diff>=0?'▲':'▼'} ${Math.abs(pct)}%`;
+            trendSummaryEl.style.color = diff >= 0 ? '#10b981' : '#ef4444';
+        }
+
         history.sort((a,b) => new Date(b.tarih) - new Date(a.tarih));
-        let hHtml = history.map(h => `<tr><td>${h.tarih.split('-').reverse().join('.')}</td><td style="color:${h.islem === 'TEMETTÜ' ? 'var(--green)' : 'var(--amber)'}">${h.islem}</td><td>${h.adet}</td><td>${formatTL(h.fiyat)}</td><td>${formatKar(h.kar)}</td></tr>`).join('');
-        document.getElementById('assetModalHistory').innerHTML = hHtml || '<tr><td colspan="5" class="empty-row" style="color:var(--t2);">Satış veya temettü kaydı yok.</td></tr>';
+        // İşlem geçmişi sayacı
+        const histCountEl = document.getElementById('assetHistoryCount');
+        if (histCountEl) histCountEl.textContent = history.length > 0 ? history.length + ' kayıt' : '';
+
+        let hHtml = history.map(h => {
+            const islemColor = h.islem === 'TEMETTÜ' ? 'var(--green)' : 'var(--amber)';
+            const karStyle   = h.kar >= 0 ? 'color:#10b981;' : 'color:#ef4444;';
+            return `<tr>
+                <td style="font-family:var(--mono); font-size:11px;">${h.tarih.split('-').reverse().join('.')}</td>
+                <td><span style="color:${islemColor}; font-weight:800; font-size:10px; padding:1px 6px; background:${h.islem==='TEMETTÜ'?'rgba(16,185,129,0.1)':'rgba(245,158,11,0.1)'}; border-radius:4px;">${h.islem}</span></td>
+                <td style="font-family:var(--mono); text-align:right;">${h.adet}</td>
+                <td style="font-family:var(--mono); text-align:right;">${formatTL(h.fiyat)}</td>
+                <td style="font-family:var(--mono); text-align:right; ${karStyle} font-weight:800;">${formatKar(h.kar)}</td>
+                <td style="font-size:10px; color:var(--t3);">${h.not || '—'}</td>
+            </tr>`;
+        }).join('');
+        document.getElementById('assetModalHistory').innerHTML = hHtml || '<tr><td colspan="6" class="empty-row" style="color:var(--t2); text-align:center; padding:20px;">Satış veya temettü kaydı yok.</td></tr>';
 
         if(window.chartAssetTrend) { try{window.chartAssetTrend.destroy();}catch(e){} }
         if(window.chartAssetPie) { try{window.chartAssetPie.destroy();}catch(e){} }
@@ -2573,7 +3425,9 @@
         const mLegendColor= isDarkModal ? '#8BA6CC' : '#334155';
         const mBorderColor= isDarkModal ? '#111827' : '#ffffff';
         
-        window.chartAssetTrend = new Chart(document.getElementById('assetTrendChart').getContext('2d'), {
+        const trendCanvas = document.getElementById('assetTrendChart');
+        if (!trendCanvas) { document.getElementById('assetDetailModal').classList.add('active'); return; }
+        window.chartAssetTrend = new Chart(trendCanvas.getContext('2d'), {
             type: 'line',
             data: { 
                 labels: trendLabels, 
@@ -2607,7 +3461,9 @@
         let pieColors = ['rgba(16,185,129,0.85)', 'rgba(59,130,246,0.85)', 'rgba(139,92,246,0.85)', 'rgba(239,68,68,0.85)', 'rgba(239,68,68,0.5)'];
         let filteredPie = pieData.map((v,i) => ({v,l:pieLabels[i],c:pieColors[i]})).filter(x => x.v > 0);
         
-        window.chartAssetPie = new Chart(document.getElementById('assetPieChart').getContext('2d'), {
+        const pieCanvas = document.getElementById('assetPieChart');
+        if (!pieCanvas) { document.getElementById('assetDetailModal').classList.add('active'); return; }
+        window.chartAssetPie = new Chart(pieCanvas.getContext('2d'), {
             type: 'doughnut',
             data: {
                 labels: filteredPie.map(x => x.l),
@@ -3632,7 +4488,9 @@
             data.forEach(d => {
                 let dunkuFiyat = null; let gunlukKarHtml = '-';
                 if (!d.isSatildi) { totalAcikKar += (Number(d.karTL) * kur); if (prevDate) { let prevRecord = prevData.find(p => p.varlik === d.varlik && !p.isSatildi); if (prevRecord) { dunkuFiyat = prevRecord.guncel; let gunlukTL = (Number(d.guncel) - Number(prevRecord.guncel)) * Number(d.adet) * kur; totalGunlukKar += gunlukTL; gunlukKarHtml = formatKar(gunlukTL); } else { gunlukKarHtml = `<span class="text-muted">YENİ GİRİŞ</span>`; } } } else { gunlukKarHtml = `<span class="text-muted">REALİZE</span>`; }
-                html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><button class="asset-link" onclick="openAssetDetail('${type}', '${d.varlik}')">${d.varlik}</button></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
+                // data-attribute ile özel karakter sorunu çözüldü — onclick inline string bozulmasın
+                const safeVarlik = (d.varlik || '').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+                html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
             });
         }
         document.getElementById(type + 'TableBody').innerHTML = html;
@@ -3654,6 +4512,59 @@
         });
         document.getElementById('tradeTableBody').innerHTML = count > 0 ? html : '<tr class="empty-row"><td colspan="10">Kayıt bulunamadı.</td></tr>';
         if(document.getElementById('summaryToplam_trade')) document.getElementById('summaryToplam_trade').innerHTML = formatKar(monthTotalKar);
+    }
+
+    function renderArz() {
+        let data = JSON.parse(localStorage.getItem('my_arz_data_v9')) || [];
+        let html = '';
+        let totalKar = 0;
+        data.forEach(d => {
+            const kar = Number(d.karTL) || 0;
+            totalKar += kar;
+            html += `<tr>
+                <td>${d.tarih ? d.tarih.split('-').reverse().join('.') : '-'}</td>
+                <td><button class="asset-link" onclick="openAssetDetail('arz','${d.hisse}')">${d.hisse}</button></td>
+                <td>${d.adet}</td>
+                <td>${formatNumberStr(d.maliyet)} TL</td>
+                <td>${d.satis > 0 ? formatNumberStr(d.satis) + ' TL' : '-'}</td>
+                <td>${formatTL(Number(d.alisTutari) || 0)}</td>
+                <td>${d.satis > 0 ? formatTL(Number(d.satisTutari) || 0) : '-'}</td>
+                <td>${d.satis > 0 ? formatKar(kar) : '<span style="color:var(--t3)">Bekliyor</span>'}</td>
+                <td>${d.satis > 0 ? formatYuzde(d.karYuzde) : '<span style="color:var(--t3)">—</span>'}</td>
+                <td>
+                    <button class="btn-warning" style="padding:4px 8px;font-size:9px;" onclick="globalEdit('arz','${d.id}','${d.tarih}')">Düzenle</button>
+                    <button class="btn-danger" style="padding:4px 8px;font-size:9px;" onclick="globalDelete('arz','${d.id}','${d.tarih}')">Sil</button>
+                </td>
+            </tr>`;
+        });
+        const tbody = document.getElementById('arzTableBody');
+        if (tbody) tbody.innerHTML = html || '<tr class="empty-row"><td colspan="10">Kayıt bulunamadı.</td></tr>';
+        const sumEl = document.getElementById('summaryToplam_arz');
+        if (sumEl) sumEl.innerHTML = formatKar(totalKar);
+    }
+
+    function renderTemettu() {
+        let data = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || [];
+        let html = '';
+        let total = 0;
+        data.sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
+        data.forEach(d => {
+            const net = Number(d.netTutar) || 0;
+            total += net;
+            html += `<tr>
+                <td>${d.tarih ? d.tarih.split('-').reverse().join('.') : '-'}</td>
+                <td><button class="asset-link" onclick="openAssetDetail('temettu','${d.hisse}')">${d.hisse}</button></td>
+                <td class="text-green">${formatTL(net)}</td>
+                <td>
+                    <button class="btn-warning" style="padding:4px 8px;font-size:9px;" onclick="globalEdit('temettu','${d.id}','${d.tarih}')">Düzenle</button>
+                    <button class="btn-danger" style="padding:4px 8px;font-size:9px;" onclick="globalDelete('temettu','${d.id}','${d.tarih}')">Sil</button>
+                </td>
+            </tr>`;
+        });
+        const tbody = document.getElementById('temettuTableBody');
+        if (tbody) tbody.innerHTML = html || '<tr class="empty-row"><td colspan="4">Kayıt bulunamadı.</td></tr>';
+        const sumEl = document.getElementById('summaryToplam_temettu');
+        if (sumEl) sumEl.innerHTML = formatKar(total);
     }
 
     function updateDashboard() {
@@ -3935,10 +4846,21 @@
     document.addEventListener('DOMContentLoaded', () => {
         let today = new Date().toISOString().split('T')[0];
         let currentMonth = today.substring(0, 7);
-buildDynamicMonthFilter();
+        buildDynamicMonthFilter();
         loadTheme();
         loadHedef();
-        
+
+        // ── asset-link event delegation (data-attribute tabanlı, özel karakter güvenli) ──
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('button.asset-link[data-varlik]');
+            if (!btn) return;
+            const type   = btn.dataset.type   || 'bist';
+            const varlik = btn.dataset.varlik  || '';
+            if (varlik) openAssetDetail(type, varlik);
+        });
+
+        // TradingView devre dışı — sadece Orion Ticker
+        buildTradingViewTicker();
         // Orion Ticker'ı başlat
         setTimeout(() => fetchOrionTicker(false), 500);
         // 15 dakikada bir otomatik güncelle
