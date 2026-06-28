@@ -4978,8 +4978,12 @@ function showAuthTab(tab) {
     let isSyncingFromCloud = false;
     let userRef = null;
 
-    const originalSetItem = localStorage.setItem;
-    const originalRemoveItem = localStorage.removeItem;
+    // Login öncesi yazılan verileri tutan kuyruk
+    const pendingSyncQueue = {};
+
+    const originalSetItem    = Storage.prototype.setItem.bind(localStorage);
+    const originalRemoveItem = Storage.prototype.removeItem.bind(localStorage);
+    const originalGetItem    = Storage.prototype.getItem.bind(localStorage);
 
     function normalizeData(val) {
         if (Array.isArray(val)) return val;
@@ -4990,6 +4994,22 @@ function showAuthTab(tab) {
             }
         }
         return val;
+    }
+
+    // Bekleyen tüm verileri Firebase'e gönder
+    function flushPendingSync() {
+        if (!userRef) return;
+        Object.keys(pendingSyncQueue).forEach(key => {
+            try {
+                const val = pendingSyncQueue[key];
+                if (val === null) {
+                    userRef.child(key).remove();
+                } else {
+                    userRef.child(key).set(JSON.parse(val));
+                }
+            } catch(e) { console.warn('pendingSync flush error', key, e); }
+            delete pendingSyncQueue[key];
+        });
     }
 
     function registerUser() {
@@ -5037,21 +5057,49 @@ function showAuthTab(tab) {
             currentUser = user;
             document.getElementById('authModal').classList.remove('active');
             toast('Hoş geldin, veriler eşitleniyor...', 'success');
-            
+
             userRef = cloudDB.ref('orion_users/' + user.uid);
-            userRef.on('value', (snapshot) => {
-                const data = snapshot.val() || {}; 
+
+            // İlk bağlantıda cloud → local sync (tek seferlik)
+            userRef.once('value', (snapshot) => {
+                const data = snapshot.val() || {};
                 isSyncingFromCloud = true;
                 let changed = false;
-
-                // Cloud'da olmayan local verileri silme — sadece cloud'dan gelen yeni/güncel verileri uygula
-                // (Silinmesi gereken verileri yalnızca explicit logout sırasında sil)
 
                 Object.keys(data).forEach(key => {
                     let normalized = normalizeData(data[key]);
                     let cloudStr = JSON.stringify(normalized);
-                    if (localStorage.getItem(key) !== cloudStr) {
-                        originalSetItem.call(localStorage, key, cloudStr);
+                    if (originalGetItem(key) !== cloudStr) {
+                        originalSetItem(key, cloudStr);
+                        changed = true;
+                    }
+                });
+
+                isSyncingFromCloud = false;
+
+                // Login öncesi bekleyen local değişiklikleri gönder
+                flushPendingSync();
+
+                if (changed && typeof updateHisseListesi === 'function') {
+                    updateHisseListesi();
+                    ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
+                    renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
+                    updateDashboard();
+                }
+            });
+
+            // Gerçek zamanlı dinleme: başka cihazdan gelen değişiklikleri uygula
+            userRef.on('value', (snapshot) => {
+                if (isSyncingFromCloud) return;
+                const data = snapshot.val() || {};
+                isSyncingFromCloud = true;
+                let changed = false;
+
+                Object.keys(data).forEach(key => {
+                    let normalized = normalizeData(data[key]);
+                    let cloudStr = JSON.stringify(normalized);
+                    if (originalGetItem(key) !== cloudStr) {
+                        originalSetItem(key, cloudStr);
                         changed = true;
                     }
                 });
@@ -5063,26 +5111,38 @@ function showAuthTab(tab) {
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
                     renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
                     updateDashboard();
+                    toast('📡 Veriler güncellendi', 'info');
                 }
             });
+
         } else {
-            currentUser = null; 
+            currentUser = null;
             userRef = null;
             document.getElementById('authModal').classList.add('active');
         }
     });
 
+    // localStorage.setItem override — her my_ yazımını anında Firebase'e ilet
     localStorage.setItem = function(key, value) {
-        originalSetItem.apply(this, arguments); 
-        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) {
-            try { userRef.child(key).set(JSON.parse(value)); } catch(e) {} 
+        originalSetItem(key, value);
+        if (key.startsWith('my_') && !isSyncingFromCloud) {
+            if (userRef) {
+                try { userRef.child(key).set(JSON.parse(value)); } catch(e) {}
+            } else {
+                // Henüz login olmadı — kuyruğa ekle
+                pendingSyncQueue[key] = value;
+            }
         }
     };
 
     localStorage.removeItem = function(key) {
-        originalRemoveItem.apply(this, arguments);
-        if (key.startsWith('my_') && !isSyncingFromCloud && userRef) { 
-            userRef.child(key).remove(); 
+        originalRemoveItem(key);
+        if (key.startsWith('my_') && !isSyncingFromCloud) {
+            if (userRef) {
+                userRef.child(key).remove();
+            } else {
+                pendingSyncQueue[key] = null;
+            }
         }
     };
 </script>
