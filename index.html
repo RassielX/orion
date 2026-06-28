@@ -1452,8 +1452,9 @@ function showAuthTab(tab) {
         </div>
         <!-- Orta: Komuta Merkezi başlık -->
         <div class="header-center-title">Yatırım Komuta Merkezi</div>
-        <!-- Sağ: ÇIKIŞ + Kısayollar (alt alta) -->
+        <!-- Sağ: Aktif kullanıcı + ÇIKIŞ + Kısayollar -->
         <div class="app-header-btns" style="gap:6px; align-items:flex-end; flex-direction:column; justify-content:center;">
+            <span id="activeUserLabel" style="font-size:9px; color:var(--t3); letter-spacing:.3px; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:none;"></span>
             <button class="btn btn-danger" style="padding:0 10px; height:28px; font-size:10px; letter-spacing:.4px; background:transparent; border:1px solid var(--red);" onclick="logoutUser()">ÇIKIŞ</button>
             <button class="btn btn-primary" style="padding:0 10px; height:24px; font-size:9px; letter-spacing:.4px;" onclick="showShortcuts()" title="Klavye Kısayolları">⌨ Kısayollar</button>
         </div>
@@ -5056,7 +5057,13 @@ function showAuthTab(tab) {
         if (user) {
             currentUser = user;
             document.getElementById('authModal').classList.remove('active');
-            toast('Hoş geldin, veriler eşitleniyor...', 'success');
+            // Aktif kullanıcı etiketini göster
+            const lbl = document.getElementById('activeUserLabel');
+            if (lbl) {
+                lbl.textContent = '👤 ' + (user.email || user.uid.substring(0,8));
+                lbl.style.display = 'block';
+            }
+            toast('Hoş geldin ' + (user.email || '') + ', veriler eşitleniyor...', 'success');
 
             userRef = cloudDB.ref('orion_users/' + user.uid);
 
