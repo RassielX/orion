@@ -60,126 +60,6 @@
             --theme: 'dark';
         }
 
-        /* ─── LIGHT TEMA ─── */
-        [data-theme="light"] {
-            --bg:         #a8c4e0;
-            --surface:    rgba(255,255,255,0.28);
-            --surface-2:  rgba(240,248,255,0.25);
-            --surface-3:  rgba(220,235,255,0.22);
-            --surface-4:  rgba(200,220,245,0.20);
-
-            --border:     rgba(255,255,255,0.35);
-            --border-2:   rgba(255,255,255,0.48);
-            --border-hi:  rgba(59,130,246,0.50);
-
-            --t1: #0F172A;
-            --t2: #1E3A5F;
-            --t3: #3D5A80;
-            --t4: #6B8BAE;
-
-            --shadow:    0 10px 25px -5px rgba(0,0,0,0.15);
-            --shadow-sm: 0 4px 10px -2px rgba(0,0,0,0.10);
-        }
-        /* ─── AÇIK TEMA — GERÇEK CAM/FROSTED GLASS ─── */
-        [data-theme="light"] body {
-            background-color: var(--bg) !important;
-        }
-        [data-theme="light"] .container {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.32) !important;
-            backdrop-filter: blur(24px) !important;
-            -webkit-backdrop-filter: blur(24px) !important;
-            position: relative !important;
-            z-index: 1 !important;
-        }
-        [data-theme="light"] .stat-card {
-            background: rgba(255,255,255,0.22) !important;
-            border-color: rgba(255,255,255,0.38) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.45) !important;
-        }
-        [data-theme="light"] .hedef-panel {
-            background: rgba(255,255,255,0.20) !important;
-            border-color: rgba(255,255,255,0.35) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-        }
-        [data-theme="light"] .hedef-item {
-            background: rgba(255,255,255,0.22) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-        }
-        [data-theme="light"] .table-responsive {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .summary-bar {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .chart-box {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .trade-form {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .filter-bar {
-            background: rgba(255,255,255,0.18) !important;
-            border-color: rgba(255,255,255,0.30) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .modal-content {
-            background: rgba(240,248,255,0.75) !important;
-            border-color: rgba(255,255,255,0.50) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-        }
-        [data-theme="light"] .import-card {
-            background: rgba(255,255,255,0.20) !important;
-            border-color: rgba(255,255,255,0.35) !important;
-        }
-        [data-theme="light"] .market-data-card {
-            background: rgba(255,255,255,0.20) !important;
-            border-color: rgba(255,255,255,0.35) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        /* Açık tema metin kontrast iyileştirmesi */
-        [data-theme="light"] .tab-btn { color: #475569 !important; }
-        [data-theme="light"] .tab-btn[data-tab="ozet-tab"] { color: #0369a1 !important; }
-        [data-theme="light"] .tab-btn[data-tab="ana-portfoy-tab"] { color: #b45309 !important; }
-        [data-theme="light"] .tab-btn[data-tab="bist-tab"] { color: #047857 !important; }
-        [data-theme="light"] .tab-btn[data-tab="emtia-tab"] { color: #92400e !important; }
-        [data-theme="light"] .tab-btn[data-tab="fon-tab"] { color: #6d28d9 !important; }
-        [data-theme="light"] .tab-btn[data-tab="nasdaq-tab"] { color: #9d174d !important; }
-        [data-theme="light"] .tab-btn[data-tab="avrupa-tab"] { color: #1d4ed8 !important; }
-        [data-theme="light"] .tab-btn[data-tab="alsat-tab"] { color: #c2410c !important; }
-        [data-theme="light"] .tab-btn[data-tab="temettu-tab"] { color: #065f46 !important; }
-        [data-theme="light"] .tab-btn[data-tab="halkaarz-tab"] { color: #4338ca !important; }
-        [data-theme="light"] .tab-btn[data-tab="toplam-kar-tab"] { color: #7e22ce !important; }
-        [data-theme="light"] .tab-btn[data-tab="import-tab"] { color: #374151 !important; }
-        [data-theme="light"] .input-group label { color: #374151 !important; }
-        [data-theme="light"] .trade-form .form-title { color: #1e3a5f !important; }
-        [data-theme="light"] .filter-bar label { color: #374151 !important; }
-        [data-theme="light"] .stat-card h4 { color: #475569 !important; }
-        [data-theme="light"] .stat-card .val { color: #0f172a !important; }
-        [data-theme="light"] th { background: rgba(226,232,240,0.75) !important; color: #334155 !important; }
-        [data-theme="light"] td { color: #0f172a !important; }
-        [data-theme="light"] .summary-bar .title { color: #1e3a5f !important; }
-        [data-theme="light"] .summary-bar .metric { color: #475569 !important; }
-        [data-theme="light"] .summary-bar .metric span { color: #0f172a !important; }
-        [data-theme="light"] .footer-copy { color: rgba(0,0,0,0.5); }
         /* --- ENDEKS BAR & ORION TICKER --- */
         #endeks-bar {
             position: relative;
@@ -193,11 +73,6 @@
             margin-bottom: 8px;
             flex-shrink: 0;
         }
-[data-theme="light"] #endeks-bar {
-    background: rgba(255,255,255,0.55) !important;
-    border-color: rgba(0,0,0,0.10) !important;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.9) !important;
-}
 /* TradingView widget sarmalayıcı */
 #tv-ticker-wrap {
     width: 100%;
@@ -214,7 +89,7 @@
 #orion-ticker-track {
     display: inline-flex; align-items: center;
     white-space: nowrap; height: 44px;
-    animation: orionScroll 60s linear infinite;
+    animation: orionScroll 120s linear infinite;
 }
 #orion-ticker-track:hover { animation-play-state: paused; }
 @keyframes orionScroll {
@@ -229,24 +104,14 @@
     flex-shrink: 0;
 }
 .orion-tick-item:hover { background: rgba(255,255,255,0.04); }
-[data-theme="light"] .orion-tick-item { border-right-color: rgba(0,0,0,0.06); }
-[data-theme="light"] .orion-tick-item:hover { background: rgba(0,0,0,0.04); }
-[data-theme="light"] #endeks-bar {
-    background: rgba(255,255,255,0.52) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-color: rgba(0,0,0,0.10) !important;
-}
 .orion-tick-label {
     font-size: 10px; font-weight: 800; letter-spacing: .6px;
     color: var(--t3); text-transform: uppercase;
 }
-[data-theme="light"] .orion-tick-label { color: #475569; }
 .orion-tick-price {
     font-size: 13px; font-weight: 800;
     color: var(--t1); font-family: var(--mono);
 }
-[data-theme="light"] .orion-tick-price { color: #0f172a; }
 .orion-tick-chg {
     font-size: 10.5px; font-weight: 700;
     padding: 2px 7px; border-radius: 4px;
@@ -254,7 +119,6 @@
 .orion-tick-chg.pos { color: #10b981; background: rgba(16,185,129,0.12); }
 .orion-tick-chg.neg { color: #ef4444; background: rgba(239,68,68,0.12); }
 .orion-tick-chg.neu { color: var(--t3); background: rgba(255,255,255,0.06); }
-[data-theme="light"] .orion-tick-chg.neu { background: rgba(0,0,0,0.05); }
 .orion-tick-loading {
     display: flex; align-items: center; gap: 10px;
     padding: 0 20px; height: 44px; color: var(--t3);
@@ -319,61 +183,6 @@
     pointer-events: none;
 }
 
-        [data-theme="light"] body {
-            background: var(--bg) !important;
-        }
-
-        /* ─── AÇIK TEMADA YILDIZ GÖRÜNÜRLÜĞܠ─── */
-        [data-theme="light"] #starCanvas {
-            opacity: 1;
-        }
-        /* Açık temada frosted-glass container'lar yıldızları göstersin */
-        [data-theme="light"] .container {
-            background: rgba(255,255,255,0.16) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            position: relative !important;
-            z-index: 1 !important;
-        }
-        [data-theme="light"] .stat-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.28) 0%, rgba(220,235,255,0.20) 100%) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-        }
-        [data-theme="light"] .hedef-panel {
-            background: linear-gradient(180deg, rgba(255,255,255,0.24) 0%, rgba(220,235,255,0.18) 100%) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-        }
-        [data-theme="light"] .hedef-item {
-            background: rgba(255,255,255,0.20) !important;
-        }
-        [data-theme="light"] .chart-box {
-            background: rgba(255,255,255,0.18) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-        }
-        [data-theme="light"] .summary-bar {
-            background: rgba(255,255,255,0.18) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-        }
-        [data-theme="light"] .table-responsive {
-            background: rgba(255,255,255,0.16) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .trade-form {
-            background: rgba(255,255,255,0.18) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-        [data-theme="light"] .filter-bar {
-            background: rgba(255,255,255,0.18) !important;
-            backdrop-filter: blur(8px) !important;
-            -webkit-backdrop-filter: blur(8px) !important;
-        }
-
         /* ─── GENEL ANİMASYON & GEÇİŞLER ─── */
         .container, .stat-card, .trade-form, .filter-bar, .summary-bar,
         .chart-box, .table-responsive, .modal-content, .hedef-panel, .hedef-item,
@@ -425,14 +234,6 @@
             position: relative;
             z-index: 1;
         }
-        [data-theme="light"] .container {
-            background: rgba(255,255,255,0.18);
-            border-color: rgba(0,0,0,0.10);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
         /* ─── UYGULAMA BAŞLIĞI ─── */
         .app-header {
             display: flex; align-items: center; justify-content: space-between;
@@ -440,7 +241,8 @@
         }
         /* ORION logosu + başlık */
         .orion-brand {
-            display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex-shrink: 0;
+            display: flex; flex-direction: row; align-items: center; gap: 0; flex-shrink: 0;
+            padding-top: 10px;
         }
         .orion-brand-name {
             font-size: 26px;
@@ -454,12 +256,6 @@
             line-height: 1;
             text-shadow: none;
         }
-        [data-theme="light"] .orion-brand-name {
-            background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #0369a1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
         .orion-brand-sub-btns {
             display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
         }
@@ -467,28 +263,16 @@
         /* Merkez başlık */
         .header-center-title {
             position: absolute; left: 50%; transform: translateX(-50%);
-            font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
-            color: var(--t4); text-transform: uppercase; white-space: nowrap;
+            font-size: 12px; font-weight: 900; letter-spacing: 3px;
+            color: #EFF4FF; text-transform: uppercase; white-space: nowrap;
             pointer-events: none;
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #38BDF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
         }
-        [data-theme="light"] .header-center-title { color: #64748b; }
         .app-header { position: relative; }
-
-        /* Tema toggle butonu */
-        .theme-toggle {
-            width: 40px; height: 22px; border-radius: 99px;
-            background: var(--surface-4); border: 1px solid var(--border-2);
-            cursor: pointer; position: relative; transition: background .3s;
-            display: flex; align-items: center; padding: 2px;
-            flex-shrink: 0;
-        }
-        .theme-toggle::after {
-            content: ''; width: 16px; height: 16px;
-            background: var(--blue); border-radius: 99px;
-            transition: transform .3s cubic-bezier(.4,0,.2,1);
-            box-shadow: 0 0 8px var(--blue-glow);
-        }
-        [data-theme="light"] .theme-toggle::after { transform: translateX(18px); background: var(--amber); box-shadow: 0 0 8px var(--amber-dim); }
 
         /* ─── PİYASA VERİ PANELİ (ÖZET SEKMESİ) ─── */
         .market-data-panel {
@@ -509,20 +293,12 @@
             min-width: 0;
         }
         .market-data-card:hover { border-color: var(--border-hi); background: rgba(255,255,255,0.05); }
-        [data-theme="light"] .market-data-card {
-            background: rgba(255,255,255,0.55);
-            border-color: rgba(0,0,0,0.08);
-        }
-        [data-theme="light"] .market-data-card:hover { background: rgba(255,255,255,0.80); }
         .mdc-label { font-size: 9px; font-weight: 800; letter-spacing: .6px; color: var(--t3); text-transform: uppercase; }
-        [data-theme="light"] .mdc-label { color: #64748b; }
         .mdc-price { font-size: 13px; font-weight: 800; color: var(--t1); font-family: var(--mono); }
-        [data-theme="light"] .mdc-price { color: #0f172a; }
         .mdc-chg { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 3px; align-self: flex-start; }
         .mdc-chg.pos { color: #10b981; background: rgba(16,185,129,0.12); }
         .mdc-chg.neg { color: #ef4444; background: rgba(239,68,68,0.12); }
         .mdc-chg.neu { color: var(--t3); background: rgba(255,255,255,0.06); }
-        [data-theme="light"] .mdc-chg.neu { background: rgba(0,0,0,0.05); }
 
         /* ─── SEKMELER (ORTALANMIŞ VE RENKLENDİRİLMİŞ) ─── */
         .tabs {
@@ -564,8 +340,6 @@
             filter: brightness(1.2);
             text-shadow: 0 0 12px currentColor;
         }
-        [data-theme="light"] .tab-btn.active { background: var(--surface-2); text-shadow: none; border-bottom-color: currentColor; }
-
         /* ─── TAB İÇERİKLERİ ─── */
         .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 8px; overflow: hidden; }
         .tab-content.active { display: flex; animation: fadeUp .3s cubic-bezier(.4,0,.2,1); }
@@ -722,19 +496,20 @@
         }
 
         /* ─── GRAFİK KUTULARI ─── */
-        .charts-container { display: flex; gap: 10px; flex: 1; min-height: 0; }
+        .charts-container { display: flex; gap: 10px; min-height: 240px; flex-shrink: 0; }
         .chart-box {
             flex: 1; background: rgba(17, 24, 39, 0.08);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
-            padding: 10px 14px; display: flex; flex-direction: column; min-height: 0;
+            padding: 10px 14px; display: flex; flex-direction: column;
+            min-height: 220px; flex-shrink: 0;
         }
         .chart-box h3 {
             font-size: 10px; font-weight: 800; color: var(--t3);
             letter-spacing: 1px; text-transform: uppercase; text-align: center;
             margin-bottom: 8px; flex-shrink: 0;
         }
-        .canvas-container { position: relative; flex: 1; min-height: 0; }
+        .canvas-container { position: relative; flex: 1; min-height: 180px; }
 
         /* ─── FİLTRE BARI ─── */
         .filter-bar {
@@ -797,8 +572,8 @@
             filter: invert(.45); cursor: pointer; opacity: 0.7; transition: opacity .2s;
         }
         input[type="date"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
-        [data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(.35);
+        /* light-tema kaldırıldı */
+        /* input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(.35);
         }
         select option { background: var(--surface-3); color: var(--t1); font-weight: 600; }
 
@@ -859,7 +634,6 @@
             position: sticky; top: 0; z-index: 5;
             text-align: center;
         }
-        [data-theme="light"] th { background: rgba(226, 232, 240, 0.85); }
         td {
             padding: 9px 6px;
             border-bottom: 1px solid var(--border);
@@ -871,7 +645,6 @@
         tr:last-child td { border-bottom: none; }
         tr:hover > td { background: var(--surface-3); }
         tbody tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
-        [data-theme="light"] tbody tr:nth-child(even) td { background: rgba(0,0,0,0.01); }
         tbody tr:nth-child(even):hover td { background: var(--surface-3); }
 
         /* Boş tablo tasarımı */
@@ -940,6 +713,11 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
         /* ─── IMPORT KART ─── */
+        #dropZone.drag-over {
+            border-color: var(--blue) !important;
+            background: var(--blue-dim) !important;
+            transform: scale(1.01);
+        }
         .import-card {
             background: var(--surface-2); border: 1px solid var(--border);
             border-radius: var(--r-lg); padding: 28px 30px; cursor: pointer;
@@ -992,7 +770,6 @@
             font-family: var(--mono);
             user-select: none;
         }
-        [data-theme="light"] .orion-watermark { color: rgba(0,0,0,0.02); }
 
         /* ═══════════════════════════════════════════════════
            MOBİL UYUMLULUK (RESPONSIVE) DÜZELTMELERİ
@@ -1339,22 +1116,82 @@
 </head>
 <body>
 
-    <div class="modal-overlay active" id="authModal" style="background: rgba(7, 11, 18, 0.98); z-index: 999999;">
-    <div class="modal-content" style="width: 420px; padding: 40px; text-align: center; box-shadow: 0 0 100px rgba(59, 130, 246, 0.2);">
-        <div style="font-size: 48px; margin-bottom: 10px;">🌌</div>
-        <h2 style="color: var(--blue); margin-bottom: 5px; font-weight: 800; letter-spacing: 2px;">ORION</h2>
-        <p style="color: var(--t3); font-size: 12px; margin-bottom: 25px;">Kişisel verileriniz şifrelenerek saklanır.</p>
-        <div class="input-group" style="margin-bottom: 15px; text-align: left;">
-            <input type="email" id="authEmail" placeholder="E-posta Adresi" style="width: 100%; text-align:center; font-size: 14px; padding: 12px;">
+    <div class="modal-overlay active" id="authModal" style="background: rgba(7, 11, 18, 0.97); z-index: 999999; backdrop-filter: blur(12px);">
+    <div class="modal-content" style="width: 420px; padding: 0; text-align: center; box-shadow: 0 0 120px rgba(59, 130, 246, 0.18), 0 40px 80px rgba(0,0,0,0.7); border: 1px solid rgba(59,130,246,0.18); border-radius: 24px; overflow: hidden;">
+        <!-- Üst dekoratif bant -->
+        <div style="height: 4px; background: linear-gradient(90deg, #3b82f6, #8b5cf6, #38bdf8); width: 100%;"></div>
+        <!-- İçerik alanı -->
+        <div style="padding: 40px 40px 36px;">
+            <!-- Logo -->
+            <div style="margin-bottom: 20px; display: flex; justify-content: center;">
+                <div style="width: 80px; height: 80px; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 32px rgba(59,130,246,0.3), 0 0 0 1px rgba(59,130,246,0.15);">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAC4jAAAuIwF4pT92AAAGNGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgMTAuMC1jMDAwIDI1LkcuZDIwZTQ2NiwgMjAyNS8xMi8wOC0yMDo1MDoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjcgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNi0xN1QwMzo0NToyOSswMzowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjMzYzVlYjA3LTcxMTAtNTc0NS04OGVlLWYxMzhiZDFkNGFlOCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjdhM2EwZGVlLTgyZmYtMzY0Yy04N2Y2LWIzYzhhOTI5NTZlZCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk3ZDE2OTkwLTQ5M2UtMDc0YS1iOWRhLTE4NjVmODRkMDU1MiI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTdkMTY5OTAtNDkzZS0wNzRhLWI5ZGEtMTg2NWY4NGQwNTUyIiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjQ1OjI5KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MzNjNWViMDctNzExMC01NzQ1LTg4ZWUtZjEzOGJkMWQ0YWU4IiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjUwOjM1KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+nYIs1AAAQZZJREFUeJzt3QuQ1tWZ5/EDtI3Q3JVWTCOCOIqAFaFGgS2tRCoDm1g6O97KyWaSKNbuTDIVo9nKjM4k6EYnqY1Ea5LMbommNpnEUmO2hnIsSApkJ1VcMpU2JY2alau0oo0XEIRwEbZ+//aPTdvX9/2f+/dTRTV46ffl7fc95znPec5zhgxvmvA9Y8zHDQAA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CAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADDUYY37n+0kAAADj0u/+P/yczFKDHS99AAAAAElFTkSuQmCC" alt="ORION" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+            </div>
+            <!-- Başlık -->
+            <h2 style="background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #38BDF8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; font-weight: 900; letter-spacing: 4px; font-size: 28px;">ORION</h2>
+            <p style="color: var(--t4); font-size: 10px; margin-bottom: 8px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;">Yatırım Komuta Merkezi</p>
+            <p style="color: var(--t3); font-size: 11.5px; margin-bottom: 28px; font-weight: 500;">🔒 Verileriniz şifrelenerek güvenle saklanır</p>
+            <!-- Sekmeler: Giriş / Kayıt Ol -->
+            <div id="authTabs" style="display: flex; gap: 0; margin-bottom: 24px; background: rgba(255,255,255,0.04); border-radius: 10px; padding: 3px; border: 1px solid rgba(255,255,255,0.07);">
+                <button id="authTabLogin" onclick="showAuthTab('login')" style="flex: 1; padding: 9px; border-radius: 8px; border: none; background: var(--blue); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .5px; cursor: pointer; transition: all .2s;">GİRİŞ YAP</button>
+                <button id="authTabRegister" onclick="showAuthTab('register')" style="flex: 1; padding: 9px; border-radius: 8px; border: none; background: transparent; color: var(--t3); font-size: 12px; font-weight: 700; letter-spacing: .5px; cursor: pointer; transition: all .2s;">KAYIT OL</button>
+            </div>
+            <!-- Giriş Formu -->
+            <div id="authFormLogin">
+                <div class="input-group" style="margin-bottom: 14px; text-align: left;">
+                    <label style="font-size: 10.5px; font-weight: 700; color: var(--t3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px; display: block;">E-POSTA</label>
+                    <input type="email" id="authEmail" placeholder="ornek@email.com" style="width: 100%; font-size: 14px; padding: 12px 16px; border-radius: 10px;">
+                </div>
+                <div class="input-group" style="margin-bottom: 22px; text-align: left;">
+                    <label style="font-size: 10.5px; font-weight: 700; color: var(--t3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px; display: block;">ŞİFRE</label>
+                    <input type="password" id="authPassword" placeholder="••••••••" style="width: 100%; font-size: 14px; padding: 12px 16px; border-radius: 10px;" onkeydown="if(event.key==='Enter') loginUser()">
+                </div>
+                <button class="btn btn-primary" style="width: 100%; height: 46px; font-size: 13px; font-weight: 800; letter-spacing: 1px; border-radius: 12px; background: linear-gradient(135deg, #3b82f6, #6366f1);" onclick="loginUser()">GİRİŞ YAP →</button>
+            </div>
+            <!-- Kayıt Formu -->
+            <div id="authFormRegister" style="display:none;">
+                <div class="input-group" style="margin-bottom: 14px; text-align: left;">
+                    <label style="font-size: 10.5px; font-weight: 700; color: var(--t3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px; display: block;">E-POSTA</label>
+                    <input type="email" id="authEmailReg" placeholder="ornek@email.com" style="width: 100%; font-size: 14px; padding: 12px 16px; border-radius: 10px;">
+                </div>
+                <div class="input-group" style="margin-bottom: 14px; text-align: left;">
+                    <label style="font-size: 10.5px; font-weight: 700; color: var(--t3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px; display: block;">ŞİFRE</label>
+                    <input type="password" id="authPasswordReg" placeholder="En az 6 karakter" style="width: 100%; font-size: 14px; padding: 12px 16px; border-radius: 10px;">
+                </div>
+                <div class="input-group" style="margin-bottom: 22px; text-align: left;">
+                    <label style="font-size: 10.5px; font-weight: 700; color: var(--t3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 6px; display: block;">ŞİFRE TEKRAR</label>
+                    <input type="password" id="authPasswordReg2" placeholder="Şifreyi tekrar girin" style="width: 100%; font-size: 14px; padding: 12px 16px; border-radius: 10px;" onkeydown="if(event.key==='Enter') registerUser()">
+                </div>
+                <button class="btn btn-success" style="width: 100%; height: 46px; font-size: 13px; font-weight: 800; letter-spacing: 1px; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669);" onclick="registerUser()">HESAP OLUŞTUR →</button>
+            </div>
+            <div id="authError" style="color: var(--red); font-size: 12px; margin-top: 14px; font-weight: 600; min-height: 18px;"></div>
         </div>
-        <div class="input-group" style="margin-bottom: 25px; text-align: left;">
-            <input type="password" id="authPassword" placeholder="Şifre (En az 6 hane)" style="width: 100%; text-align:center; font-size: 14px; padding: 12px;">
-        </div>
-        <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px; height: 44px; font-size: 12px;" onclick="loginUser()">GİRİŞ YAP</button>
-        <button class="btn" style="width: 100%; height: 44px; font-size: 12px; background:transparent; border: 1px solid var(--t3); color: var(--t3);" onclick="registerUser()">YENİ KAYIT</button>
-        <div id="authError" style="color: var(--red); font-size: 12px; margin-top: 15px; font-weight: 600;"></div>
     </div>
 </div>
+<script>
+function showAuthTab(tab) {
+    const loginForm = document.getElementById('authFormLogin');
+    const registerForm = document.getElementById('authFormRegister');
+    const loginTab = document.getElementById('authTabLogin');
+    const registerTab = document.getElementById('authTabRegister');
+    if (tab === 'login') {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        loginTab.style.background = 'var(--blue)';
+        loginTab.style.color = '#fff';
+        registerTab.style.background = 'transparent';
+        registerTab.style.color = 'var(--t3)';
+    } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        registerTab.style.background = 'var(--blue)';
+        registerTab.style.color = '#fff';
+        loginTab.style.background = 'transparent';
+        loginTab.style.color = 'var(--t3)';
+    }
+}
+</script>
 <div id="toast-container"></div>
 <canvas id="starCanvas"></canvas>
 
@@ -1463,22 +1300,21 @@
 
 <div class="container">
     <div class="app-header">
-        <!-- Sol: ORION marka + butolar altında -->
+        <!-- Sol: Logo + ORION yazısı + Kısayollar -->
         <div class="orion-brand">
-            <span class="orion-brand-name">ORION</span>
-            <div class="orion-brand-sub-btns">
-                <button class="btn btn-primary" style="padding:0 10px; height:26px; font-size:9.5px; letter-spacing:.4px;" onclick="showShortcuts()" title="Klavye Kısayolları">⌨ Kısayollar</button>
-                <button class="btn" style="padding:0 9px; height:26px; font-size:9.5px; letter-spacing:.4px; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.3); color:#38BDF8;" onclick="fetchOrionTicker(true); loadMarketDataPanel();" title="Piyasa Verilerini Yenile">🔄 Piyasa</button>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0; box-shadow:0 4px 14px rgba(59,130,246,0.35), 0 0 0 1px rgba(59,130,246,0.2);">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAC4jAAAuIwF4pT92AAAGNGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgMTAuMC1jMDAwIDI1LkcuZDIwZTQ2NiwgMjAyNS8xMi8wOC0yMDo1MDoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjcgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNi0xN1QwMzo0NToyOSswMzowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjMzYzVlYjA3LTcxMTAtNTc0NS04OGVlLWYxMzhiZDFkNGFlOCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjdhM2EwZGVlLTgyZmYtMzY0Yy04N2Y2LWIzYzhhOTI5NTZlZCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk3ZDE2OTkwLTQ5M2UtMDc0YS1iOWRhLTE4NjVmODRkMDU1MiI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTdkMTY5OTAtNDkzZS0wNzRhLWI5ZGEtMTg2NWY4NGQwNTUyIiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjQ1OjI5KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MzNjNWViMDctNzExMC01NzQ1LTg4ZWUtZjEzOGJkMWQ0YWU4IiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjUwOjM1KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+nYIs1AAAQZZJREFUeJzt3QuQ1tWZ5/EDtI3Q3JVWTCOCOIqAFaFGgS2tRCoDm1g6O97KyWaSKNbuTDIVo9nKjM4k6EYnqY1Ea5LMbommNpnEUmO2hnIsSApkJ1VcMpU2JY2alau0oo0XEIRwEbZ+//aPTdvX9/2f+/dTRTV46ffl7fc95znPec5zhgxvmvA9Y8zHDQAA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CAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADDUYY37n+0kAAADj0u/+P/yczFKDHS99AAAAAElFTkSuQmCC" alt="ORION" style="width:100%;height:100%;object-fit:cover;display:block;">
+                </div>
+                <span class="orion-brand-name">ORION</span>
             </div>
         </div>
         <!-- Orta: Komuta Merkezi başlık -->
         <div class="header-center-title">Yatırım Komuta Merkezi</div>
-        <!-- Sağ: tema toggle + çıkış -->
-        <div class="app-header-btns" style="gap:10px; align-items:center;">
-            <button class="btn btn-danger" style="padding:0 10px; height:28px; font-size:10px; letter-spacing:.4px; background: transparent; border: 1px solid var(--red);" onclick="logoutUser()">ÇIKIŞ</button>
-            <span style="font-size:12px; color:var(--t3); opacity:.8;">🌙</span>
-            <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Tema Değiştir (Koyu / Açık)"></button>
-            <span style="font-size:12px; color:var(--t3); opacity:.8;">☀️</span>
+        <!-- Sağ: ÇIKIŞ + Kısayollar (alt alta) -->
+        <div class="app-header-btns" style="gap:6px; align-items:flex-end; flex-direction:column; justify-content:center;">
+            <button class="btn btn-danger" style="padding:0 10px; height:28px; font-size:10px; letter-spacing:.4px; background:transparent; border:1px solid var(--red);" onclick="logoutUser()">ÇIKIŞ</button>
+            <button class="btn btn-primary" style="padding:0 10px; height:24px; font-size:9px; letter-spacing:.4px;" onclick="showShortcuts()" title="Klavye Kısayolları">⌨ Kısayollar</button>
         </div>
     </div>
     
@@ -1518,10 +1354,78 @@
         </div>
         <input type="file" id="inp_excel" accept=".xlsx,.xls,.csv" style="display:none" onchange="handleExcelUpload(event)">
         <input type="file" id="inp_json"  accept=".json" style="display:none" onchange="handleJSONUpload(event)">
-        <div id="dropZone" style="border:2px dashed var(--border); border-radius:16px; padding:45px; text-align:center; margin-bottom:30px; background:var(--surface-2); transition:all 0.2s; cursor:pointer;"
+        <div id="dropZone" style="border:2px dashed var(--border); border-radius:16px; padding:45px; text-align:center; margin-bottom:20px; background:var(--surface-2); transition:all 0.2s; cursor:pointer;"
             ondragover="handleDragOver(event)" ondragleave="handleDragLeave()" ondrop="handleDrop(event)" onclick="document.getElementById('inp_excel').click()">
           <div style="font-size:40px; margin-bottom:12px;">📂</div>
           <div style="color:var(--t2); font-size:14px; font-weight:600; margin-bottom:8px;">Excel veya JSON dosyasını buraya sürükle ya da tıkla</div>
+          <div style="color:var(--t3); font-size:11px; font-weight:500;">Desteklenen formatlar: .xlsx, .xls, .csv, .json</div>
+        </div>
+
+        <!-- AKTARMA ŞABLONU AÇIKLAMASI -->
+        <div class="trade-form" style="padding:20px; margin-bottom:20px; border:1px solid rgba(59,130,246,0.2); background:rgba(59,130,246,0.04);">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+            <span style="font-size:20px;">📋</span>
+            <div style="color:var(--blue); font-size:12px; font-weight:800; letter-spacing:.5px; text-transform:uppercase;">Excel Aktarma Şablonu &amp; Kurallar</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; overflow:hidden;">
+            <!-- Format 1: İşlem Defteri -->
+            <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:10px; padding:14px; min-width:0; overflow:hidden;">
+              <div style="color:var(--green); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase;">📑 Format 1: İşlem Defteri</div>
+              <div style="color:var(--t3); font-size:10px; margin-bottom:8px; line-height:1.6;">İlk satırda <strong style="color:var(--t2);">"işlem"</strong> başlığı içeren sütun varsa bu format olarak tanınır.</div>
+              <table style="width:100%; border-collapse:collapse; font-size:10px; table-layout:fixed;">
+                <thead><tr style="background:rgba(255,255,255,0.04);">
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">TARİH</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">İŞLEM</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">VARLIK</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">ADET</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">FİYAT</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">15.01.2025</td><td style="padding:4px 8px; color:var(--green); border:1px solid var(--border); font-weight:700;">ALIŞ</td><td style="padding:4px 8px; color:var(--blue); border:1px solid var(--border); font-weight:700;">GARAN</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">100</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">125,50</td></tr>
+                  <tr><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">20.02.2025</td><td style="padding:4px 8px; color:var(--red); border:1px solid var(--border); font-weight:700;">SATIŞ</td><td style="padding:4px 8px; color:var(--blue); border:1px solid var(--border); font-weight:700;">GARAN</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">50</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">140,00</td></tr>
+                  <tr><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">01.03.2025</td><td style="padding:4px 8px; color:var(--amber); border:1px solid var(--border); font-weight:700;">TEMETTÜ</td><td style="padding:4px 8px; color:var(--blue); border:1px solid var(--border); font-weight:700;">GARAN</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">50</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">350,00</td></tr>
+                </tbody>
+              </table>
+              <div style="margin-top:10px; color:var(--t3); font-size:9.5px; line-height:1.7;">
+                ✅ İşlem tipi: <strong style="color:var(--t2);">ALIŞ / A / AL</strong> veya <strong style="color:var(--t2);">SATIŞ / S / SAT</strong> veya <strong style="color:var(--t2);">TEMETTÜ</strong><br>
+                ✅ Tarih formatı: <strong style="color:var(--t2);">GG.AA.YYYY</strong> veya <strong style="color:var(--t2);">YYYY-AA-GG</strong><br>
+                ✅ Virgüllü sayı (1.250,50) ve noktalı sayı (1250.50) desteklenir<br>
+                ✅ Birden fazla dosya yüklenebilir, veriler birleştirilir
+              </div>
+            </div>
+            <!-- Format 2: Günlük Tablo -->
+            <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:10px; padding:14px; min-width:0; overflow:hidden;">
+              <div style="color:var(--amber); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase;">📊 Format 2: Günlük Portföy Tablosu</div>
+              <div style="color:var(--t3); font-size:10px; margin-bottom:8px; line-height:1.6;">Her sayfanın adı tarih olmalıdır: <strong style="color:var(--t2);">15.01</strong> veya <strong style="color:var(--t2);">15.01.2025</strong></div>
+              <table style="width:100%; border-collapse:collapse; font-size:10px; table-layout:fixed;">
+                <thead><tr style="background:rgba(255,255,255,0.04);">
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">VARLIK</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">ADET</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">MALİYET</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">GÜNCEL</th>
+                  <th style="padding:4px 8px; text-align:left; color:var(--t2); border:1px solid var(--border);">KÂR</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td style="padding:4px 8px; color:var(--blue); border:1px solid var(--border); font-weight:700;">GARAN</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">100</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">125,50</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">138,00</td><td style="padding:4px 8px; color:var(--green); border:1px solid var(--border);">1.250</td></tr>
+                  <tr><td style="padding:4px 8px; color:var(--blue); border:1px solid var(--border); font-weight:700;">THYAO</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">50</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">200,00</td><td style="padding:4px 8px; color:var(--t1); border:1px solid var(--border);">215,00</td><td style="padding:4px 8px; color:var(--green); border:1px solid var(--border);">750</td></tr>
+                </tbody>
+              </table>
+              <div style="margin-top:10px; color:var(--t3); font-size:9.5px; line-height:1.7;">
+                ✅ Sayfa adı = tarih: <strong style="color:var(--t2);">15.01</strong> → sistem yılı otomatik ekler<br>
+                ✅ Emtia otomatik tanınır (ALTIN, GÜMÜŞ, ÇEYREK vb.)<br>
+                ✅ 3 harfli semboller Fon olarak sınıflandırılır<br>
+                ✅ Diğer tüm semboller BİST olarak işlenir
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px; padding:10px 14px; background:rgba(245,158,11,0.08); border-radius:8px; border:1px solid rgba(245,158,11,0.2);">
+            <div style="color:var(--amber); font-size:10px; font-weight:800; margin-bottom:4px;">⚠️ ÖNEMLİ NOT</div>
+            <div style="color:var(--t2); font-size:10px; line-height:1.7;">
+              Birden fazla Excel dosyası yükleyebilirsiniz — veriler <strong>birleştirilir, silinmez</strong>. Aynı tarihe ait kayıtlar varsa güncellenir.<br>
+              Nasdaq hisseleri için kategori otomatik belirlenir (sembol <em>GC=F, SI=F</em> gibi emtia kodları hariç).<br>
+              JSON yedek dosyaları ile tam yedekleme/geri yükleme yapabilirsiniz.
+            </div>
+          </div>
         </div>
         <div id="importResultArea" style="display:none; margin-bottom:24px;">
           <div class="trade-form" style="border:1px solid var(--blue); margin-bottom:0; padding:24px;">
@@ -1543,21 +1447,17 @@
 
     <div id="ozet-tab" class="tab-content active">
         <div id="endeks-bar">
-            <!-- TradingView Ticker Tape — canlı piyasa bandı (tema dinamik) -->
-            <div id="tv-ticker-wrap" class="tradingview-widget-container" style="width:100%;height:46px;overflow:hidden;">
-                <div class="tradingview-widget-container__widget"></div>
-            </div>
-            <!-- Orion Ticker — TV yüklenemezse yedek olarak kalır -->
-            <div id="orion-ticker-wrap" style="display:none;">
+            <!-- Orion Ticker — Yahoo Finance v8 tabanlı, CORS açık, tüm endeksler -->
+            <div id="orion-ticker-wrap" style="display:flex;">
                 <div id="orion-ticker-track">
                     <div class="orion-tick-loading"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>
                 </div>
             </div>
         </div>
 
-        <!-- PİYASA VERİ PANELİ -->
-        <div class="market-data-panel" id="marketDataPanel">
-            <!-- JS ile doldurulacak -->
+        <!-- PİYASA VERİ PANELİ — Ticker'da gösterildiği için gizlendi -->
+        <div class="market-data-panel" id="marketDataPanel" style="display:none;">
+            <!-- Ticker bar tüm verileri gösteriyor, bu panel gereksiz -->
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; flex-shrink:0;">
@@ -1857,7 +1757,7 @@
     const STAR_COUNT = 280;
 
     function isDark() {
-        return document.documentElement.getAttribute('data-theme') !== 'light';
+        return true; // tek tema: koyu
     }
 
     function resize() {
@@ -1997,7 +1897,7 @@
     // ============================================================
     document.addEventListener('keydown', e => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') return;
-        const map = { '1':'ozet-tab','2':'ana-portfoy-tab','3':'bist-tab','4':'emtia-tab','5':'fon-tab','6':'nasdaq-tab','7':'alsat-tab','8':'temettu-tab','9':'halkaarz-tab','0':'import-tab' };
+        const map = { '1':'ozet-tab','2':'ana-portfoy-tab','3':'bist-tab','4':'emtia-tab','5':'fon-tab','6':'nasdaq-tab','7':'avrupa-tab','8':'alsat-tab','9':'temettu-tab','q':'halkaarz-tab','w':'toplam-kar-tab','0':'import-tab' };
         if (map[e.key]) { e.preventDefault(); switchTab(map[e.key]); }
         if (e.key === '?' || (e.key === '/' && e.shiftKey)) showShortcuts();
     });
@@ -2014,7 +1914,7 @@
                     <div class="modal-title">Klavye Kısayolları</div>
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-top:4px;">
-                    ${[['1','Özet'],['2','Ana Portföy'],['3','BİST'],['4','Emtia'],['5','Fonlar'],['6','Nasdaq'],['7','Al-Sat'],['8','Temettü'],['9','H. Arz'],['0','Aktar']].map(([k,v])=>
+                    ${[['1','Özet'],['2','İşlem Tablosu'],['3','BİST'],['4','Emtia'],['5','Fonlar'],['6','Nasdaq'],['7','Avrupa'],['8','Al-Sat'],['9','Temettü'],['Q','H. Arz'],['W','K/Z Trendi'],['0','Aktar']].map(([k,v])=>
                     `<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-3);border-radius:var(--r);border:1px solid var(--border);">
                         <kbd style="background:var(--surface-4);border:1px solid var(--border-2);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:14px;font-weight:800;color:var(--blue);min-width:34px;text-align:center; box-shadow:0 2px 5px rgba(0,0,0,0.2)">${k}</kbd>
                         <span style="font-size:12px;font-weight:600;color:var(--t2);">${v}</span>
@@ -2028,32 +1928,9 @@
         document.body.appendChild(overlay);
     }
 
-    // ============================================================
-    // TEMA DEĞİŞTİRİCİ
-    // ============================================================
-    function toggleTheme() {
-        const html = document.documentElement;
-        const isLight = html.getAttribute('data-theme') === 'light';
-        if (isLight) {
-            html.removeAttribute('data-theme');
-            localStorage.setItem('portfoy_theme', 'dark');
-            toast('Koyu tema aktif', 'info', 2000);
-        } else {
-            html.setAttribute('data-theme', 'light');
-            localStorage.setItem('portfoy_theme', 'light');
-            toast('Açık tema aktif', 'info', 2000);
-        }
-               setTimeout(() => {
-            const isDarkNow = html.getAttribute('data-theme') !== 'light';
-            Chart.defaults.color = isDarkNow ? '#64748B' : '#94A3B8';
-            Chart.defaults.borderColor = isDarkNow ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
-            updateDashboard();
-            rebuildTickerWidget();
-            buildTradingViewTicker();
-        }, 50);
-    }
 
     // ═══════════════════════════════════════════════════════════════
+    // TradingView widget yüklenemezse Orion ticker otomatik devreye girer
     function buildTradingViewTicker() {
         const wrap = document.getElementById('tv-ticker-wrap');
         if (!wrap) return;
@@ -2062,9 +1939,6 @@
         if (oldScript) oldScript.remove();
         const widgetDiv = wrap.querySelector('.tradingview-widget-container__widget');
         if (widgetDiv) widgetDiv.innerHTML = '';
-
-        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-        const theme  = isDark ? 'dark' : 'light';
 
         const config = {
             symbols: [
@@ -2082,7 +1956,7 @@
                 { proName: 'BITSTAMP:BTCUSD',    title: 'BTC/USD'     }
             ],
             showSymbolLogo: true,
-            colorTheme: theme,
+            colorTheme: 'dark',
             isTransparent: true,
             displayMode: 'adaptive',
             locale: 'tr'
@@ -2094,18 +1968,48 @@
         script.src  = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
         script.async = true;
         script.innerHTML = JSON.stringify(config);
+
+        const orionWrap = document.getElementById('orion-ticker-wrap');
+
+        // Orion ticker'ı hemen başlat — TradingView beklenmeden veriler çekilsin
+        if (orionWrap) orionWrap.style.display = 'flex';
+        fetchOrionTicker(false);
+
+        // TradingView yüklenemezse Orion zaten çalışıyor
+        script.onerror = () => {
+            wrap.style.display = 'none';
+        };
+
+        // 4 saniye içinde TV widget içerik üretirse Orion'u gizle, TV'yi göster
         wrap.appendChild(script);
 
-        // Widget yüklenince TV wrap'ı göster, Orion wrap'ı gizle
-        const orionWrap = document.getElementById('orion-ticker-wrap');
-        if (orionWrap) orionWrap.style.display = 'none';
-        wrap.style.display = 'block';
+        const tvFallbackTimer = setTimeout(() => {
+            const tvContent = wrap.querySelector('.tradingview-widget-container__widget');
+            const hasContent = tvContent && tvContent.children.length > 0;
+            if (!hasContent) {
+                wrap.style.display = 'none';
+            }
+            // Orion zaten çalışıyor — ek işlem gerekmez
+        }, 4000);
+
+        // TV başarıyla yüklenince Orion'u gizle, TV'yi göster
+        const observer = new MutationObserver(() => {
+            const tvContent = wrap.querySelector('.tradingview-widget-container__widget');
+            if (tvContent && tvContent.children.length > 0) {
+                clearTimeout(tvFallbackTimer);
+                observer.disconnect();
+                wrap.style.display = 'block';
+                if (orionWrap) orionWrap.style.display = 'none';
+            }
+        });
+        observer.observe(wrap, { childList: true, subtree: true });
     }
 
     // ═══════════════════════════════════════════════════════════════
     // ORION TICKER — Güçlendirilmiş çoklu proxy zinciri + kalıcı cache fallback
     // Döviz: open.er-api.com (CORS açık)
-    // BİST/Endeks: stooq.com → allorigins proxy → statik fallback
+    // BİST/Endeks: Yahoo Finance v8 chart API (CORS açık, proxy gerekmez)
+    // Altın TL: Harem Altın → fallback: ONS × USD/TRY hesabı
     // ═══════════════════════════════════════════════════════════════
     let orionTickerCache = null;
     let orionTickerTime  = 0;
@@ -2124,7 +2028,7 @@
         { label: 'FTSE 100',   flag: '🇬🇧', price: 0, chg: 0, fallback: true },
         { label: 'EURO STOXX', flag: '🇪🇺', price: 0, chg: 0, fallback: true },
         { label: 'ALTIN ONS',  flag: '🥇', price: 0, chg: 0, fallback: true },
-        { label: 'GUMUS',      flag: '🥈', price: 0, chg: 0, fallback: true },
+        { label: 'GÜMÜŞ',      flag: '🥈', price: 0, chg: 0, fallback: true },
         { label: 'BTC/USD',    flag: '\u20BF',    price: 0, chg: 0, fallback: true },
     ];
 
@@ -2136,7 +2040,7 @@
             u => `https://thingproxy.freeboard.io/fetch/${u}`,
             u => u  // doğrudan son çare
         ];
-        // Önce paralel dene — ilk başarılı olanı döndür
+        // Önce ilk 3 proxy'i paralel dene — ilk başarılı olanı döndür
         try {
             const raceResult = await Promise.any(
                 proxies.slice(0, 3).map(makeUrl =>
@@ -2146,7 +2050,12 @@
             );
             if (raceResult) return raceResult;
         } catch(e) {}
-        // Paralel başarısızsa doğrudan dene
+        // Paralel başarısızsa thingproxy dene
+        try {
+            const r = await fetch(`https://thingproxy.freeboard.io/fetch/${url}`, { signal: AbortSignal.timeout(timeout) });
+            if (r.ok) return r;
+        } catch(e) {}
+        // Son çare: doğrudan dene
         try {
             const r = await fetch(url, { signal: AbortSignal.timeout(timeout) });
             if (r.ok) return r;
@@ -2154,11 +2063,96 @@
         return null;
     }
 
+    // ── Çoklu kaynak endeks/hisse fiyat çekici ──────────────────────────────
+    // Kaynak 1: Stooq CSV (CORS açık, hızlı, endeksler için ideal)
+    // Kaynak 2: Yahoo Finance v8 proxy üzerinden
+    // Kaynak 3: allorigins üzerinden Yahoo v8
+
+    async function fetchStooqPrice(stooqSymbol, timeout = 8000) {
+        // Stooq CSV: anlık fiyat — proxy zinciriyle dene (CORS engeli olabilir)
+        try {
+            const url = `https://stooq.com/q/l/?s=${encodeURIComponent(stooqSymbol)}&f=sd2t2ohlcv&h&e=csv`;
+            const res = await fetchWithProxy(url, timeout);
+            if (!res) return null;
+            const text = await res.text();
+            // CSV: Symbol,Date,Time,Open,High,Low,Close,Volume
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return null;
+            const cols = lines[1].split(',');
+            const close = parseFloat(cols[6]);
+            const open  = parseFloat(cols[3]);
+            if (isNaN(close) || close <= 0 || close === 0.01) return null; // stooq returns 0.01 for N/A
+            const chg = open > 0 ? ((close - open) / open) * 100 : 0;
+            return { price: close, chg };
+        } catch(e) { return null; }
+    }
+
+    async function fetchYahooV8(symbol, timeout = 10000) {
+        const enc = encodeURIComponent(symbol);
+        const baseUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
+
+        const parseYahooJson = (json) => {
+            const meta = json?.chart?.result?.[0]?.meta;
+            if (!meta || !meta.regularMarketPrice) return null;
+            const price = meta.regularMarketPrice;
+            const prev  = meta.chartPreviousClose || meta.previousClose || price;
+            const chg   = prev > 0 ? ((price - prev) / prev) * 100 : 0;
+            return { price, chg };
+        };
+
+        // Proxy zinciri — CORS için
+        const proxies = [
+            `https://api.allorigins.win/raw?url=${encodeURIComponent(baseUrl)}`,
+            `https://corsproxy.io/?${encodeURIComponent(baseUrl)}`,
+            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(baseUrl)}`,
+        ];
+
+        for (const proxyUrl of proxies) {
+            try {
+                const r = await fetch(proxyUrl, { signal: AbortSignal.timeout(timeout) });
+                if (!r.ok) continue;
+                const text = await r.text();
+                if (!text || text.trim().startsWith('<')) continue; // HTML hata sayfası
+                const json = JSON.parse(text);
+                const result = parseYahooJson(json);
+                if (result) return result;
+            } catch(e) {}
+        }
+
+        return null;
+    }
+
+    // Stooq sembolleri haritası (Yahoo sembolü → Stooq sembolü)
+    const STOOQ_MAP = {
+        'XU100.IS':  'xu100.pl',
+        'XU030.IS':  'xu030.pl',
+        'GC=F':      'gc.f',
+        'SI=F':      'si.f',
+        '^NDX':      'ndx.in',  // stooq'ta NDX için
+        '^GSPC':     'spy.us',  // SPY ETF (S&P proxy)
+        '^GDAXI':    '^dax',
+        '^FCHI':     '^cac',
+        '^FTSE':     '^ftse',
+        '^STOXX50E': '^stoxx50e',
+        'BTC-USD':   'btc.v',
+    };
+
+    // Önce Stooq dene, başarısız olursa Yahoo v8 proxy ile dene
+    async function fetchEndeksPrice(yahooSymbol, timeout = 10000) {
+        const stooqSym = STOOQ_MAP[yahooSymbol];
+        if (stooqSym) {
+            const stooqResult = await fetchStooqPrice(stooqSym, timeout);
+            if (stooqResult) return stooqResult;
+        }
+        // Stooq başarısız → Yahoo v8 proxy
+        return await fetchYahooV8(yahooSymbol, timeout);
+    }
+
     // localStorage'dan son başarılı ticker verisini yükle (offline fallback)
     function loadTickerFromStorage() {
         try {
-            const saved = localStorage.getItem('orion_ticker_cache');
-            const savedTime = parseInt(localStorage.getItem('orion_ticker_time') || '0');
+            const saved = localStorage.getItem('orion_ticker_cache_v2');
+            const savedTime = parseInt(localStorage.getItem('orion_ticker_time_v2') || '0');
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed) && parsed.length > 0) {
@@ -2213,19 +2207,18 @@
                 const yarim  = parseFloat(data?.YARIM?.satis    || 0);
                 const tam    = parseFloat(data?.TEK_YENI?.satis  || data?.TEK?.satis    || 0);
                 const ons    = parseFloat(data?.ONS?.satis       || 0);
-                if (gram   > 0) { results.push({ label: 'HAS ALTIN', flag: '🔶', price: gram,   chg: 0, unit: '₺/g' }); goldFetched = true; }
-                if (ceyrek > 0) { results.push({ label: 'ÇEYREK',    flag: '🪙', price: ceyrek, chg: 0, unit: '₺'   }); goldFetched = true; }
-                if (yarim  > 0) { results.push({ label: 'YARIM',     flag: '🪙', price: yarim,  chg: 0, unit: '₺'   }); goldFetched = true; }
-                if (tam    > 0) { results.push({ label: 'TAM ALTIN', flag: '🪙', price: tam,    chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (gram   > 0) { results.push({ label: 'HAS ALTIN', flag: '🥇', price: gram,   chg: 0, unit: '₺/g' }); goldFetched = true; }
+                if (ceyrek > 0) { results.push({ label: 'ÇEYREK',    flag: '🥇', price: ceyrek, chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (yarim  > 0) { results.push({ label: 'YARIM',     flag: '🥇', price: yarim,  chg: 0, unit: '₺'   }); goldFetched = true; }
+                if (tam    > 0) { results.push({ label: 'TAM ALTIN', flag: '🥇', price: tam,    chg: 0, unit: '₺'   }); goldFetched = true; }
                 if (ons    > 0) { results.push({ label: 'ALTIN ONS', flag: '🥇', price: ons,    chg: 0, unit: '₺'   }); goldFetched = true; }
             }
         } catch(e) {}
 
         // Kaynak B: Altın fiyatları hesapla — USD/TRY döviz × ONS USD (Stooq/Yahoo'dan gelecek)
-        // Bu adım Stooq sonrası tamamlanacak (aşağıda hesap yapılacak)
+        // Bu adım Stooq/Yahoo sonrası tamamlanacak (aşağıda hesap yapılacak)
 
         // ── 3. Stooq CSV — birincil kaynak (BIST, endeksler, emtia) ────────────
-        // Stooq sembol → label mapping
         const stooqTargets = [
             { sym: 'xu100.pl',   label: 'BIST 100',   flag: '🇹🇷' },
             { sym: 'xu030.pl',   label: 'BIST 30',    flag: '🇹🇷' },
@@ -2237,7 +2230,7 @@
             { sym: '^cac',       label: 'CAC 40',     flag: '🇫🇷' },
             { sym: '^ftse',      label: 'FTSE 100',   flag: '🇬🇧' },
             { sym: '^stoxx50e',  label: 'EURO STOXX', flag: '🇪🇺' },
-            { sym: 'btc.v',      label: 'BTC/USD',    flag: '₿'   },
+            { sym: 'btc.v',      label: 'BTC/USD',    flag: '💎'  },
         ];
 
         // Zaten var olanları alma — Harem'den alınmışsa tekrar çekme
@@ -2260,7 +2253,7 @@
             } catch(e) {}
         }));
 
-        // ── 4. Yahoo Finance — Stooq'dan eksik kalanlar için yedek ────────────
+        // ── 4. Yahoo Finance v7 — Stooq'dan eksik kalanlar için yedek ───────────
         const yahooMap = [
             { yahoo: 'XU100.IS',  label: 'BIST 100'   },
             { yahoo: 'XU030.IS',  label: 'BIST 30'    },
@@ -2277,9 +2270,9 @@
         const stillMissing = yahooMap.filter(s => !results.find(r => r.label === s.label));
         if (stillMissing.length > 0) {
             try {
-                const syms    = stillMissing.map(s => s.yahoo).join(',');
-                const yUrl    = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
-                const yUrl2   = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
+                const syms  = stillMissing.map(s => s.yahoo).join(',');
+                const yUrl  = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
+                const yUrl2 = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
                 let yRes = await fetchWithProxy(yUrl, 10000) || await fetchWithProxy(yUrl2, 10000);
                 if (yRes) {
                     const yData  = await yRes.json();
@@ -2290,12 +2283,56 @@
                         const price = q.regularMarketPrice;
                         const chg   = q.regularMarketChangePercent || 0;
                         if (price && price > 0 && !results.find(r => r.label === sym.label)) {
-                            const flagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'₿' };
+                            const flagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'💎' };
                             results.push({ label: sym.label, flag: flagMap[sym.label] || '📊', price, chg });
                         }
                     });
                 }
             } catch(e) {}
+        }
+
+        // ── 4c. Yahoo Finance v8 chart — direkt + proxy race, son deneme ─────────
+        const stillMissing2 = yahooMap.filter(s => !results.find(r => r.label === s.label));
+        if (stillMissing2.length > 0) {
+            const v8FlagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'💎' };
+            await Promise.allSettled(stillMissing2.map(async s => {
+                try {
+                    const enc    = encodeURIComponent(s.yahoo);
+                    const direct1 = `https://query1.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
+                    const direct2 = `https://query2.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
+                    const proxy1  = `https://api.allorigins.win/raw?url=${encodeURIComponent(direct2)}`;
+                    const proxy2  = `https://corsproxy.io/?${encodeURIComponent(direct2)}`;
+
+                    const parseV8 = async (fetchPromise) => {
+                        const r = await fetchPromise;
+                        if (!r.ok) throw new Error('not_ok');
+                        const text = await r.text();
+                        if (!text || text.trim()[0] !== '{') throw new Error('not_json');
+                        const json = JSON.parse(text);
+                        const meta = json?.chart?.result?.[0]?.meta;
+                        if (!meta?.regularMarketPrice) throw new Error('no_price');
+                        return meta;
+                    };
+
+                    let meta = null;
+                    try {
+                        meta = await Promise.any([
+                            parseV8(fetch(direct1, { signal: AbortSignal.timeout(8000) })),
+                            parseV8(fetch(direct2, { signal: AbortSignal.timeout(8000) })),
+                            parseV8(fetch(proxy1,   { signal: AbortSignal.timeout(9000) })),
+                            parseV8(fetch(proxy2,   { signal: AbortSignal.timeout(9000) })),
+                        ]);
+                    } catch(e) {}
+
+                    if (!meta) return;
+                    const price = meta.regularMarketPrice;
+                    const prev  = meta.chartPreviousClose || meta.previousClose || price;
+                    const chg   = prev > 0 ? ((price - prev) / prev) * 100 : 0;
+                    if (price > 0 && !results.find(r2 => r2.label === s.label)) {
+                        results.push({ label: s.label, flag: v8FlagMap[s.label] || '📊', price, chg });
+                    }
+                } catch(e) {}
+            }));
         }
 
         // ── 4b. Altın TL hesabı — Harem başarısızsa ONS+döviz ile hesapla ───
@@ -2309,10 +2346,10 @@
                 const ceyrekTL = gramTL * 1.6066;  // 0.25 altın = ~1.6066 gram (22 ayar)
                 const yarimTL  = gramTL * 3.2133;
                 const tamTL    = gramTL * 6.4266;
-                if (gramTL > 0)   results.push({ label: 'HAS ALTIN', flag: '🔶', price: Math.round(gramTL),   chg: onsItem.chg, unit: '₺/g' });
-                if (ceyrekTL > 0) results.push({ label: 'ÇEYREK',    flag: '🪙', price: Math.round(ceyrekTL), chg: onsItem.chg, unit: '₺' });
-                if (yarimTL > 0)  results.push({ label: 'YARIM',     flag: '🪙', price: Math.round(yarimTL),  chg: onsItem.chg, unit: '₺' });
-                if (tamTL > 0)    results.push({ label: 'TAM ALTIN', flag: '🪙', price: Math.round(tamTL),    chg: onsItem.chg, unit: '₺' });
+                if (gramTL > 0)   results.push({ label: 'HAS ALTIN', flag: '🥇', price: Math.round(gramTL),   chg: onsItem.chg, unit: '₺/g' });
+                if (ceyrekTL > 0) results.push({ label: 'ÇEYREK',    flag: '🥇', price: Math.round(ceyrekTL), chg: onsItem.chg, unit: '₺' });
+                if (yarimTL > 0)  results.push({ label: 'YARIM',     flag: '🥇', price: Math.round(yarimTL),  chg: onsItem.chg, unit: '₺' });
+                if (tamTL > 0)    results.push({ label: 'TAM ALTIN', flag: '🥇', price: Math.round(tamTL),    chg: onsItem.chg, unit: '₺' });
             }
         }
 
@@ -2350,8 +2387,8 @@
         orionTickerCache = ordered;
         orionTickerTime  = now;
         try {
-            localStorage.setItem('orion_ticker_cache', JSON.stringify(ordered));
-            localStorage.setItem('orion_ticker_time', now.toString());
+            localStorage.setItem('orion_ticker_cache_v2', JSON.stringify(ordered));
+            localStorage.setItem('orion_ticker_time_v2', now.toString());
         } catch(e) {}
         renderOrionTicker(ordered);
         if (document.getElementById('marketDataPanel')) loadMarketDataPanel();
@@ -2361,6 +2398,11 @@
     function renderOrionTicker(items) {
         const track = document.getElementById('orion-ticker-track');
         if (!track) return;
+        // Orion wrap'ı görünür yap
+        const orionWrap = document.getElementById('orion-ticker-wrap');
+        if (orionWrap && orionWrap.style.display === 'none') {
+            orionWrap.style.display = 'flex';
+        }
         if (!items || items.length === 0) {
             track.innerHTML = '<div class="orion-tick-loading" style="color:var(--amber);">⚠️ Piyasa verisi alınamadı</div>';
             return;
@@ -2444,8 +2486,8 @@
     }
 
     function loadTheme() {
-        const saved = localStorage.getItem('portfoy_theme');
-        if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        // Tek tema: koyu (dark). Light tema kaldırıldı.
+        localStorage.removeItem('portfoy_theme');
     }
 
     // --- VERİTABANI BAŞLATICI VE GLOBAL DEĞİŞKENLER ---
@@ -2542,8 +2584,15 @@
             const sentUrl = `https://finnhub.io/api/v1/news-sentiment?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
             const profUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${encodeURIComponent(isBIST ? symbol+'.IS' : symbol)}&token=${FINNHUB_KEY}`;
 
-            // Quote: proxy zinciriyle dene
+            // Quote: Yahoo v8 direkt çalışıyor (CORS açık) — proxy gerekmez
             const quoteFetch = async () => {
+                for (const url of [quoteUrl, quoteUrl2]) {
+                    try {
+                        const r = await fetch(url, { signal: AbortSignal.timeout(12000) });
+                        if (r.ok) return await r.json();
+                    } catch(e) {}
+                }
+                // Fallback: proxy zinciriyle dene
                 for (const url of [quoteUrl, quoteUrl2]) {
                     const r = await fetchWithProxy(url, 12000);
                     if (r) { try { return await r.json(); } catch(e) {} }
@@ -2625,17 +2674,201 @@
                 prof.weburl = profRes.value.weburl || null;
             }
 
-            renderHisseAnaliziResult(symbol, news, sent, prof, quote);
+            // Dış veri geldiyse göster, gelmezse portföy içi moda geç
+            if (quote && quote.price > 0) {
+                renderHisseAnaliziResult(symbol, news, sent, prof, quote);
+            } else {
+                renderPortfoyIciAnaliz(symbol, resultEl);
+            }
 
         } catch(e) {
-            resultEl.innerHTML = `<div style="text-align:center; padding:40px; color:var(--red);">
-                <div style="font-size:28px; margin-bottom:12px;">⚠️</div>
-                <div style="font-weight:700;">Bağlantı Hatası</div>
-                <div style="margin-top:8px; font-size:12px; color:var(--t3);">${e.message}</div>
-            </div>`;
+            // Bağlantı hatası — portföy içi moda geç
+            renderPortfoyIciAnaliz(symbol, resultEl);
         }
     }
 
+    // ── Portföy İçi Analiz — dış API'sız, localStorage verisinden ──────────
+        // ORION Yatirim Danismani â€” Portfoy Ici AI Analiz
+    function renderPortfoyIciAnaliz(symbol, resultEl) {
+        const sym = symbol.toUpperCase().trim();
+        const cats = ['bist','emtia','nasdaq','avrupa','fon'];
+        const fmt = (n,d=2) => (n==null||isNaN(Number(n))) ? '\u2014' : new Intl.NumberFormat('tr-TR',{minimumFractionDigits:d,maximumFractionDigits:d}).format(Number(n));
+        const fmtTL = (n) => { const v=Number(n)||0; const c=v>0?'#10b981':v<0?'#ef4444':'#8BA6CC'; return '<span style="color:'+c+';font-weight:800;">'+(v>0?'+':'')+fmt(v)+' \u20ba</span>'; };
+        const pctFmt = (n) => { const v=Number(n)||0; const c=v>0?'#10b981':v<0?'#ef4444':'#8BA6CC'; return '<span style="color:'+c+';font-weight:800;">'+(v>0?'+':'')+fmt(v)+'%</span>'; };
+
+        let allRecords = [];
+        cats.forEach(cat => {
+            try {
+                const db = JSON.parse(localStorage.getItem('my_'+cat+'_v9') || '{}');
+                Object.entries(db).forEach(([date,rows]) => {
+                    (rows||[]).forEach(r => { if ((r.varlik||'').toUpperCase()===sym) allRecords.push({...r,cat,date}); });
+                });
+            } catch(e) {}
+        });
+        let tradeRecords = [];
+        try {
+            tradeRecords = (JSON.parse(localStorage.getItem('my_trade_data_v9')||'[]'))
+                .filter(d => (d.hisse||'').toUpperCase()===sym);
+        } catch(e) {}
+
+        if (allRecords.length===0 && tradeRecords.length===0) {
+            resultEl.innerHTML = '<div style="text-align:center;padding:60px 20px;"><div style="font-size:48px;margin-bottom:16px;">\ud83d\udd0d</div><div style="font-size:16px;font-weight:800;color:var(--t1);margin-bottom:8px;">'+sym+' Portf\u00f6y\u00fcn\u00fczde Bulunamad\u0131</div><div style="font-size:12px;color:var(--t3);max-width:320px;margin:0 auto;line-height:1.6;">Bu sembol portf\u00f6y kay\u0131tlar\u0131n\u0131zda yer alm\u0131yor. L\u00fctfen portf\u00f6y\u00fcn\u00fczde kay\u0131tl\u0131 bir hisse sembol\u00fc girin.</div></div>';
+            return;
+        }
+
+        const aktifler    = allRecords.filter(r => !r.isSatildi);
+        const satilmislar = allRecords.filter(r =>  r.isSatildi);
+
+        const toplamMaliyet = aktifler.reduce((s,r) => s+(Number(r.alisTutari)||0), 0);
+        const toplamDeger   = aktifler.reduce((s,r) => s+(Number(r.guncelTutar)||0), 0);
+        const acikKarTL     = toplamDeger - toplamMaliyet;
+        const acikKarPct    = toplamMaliyet > 0 ? (acikKarTL/toplamMaliyet)*100 : 0;
+        const kapaliKar     = satilmislar.reduce((s,r) => s+(Number(r.karTL)||0), 0);
+        const tradeKar      = tradeRecords.filter(d=>!d.isBekliyor).reduce((s,d) => s+(Number(d.karTL)||0), 0);
+        const toplamKar     = acikKarTL + kapaliKar + tradeKar;
+
+        const toplamAdet = aktifler.reduce((s,r) => s+(Number(r.adet)||0), 0);
+        const maliyetOrtalama = toplamAdet > 0 ? toplamMaliyet/toplamAdet : 0;
+        const guncelFiyat     = toplamAdet > 0 ? toplamDeger/toplamAdet   : 0;
+
+        const portfoyPayi = (() => {
+            let genelToplam = 0;
+            cats.forEach(cat => {
+                try {
+                    const db = JSON.parse(localStorage.getItem('my_'+cat+'_v9')||'{}');
+                    Object.values(db).forEach(rows => (rows||[]).forEach(r => { if(!r.isSatildi) genelToplam += Number(r.guncelTutar)||0; }));
+                } catch(e) {}
+            });
+            return genelToplam > 0 ? (toplamDeger/genelToplam)*100 : 0;
+        })();
+
+        // AI Sinyal
+        const signal = (() => {
+            if (acikKarPct >= 30) return { text:'G\u00dc\u00c7L\u00dc TUT \/ K\u0130SM\u0130 SATI\u015e', color:'#10b981', icon:'\ud83d\udc8e', risk:'D\u00dc\u015e\u00dcK', puan:92 };
+            if (acikKarPct >= 15) return { text:'TUT',                         color:'#10b981', icon:'\u2705',         risk:'D\u00dc\u015e\u00dcK', puan:78 };
+            if (acikKarPct >= 5)  return { text:'TUT \/ BEKLE',                 color:'#22c55e', icon:'\ud83d\udfe2',    risk:'D\u00dc\u015e\u00dcK', puan:65 };
+            if (acikKarPct >= 0)  return { text:'BEKLE \/ \u0130ZLE',            color:'#f59e0b', icon:'\u23f3',         risk:'ORTA',   puan:52 };
+            if (acikKarPct >= -10) return { text:'D\u0130KKAT \/ ORTALAMA',     color:'#f59e0b', icon:'\u26a0\ufe0f',   risk:'ORTA',   puan:38 };
+            if (acikKarPct >= -20) return { text:'ZARARLI POZ\u0130SYON',       color:'#ef4444', icon:'\ud83d\udd34',   risk:'Y\u00dcKSEK', puan:22 };
+            return { text:'ZARAR KES',                                           color:'#ef4444', icon:'\ud83d\udea8',   risk:'\u00c7OK Y\u00dcKSEK', puan:8 };
+        })();
+
+        const riskRenk = { 'D\u00dc\u015e\u00dcK':'#10b981', 'ORTA':'#f59e0b', 'Y\u00dcKSEK':'#ef4444', '\u00c7OK Y\u00dcKSEK':'#8b5cf6' }[signal.risk] || '#8BA6CC';
+
+        // AI Yorumlar
+        const yorumlar = [];
+        if (acikKarPct >= 25) {
+            yorumlar.push('Pozisyonunuz g\u00fc\u00e7l\u00fc kazan\u00e7 b\u00f6lgesinde (%'+fmt(acikKarPct,1)+'). K\u0131smi k\u00e2r realizasyonu (\u00f6nerilen: pozisyonun %30-50\'si) ile riski azaltabilirsiniz.');
+            yorumlar.push('Kalan pozisyonu maliyet + %'+Math.max(10,Math.round(acikKarPct*0.4))+' seviyesinde stop-loss ile koruyun.');
+        } else if (acikKarPct >= 10) {
+            yorumlar.push('Pozisyon karl\u0131 seyrediyor (%'+fmt(acikKarPct,1)+'). Mevcut seviyede tutmaya devam edin.');
+            yorumlar.push('Maliyetinizin %'+Math.round(acikKarPct*0.5)+' alt\u0131na stop-loss koyarak k\u00e2r\u0131n bir k\u0131sm\u0131n\u0131 koruyun.');
+        } else if (acikKarPct >= 0) {
+            yorumlar.push('Pozisyon k\u00e2r\/zarar s\u0131n\u0131r\u0131nda (%'+fmt(acikKarPct,1)+'). Piyasa hareketlerini yak\u0131ndan takip edin.');
+            yorumlar.push('Ortalama maliyet seviyeniz ('+fmt(maliyetOrtalama)+' \u20ba) \u00f6nemli bir destek noktas\u0131 olarak de\u011ferlendirilebilir.');
+        } else if (acikKarPct >= -10) {
+            yorumlar.push('Pozisyon zararda (%'+fmt(acikKarPct,1)+') ancak toparlanma ihtimali var. Ortalama d\u00fc\u015f\u00fcrme f\u0131rsat\u0131 de\u011ferlendirilebilir.');
+            yorumlar.push('Mevcut zararÄ±n %'+Math.abs(acikKarPct).toFixed(1)+' daha b\u00fcy\u00fcmesi durumunda pozisyonu yeniden de\u011ferlendirin.');
+        } else if (acikKarPct >= -20) {
+            yorumlar.push('\u00d6nemli bir zarar var (%'+fmt(acikKarPct,1)+'). Ortalama d\u00fc\u015f\u00fcrme yapmadan \u00f6nce \u015firketi tekrar de\u011ferlendirin.');
+            yorumlar.push('Portf\u00f6y riskini azaltmak ad\u0131na pozisyon k\u00fc\u00e7\u00fcltme d\u00fc\u015f\u00fcn\u00fclebilir.');
+        } else {
+            yorumlar.push('Derin zararda bir pozisyon (%'+fmt(acikKarPct,1)+'). Zarar kesme stratejisi ile daha b\u00fcy\u00fck kay\u0131plar\u0131n \u00f6n\u00fcne ge\u00e7ilebilir.');
+            yorumlar.push('Bu seviyede ortalama d\u00fc\u015f\u00fcrme riski art\u0131r\u0131r. Net bir \u00e7\u0131k\u0131\u015f stratejisi belirleyin.');
+        }
+        if (portfoyPayi > 30) yorumlar.push('Bu hisse portf\u00f6y\u00fcn\u00fcz\u00fcn %'+fmt(portfoyPayi,1)+'\'ini olu\u015fturuyor \u2014 yo\u011funla\u015fma riski! \u00c7e\u015fitlendirilmi\u015f bir portf\u00f6y i\u00e7in oran d\u00fc\u015f\u00fcrme \u00f6nerilir.');
+        else if (portfoyPayi > 15) yorumlar.push('Portf\u00f6y a\u011f\u0131rl\u0131\u011f\u0131 %'+fmt(portfoyPayi,1)+'. Makul bir konsantrasyon, takibi s\u00fcrd\u00fcr\u00fcn.');
+        else if (portfoyPayi > 0) yorumlar.push('Portf\u00f6y a\u011f\u0131rl\u0131\u011f\u0131 %'+fmt(portfoyPayi,1)+'. \u0130yi \u00e7e\u015fitlendirilmi\u015f bir pozisyon.');
+        if (toplamAdet > 0 && maliyetOrtalama > 0) yorumlar.push('Ort. maliyet: '+fmt(maliyetOrtalama)+' \u20ba \u00b7 G\u00fcncel birim: '+fmt(guncelFiyat)+' \u20ba \u00b7 '+toplamAdet.toLocaleString('tr-TR')+' adet aktif pozisyon.');
+        if (kapaliKar > 0) yorumlar.push('Bu hisseden ge\u00e7mi\u015fte '+fmt(kapaliKar)+' \u20ba k\u00e2r realize ettiniz \u2014 ba\u015far\u0131l\u0131 bir ge\u00e7mi\u015finiz var.');
+        else if (kapaliKar < 0) yorumlar.push('Ge\u00e7mi\u015fte '+fmt(Math.abs(kapaliKar))+' \u20ba zarar realize edildi. Mevcut pozisyonun y\u00f6netimine \u00f6zen g\u00f6sterin.');
+
+        const icons = ['\ud83d\udca1','\ud83d\udccc','\u26a1','\ud83c\udfaf','\ud83d\udcca','\ud83d\udd14','\ud83d\udee1\ufe0f'];
+
+        resultEl.innerHTML = '<div style="padding:4px 0;">'
+
+        // Baslik + sinyal karti
+        + '<div style="display:flex;align-items:stretch;gap:12px;margin-bottom:16px;flex-wrap:wrap;">'
+        + '<div style="flex:1;min-width:220px;background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));border:1px solid rgba(59,130,246,0.25);border-radius:var(--r-lg);padding:18px 20px;">'
+        + '<div style="display:flex;align-items:center;gap:12px;">'
+        + '<div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(59,130,246,0.25),rgba(139,92,246,0.25));display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#3b82f6;border:1px solid rgba(59,130,246,0.3);flex-shrink:0;">'+sym.charAt(0)+'</div>'
+        + '<div>'
+        + '<div style="font-size:22px;font-weight:900;color:var(--t1);letter-spacing:1px;">'+sym+'</div>'
+        + '<div style="font-size:10px;color:var(--t3);font-weight:600;margin-top:3px;letter-spacing:.5px;">\ud83e\udd16 ORION AI \u00b7 YATIRIM DANI\u015eMANI ANALÄ°ZÄ°</div>'
+        + '<div style="font-size:10px;color:var(--t3);margin-top:2px;">'+aktifler.length+' aktif \u00b7 '+satilmislar.length+' kapal\u0131 \u00b7 '+tradeRecords.length+' al-sat kayd\u0131</div>'
+        + '</div></div></div>'
+        + '<div style="min-width:180px;background:rgba(0,0,0,0.2);border:2px solid '+signal.color+';border-radius:var(--r-lg);padding:18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">'
+        + '<div style="font-size:28px;margin-bottom:6px;">'+signal.icon+'</div>'
+        + '<div style="font-size:11px;font-weight:900;color:'+signal.color+';letter-spacing:.8px;">'+signal.text+'</div>'
+        + '<div style="font-size:9px;color:var(--t3);margin-top:4px;font-weight:700;">R\u0130SK: <span style="color:'+riskRenk+';">'+signal.risk+'</span></div>'
+        + '<div style="margin-top:8px;width:100%;height:4px;background:var(--surface-4);border-radius:2px;overflow:hidden;"><div style="height:100%;width:'+signal.puan+'%;background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981);border-radius:2px;"></div></div>'
+        + '<div style="font-size:9px;color:var(--t3);margin-top:3px;">Skor: '+signal.puan+'/100</div>'
+        + '</div></div>'
+
+        // Metrik kartlar
+        + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px;">'
+        + (toplamMaliyet>0 ? '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.8px;margin-bottom:5px;">TOPLAM MALÄ°YET</div><div style="font-size:13px;font-weight:900;color:var(--t1);font-family:var(--mono);">'+fmt(toplamMaliyet)+' \u20ba</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">'+fmt(toplamAdet,0)+' adet</div></div>' : '')
+        + (toplamDeger>0  ? '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.8px;margin-bottom:5px;">GÃœNCEL DEÄER</div><div style="font-size:13px;font-weight:900;color:var(--t1);font-family:var(--mono);">'+fmt(toplamDeger)+' \u20ba</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">Portf\u00f6y pay\u0131: %'+fmt(portfoyPayi,1)+'</div></div>' : '')
+        + '<div style="background:var(--surface-3);border:1px solid var(--border-hi);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.8px;margin-bottom:5px;">AÃ‡IK K/Z</div><div style="font-size:13px;font-family:var(--mono);">'+fmtTL(acikKarTL)+'</div><div style="font-size:10px;margin-top:2px;">'+pctFmt(acikKarPct)+'</div></div>'
+        + (kapaliKar!==0 ? '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.8px;margin-bottom:5px;">KAPALI K/Z</div><div style="font-size:13px;font-family:var(--mono);">'+fmtTL(kapaliKar)+'</div></div>' : '')
+        + (tradeKar!==0  ? '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:var(--t3);letter-spacing:.8px;margin-bottom:5px;">AL-SAT K/Z</div><div style="font-size:13px;font-family:var(--mono);">'+fmtTL(tradeKar)+'</div></div>' : '')
+        + '<div style="background:var(--surface-3);border:2px solid rgba(139,92,246,0.3);border-radius:var(--r);padding:12px 14px;"><div style="font-size:9px;font-weight:800;color:#8b5cf6;letter-spacing:.8px;margin-bottom:5px;">TOPLAM K/Z</div><div style="font-size:14px;font-family:var(--mono);font-weight:900;">'+fmtTL(toplamKar)+'</div></div>'
+        + '</div>'
+
+        // AI yorum bolumu
+        + '<div style="background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(139,92,246,0.05));border:1px solid rgba(59,130,246,0.2);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:14px;">'
+        + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">'
+        + '<div style="font-size:16px;">\ud83e\udd16</div>'
+        + '<div style="font-size:11px;font-weight:900;color:#3b82f6;letter-spacing:.8px;">ORION AI \u00b7 YATIRIM DANI\u015eMANI G\u00d6R\u00dc\u015eLER\u0130</div>'
+        + '</div>'
+        + yorumlar.map((y,i) => '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);"><div style="font-size:14px;flex-shrink:0;margin-top:1px;">'+(icons[i]||'\u2022')+'</div><div style="font-size:12px;color:var(--t2);line-height:1.65;font-weight:500;">'+y+'</div></div>').join('')
+        + '</div>'
+
+        // Pozisyon gecmisi tablosu
+        + (allRecords.length > 0 ?
+          '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:12px;">'
+          + '<div style="padding:10px 16px;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;color:var(--blue);letter-spacing:1px;">\ud83d\udccb POZ\u0130SYON GEÃ‡MÄ°ÅÄ° ('+allRecords.length+' kay\u0131t)</div>'
+          + '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:11px;">'
+          + '<thead><tr style="background:var(--surface-4);">'
+          + '<th style="padding:7px 10px;text-align:left;color:var(--t3);font-weight:700;">TARÄ°H</th>'
+          + '<th style="padding:7px 10px;text-align:left;color:var(--t3);font-weight:700;">KAT.</th>'
+          + '<th style="padding:7px 10px;text-align:right;color:var(--t3);font-weight:700;">ADET</th>'
+          + '<th style="padding:7px 10px;text-align:right;color:var(--t3);font-weight:700;">MALÄ°YET</th>'
+          + '<th style="padding:7px 10px;text-align:right;color:var(--t3);font-weight:700;">K/Z</th>'
+          + '<th style="padding:7px 10px;text-align:center;color:var(--t3);font-weight:700;">DURUM</th>'
+          + '</tr></thead><tbody>'
+          + [...allRecords].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,12).map(r =>
+              '<tr style="border-bottom:1px solid var(--border);">'
+              + '<td style="padding:7px 10px;color:var(--t2);">'+r.date+'</td>'
+              + '<td style="padding:7px 10px;color:var(--blue);font-weight:800;text-transform:uppercase;">'+r.cat+'</td>'
+              + '<td style="padding:7px 10px;text-align:right;font-family:var(--mono);">'+fmt(r.adet,0)+'</td>'
+              + '<td style="padding:7px 10px;text-align:right;font-family:var(--mono);">'+fmt(r.alisTutari||r.maliyet)+'</td>'
+              + '<td style="padding:7px 10px;text-align:right;">'+fmtTL(Number(r.karTL)||0)+'</td>'
+              + '<td style="padding:7px 10px;text-align:center;"><span style="font-size:9px;font-weight:800;padding:2px 7px;border-radius:4px;background:'+(r.isSatildi?'rgba(245,158,11,0.12)':'rgba(16,185,129,0.12)')+';color:'+(r.isSatildi?'#f59e0b':'#10b981')+';"> '+(r.isSatildi?'SATILDI':'AKTÄ°F')+'</span></td>'
+              + '</tr>'
+            ).join('')
+          + '</tbody></table></div></div>'
+        : '')
+
+        // Al-Sat gecmisi
+        + (tradeRecords.length > 0 ?
+          '<div style="background:var(--surface-3);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;">'
+          + '<div style="padding:10px 16px;border-bottom:1px solid var(--border);font-size:10px;font-weight:800;color:var(--amber);letter-spacing:1px;">\u26a1 AL-SAT GEÃ‡MÄ°ÅÄ° ('+tradeRecords.length+' i\u015flem)</div>'
+          + '<div style="padding:10px 14px;">'
+          + tradeRecords.map(d =>
+              '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:11px;flex-wrap:wrap;gap:4px;">'
+              + '<span style="color:var(--t2);">'+d.tarih+'</span>'
+              + '<span style="color:'+(d.isBekliyor?'#38BDF8':'var(--t1)')+';font-weight:700;">'+(d.isBekliyor?'BEKLÄ°YOR':'TAMAMLANDI')+'</span>'
+              + '<span style="color:var(--t2);">'+fmt(d.adet,0)+' adet \u00b7 '+fmt(d.alis)+' \u20ba</span>'
+              + '<span>'+(d.isBekliyor?'\u2014':fmtTL(Number(d.karTL)))+'</span>'
+              + '</div>'
+            ).join('')
+          + '<div style="padding-top:8px;text-align:right;font-size:12px;font-weight:800;">Al-Sat Toplam: '+fmtTL(tradeKar)+'</div>'
+          + '</div></div>'
+        : '')
+
+        + '</div>';
+    }
     function renderHisseAnaliziResult(symbol, news, sent, prof, quote = {}) {
         let resultEl = document.getElementById('hisseAnaliziResult');
         const fmtN = (n, dec=2) => n != null && !isNaN(n)
@@ -2964,22 +3197,21 @@
         const topLosers = [...sortedByKarList].reverse().filter(a => a.kar < 0).slice(0,3);
 
         // Tema renk paleti
-        const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
-        const siriusBg        = isLightTheme ? 'linear-gradient(135deg, rgba(240,248,255,0.95) 0%, rgba(220,235,255,0.92) 100%)' : 'linear-gradient(135deg, #080A0F 0%, #0D1117 100%)';
-        const siriusHeaderBg  = isLightTheme ? 'linear-gradient(90deg, rgba(245,158,11,0.10) 0%, rgba(139,92,246,0.07) 50%, rgba(59,130,246,0.07) 100%)' : 'linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(59,130,246,0.1) 100%)';
-        const siriusText      = isLightTheme ? '#0F172A' : '#EFF4FF';
-        const siriusTextSub   = isLightTheme ? 'rgba(30,58,95,0.55)' : 'rgba(255,255,255,0.4)';
-        const siriusCardBg    = isLightTheme ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.03)';
-        const siriusCardBorder= isLightTheme ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.07)';
-        const siriusDivider   = isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
-        const siriusItemBg    = isLightTheme ? 'rgba(255,255,255,0.50)' : 'rgba(255,255,255,0.03)';
-        const siriusItemText  = isLightTheme ? '#0F172A' : '#ffffff';
-        const siriusSubText   = isLightTheme ? '#475569' : 'rgba(255,255,255,0.4)';
+        const siriusBg        = 'linear-gradient(135deg, #080A0F 0%, #0D1117 100%)';
+        const siriusHeaderBg  = 'linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(139,92,246,0.1) 50%, rgba(59,130,246,0.1) 100%)';
+        const siriusText      = '#EFF4FF';
+        const siriusTextSub   = 'rgba(255,255,255,0.4)';
+        const siriusCardBg    = 'rgba(255,255,255,0.03)';
+        const siriusCardBorder= 'rgba(255,255,255,0.07)';
+        const siriusDivider   = 'rgba(255,255,255,0.05)';
+        const siriusItemBg    = 'rgba(255,255,255,0.03)';
+        const siriusItemText  = '#ffffff';
+        const siriusSubText   = 'rgba(255,255,255,0.4)';
 
         // Modal arka planını güncelle
         const siriusModalEl = document.getElementById('siriusModalContent');
         if (siriusModalEl) {
-            siriusModalEl.style.background = isLightTheme ? 'rgba(240,248,255,0.95)' : '#080A0F';
+            siriusModalEl.style.background = '#080A0F';
         }
 
         // Modal HTML — Modern, detaylı, scrollable
@@ -3131,11 +3363,11 @@
                         maintainAspectRatio: false, 
                         plugins: { legend: { display: false } }, 
                         scales: {
-                            y: { beginAtZero: true, grid: {color: isLightTheme ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)'}, ticks: { color: isLightTheme ? '#475569' : '#94A3B8', font: {size: 10, family: "'Inter', sans-serif"} } },
+                            y: { beginAtZero: true, grid: {color: 'rgba(255,255,255,0.05)'}, ticks: { color: '#94A3B8', font: {size: 10, family: "'Inter', sans-serif"} } },
                             x: {
                                 grid: {display:false},
                                 ticks: {
-                                    color: isLightTheme ? '#334155' : '#cbd5e1',
+                                    color: '#cbd5e1',
                                     font: {weight:800, size: 10, family: "'Inter', sans-serif"},
                                     maxRotation: 0, // <-- DÜZ YAZI İÇİN BURASI
                                     minRotation: 0, // <-- DÜZ YAZI İÇİN BURASI
@@ -3175,7 +3407,7 @@
                             data: cData,
                             backgroundColor: cColors,
                             borderWidth: 2,
-                            borderColor: isLightTheme ? 'rgba(240,248,255,0.95)' : '#080A0F',
+                            borderColor: '#080A0F',
                             hoverOffset: 4
                         }]
                     },
@@ -3183,7 +3415,7 @@
                         maintainAspectRatio: false,
                         cutout: '65%',
                         plugins: {
-                            legend: { position: 'right', labels: { color: isLightTheme ? '#334155' : '#cbd5e1', font: {size: 10, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 10 } }
+                            legend: { position: 'right', labels: { color: '#cbd5e1', font: {size: 10, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 10 } }
                         }
                     }
                 });
@@ -3419,11 +3651,10 @@
         if(window.chartAssetTrend) { try{window.chartAssetTrend.destroy();}catch(e){} }
         if(window.chartAssetPie) { try{window.chartAssetPie.destroy();}catch(e){} }
 
-        const isDarkModal = document.documentElement.getAttribute('data-theme') !== 'light';
-        const mTickColor  = isDarkModal ? '#64748B' : '#94A3B8';
-        const mGridColor  = isDarkModal ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.06)';
-        const mLegendColor= isDarkModal ? '#8BA6CC' : '#334155';
-        const mBorderColor= isDarkModal ? '#111827' : '#ffffff';
+        const mTickColor  = '#64748B';
+        const mGridColor  = 'rgba(255,255,255,0.05)';
+        const mLegendColor= '#8BA6CC';
+        const mBorderColor= '#111827';
         
         const trendCanvas = document.getElementById('assetTrendChart');
         if (!trendCanvas) { document.getElementById('assetDetailModal').classList.add('active'); return; }
@@ -3982,12 +4213,11 @@
     function applySmartDiff() {
         let dailyData = window._dailyExcelData; if(!dailyData) return;
         let dates = Object.keys(dailyData).sort(); let totalItems = Object.values(dailyData).reduce((s,arr)=>s+arr.length, 0);
-        if (!confirm(`⚠️ Excel'deki ${totalItems} kayıt sisteme entegre edilecek. Mevcut geçmişiniz korunacak. Devam edilsin mi?`)) return;
+        if (!confirm(`⚠️ Excel'deki ${totalItems} kayıt sisteme entegre edilecek. Mevcut geçmişiniz korunacak, yeni verilerle birleştirilecek. Devam edilsin mi?`)) return;
 
-        dates.forEach(date => {
-            let uniqueCatsInFile = new Set(dailyData[date].map(item => item.cat));
-            uniqueCatsInFile.forEach(cat => { let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; db[date] = []; localStorage.setItem(`my_${cat}_v9`, JSON.stringify(db)); });
-        });
+        // Mevcut verileri SİLMEDEN sadece eksik tarihleri/kayıtları ekle
+        // Aynı tarihe ait mevcut kayıtlar korunur, Excel'den gelen yeni tarihler eklenir
+        // NOT: Burada db[date]=[] YAPILMAZ — merge loop aşağıda yapılır
 
         let previousState = {}; let firstUploadDate = dates[0];
         assetCategories.forEach(cat => {
@@ -3998,34 +4228,58 @@
         for (let date of dates) {
             let currentDayAssets = dailyData[date]; let currentState = {};
             for (let item of currentDayAssets) {
-                let cat = item.cat; let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; if(!db[date]) db[date] = [];
+                let cat = item.cat;
+                let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+                if (!db[date]) db[date] = [];
+
+                // MERGE: Bu tarihte bu varlık zaten kayıtlıysa tekrar ekleme — güncelle
+                const existingIdx = db[date].findIndex(r => r.varlik === item.varlik && !r.isSatildi);
+
                 let prevItem = previousState[item.varlik];
                 if (prevItem && Number(item.adet) < prevItem.adet) {
-                    let soldAdet = prevItem.adet - Number(item.adet); let sellPrice = Number(item.guncel); let satisMaliyeti = soldAdet * prevItem.maliyet; let satisTutari = soldAdet * sellPrice;
-                    db[date].push({ id: Date.now() + Math.random(), varlik: item.varlik, adet: soldAdet, maliyet: prevItem.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satisMaliyeti, guncelTutar: satisTutari, karTL: satisTutari - satisMaliyeti, karYuzde: satisMaliyeti > 0 ? ((satisTutari - satisMaliyeti) / satisMaliyeti) * 100 : 0 });
+                    // Adet azalmış → satış kaydı ekle (sadece daha önce eklenmemişse)
+                    const satisVar = db[date].some(r => r.varlik === item.varlik && r.isSatildi);
+                    if (!satisVar) {
+                        let soldAdet = prevItem.adet - Number(item.adet); let sellPrice = Number(item.guncel);
+                        let satisMaliyeti = soldAdet * prevItem.maliyet; let satisTutari = soldAdet * sellPrice;
+                        db[date].push({ id: Date.now() + Math.random(), varlik: item.varlik, adet: soldAdet, maliyet: prevItem.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satisMaliyeti, guncelTutar: satisTutari, karTL: satisTutari - satisMaliyeti, karYuzde: satisMaliyeti > 0 ? ((satisTutari - satisMaliyeti) / satisMaliyeti) * 100 : 0 });
+                    }
                 }
                 if (item.adet > 0) {
                     let alisTutari  = Number(item.maliyet) > 0 ? (Number(item.adet) * Number(item.maliyet)) : (Number(item.toplamDeger) || Number(item.adet) * Number(item.guncel));
                     let guncelTutar = Number(item.toplamDeger) || (Number(item.adet) * Number(item.guncel));
                     let karTL; if (item.tabloKar !== null && item.tabloKar !== undefined && !isNaN(item.tabloKar)) { karTL = Number(item.tabloKar); } else { karTL = guncelTutar - alisTutari; }
                     let karYuzde = alisTutari > 0 ? (karTL / alisTutari) * 100 : 0;
-                    db[date].push({ id: Date.now() + Math.random(), varlik: item.varlik, adet: item.adet, maliyet: item.maliyet, guncel: item.guncel, satis: 0, isSatildi: false, alisTutari, guncelTutar, karTL, karYuzde });
+                    const newRecord = { id: Date.now() + Math.random(), varlik: item.varlik, adet: item.adet, maliyet: item.maliyet, guncel: item.guncel, satis: 0, isSatildi: false, alisTutari, guncelTutar, karTL, karYuzde };
+                    if (existingIdx >= 0) {
+                        // Zaten var → güncelle (eski kaydı koru, sadece fiyat/değer güncelle)
+                        db[date][existingIdx] = { ...db[date][existingIdx], guncel: item.guncel, guncelTutar, karTL, karYuzde };
+                    } else {
+                        // Yeni kayıt — ekle
+                        db[date].push(newRecord);
+                    }
                 }
                 currentState[item.varlik] = { adet: item.adet, maliyet: item.maliyet, guncel: item.guncel, cat: cat };
                 localStorage.setItem(`my_${cat}_v9`, JSON.stringify(db));
             }
             for (let vName in previousState) {
                 if (!currentState[vName]) {
-                    let p = previousState[vName]; let db = JSON.parse(localStorage.getItem(`my_${p.cat}_v9`)) || {}; if(!db[date]) db[date] = [];
-                    let sellPrice = p.guncel; let satisTutari = p.adet * sellPrice; let satisMaliyeti = p.adet * p.maliyet;
-                    db[date].push({ id: Date.now() + Math.random(), varlik: vName, adet: p.adet, maliyet: p.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satisMaliyeti, guncelTutar: satisTutari, karTL: satisTutari - satisMaliyeti, karYuzde: satisMaliyeti > 0 ? ((satisTutari - satisMaliyeti) / satisMaliyeti) * 100 : 0 });
-                    localStorage.setItem(`my_${p.cat}_v9`, JSON.stringify(db));
+                    let p = previousState[vName];
+                    let db = JSON.parse(localStorage.getItem(`my_${p.cat}_v9`)) || {};
+                    if (!db[date]) db[date] = [];
+                    // Satış kaydı zaten eklenmemişse ekle
+                    const satisVar = db[date].some(r => r.varlik === vName && r.isSatildi);
+                    if (!satisVar) {
+                        let sellPrice = p.guncel; let satisTutari = p.adet * sellPrice; let satisMaliyeti = p.adet * p.maliyet;
+                        db[date].push({ id: Date.now() + Math.random(), varlik: vName, adet: p.adet, maliyet: p.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satisMaliyeti, guncelTutar: satisTutari, karTL: satisTutari - satisMaliyeti, karYuzde: satisMaliyeti > 0 ? ((satisTutari - satisMaliyeti) / satisMaliyeti) * 100 : 0 });
+                        localStorage.setItem(`my_${p.cat}_v9`, JSON.stringify(db));
+                    }
                 }
             }
             previousState = currentState;
         }
         let lastDate = dates[dates.length - 1]; assetCategories.forEach(cat => { let el = document.getElementById(`${cat}DateFilter`); if (el) el.value = lastDate; });
-        alert(`✅ Aktarım tamamlandı!`); location.reload();
+        alert(`✅ Aktarım tamamlandı! ${Object.values(dailyData).reduce((s,a)=>s+a.length,0)} kayıt mevcut verilerle birleştirildi.`); location.reload();
     }
 
     function exportCategoryToExcel(type) {
@@ -4629,9 +4883,8 @@
 
         if (typeof Chart !== 'undefined') {
             if (chartKar) { try { chartKar.destroy(); } catch(e){} chartKar = null; }
-            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-            const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-            const tickColor = isDark ? '#64748B' : '#94A3B8';
+            const gridColor = 'rgba(255,255,255,0.05)';
+            const tickColor = '#64748B';
             
             chartKar = new Chart(document.getElementById('karChart').getContext('2d'), {
                 type: 'bar',
@@ -4669,7 +4922,7 @@
                     datasets: [{ 
                         data: [portfoyGuncelDeğer.bist, portfoyGuncelDeğer.emtia, portfoyGuncelDeğer.fon, portfoyGuncelDeğer.nasdaq, portfoyGuncelDeğer.avrupa], 
                         backgroundColor: ['rgba(16,185,129,0.85)', 'rgba(59,130,246,0.85)', 'rgba(245,158,11,0.85)', 'rgba(139,92,246,0.85)', 'rgba(236,72,153,0.85)'],
-                        borderWidth: 2, borderColor: isDark ? 'var(--surface-2)' : '#fff',
+                        borderWidth: 2, borderColor: 'var(--surface-2)',
                         hoverOffset: 6
                     }] 
                 },
@@ -4719,9 +4972,8 @@
         
         if (typeof Chart !== 'undefined') {
             if(chartYillikTrend) { try { chartYillikTrend.destroy(); } catch(e){} chartYillikTrend = null; }
-            const isDark2 = document.documentElement.getAttribute('data-theme') !== 'light';
-            const gc2 = isDark2 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)';
-            const tc2 = isDark2 ? '#64748B' : '#94A3B8';
+            const gc2 = 'rgba(255,255,255,0.05)';
+            const tc2 = '#64748B';
             chartYillikTrend = new Chart(document.getElementById('yillikTrendChart').getContext('2d'), {
                 type: 'line',
                 data: { 
@@ -4859,12 +5111,10 @@
             if (varlik) openAssetDetail(type, varlik);
         });
 
-        // TradingView devre dışı — sadece Orion Ticker
-        buildTradingViewTicker();
-        // Orion Ticker'ı başlat
-        setTimeout(() => fetchOrionTicker(false), 500);
+        // Orion Ticker — Yahoo Finance v8, CORS açık, tüm endeksler dahil
+        fetchOrionTicker(true);
         // 15 dakikada bir otomatik güncelle
-        setInterval(() => fetchOrionTicker(false), 15 * 60 * 1000);
+        setInterval(() => fetchOrionTicker(true), 15 * 60 * 1000);
 
         setTimeout(() => refreshAllMarketData(), 1500);
 
@@ -4933,33 +5183,33 @@
     }
 
     function registerUser() {
-        const email = document.getElementById('authEmail').value;
-        const pass = document.getElementById('authPassword').value;
-        const err = document.getElementById('authError');
-        if(!email || !pass) { err.innerText = "Lütfen e-posta ve şifre girin."; return; }
-        if(pass.length < 6) { err.innerText = "Şifre en az 6 hane olmalıdır."; return; }
-        
+        const email = (document.getElementById('authEmailReg') || document.getElementById('authEmail')).value.trim();
+        const pass  = (document.getElementById('authPasswordReg') || document.getElementById('authPassword')).value;
+        const pass2El = document.getElementById('authPasswordReg2');
+        const pass2 = pass2El ? pass2El.value : pass;
+        const err   = document.getElementById('authError');
+        if (!email || !pass) { err.style.color = 'var(--red)'; err.innerText = "Lütfen e-posta ve şifre girin."; return; }
+        if (pass.length < 6) { err.style.color = 'var(--red)'; err.innerText = "Şifre en az 6 karakter olmalıdır."; return; }
+        if (pass2El && pass !== pass2) { err.style.color = 'var(--red)'; err.innerText = "Şifreler eşleşmiyor."; return; }
         err.style.color = "var(--t3)"; err.innerText = "Kayıt yapılıyor...";
-        
         auth.createUserWithEmailAndPassword(email, pass)
-        .then(() => { err.style.color = "var(--green)"; err.innerText = "Kayıt başarılı! Giriş yapabilirsiniz."; })
-        .catch((error) => {
-            err.style.color = "var(--red)";
-            err.innerText = "Hata: " + (error.code === 'auth/email-already-in-use' ? "Bu e-posta zaten kayıtlı." : error.message);
-        });
+            .then(() => { err.style.color = "var(--green)"; err.innerText = "✅ Kayıt başarılı! Giriş yapabilirsiniz."; showAuthTab('login'); })
+            .catch((error) => {
+                err.style.color = "var(--red)";
+                err.innerText = error.code === 'auth/email-already-in-use' ? "Bu e-posta zaten kayıtlı." :
+                                error.code === 'auth/invalid-email'        ? "Geçersiz e-posta adresi."  : error.message;
+            });
     }
 
     function loginUser() {
-        const email = document.getElementById('authEmail').value;
-        const pass = document.getElementById('authPassword').value;
-        const err = document.getElementById('authError');
-        if(!email || !pass) { err.innerText = "Lütfen e-posta ve şifre girin."; return; }
-        
+        const email = document.getElementById('authEmail').value.trim();
+        const pass  = document.getElementById('authPassword').value;
+        const err   = document.getElementById('authError');
+        if (!email || !pass) { err.style.color = 'var(--red)'; err.innerText = "Lütfen e-posta ve şifre girin."; return; }
         err.style.color = "var(--t3)"; err.innerText = "Giriş yapılıyor...";
-
         auth.signInWithEmailAndPassword(email, pass)
-        .then(() => { err.style.color = "var(--green)"; err.innerText = "Başarılı!"; })
-        .catch((error) => { err.style.color = "var(--red)"; err.innerText = "Hata: E-posta veya şifre yanlış."; });
+            .then(() => { err.style.color = "var(--green)"; err.innerText = "✅ Başarılı!"; })
+            .catch(() => { err.style.color = "var(--red)"; err.innerText = "E-posta veya şifre hatalı."; });
     }
 
     function logoutUser() {
@@ -4984,12 +5234,8 @@
                 isSyncingFromCloud = true;
                 let changed = false;
 
-                Object.keys(localStorage).forEach(key => {
-                    if (key.startsWith('my_') && !data[key]) {
-                        originalRemoveItem.call(localStorage, key);
-                        changed = true;
-                    }
-                });
+                // Cloud'da olmayan local verileri silme — sadece cloud'dan gelen yeni/güncel verileri uygula
+                // (Silinmesi gereken verileri yalnızca explicit logout sırasında sil)
 
                 Object.keys(data).forEach(key => {
                     let normalized = normalizeData(data[key]);
