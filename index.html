@@ -2660,10 +2660,10 @@ function showAuthTab(tab) {
     let chartVarlik = null; let chartKar = null; let chartYillikTrend = null; let chartAssetTrend = null;
     let editingId = null; let editingType = null; let editingDate = null;
 
-    assetCategories.forEach(cat => { if (!localStorage.getItem(`my_${cat}_v9`)) localStorage.setItem(`my_${cat}_v9`, JSON.stringify({})); });
-    if (!localStorage.getItem('my_trade_data_v9')) localStorage.setItem('my_trade_data_v9', JSON.stringify([]));
-    if (!localStorage.getItem('my_arz_data_v9')) localStorage.setItem('my_arz_data_v9', JSON.stringify([]));
-    if (!localStorage.getItem('my_temettu_data_v9')) localStorage.setItem('my_temettu_data_v9', JSON.stringify([]));
+    assetCategories.forEach(cat => { if (!localStorage.getItem(`my_${cat}_v9`)) saveData(`my_${cat}_v9`, {}); });
+    if (!localStorage.getItem('my_trade_data_v9')) saveData('my_trade_data_v9', []);
+    if (!localStorage.getItem('my_arz_data_v9')) saveData('my_arz_data_v9', []);
+    if (!localStorage.getItem('my_temettu_data_v9')) saveData('my_temettu_data_v9', []);
 
     // --- FORMATLAMA FONKSİYONLARI ---
     function formatNumberStr(num) {
@@ -3650,7 +3650,7 @@ function showAuthTab(tab) {
             db.push({ id: Date.now() + Math.random(), tarih, piyasa, hisse, adet, alis, satis: isBekliyor ? null : satis, alisTutari, satisTutari, karTL, karYuzde, isBekliyor });
         }
 
-        localStorage.setItem('my_trade_data_v9', JSON.stringify(db));
+        saveData('my_trade_data_v9', db);
         
         document.getElementById('tradeHisse').value = ''; document.getElementById('tradeAdet').value = '';
         document.getElementById('tradeAlisFiyat').value = ''; document.getElementById('tradeSatisFiyat').value = '';
@@ -3698,7 +3698,7 @@ function showAuthTab(tab) {
             db.push({ id: Date.now() + Math.random(), tarih, hisse, adet, maliyet, satis, alisTutari, satisTutari, karTL, karYuzde });
         }
 
-        localStorage.setItem('my_arz_data_v9', JSON.stringify(db));
+        saveData('my_arz_data_v9', db);
         
         document.getElementById('arzHisse').value = ''; document.getElementById('arzAdet').value = '';
         document.getElementById('arzMaliyet').value = ''; document.getElementById('arzSatis').value = '';
@@ -3724,7 +3724,7 @@ function showAuthTab(tab) {
             db.push({ id: Date.now() + Math.random(), tarih, hisse, netTutar: net });
         }
 
-        localStorage.setItem('my_temettu_data_v9', JSON.stringify(db));
+        saveData('my_temettu_data_v9', db);
         
         document.getElementById('temettuHisse').value = ''; document.getElementById('temettuNet').value = '';
         updateHisseListesi(); renderTemettu(); updateDashboard(); renderToplamKar();
@@ -3737,7 +3737,7 @@ function showAuthTab(tab) {
             let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
             if(db[date]) {
                 db[date] = db[date].filter(d => String(d.id) !== String(id));
-                localStorage.setItem(`my_${type}_v9`, JSON.stringify(db));
+                saveData(`my_${type}_v9`, db);
                 renderAsset(type);
             }
         } else {
@@ -3985,9 +3985,9 @@ function showAuthTab(tab) {
         let imported = 0;
         records.forEach(r => {
             let cat = "bist"; if(isEmtia(r.varlik)) cat = "emtia"; else if(r.varlik.length === 3 && !r.varlik.includes('.')) cat = "fon";
-            if (r.islem === 'TEMETTU') { let db = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || []; db.push({ id: Date.now() + Math.random(), tarih: r.tarih, hisse: r.varlik, netTutar: r.fiyat }); localStorage.setItem('my_temettu_data_v9', JSON.stringify(db)); imported++; } 
-            else if (r.islem === 'SATIS') { executeFIFO_Sell(cat, r.tarih, r.varlik, r.adet, r.fiyat); imported++; } 
-            else { let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; if(!db[r.tarih]) db[r.tarih] = []; let aTut = r.adet * r.fiyat; db[r.tarih].push({ id: Date.now() + Math.random(), varlik: r.varlik, adet: r.adet, maliyet: r.fiyat, guncel: r.fiyat, satis: 0, isSatildi: false, alisTutari: aTut, guncelTutar: aTut, karTL: 0, karYuzde: 0 }); localStorage.setItem(`my_${cat}_v9`, JSON.stringify(db)); imported++; }
+            if (r.islem === 'TEMETTU') { let db = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || []; db.push({ id: Date.now() + Math.random(), tarih: r.tarih, hisse: r.varlik, netTutar: r.fiyat }); saveData('my_temettu_data_v9', db); imported++; }
+            else if (r.islem === 'SATIS') { executeFIFO_Sell(cat, r.tarih, r.varlik, r.adet, r.fiyat); imported++; }
+            else { let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; if(!db[r.tarih]) db[r.tarih] = []; let aTut = r.adet * r.fiyat; db[r.tarih].push({ id: Date.now() + Math.random(), varlik: r.varlik, adet: r.adet, maliyet: r.fiyat, guncel: r.fiyat, satis: 0, isSatildi: false, alisTutari: aTut, guncelTutar: aTut, karTL: 0, karYuzde: 0 }); saveData(`my_${cat}_v9`, db); imported++; }
         });
         alert(`✅ ${imported} adet işlem başarıyla portföye aktarıldı ve FIFO ile kâr realize edildi!`); location.reload();
     }
@@ -4071,7 +4071,7 @@ function showAuthTab(tab) {
                     }
                 }
                 currentState[item.varlik] = { adet: item.adet, maliyet: item.maliyet, guncel: item.guncel, cat: cat };
-                localStorage.setItem(`my_${cat}_v9`, JSON.stringify(db));
+                saveData(`my_${cat}_v9`, db);
             }
             for (let vName in previousState) {
                 if (!currentState[vName]) {
@@ -4083,7 +4083,7 @@ function showAuthTab(tab) {
                     if (!satisVar) {
                         let sellPrice = p.guncel; let satisTutari = p.adet * sellPrice; let satisMaliyeti = p.adet * p.maliyet;
                         db[date].push({ id: Date.now() + Math.random(), varlik: vName, adet: p.adet, maliyet: p.maliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: satisMaliyeti, guncelTutar: satisTutari, karTL: satisTutari - satisMaliyeti, karYuzde: satisMaliyeti > 0 ? ((satisTutari - satisMaliyeti) / satisMaliyeti) * 100 : 0 });
-                        localStorage.setItem(`my_${p.cat}_v9`, JSON.stringify(db));
+                        saveData(`my_${p.cat}_v9`, db);
                     }
                 }
             }
@@ -4283,7 +4283,7 @@ function showAuthTab(tab) {
                 }
             }
         }
-        localStorage.setItem(`my_${cat}_v9`, JSON.stringify(db)); return true;
+        saveData(`my_${cat}_v9`, db); return true;
     }
 
     function saveMasterForm() {
@@ -4319,17 +4319,17 @@ function showAuthTab(tab) {
             let data = JSON.parse(localStorage.getItem('my_trade_data_v9')) || []; let isBekliyor = tSatis <= 0;
             if(masterEditingId) { let idx = data.findIndex(d => String(d.id) === String(masterEditingId)); if(idx > -1) data[idx] = { id: masterEditingId, tarih: tTarih, piyasa: data[idx].piyasa, hisse: tVarlik, adet: tAdet, alis: tMaliyet, satis: isBekliyor ? null : tSatis, alisTutari: tAdet*tMaliyet, satisTutari: isBekliyor?0:tAdet*tSatis, karTL: isBekliyor?0:(tAdet*tSatis)-(tAdet*tMaliyet), karYuzde: isBekliyor?0:(((tSatis-tMaliyet)/tMaliyet)*100), isBekliyor }; } 
             else { data.push({ id: Date.now() + Math.random(), tarih: tTarih, piyasa: 'BIST', hisse: tVarlik, adet: tAdet, alis: tMaliyet, satis: isBekliyor ? null : tSatis, alisTutari: tAdet*tMaliyet, satisTutari: isBekliyor?0:tAdet*tSatis, karTL: isBekliyor?0:(tAdet*tSatis)-(tAdet*tMaliyet), karYuzde: isBekliyor?0:(((tSatis-tMaliyet)/tMaliyet)*100), isBekliyor }); }
-            localStorage.setItem('my_trade_data_v9', JSON.stringify(data));
+            saveData('my_trade_data_v9', data);
         } else if (cat === 'arz') {
             let data = JSON.parse(localStorage.getItem('my_arz_data_v9')) || [];
             if(masterEditingId) { let idx = data.findIndex(d => String(d.id) === String(masterEditingId)); if(idx > -1) data[idx] = { id: masterEditingId, tarih: tTarih, hisse: tVarlik, adet: tAdet, maliyet: tMaliyet, satis: tSatis, alisTutari: tAdet*tMaliyet, satisTutari: tAdet*tSatis, karTL: (tAdet*tSatis)-(tAdet*tMaliyet), karYuzde: ((tSatis-tMaliyet)/tMaliyet)*100 }; } 
             else { data.push({ id: Date.now() + Math.random(), tarih: tTarih, hisse: tVarlik, adet: tAdet, maliyet: tMaliyet, satis: tSatis, alisTutari: tAdet*tMaliyet, satisTutari: tAdet*tSatis, karTL: (tAdet*tSatis)-(tAdet*tMaliyet), karYuzde: ((tSatis-tMaliyet)/tMaliyet)*100 }); }
-            localStorage.setItem('my_arz_data_v9', JSON.stringify(data));
+            saveData('my_arz_data_v9', data);
         } else if (cat === 'temettu') {
             let data = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || [];
             if(masterEditingId) { let idx = data.findIndex(d => String(d.id) === String(masterEditingId)); if(idx > -1) data[idx] = { id: masterEditingId, tarih: tTarih, hisse: tVarlik, netTutar: tMaliyet }; } 
             else { data.push({ id: Date.now() + Math.random(), tarih: tTarih, hisse: tVarlik, netTutar: tMaliyet }); }
-            localStorage.setItem('my_temettu_data_v9', JSON.stringify(data));
+            saveData('my_temettu_data_v9', data);
         }
         resetMasterForm(); renderIslemGecmisi(); updateHisseListesi(); updateDashboard(); assetCategories.forEach(c => renderAsset(c)); renderTrade(); renderArz(); renderTemettu(); renderToplamKar();
     }
@@ -4986,6 +4986,31 @@ function showAuthTab(tab) {
     const originalRemoveItem = Storage.prototype.removeItem.bind(localStorage);
     const originalGetItem    = Storage.prototype.getItem.bind(localStorage);
 
+    // Merkezi veri kaydetme fonksiyonu — hem localStorage hem Firebase'e yazar
+    function saveData(key, value) {
+        const strVal = (typeof value === 'string') ? value : JSON.stringify(value);
+        originalSetItem(key, strVal);
+        if (!key.startsWith('my_')) return;
+        if (isSyncingFromCloud) return;
+        if (userRef) {
+            try { userRef.child(key).set(JSON.parse(strVal)); } catch(e) {}
+        } else {
+            pendingSyncQueue[key] = strVal;
+        }
+    }
+
+    // Merkezi veri silme fonksiyonu
+    function removeData(key) {
+        originalRemoveItem(key);
+        if (!key.startsWith('my_')) return;
+        if (isSyncingFromCloud) return;
+        if (userRef) {
+            userRef.child(key).remove();
+        } else {
+            pendingSyncQueue[key] = null;
+        }
+    }
+
     function normalizeData(val) {
         if (Array.isArray(val)) return val;
         if (val && typeof val === 'object') {
@@ -5108,29 +5133,8 @@ function showAuthTab(tab) {
         }
     });
 
-    // localStorage.setItem override — her my_ yazımını anında Firebase'e ilet
-    localStorage.setItem = function(key, value) {
-        originalSetItem(key, value);
-        if (key.startsWith('my_') && !isSyncingFromCloud) {
-            if (userRef) {
-                try { userRef.child(key).set(JSON.parse(value)); } catch(e) {}
-            } else {
-                // Henüz login olmadı — kuyruğa ekle
-                pendingSyncQueue[key] = value;
-            }
-        }
-    };
-
-    localStorage.removeItem = function(key) {
-        originalRemoveItem(key);
-        if (key.startsWith('my_') && !isSyncingFromCloud) {
-            if (userRef) {
-                userRef.child(key).remove();
-            } else {
-                pendingSyncQueue[key] = null;
-            }
-        }
-    };
+    // saveData ve removeData fonksiyonları tüm my_ yazımlarını yönetiyor.
+    // localStorage override artık kullanılmıyor.
 </script>
 </body>
 </html>
