@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -4962,13 +4962,13 @@ function showAuthTab(tab) {
 
 <script>
     const firebaseConfig = {
-        apiKey: "AIzaSyDflDPLKU5UvsvWnAygAdsI0TjqR8qwUSM",
-        authDomain: "kpss-2026-ec46f.firebaseapp.com",
-        databaseURL: "https://kpss-2026-ec46f-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "kpss-2026-ec46f",
-        storageBucket: "kpss-2026-ec46f.firebasestorage.app",
-        messagingSenderId: "1077675000074",
-        appId: "1:1077675000074:web:9c10cdf2ceb38abd2b7af3"
+        apiKey: "AIzaSyA47r6aJ7MqwUmmHCtiE5qt1a1N5wY9L60",
+        authDomain: "orion-7b644.firebaseapp.com",
+        databaseURL: "https://orion-7b644-default-rtdb.firebaseio.com",
+        projectId: "orion-7b644",
+        storageBucket: "orion-7b644.firebasestorage.app",
+        messagingSenderId: "714846189618",
+        appId: "1:714846189618:web:7e5a46d7fc906ae966e42b"
     };
 
     if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
@@ -5067,37 +5067,11 @@ function showAuthTab(tab) {
 
             userRef = cloudDB.ref('orion_users/' + user.uid);
 
-            // İlk bağlantıda cloud → local sync (tek seferlik)
-            userRef.once('value', (snapshot) => {
-                const data = snapshot.val() || {};
-                isSyncingFromCloud = true;
-                let changed = false;
+            let _firstSync = true;
 
-                Object.keys(data).forEach(key => {
-                    let normalized = normalizeData(data[key]);
-                    let cloudStr = JSON.stringify(normalized);
-                    if (originalGetItem(key) !== cloudStr) {
-                        originalSetItem(key, cloudStr);
-                        changed = true;
-                    }
-                });
-
-                isSyncingFromCloud = false;
-
-                // Login öncesi bekleyen local değişiklikleri gönder
-                flushPendingSync();
-
-                if (changed && typeof updateHisseListesi === 'function') {
-                    updateHisseListesi();
-                    ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
-                    renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
-                    updateDashboard();
-                }
-            });
-
-            // Gerçek zamanlı dinleme: başka cihazdan gelen değişiklikleri uygula
+            // Tek listener — ilk tetiklemede full sync + pending flush,
+            // sonrasında gerçek zamanlı değişiklikleri uygula
             userRef.on('value', (snapshot) => {
-                if (isSyncingFromCloud) return;
                 const data = snapshot.val() || {};
                 isSyncingFromCloud = true;
                 let changed = false;
@@ -5113,12 +5087,19 @@ function showAuthTab(tab) {
 
                 isSyncingFromCloud = false;
 
+                if (_firstSync) {
+                    _firstSync = false;
+                    // Login öncesi bekleyen yerel değişiklikleri Firebase'e gönder
+                    flushPendingSync();
+                } else if (changed) {
+                    toast('📡 Veriler güncellendi', 'info');
+                }
+
                 if (changed && typeof updateHisseListesi === 'function') {
                     updateHisseListesi();
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
                     renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
                     updateDashboard();
-                    toast('📡 Veriler güncellendi', 'info');
                 }
             });
 
