@@ -3641,7 +3641,7 @@ function showAuthTab(tab) {
                 id: Date.now() + Math.random(), varlik, adet, maliyet, guncel, satis, isSatildi,
                 alisTutari, guncelTutar, karTL, karYuzde
             });
-            localStorage.setItem(dbName, JSON.stringify(db));
+            saveData(dbName, db);
         }
 
         document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = '';
@@ -3774,7 +3774,7 @@ function showAuthTab(tab) {
             if(type==='trade') dbName = 'my_trade_data_v9';
             let db = JSON.parse(localStorage.getItem(dbName)) || [];
             db = db.filter(d => String(d.id) !== String(id));
-            localStorage.setItem(dbName, JSON.stringify(db));
+            saveData(dbName, db);
             if(type === 'trade') renderTrade();
             if(type === 'arz') renderArz();
             if(type === 'temettu') renderTemettu();
@@ -4145,11 +4145,11 @@ function showAuthTab(tab) {
         XLSX.writeFile(wb, `${type.toUpperCase()}_Cikti.xlsx`);
     }
 
-    function processJSONFile(file) { showImportStatus('⏳ JSON okunuyor...','loading'); const reader = new FileReader(); reader.onload = function(e){ try { const backup = JSON.parse(e.target.result); const keys = Object.keys(backup).filter(k=>k.startsWith('my_')); if(!keys.length){ showImportStatus('❌ Geçerli yedek değil.','error'); return; } Object.entries(backup).forEach(([k,v])=>localStorage.setItem(k,JSON.stringify(v))); alert('✅ Geri yüklendi!'); location.reload(); } catch(err){ showImportStatus('❌ Hata.','error'); } }; reader.readAsText(file,'UTF-8'); }
+    function processJSONFile(file) { showImportStatus('⏳ JSON okunuyor...','loading'); const reader = new FileReader(); reader.onload = function(e){ try { const backup = JSON.parse(e.target.result); const keys = Object.keys(backup).filter(k=>k.startsWith('my_')); if(!keys.length){ showImportStatus('❌ Geçerli yedek değil.','error'); return; } Object.entries(backup).forEach(([k,v])=>saveData(k, v)); alert('✅ Geri yüklendi!'); location.reload(); } catch(err){ showImportStatus('❌ Hata.','error'); } }; reader.readAsText(file,'UTF-8'); }
     function exportAllData() { const backup={}; Object.keys(localStorage).filter(k=>k.startsWith('my_')).forEach(k=>{ try{ backup[k]=JSON.parse(localStorage.getItem(k)); }catch(e){} }); const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'})); const a=document.createElement('a'); a.href=url; a.download=`portfoy_yedek_${new Date().toISOString().split('T')[0]}.json`; a.click(); URL.revokeObjectURL(url); }
     function showImportStatus(msg, type) { const c={loading:'var(--t3)',success:'var(--green)',error:'var(--red)'}; document.getElementById('importStatusMsg').innerHTML=`<div style="color:${c[type]};font-size:12px;font-weight:800;">${msg}</div>`; document.getElementById('importResultArea').style.display='block'; }
     function refreshDataSummary() { const cats=[{key:'my_bist_v9', label:'BIST', color:'var(--green)', t:'portfoy'}, {key:'my_emtia_v9', label:'EMTİA', color:'var(--blue)', t:'portfoy'}, {key:'my_fon_v9', label:'FONLAR', color:'var(--amber)', t:'portfoy'}, {key:'my_nasdaq_v9', label:'NASDAQ', color:'#A855F7', t:'portfoy'}, {key:'my_avrupa_v9', label:'AVRUPA', color:'#EC4899', t:'portfoy'}, {key:'my_trade_data_v9', label:'AL-SAT', color:'var(--t3)', t:'array'}, {key:'my_temettu_data_v9', label:'TEMETTÜ', color:'var(--green)', t:'array'}, {key:'my_arz_data_v9', label:'HALKA ARZ', color:'var(--blue)', t:'array'}]; document.getElementById('existingDataSummary').innerHTML = cats.map(c=>{ let count=0; try { const p=JSON.parse(localStorage.getItem(c.key)||'{}'); count = c.t==='portfoy' ? Object.values(p).reduce((s,a)=>s+a.length,0) : (p.length||0); } catch(e){} return `<div style="background:var(--surface-3);border:1px solid var(--border);border-left:4px solid ${c.color};border-radius:8px;padding:12px;"><div style="color:${c.color};font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:6px;">${c.label}</div><div style="font-size:20px;font-weight:800;font-family:var(--mono);">${count}</div></div>`; }).join(''); }
-    function confirmClearAll() { if(confirm('⚠️ TÜM VERİLER SİLİNECEK! Emin misiniz?')) { Object.keys(localStorage).filter(k=>k.startsWith('my_')).forEach(k=>localStorage.removeItem(k)); location.reload(); } }
+    function confirmClearAll() { if(confirm('⚠️ TÜM VERİLER SİLİNECEK! Emin misiniz?')) { const keys = Object.keys(localStorage).filter(k=>k.startsWith('my_')); keys.forEach(k=>{ localStorage.removeItem(k); if(window._orionSync && window._orionSync.ref){ try{ window._orionSync.ref.child(k).remove(); }catch(e){} } }); location.reload(); } }
 // ============================================================
     // HİSSE YAZINCA ÇIKAN HIZLI ASİSTAN RADARI
     // ============================================================
@@ -4337,11 +4337,11 @@ function showAuthTab(tab) {
                         else { oldRecord.guncelTutar = tAdet * tGuncel; if(tSatis > 0) { oldRecord.satis = tSatis; oldRecord.guncel = tSatis; oldRecord.isSatildi = true; oldRecord.guncelTutar = tAdet * tSatis; } }
                         oldRecord.alisTutari = tAdet * tMaliyet; oldRecord.karTL = Number(oldRecord.guncelTutar) - Number(oldRecord.alisTutari); oldRecord.karYuzde = (tAdet * tMaliyet) > 0 ? (oldRecord.karTL / (tAdet * tMaliyet)) * 100 : 0;
                     }
-                } localStorage.setItem(dbName, JSON.stringify(db));
+                } saveData(dbName, db);
             } else {
                 if (tSatis > 0 && tMaliyet === 0) { executeFIFO_Sell(cat, tTarih, tVarlik, tAdet, tSatis); } else {
                     let _alisTut = tAdet*tMaliyet; let _guncelTut = tSatis>0?tAdet*tSatis:tAdet*tGuncel; let _karTL = _guncelTut - _alisTut; let _karYuzde = tMaliyet>0 ? ((tSatis>0?tSatis:tGuncel)-tMaliyet)/tMaliyet*100 : 0;
-                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: _alisTut, guncelTutar: _guncelTut, karTL: _karTL, karYuzde: _karYuzde }); localStorage.setItem(dbName, JSON.stringify(db));
+                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: _alisTut, guncelTutar: _guncelTut, karTL: _karTL, karYuzde: _karYuzde }); saveData(dbName, db);
                 }
             }
         } else if (cat === 'trade') {
@@ -4553,7 +4553,7 @@ function showAuthTab(tab) {
         let prevData = db[dates[dates.length - 1]].filter(d => !d.isSatildi); if(prevData.length === 0) return;
         if(!db[date]) db[date] = [];
         prevData.forEach(item => { if(!db[date].find(d => d.varlik === item.varlik)) { let newItem = {...item}; newItem.id = Date.now() + Math.random(); db[date].push(newItem); } });
-        localStorage.setItem(dbName, JSON.stringify(db)); renderAsset(type); updateDashboard();
+        saveData(dbName, db); renderAsset(type); updateDashboard();
     }
 
     function saveEditAsset(type) {
@@ -4562,7 +4562,7 @@ function showAuthTab(tab) {
         if (!varlik || newAdet <= 0) return;
         let dbName = `my_${type}_v9`; let db = JSON.parse(localStorage.getItem(dbName)) || {}; let idx = db[editingDate].findIndex(d => String(d.id) === String(editingId)); if(idx === -1) return;
         let r = db[editingDate][idx]; r.varlik = varlik; r.adet = newAdet; r.maliyet = maliyet; r.guncel = guncel; r.alisTutari = newAdet*maliyet; r.guncelTutar = newAdet*guncel; r.karTL = r.guncelTutar - r.alisTutari; r.karYuzde = r.alisTutari > 0 ? (r.karTL/r.alisTutari)*100 : 0;
-        localStorage.setItem(dbName, JSON.stringify(db)); document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = ''; document.getElementById(type + 'Maliyet').value = ''; document.getElementById(type + 'Guncel').value = '';
+        saveData(dbName, db); document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = ''; document.getElementById(type + 'Maliyet').value = ''; document.getElementById(type + 'Guncel').value = '';
         let btn = document.getElementById(`btnEkleSat_${type}`); if(btn) { btn.innerHTML = "Ekle"; btn.setAttribute('onclick', `addAsset('${type}')`); btn.classList.remove('btn-warning'); btn.classList.add('btn-success'); }
         editingId = null; renderAsset(type); updateDashboard(); renderIslemGecmisi();
     }
