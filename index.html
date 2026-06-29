@@ -4236,6 +4236,35 @@ function showAuthTab(tab) {
         document.getElementById('quickAssetInfo').style.display = 'none';
     }
 
+    function deleteFromLedger(cat, varlik) {
+        if (!confirm(`"${varlik}" için TÜM kayıtlar silinecek! Emin misiniz?`)) return;
+        if (assetCategories.includes(cat)) {
+            let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+            Object.keys(db).forEach(date => {
+                db[date] = db[date].filter(d => d.varlik !== varlik);
+                if (db[date].length === 0) delete db[date];
+            });
+            saveData(`my_${cat}_v9`, db);
+            renderAsset(cat);
+        } else if (cat === 'trade') {
+            let db = JSON.parse(localStorage.getItem('my_trade_data_v9')) || [];
+            db = db.filter(d => d.hisse !== varlik);
+            saveData('my_trade_data_v9', db);
+            renderTrade();
+        } else if (cat === 'arz') {
+            let db = JSON.parse(localStorage.getItem('my_arz_data_v9')) || [];
+            db = db.filter(d => d.hisse !== varlik);
+            saveData('my_arz_data_v9', db);
+            renderArz();
+        } else if (cat === 'temettu') {
+            let db = JSON.parse(localStorage.getItem('my_temettu_data_v9')) || [];
+            db = db.filter(d => d.hisse !== varlik);
+            saveData('my_temettu_data_v9', db);
+            renderTemettu();
+        }
+        renderIslemGecmisi(); updateDashboard(); renderToplamKar(); updateHisseListesi();
+    }
+
     function editFromLedger(cat, varlik, sonTarih) {
         switchTab('ana-portfoy-tab');
         document.getElementById('masterCat').value = cat;
@@ -4532,6 +4561,7 @@ function showAuthTab(tab) {
                     <td style="display:flex; gap:4px; justify-content:center;">
                         <button class="btn-primary" style="padding:4px 8px; font-size:9px;" onclick="openAssetDetail('${r.cat==='trade'||r.cat==='arz'?'bist':r.cat}', '${r.varlik}')">İncele</button>
                         <button class="btn btn-warning" style="padding:4px 8px; font-size:9px; height:auto;" onclick="editFromLedger('${r.cat}', '${r.varlik}', '${r.sonTarih}')">Düzenle</button>
+                        <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="deleteFromLedger('${r.cat}', '${r.varlik}')">Sil</button>
                     </td>
                 </tr>`;
             });
