@@ -5069,33 +5069,31 @@ function showAuthTab(tab) {
 
             let _firstSync = true;
 
-            // Tek listener — ilk tetiklemede full sync + pending flush,
-            // sonrasında gerçek zamanlı değişiklikleri uygula
+            // Tek listener — Firebase'den her değişiklikte çalışır
             userRef.on('value', (snapshot) => {
                 const data = snapshot.val() || {};
                 isSyncingFromCloud = true;
-                let changed = false;
 
+                // Cloud'dan gelen tüm verileri localStorage'a yaz
                 Object.keys(data).forEach(key => {
-                    let normalized = normalizeData(data[key]);
-                    let cloudStr = JSON.stringify(normalized);
-                    if (originalGetItem(key) !== cloudStr) {
+                    try {
+                        let normalized = normalizeData(data[key]);
+                        let cloudStr = JSON.stringify(normalized);
                         originalSetItem(key, cloudStr);
-                        changed = true;
-                    }
+                    } catch(e) {}
                 });
 
                 isSyncingFromCloud = false;
 
                 if (_firstSync) {
                     _firstSync = false;
-                    // Login öncesi bekleyen yerel değişiklikleri Firebase'e gönder
                     flushPendingSync();
-                } else if (changed) {
+                } else {
                     toast('📡 Veriler güncellendi', 'info');
                 }
 
-                if (changed && typeof updateHisseListesi === 'function') {
+                // Her zaman UI'ı yenile
+                if (typeof updateHisseListesi === 'function') {
                     updateHisseListesi();
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
                     renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
