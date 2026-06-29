@@ -2655,6 +2655,35 @@ function showAuthTab(tab) {
     }
 
     // --- VERİTABANI BAŞLATICI VE GLOBAL DEĞİŞKENLER ---
+    // ── GLOBAL SYNC KÖPRÜSÜ ──────────────────────────────────────────
+    // Firebase bloğu daha sonra yüklendiği için window üzerinden erişilir.
+    // Firebase bloğu hazır olduğunda window._orionSync.ref ve .syncing set eder.
+    window._orionSync = { ref: null, syncing: false, queue: {} };
+
+    function saveData(key, value) {
+        const strVal = (typeof value === 'string') ? value : JSON.stringify(value);
+        localStorage.setItem(key, strVal);
+        if (!key.startsWith('my_')) return;
+        if (window._orionSync.syncing) return;
+        if (window._orionSync.ref) {
+            try { window._orionSync.ref.child(key).set(JSON.parse(strVal)); } catch(e) {}
+        } else {
+            window._orionSync.queue[key] = strVal;
+        }
+    }
+
+    function removeData(key) {
+        localStorage.removeItem(key);
+        if (!key.startsWith('my_')) return;
+        if (window._orionSync.syncing) return;
+        if (window._orionSync.ref) {
+            window._orionSync.ref.child(key).remove();
+        } else {
+            window._orionSync.queue[key] = null;
+        }
+    }
+    // ─────────────────────────────────────────────────────────────────
+
     const assetCategories = ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'];
     let masterEditingId = null; let masterEditingCat = null; let masterEditingDate = null;
     let chartVarlik = null; let chartKar = null; let chartYillikTrend = null; let chartAssetTrend = null;
@@ -4976,40 +5005,9 @@ function showAuthTab(tab) {
     const auth = firebase.auth();
 
     let currentUser = null;
-    let isSyncingFromCloud = false;
-    let userRef = null;
 
-    // Login öncesi yazılan verileri tutan kuyruk
-    const pendingSyncQueue = {};
-
-    const originalSetItem    = Storage.prototype.setItem.bind(localStorage);
-    const originalRemoveItem = Storage.prototype.removeItem.bind(localStorage);
-    const originalGetItem    = Storage.prototype.getItem.bind(localStorage);
-
-    // Merkezi veri kaydetme fonksiyonu — hem localStorage hem Firebase'e yazar
-    function saveData(key, value) {
-        const strVal = (typeof value === 'string') ? value : JSON.stringify(value);
-        originalSetItem(key, strVal);
-        if (!key.startsWith('my_')) return;
-        if (isSyncingFromCloud) return;
-        if (userRef) {
-            try { userRef.child(key).set(JSON.parse(strVal)); } catch(e) {}
-        } else {
-            pendingSyncQueue[key] = strVal;
-        }
-    }
-
-    // Merkezi veri silme fonksiyonu
-    function removeData(key) {
-        originalRemoveItem(key);
-        if (!key.startsWith('my_')) return;
-        if (isSyncingFromCloud) return;
-        if (userRef) {
-            userRef.child(key).remove();
-        } else {
-            pendingSyncQueue[key] = null;
-        }
-    }
+    // window._orionSync köprüsü — saveData() tarafından kullanılır
+    const _sync = window._orionSync;
 
     function normalizeData(val) {
         if (Array.isArray(val)) return val;
@@ -5024,17 +5022,17 @@ function showAuthTab(tab) {
 
     // Bekleyen tüm verileri Firebase'e gönder
     function flushPendingSync() {
-        if (!userRef) return;
-        Object.keys(pendingSyncQueue).forEach(key => {
+        if (!_sync.ref) return;
+        Object.keys(_sync.queue).forEach(key => {
             try {
-                const val = pendingSyncQueue[key];
+                const val = _sync.queue[key];
                 if (val === null) {
-                    userRef.child(key).remove();
+                    _sync.ref.child(key).remove();
                 } else {
-                    userRef.child(key).set(JSON.parse(val));
+                    _sync.ref.child(key).set(JSON.parse(val));
                 }
             } catch(e) { console.warn('pendingSync flush error', key, e); }
-            delete pendingSyncQueue[key];
+            delete _sync.queue[key];
         });
     }
 
@@ -5069,12 +5067,12 @@ function showAuthTab(tab) {
     }
 
     function logoutUser() {
-        if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) { 
-            isSyncingFromCloud = true; 
+        if(confirm("Güvenli çıkış yapmak istiyor musunuz?")) {
+            _sync.syncing = true;
             Object.keys(localStorage).filter(k => k.startsWith('my_')).forEach(k => {
-                originalRemoveItem.call(localStorage, k);
+                localStorage.removeItem(k);
             });
-            auth.signOut().then(() => { location.reload(); }); 
+            auth.signOut().then(() => { location.reload(); });
         }
     }
 
@@ -5082,7 +5080,6 @@ function showAuthTab(tab) {
         if (user) {
             currentUser = user;
             document.getElementById('authModal').classList.remove('active');
-            // Aktif kullanıcı etiketini göster
             const lbl = document.getElementById('activeUserLabel');
             if (lbl) {
                 lbl.textContent = '👤 ' + (user.email || user.uid.substring(0,8));
@@ -5090,25 +5087,24 @@ function showAuthTab(tab) {
             }
             toast('Hoş geldin ' + (user.email || '') + ', veriler eşitleniyor...', 'success');
 
-            userRef = cloudDB.ref('orion_users/' + user.uid);
+            _sync.ref = cloudDB.ref('orion_users/' + user.uid);
 
             let _firstSync = true;
 
             // Tek listener — Firebase'den her değişiklikte çalışır
-            userRef.on('value', (snapshot) => {
+            _sync.ref.on('value', (snapshot) => {
                 const data = snapshot.val() || {};
-                isSyncingFromCloud = true;
+                _sync.syncing = true;
 
                 // Cloud'dan gelen tüm verileri localStorage'a yaz
                 Object.keys(data).forEach(key => {
                     try {
                         let normalized = normalizeData(data[key]);
-                        let cloudStr = JSON.stringify(normalized);
-                        originalSetItem(key, cloudStr);
+                        localStorage.setItem(key, JSON.stringify(normalized));
                     } catch(e) {}
                 });
 
-                isSyncingFromCloud = false;
+                _sync.syncing = false;
 
                 if (_firstSync) {
                     _firstSync = false;
@@ -5128,13 +5124,10 @@ function showAuthTab(tab) {
 
         } else {
             currentUser = null;
-            userRef = null;
+            _sync.ref = null;
             document.getElementById('authModal').classList.add('active');
         }
     });
-
-    // saveData ve removeData fonksiyonları tüm my_ yazımlarını yönetiyor.
-    // localStorage override artık kullanılmıyor.
 </script>
 </body>
 </html>
