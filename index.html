@@ -71,13 +71,13 @@
         /* --- ENDEKS BAR & ORION TICKER --- */
         #endeks-bar {
             position: relative;
-            background: rgba(7, 11, 18, 0.08);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(15, 23, 42, 0.04);
+            border: 1px solid rgba(255,255,255,0.03);
             border-radius: var(--r-lg);
             overflow: hidden;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.01);
             margin-bottom: 8px;
             flex-shrink: 0;
         }
@@ -233,12 +233,12 @@
         /* ─── ANA KAPSAYICI ─── */
         .container {
             width: 100%; height: calc(100vh - 28px);
-            background: rgba(9, 13, 22, 0.22);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255,255,255,0.05);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.12) 0%, rgba(8, 12, 21, 0.08) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.04);
             border-radius: var(--r-xl);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.05);
+            box-shadow: inset 0 0 30px rgba(255,255,255,0.01), 0 20px 40px -10px rgba(0,0,0,0.30);
             padding: 12px 18px 10px;
             display: flex; flex-direction: column; gap: 0;
             overflow: hidden;
@@ -357,13 +357,13 @@
         #orionSidebarOverlay.active { display: block; opacity: 1; }
         #orionLeftSidebar {
             position: fixed; top: 0; left: -300px; width: 275px; height: 100vh;
-            background: rgba(8, 12, 21, 0.50);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            background: linear-gradient(135deg, rgba(8, 12, 21, 0.35) 0%, rgba(15, 23, 42, 0.20) 100%);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255,255,255,0.06);
             z-index: 10000; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; flex-direction: column; padding: 20px 16px;
-            box-shadow: 15px 0 45px rgba(0,0,0,0.45);
-            overflow-y: auto;
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.02), 15px 0 45px rgba(0,0,0,0.45);
+            overflow: hidden;
         }
         #orionLeftSidebar.open { left: 0; }
 
@@ -862,8 +862,8 @@
            MOBİL UYUMLULUK (RESPONSIVE) DÜZELTMELERİ
         ═══════════════════════════════════════════════════ */
 
-        /* ── ORTA EKRAN (1200px altı) ── */
-        @media (max-width: 1200px) {
+        /* ── ORTA EKRAN (1300px altı) ── */
+        @media (max-width: 1300px) {
             .charts-container {
                 flex-direction: column !important;
                 gap: 12px;
@@ -872,6 +872,20 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.25);
         }
 
         /* ── TABLET GENİŞ (900px altı) ── */
@@ -1343,7 +1357,7 @@
         <span class="orion-brand-name" style="font-size:18px; letter-spacing: 3px; color: #FFFFFF !important;">ORION</span>
         <button class="modal-close" style="position:absolute; top:8px; right:12px; font-size:24px; color:var(--t3); border:none; background:transparent; cursor:pointer; padding: 4px; transition:color 0.2s; line-height: 1;" onclick="toggleSidebar()" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t3)'" title="Menüyü Kapat">&times;</button>
     </div>
-    <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+    <div style="display:flex; flex-direction:column; gap:4px; width:100%; flex: 1; overflow-y: auto; padding-right: 4px; margin-bottom: 12px;" class="custom-scrollbar">
         <button class="sidebar-nav-btn active" data-tab="ozet-tab" onclick="switchTab('ozet-tab'); toggleSidebar()">📊 Özet</button>
         <button class="sidebar-nav-btn" data-tab="ana-portfoy-tab" onclick="switchTab('ana-portfoy-tab'); toggleSidebar()">📋 İşlem Defteri</button>
         <button class="sidebar-nav-btn" data-tab="bist-tab" onclick="switchTab('bist-tab'); toggleSidebar()">📈 BİST</button>
@@ -2135,6 +2149,19 @@ function showAuthTab(tab) {
         const localTime = new Date(localDate.getTime() - (offset * 60 * 1000));
         return localTime.toISOString().split('T')[0];
     }
+
+    function openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) modal.classList.add('active');
+    }
+    window.openModal = openModal;
+
+    function closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) modal.classList.remove('active');
+    }
+    window.closeModal = closeModal;
+
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
     // ============================================================
@@ -2808,7 +2835,10 @@ function showAuthTab(tab) {
         labelOrder.forEach(l => {
             const exists = results.find(r => r.label === l);
             if (!exists) {
-                const prevGoodVal = storedData.find(s => s.label === l);
+                let prevGoodVal = storedData.find(s => s.label === l);
+                if (!prevGoodVal) {
+                    prevGoodVal = ORION_DEFAULT_TICKER.find(d => d.label === l);
+                }
                 if (prevGoodVal) {
                     results.push(prevGoodVal);
                 }
