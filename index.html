@@ -17,6 +17,14 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: "Twemoji Country Flags";
+            src: url("https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill@0.1.8/dist/TwemojiCountryFlags.woff2") format("woff2");
+            unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0061-E007A, U+E007F;
+        }
+        .orion-flag {
+            font-family: "Twemoji Country Flags", "Inter", -apple-system, sans-serif !important;
+        }
         /* ═══════════════════════════════════════════════════
            PORTFÖY KOMUTA MERKEZİ  —  v6  PREMIUM DARK/LIGHT
         ═══════════════════════════════════════════════════ */
@@ -247,6 +255,13 @@
             display: flex; flex-direction: row; align-items: center; gap: 0; flex-shrink: 0;
             padding-top: 10px;
         }
+        .app-header .orion-brand {
+            visibility: hidden;
+            width: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
         .orion-brand-name {
             font-size: 26px;
             font-weight: 900;
@@ -303,14 +318,10 @@
         .mdc-chg.neg { color: #ef4444; background: rgba(239,68,68,0.12); }
         .mdc-chg.neu { color: var(--t3); background: rgba(255,255,255,0.06); }
 
-        /* ─── SEKMELER (ORTALANMIŞ VE RENKLENDİRİLMİŞ) ─── */
+        /* ─── SEKMELER (GİZLENDİ) ─── */
         .tabs {
-            display: flex; gap: 2px; flex-shrink: 0;
-            justify-content: center;
-            border-bottom: 2px solid var(--border);
-            margin-bottom: 8px; overflow-x: auto;
+            display: none !important;
         }
-        .tabs::-webkit-scrollbar { height: 0; }
         .tab-btn {
             padding: 7px 14px 7px;
             cursor: pointer; border: none; background: transparent;
@@ -323,35 +334,106 @@
             white-space: nowrap; font-family: inherit;
         }
         
-        .tab-btn[data-tab="ozet-tab"] { color: #38BDF8; }
-        .tab-btn[data-tab="ana-portfoy-tab"] { color: #F5A623; }
-        .tab-btn[data-tab="bist-tab"] { color: #10B981; }
-        .tab-btn[data-tab="emtia-tab"] { color: #FBBF24; }
-        .tab-btn[data-tab="fon-tab"] { color: #A78BFA; }
-        .tab-btn[data-tab="nasdaq-tab"] { color: #F472B6; }
-        .tab-btn[data-tab="avrupa-tab"] { color: #60A5FA; }
-        .tab-btn[data-tab="alsat-tab"] { color: #FB923C; }
-        .tab-btn[data-tab="temettu-tab"] { color: #34D399; }
-        .tab-btn[data-tab="halkaarz-tab"] { color: #818CF8; }
-        .tab-btn[data-tab="toplam-kar-tab"] { color: #E879F9; }
-        .tab-btn[data-tab="import-tab"] { color: #9CA3AF; }
-
-        .tab-btn:hover { background: rgba(255,255,255,0.04); filter: brightness(1.3); }
-        .tab-btn.active { 
-            border-bottom-color: currentColor; 
-            background: var(--surface-3); 
-            filter: brightness(1.2);
-            text-shadow: 0 0 12px currentColor;
+        /* Kullanıcı İsteği: Tüm başlıklar bembeyaz (#FFFFFF) olacak, sarı/pembe vs yok */
+        .tab-btn,
+        .tab-btn[data-tab] {
+            color: #FFFFFF !important;
         }
+
+        .tab-btn:hover { background: rgba(255,255,255,0.08); }
+        .tab-btn.active { 
+            border-bottom-color: #FFFFFF; 
+            background: var(--surface-3); 
+            text-shadow: 0 0 10px rgba(255,255,255,0.4);
+            color: #FFFFFF !important;
+        }
+
+        /* ─── SOL MENÜ (AÇILIR SIDEBAR DRAWER) ─── */
+        #orionSidebarOverlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.70);
+            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            z-index: 9999; display: none; opacity: 0; transition: opacity 0.3s ease;
+        }
+        #orionSidebarOverlay.active { display: block; opacity: 1; }
+        #orionLeftSidebar {
+            position: fixed; top: 0; left: -300px; width: 275px; height: 100vh;
+            background: rgba(8, 12, 21, 0.82);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-right: 1px solid rgba(255,255,255,0.08);
+            z-index: 10000; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex; flex-direction: column; padding: 20px 16px;
+            box-shadow: 15px 0 45px rgba(0,0,0,0.55);
+            overflow-y: auto;
+        }
+        #orionLeftSidebar.open { left: 0; }
+
+        @media (min-width: 901px) {
+            #orionSidebarOverlay {
+                display: none !important;
+            }
+            #orionLeftSidebar {
+                left: -275px;
+            }
+            #orionLeftSidebar.open {
+                left: 0;
+            }
+            .container {
+                transition: margin-left 0.3s ease, width 0.3s ease;
+            }
+            #orionLeftSidebar.open ~ .container {
+                margin-left: 275px;
+                width: calc(100% - 275px) !important;
+            }
+        }
+        .sidebar-nav-btn {
+            display: flex; align-items: center; gap: 12px; width: 100%;
+            padding: 12px 14px; background: transparent; border: 1px solid transparent;
+            border-radius: var(--r); color: #FFFFFF !important;
+            font-size: 13px; font-weight: 700; text-align: left; cursor: pointer;
+            transition: all 0.2s ease; margin-bottom: 5px; font-family: inherit;
+        }
+        .sidebar-nav-btn:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.18);
+            transform: translateX(4px);
+        }
+        .sidebar-nav-btn.active {
+            background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(139,92,246,0.28));
+            border-color: rgba(91,164,245,0.55);
+            box-shadow: 0 4px 15px rgba(59,130,246,0.25);
+            color: #FFFFFF !important;
+        }
+
         /* ─── TAB İÇERİKLERİ ─── */
         .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 8px; overflow: hidden; }
         .tab-content.active { display: flex; animation: fadeUp .3s cubic-bezier(.4,0,.2,1); }
         @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
-        /* Mobilde tab içerikleri scroll edilebilir */
+        
+        /* Mobilde ve Tablette hareket/scroll sorununu çözen kurallar */
         @media (max-width: 900px) {
+            html, body {
+                overflow-x: hidden !important;
+                overflow-y: auto !important;
+                height: auto !important;
+                min-height: 100% !important;
+                -webkit-overflow-scrolling: touch !important;
+                touch-action: pan-y !important;
+            }
+            .container {
+                height: auto !important;
+                min-height: 100vh !important;
+                overflow: visible !important;
+                padding-bottom: 60px !important;
+            }
             .tab-content { overflow: visible !important; min-height: unset !important; }
             .tab-content.active { overflow: visible !important; }
+            .table-responsive {
+                overflow-x: auto !important;
+                overflow-y: visible !important;
+                max-height: none !important;
+            }
         }
+
 
         /* ─── STAT KARTLARI ─── */
         .dashboard {
@@ -387,13 +469,15 @@
             text-transform: uppercase;
         }
         .stat-card .val {
-            font-size: 20px;
+            font-size: clamp(14px, 2.2vw, 20px);
             font-weight: 800;
             color: var(--t1);
             margin-bottom: 8px;
             font-family: var(--mono);
             letter-spacing: -.5px;
             line-height: 1.1;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .stat-list {
             font-size: 11px;
@@ -872,7 +956,7 @@
                 gap: 8px;
             }
             .stat-card { padding: 10px 12px !important; }
-            .stat-card .val { font-size: 16px !important; }
+            .stat-card .val { font-size: clamp(12px, 3.8vw, 16px) !important; }
             .stat-card .lbl { font-size: 10px !important; }
 
             /* Piyasa veri paneli */
@@ -1035,7 +1119,7 @@
             /* Dashboard */
             .dashboard { grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
             .stat-card { padding: 8px 10px !important; }
-            .stat-card .val { font-size: 14px !important; }
+            .stat-card .val { font-size: clamp(11px, 3.2vw, 14px) !important; }
             .stat-card .lbl { font-size: 9px !important; }
 
             /* Piyasa veri paneli */
@@ -1119,7 +1203,7 @@
             .market-data-panel { grid-template-columns: 1fr 1fr !important; }
             .ha-sent-grid { grid-template-columns: 1fr !important; }
             .ha-meta-grid { grid-template-columns: 1fr !important; }
-            .stat-card .val { font-size: 13px !important; }
+            .stat-card .val { font-size: clamp(10px, 3vw, 13px) !important; }
             .stat-card .lbl { font-size: 9px !important; }
             .summary-bar .metric span { font-size: 10px !important; }
             .summary-bar .metric b { font-size: 11px !important; }
@@ -1239,6 +1323,45 @@
 </head>
 <body>
 
+<!-- Sol Menü Overlay ve Sidebar -->
+<div id="orionSidebarOverlay" onclick="toggleSidebar()"></div>
+<div id="orionLeftSidebar" class="open">
+    <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:24px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:16px; position:relative; width:100%;">
+        <div id="orionSidebarLogoContainer" style="width:50px; height:50px; border-radius:12px; overflow:hidden; margin-bottom:10px; box-shadow:0 6px 20px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246,0.25);"></div>
+        <span class="orion-brand-name" style="font-size:18px; letter-spacing: 3px; color: #FFFFFF !important;">ORION</span>
+        <button class="modal-close" style="position:absolute; top:0; right:0; font-size:16px; color:var(--t3); border:none; background:transparent; cursor:pointer; padding: 4px;" onclick="toggleSidebar()" title="Menüyü Kapat">◀</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+        <button class="sidebar-nav-btn active" data-tab="ozet-tab" onclick="switchTab('ozet-tab'); toggleSidebar()">📊 Özet</button>
+        <button class="sidebar-nav-btn" data-tab="ana-portfoy-tab" onclick="switchTab('ana-portfoy-tab'); toggleSidebar()">📋 İşlem Defteri</button>
+        <button class="sidebar-nav-btn" data-tab="bist-tab" onclick="switchTab('bist-tab'); toggleSidebar()">📈 BİST</button>
+        <button class="sidebar-nav-btn" data-tab="emtia-tab" onclick="switchTab('emtia-tab'); toggleSidebar()">🪙 Emtia</button>
+        <button class="sidebar-nav-btn" data-tab="fon-tab" onclick="switchTab('fon-tab'); toggleSidebar()">📦 Fonlar</button>
+        <button class="sidebar-nav-btn" data-tab="nasdaq-tab" onclick="switchTab('nasdaq-tab'); toggleSidebar()"><span class="orion-flag" style="margin-right:4px;">🇺🇸</span> Nasdaq</button>
+        <button class="sidebar-nav-btn" data-tab="avrupa-tab" onclick="switchTab('avrupa-tab'); toggleSidebar()"><span class="orion-flag" style="margin-right:4px;">🇪🇺</span> Avrupa</button>
+        <button class="sidebar-nav-btn" data-tab="alsat-tab" onclick="switchTab('alsat-tab'); toggleSidebar()">⚡ Al-Sat</button>
+        <button class="sidebar-nav-btn" data-tab="temettu-tab" onclick="switchTab('temettu-tab'); toggleSidebar()">💰 Temettü</button>
+        <button class="sidebar-nav-btn" data-tab="halkaarz-tab" onclick="switchTab('halkaarz-tab'); toggleSidebar()">🚀 Halka Arz</button>
+        <button class="sidebar-nav-btn" data-tab="toplam-kar-tab" onclick="switchTab('toplam-kar-tab'); toggleSidebar()">📈 K/Z Trendi</button>
+        <button class="sidebar-nav-btn" data-tab="import-tab" onclick="switchTab('import-tab'); toggleSidebar()">📥 Aktar</button>
+    </div>
+    
+    <!-- Alt kullanıcı profil alanı -->
+    <div style="margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:10px; width:100%;">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; border:1px solid rgba(59,130,246,0.3); font-size:14px; color:#38BDF8;">👤</div>
+            <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">
+                <div id="sidebarUserEmail" style="font-size:11px; font-weight:800; color:var(--t1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">yükleniyor...</div>
+                <div style="font-size:8px; font-weight:700; color:var(--t3); letter-spacing:.5px; text-transform:uppercase;">Aktif Kullanıcı</div>
+            </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <button class="btn" onclick="openHesabimModal(); toggleSidebar();" style="height:28px; font-size:9px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:#fff; cursor:pointer; font-weight:700; border-radius:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">Ayarlar</button>
+            <button class="btn btn-danger" onclick="logoutUser()" style="height:28px; font-size:9px; font-weight:700; border-radius:6px; background:rgba(239,68,68,0.12); border:1px solid var(--red); color:#FF8A8A; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.12)'">Çıkış</button>
+        </div>
+    </div>
+</div>
+
     <div class="modal-overlay active" id="authModal" style="background: rgba(7, 11, 18, 0.97); z-index: 999999; backdrop-filter: blur(12px);">
     <div class="modal-content" style="width: 420px; padding: 0; text-align: center; box-shadow: 0 0 120px rgba(59, 130, 246, 0.18), 0 40px 80px rgba(0,0,0,0.7); border: 1px solid rgba(59,130,246,0.18); border-radius: 24px; overflow: hidden;">
         <!-- Üst dekoratif bant -->
@@ -1327,6 +1450,98 @@ function showAuthTab(tab) {
     </div>
 </div>
 
+<!-- ═══════════════════ HESABIM MODALİ ═══════════════════ -->
+<div class="modal-overlay" id="hesabimModal">
+    <div class="modal-content" style="width: 500px; max-width:95%; max-height:85vh; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 60px rgba(59,130,246,0.1) inset, 0 20px 50px rgba(0,0,0,0.6); padding: 0; border-radius: var(--r-xl); overflow-y: auto;">
+        <button class="modal-close" style="top: 16px; right: 20px; z-index: 10; font-size: 28px;" onclick="closeModal('hesabimModal')">×</button>
+        <!-- Modal Header -->
+        <div style="background:linear-gradient(90deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.08) 100%); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 22px 28px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(59,130,246,0.2),rgba(139,92,246,0.2));display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid rgba(59,130,246,0.3);">👤</div>
+                <div>
+                    <div style="color:var(--t1); font-size:16px; font-weight:900; letter-spacing:1px;">HESABIM & AYARLAR</div>
+                    <div style="color:var(--t3); font-size:9.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Hesap Güvenliği ve Veri Yönetimi</div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Body -->
+        <div style="padding: 24px 28px 28px; display:flex; flex-direction:column; gap:20px;">
+            <!-- E-posta Bilgisi -->
+            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <span style="font-size:10px; color:var(--t3); font-weight:800; display:block; text-transform:uppercase; margin-bottom:4px;">E-Posta Adresi</span>
+                    <strong id="hesabimUserEmail" style="color:var(--t1); font-size:13.5px; font-family:var(--mono);">yükleniyor...</strong>
+                </div>
+                <div style="font-size:9px; background:rgba(16,185,129,0.12); color:#10b981; padding:3px 8px; border-radius:20px; font-weight:800; letter-spacing:.5px;">AKTİF HESAP</div>
+            </div>
+
+            <!-- Şifre Sıfırlama Eylemi -->
+            <div style="border-top:1px solid var(--border); padding-top:16px;">
+                <h4 style="font-size:11.5px; color:var(--t2); font-weight:800; text-transform:uppercase; margin-bottom:8px; letter-spacing:.5px;">🔒 Şifre Güncelleme</h4>
+                <p style="font-size:11px; color:var(--t3); line-height:1.6; margin-bottom:12px;">Şifrenizi sıfırlamak için kayıtlı e-posta adresinize bir şifre sıfırlama bağlantısı gönderebilirsiniz.</p>
+                <button class="btn btn-primary" onclick="sendResetPasswordEmail()" style="width:100%; height:38px; font-size:11px; background:rgba(59,130,246,0.1); border:1px solid var(--blue); color:#38BDF8;">Şifre Sıfırlama E-postası Gönder</button>
+            </div>
+
+            <!-- Veri Yedekleme ve Yükleme -->
+            <div style="border-top:1px solid var(--border); padding-top:16px;">
+                <h4 style="font-size:11.5px; color:var(--t2); font-weight:800; text-transform:uppercase; margin-bottom:8px; letter-spacing:.5px;">📦 Veri Yedekleme & Geri Yükleme</h4>
+                <p style="font-size:11px; color:var(--t3); line-height:1.6; margin-bottom:12px;">Portföy verilerinizi JSON formatında bilgisayarınıza indirebilir veya daha önce indirdiğiniz bir yedeği geri yükleyebilirsiniz.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <button class="btn btn-primary" onclick="exportAllData(); closeModal('hesabimModal')" style="height:36px; font-size:10px; border-color:var(--amber); color:var(--amber); background:rgba(245,158,11,0.06);">📥 Yedeği İndir (JSON)</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('inp_json_hesabim').click();" style="height:36px; font-size:10px; border-color:var(--blue); color:#38BDF8; background:rgba(59,130,246,0.06);">📤 Yedeği Yükle (JSON)</button>
+                </div>
+                <input type="file" id="inp_json_hesabim" accept=".json" style="display:none" onchange="handleJSONUploadHesabim(event)">
+            </div>
+
+            <!-- Verileri Sıfırlama Eylemi -->
+            <div style="border-top:1px solid var(--border); padding-top:16px; background:rgba(239,68,68,0.02); border-radius:8px; padding:12px; border:1px dashed rgba(239,68,68,0.2);">
+                <h4 style="font-size:11.5px; color:var(--red); font-weight:800; text-transform:uppercase; margin-bottom:6px; letter-spacing:.5px;">⚠️ Verileri Sıfırla</h4>
+                <p style="font-size:11px; color:var(--t3); line-height:1.6; margin-bottom:12px;">Tüm portföy, işlem geçmişi, halka arz ve temettü kayıtlarınızı kalıcı olarak siler. Bu işlem geri alınamaz.</p>
+                <button class="btn btn-danger" onclick="confirmClearAll(); closeModal('hesabimModal')" style="width:100%; height:38px; font-size:11px; font-weight:800; background:linear-gradient(135deg, #ef4444, #b91c1c); color:#fff; border:none;">🗑 TÜM VERİLERİMİ SIFIRLA</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════ TOPLU FON FİYAT GÜNCELLEME MODALİ ═══════════════════ -->
+<div class="modal-overlay" id="bulkFonModal">
+    <div class="modal-content" style="width: 600px; max-width:95%; max-height:85vh; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 60px rgba(16,185,129,0.1) inset, 0 20px 50px rgba(0,0,0,0.6); padding: 0; border-radius: var(--r-xl); overflow-y: auto;">
+        <button class="modal-close" style="top: 16px; right: 20px; z-index: 10; font-size: 28px;" onclick="closeModal('bulkFonModal')">×</button>
+        <!-- Modal Header -->
+        <div style="background:linear-gradient(90deg, rgba(16,185,129,0.15) 0%, rgba(139,92,246,0.08) 100%); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 22px 28px 18px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(16,185,129,0.2),rgba(139,92,246,0.2));display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid rgba(16,185,129,0.3);">📝</div>
+                <div>
+                    <div style="color:var(--t1); font-size:16px; font-weight:900; letter-spacing:1px;">TOPLU HIZLI FON FİYATI GÜNCELLE</div>
+                    <div style="color:var(--t3); font-size:9.5px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">Fon Fiyatlarını Haftalık Toplu Düzenleme</div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Body -->
+        <div style="padding: 20px 28px 28px; display:flex; flex-direction:column; gap:16px;">
+            <div style="color:var(--t2); font-size:12px; font-weight:600; line-height:1.5;">
+                Aşağıdaki tabloda seçili tarihe (<span id="bulkFonSelectedDate" style="color:var(--blue); font-family:var(--mono);"></span>) ait portföyünüzdeki aktif fonlar listelenmiştir. Güncel fiyatları hızlıca girip tek seferde kaydedebilirsiniz.
+            </div>
+            <div class="table-responsive" style="max-height:45vh; border-radius:var(--r); border-color:var(--border);">
+                <table style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left; padding-left:14px; width:40%;">Fon Kodu / Tanımı</th>
+                            <th style="width:30%;">Maliyet</th>
+                            <th style="width:30%;">Güncel Fiyat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bulkFonTableBody"></tbody>
+                </table>
+            </div>
+            <div style="display:flex; gap:12px; justify-content:flex-end; margin-top:8px;">
+                <button class="btn btn-primary" onclick="closeModal('bulkFonModal')" style="background:transparent; border:1px solid var(--border);">İptal</button>
+                <button class="btn btn-success" onclick="saveBulkFonPrices()" style="min-width:140px;">💾 TÜMÜNÜ KAYDET</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- ═══════════════════ HİSSE ANALİZİ MODALİ ═══════════════════ -->
 <div class="modal-overlay" id="hisseAnaliziModal">
     <div class="modal-content" style="width:1100px; max-width:98%; max-height:92vh; border:1px solid rgba(56,189,248,0.25); box-shadow:0 0 60px rgba(56,189,248,0.06) inset, 0 20px 50px rgba(0,0,0,0.6); padding:0; border-radius:var(--r-xl); overflow-y:auto;">
@@ -1353,6 +1568,10 @@ function showAuthTab(tab) {
                     style="padding:10px 28px; background:linear-gradient(135deg,rgba(56,189,248,0.2),rgba(56,189,248,0.05)); border:1px solid rgba(56,189,248,0.5); border-radius:8px; color:#38BDF8; font-size:12px; font-weight:800; letter-spacing:.8px; cursor:pointer; white-space:nowrap;">
                     🔍 ANALİZ ET
                 </button>
+            </div>
+            <!-- Gemini API Key Girişi (Gizli) -->
+            <div style="display:none !important;">
+                <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." onchange="localStorage.setItem('gemini_api_key', this.value)">
             </div>
             <!-- Hızlı seçim — statik butonlar -->
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
@@ -1441,11 +1660,13 @@ function showAuthTab(tab) {
 
 <div class="container">
     <div class="app-header">
+        <!-- Hamburger Menu Button -->
+        <button class="btn btn-primary" id="sidebarToggleBtn" style="padding:0 12px; height:34px; font-size:16px; border:1px solid var(--border-2); background:transparent; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#FFFFFF; margin-right: 6px;" onclick="toggleSidebar()">◀</button>
         <!-- Sol: Logo + ORION yazısı + Kısayollar -->
         <div class="orion-brand">
             <div style="display:flex; align-items:center; gap:10px;">
-                <div style="width:38px; height:38px; border-radius:10px; overflow:hidden; flex-shrink:0; box-shadow:0 4px 14px rgba(59,130,246,0.35), 0 0 0 1px rgba(59,130,246,0.2);">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAC4jAAAuIwF4pT92AAAGNGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgMTAuMC1jMDAwIDI1LkcuZDIwZTQ2NiwgMjAyNS8xMi8wOC0yMDo1MDoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjcgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNi0xN1QwMzo0NToyOSswMzowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjMzYzVlYjA3LTcxMTAtNTc0NS04OGVlLWYxMzhiZDFkNGFlOCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjdhM2EwZGVlLTgyZmYtMzY0Yy04N2Y2LWIzYzhhOTI5NTZlZCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk3ZDE2OTkwLTQ5M2UtMDc0YS1iOWRhLTE4NjVmODRkMDU1MiI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTdkMTY5OTAtNDkzZS0wNzRhLWI5ZGEtMTg2NWY4NGQwNTUyIiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjQ1OjI5KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MzNjNWViMDctNzExMC01NzQ1LTg4ZWUtZjEzOGJkMWQ0YWU4IiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjUwOjM1KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+nYIs1AAAQZZJREFUeJzt3QuQ1tWZ5/EDtI3Q3JVWTCOCOIqAFaFGgS2tRCoDm1g6O97KyWaSKNbuTDIVo9nKjM4k6EYnqY1Ea5LMbommNpnEUmO2hnIsSApkJ1VcMpU2JY2alau0oo0XEIRwEbZ+//aPTdvX9/2f+/dTRTV46ffl7fc95znPec5zhgxvmvA9Y8zHDQAA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CAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADDUYY37n+0kAAADj0u/+P/yczFKDHS99AAAAAElFTkSuQmCC" alt="ORION" style="width:100%;height:100%;object-fit:cover;display:block;">
+                <div style="display:none;">
+                    <img id="orionMainLogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAC4jAAAuIwF4pT92AAAGNGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgMTAuMC1jMDAwIDI1LkcuZDIwZTQ2NiwgMjAyNS8xMi8wOC0yMDo1MDoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDI3LjcgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyNi0wNi0xN1QwMzo0NToyOSswMzowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIHhtcDpNZXRhZGF0YURhdGU9IjIwMjYtMDYtMTdUMDM6NTA6MzUrMDM6MDAiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjMzYzVlYjA3LTcxMTAtNTc0NS04OGVlLWYxMzhiZDFkNGFlOCIgeG1wTU06RG9jdW1lbnRJRD0iYWRvYmU6ZG9jaWQ6cGhvdG9zaG9wOjdhM2EwZGVlLTgyZmYtMzY0Yy04N2Y2LWIzYzhhOTI5NTZlZCIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOjk3ZDE2OTkwLTQ5M2UtMDc0YS1iOWRhLTE4NjVmODRkMDU1MiI+IDx4bXBNTTpIaXN0b3J5PiA8cmRmOlNlcT4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNyZWF0ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6OTdkMTY5OTAtNDkzZS0wNzRhLWI5ZGEtMTg2NWY4NGQwNTUyIiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjQ1OjI5KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249ImNvbnZlcnRlZCIgc3RFdnQ6cGFyYW1ldGVycz0iZnJvbSBhcHBsaWNhdGlvbi92bmQuYWRvYmUucGhvdG9zaG9wIHRvIGltYWdlL3BuZyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6MzNjNWViMDctNzExMC01NzQ1LTg4ZWUtZjEzOGJkMWQ0YWU4IiBzdEV2dDp3aGVuPSIyMDI2LTA2LTE3VDAzOjUwOjM1KzAzOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgMjcuNyAoV2luZG93cykiIHN0RXZ0OmNoYW5nZWQ9Ii8iLz4gPC9yZGY6U2VxPiA8L3htcE1NOkhpc3Rvcnk+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+nYIs1AAAQZZJREFUeJzt3QuQ1tWZ5/EDtI3Q3JVWTCOCOIqAFaFGgS2tRCoDm1g6O97KyWaSKNbuTDIVo9nKjM4k6EYnqY1Ea5LMbommNpnEUmO2hnIsSApkJ1VcMpU2JY2alau0oo0XEIRwEbZ+//aPTdvX9/2f+/dTRTV46ffl7fc95znPec5zhgxvmvA9Y8zHDQAA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CAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADBEAAACQIQIAAAAyRAAAAECGCAAAAMgQAQAAABkiAAAAIEMEAAAAZIgAAACADDUYY37n+0kAAADj0u/+P/yczFKDHS99AAAAAElFTkSuQmCC" alt="ORION" style="width:100%;height:100%;object-fit:cover;display:block;">
                 </div>
                 <span class="orion-brand-name">ORION</span>
             </div>
@@ -1733,7 +1954,10 @@ function showAuthTab(tab) {
                 <option value="all">Tümü (Gruplandırılmış)</option>
                 <option value="log">İşlem Günlüğü (Tarihsel Log)</option>
             </select>
-            <button class="btn btn-primary" style="margin-left: auto;" onclick="exportCategoryToExcel('islem-defteri')">Excel İndir</button>
+            <div style="margin-left: auto; display: flex; gap: 10px;">
+                <button class="btn btn-success" onclick="bulkFetchAllActivePrices()" id="btnBulkFetch_all">⚡ Fiyatları Güncelle</button>
+                <button class="btn btn-primary" onclick="exportCategoryToExcel('islem-defteri')">Excel İndir</button>
+            </div>
         </div>
         <div class="table-responsive">
             <table>
@@ -1761,7 +1985,7 @@ function showAuthTab(tab) {
     <div id="emtia-tab" class="tab-content">
         <div class="filter-bar">
             <label>Tarih:</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('emtiaDateFilter', -1)">◀</button><input type="date" id="emtiaDateFilter" onchange="renderAsset('emtia')"><button class="btn-stepper" onclick="stepDate('emtiaDateFilter', 1)">▶</button></div>
-            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('emtia')">Dünden Kopyala</button><button class="btn btn-primary" onclick="exportCategoryToExcel('emtia')">Excel İndir</button></div>
+            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('emtia')">Dünden Kopyala</button><button class="btn btn-success" onclick="bulkFetchPrices('emtia')" id="btnBulkFetch_emtia">⚡ Fiyatları Güncelle</button><button class="btn btn-primary" onclick="exportCategoryToExcel('emtia')">Excel İndir</button></div>
         </div>
         <div class="summary-bar" id="summaryBar_emtia"><div class="title"><span id="summaryDate_emtia">...</span> — Günlük</div><div class="metrics"><div class="metric">Günlük Değişim:<span id="summaryGunluk_emtia">0,00 TL</span></div><div class="metric">Kâr/Zarar:<span id="summaryToplam_emtia">0,00 TL</span></div></div></div>
         <div class="trade-form"><div class="form-row">
@@ -1773,11 +1997,11 @@ function showAuthTab(tab) {
     <div id="bist-tab" class="tab-content">
         <div class="filter-bar">
             <label>Tarih:</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('bistDateFilter', -1)">◀</button><input type="date" id="bistDateFilter" onchange="renderAsset('bist')"><button class="btn-stepper" onclick="stepDate('bistDateFilter', 1)">▶</button></div>
-            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('bist')">Dünden Kopyala</button><button class="btn btn-primary" onclick="exportCategoryToExcel('bist')">Excel İndir</button></div>
+            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('bist')">Dünden Kopyala</button><button class="btn btn-success" onclick="bulkFetchPrices('bist')" id="btnBulkFetch_bist">🚀 Fiyatları Güncelle</button><button class="btn btn-primary" onclick="exportCategoryToExcel('bist')">Excel İndir</button></div>
         </div>
         <div class="summary-bar" id="summaryBar_bist"><div class="title"><span id="summaryDate_bist">...</span> — Günlük</div><div class="metrics"><div class="metric">Günlük Değişim:<span id="summaryGunluk_bist">0,00 TL</span></div><div class="metric">Kâr/Zarar:<span id="summaryToplam_bist">0,00 TL</span></div></div></div>
         <div class="trade-form"><div class="form-row">
-            <div class="input-group"><label>HİSSE TANIMI</label><input type="text" id="bistVarlik" list="kayitliHisseler" autocomplete="off"></div><div class="input-group"><label>Adet</label><input type="number" id="bistAdet" placeholder="0" step="0.01"></div><div class="input-group"><label>Birim Maliyet</label><input type="number" id="bistMaliyet" placeholder="0.00" step="0.01"></div><div class="input-group"><label>Güncel Fiyat</label><input type="number" id="bistGuncel" placeholder="0.00" step="0.01"></div><div class="input-group"><label style="color:var(--amber);">Satış</label><input type="number" id="bistSatis" placeholder="Opsiyonel" step="0.01"></div><button class="btn btn-success" id="btnEkleSat_bist" onclick="addAsset('bist')">Ekle</button>
+            <div class="input-group"><label>HİSSE TANIMI</label><input type="text" id="bistVarlik" list="kayitliHisseler" autocomplete="off"></div><div class="input-group"><label>Adet</label><input type="number" id="bistAdet" placeholder="0" step="0.01"></div><div class="input-group"><label>Birim Maliyet</label><input type="number" id="bistMaliyet" placeholder="0.00" step="0.01"></div><div class="input-group"><label>Güncel Fiyat</label><div style="display:flex; gap:4px;"><input type="number" id="bistGuncel" placeholder="0.00" step="0.01" style="flex:1;"><button class="btn btn-primary" onclick="autoFetchSinglePrice('bist')" style="padding:0 8px; height:34px; font-size:11px;" title="İnternetten Fiyat Getir">⚡</button></div></div><div class="input-group"><label style="color:var(--amber);">Satış</label><input type="number" id="bistSatis" placeholder="Opsiyonel" step="0.01"></div><button class="btn btn-success" id="btnEkleSat_bist" onclick="addAsset('bist')">Ekle</button>
         </div></div>
         <div class="table-responsive"><table><thead><tr><th>Varlık</th><th>Adet</th><th>Maliyet</th><th>Önceki</th><th>Güncel</th><th>Satış</th><th>Top. Maliyet</th><th>Değer</th><th>Günlük</th><th>Toplam K/Z</th><th>Getiri %</th><th>Kontrol</th></tr></thead><tbody id="bistTableBody"></tbody></table></div>
     </div>
@@ -1785,11 +2009,12 @@ function showAuthTab(tab) {
     <div id="fon-tab" class="tab-content">
         <div class="filter-bar">
             <label>Tarih:</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('fonDateFilter', -1)">◀</button><input type="date" id="fonDateFilter" onchange="renderAsset('fon')"><button class="btn-stepper" onclick="stepDate('fonDateFilter', 1)">▶</button></div>
-            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('fon')">Dünden Kopyala</button><button class="btn btn-primary" onclick="exportCategoryToExcel('fon')">Excel İndir</button></div>
+            <div style="margin-left: auto; display: flex; gap: 10px;"><button class="btn btn-warning" onclick="copyFromPrevious('fon')">Dünden Kopyala</button><button class="btn btn-success" onclick="openBulkFonModal()">📝 Toplu Fon Fiyatı Güncelle</button><button class="btn btn-primary" onclick="exportCategoryToExcel('fon')">Excel İndir</button></div>
         </div>
-        <div class="summary-bar" id="summaryBar_fon"><div class="title"><span id="summaryDate_fon">...</span> — Günlük</div><div class="metrics"><div class="metric">Günlük Değişim:<span id="summaryGunluk_fon">0,00 TL</span></div><div class="metric">Kâr/Zarar:<span id="summaryToplam_fon">0,00 TL</span></div></div></div>
+        <div class="summary-bar" id="summaryBar_fon"><div class="title"><span id="summaryDate_fon">...</span> — Haftalık Takip</div><div class="metrics"><div class="metric">Haftalık Değişim:<span id="summaryGunluk_fon">0,00 TL</span></div><div class="metric">Toplam Kâr/Zarar:<span id="summaryToplam_fon">0,00 TL</span></div></div></div>
         <div class="trade-form"><div class="form-row">
             <div class="input-group"><label>Fon Kodu</label><input type="text" id="fonVarlik" list="kayitliHisseler" autocomplete="off"></div>
+            <div class="input-group"><label>Başlangıç Tarihi</label><input type="date" id="fonBaslangicTarihi"></div>
             <div class="input-group"><label>Adet</label><input type="number" id="fonAdet" placeholder="0" step="0.01"></div>
             <div class="input-group"><label>Birim Maliyet</label><input type="number" id="fonMaliyet" placeholder="0.00" step="0.01"></div>
             <div class="input-group"><label>Komisyon</label><input type="number" id="fonKomisyon" placeholder="0.00" step="0.01"></div>
@@ -1797,14 +2022,14 @@ function showAuthTab(tab) {
             <div class="input-group"><label style="color:var(--amber);">Satış</label><input type="number" id="fonSatis" placeholder="Opsiyonel" step="0.01"></div>
             <button class="btn btn-success" id="btnEkleSat_fon" onclick="addAsset('fon')">Ekle</button>
         </div></div>
-        <div class="table-responsive"><table><thead><tr><th>Varlık</th><th>Adet</th><th>Maliyet</th><th>Önceki</th><th>Güncel</th><th>Satış</th><th>Top. Maliyet</th><th>Değer</th><th>Günlük</th><th>Toplam K/Z</th><th>Getiri %</th><th>Kontrol</th></tr></thead><tbody id="fonTableBody"></tbody></table></div>
+        <div class="table-responsive"><table><thead><tr><th>Varlık</th><th>Bşlg. Tarihi</th><th>Adet</th><th>Maliyet</th><th>Önceki Hafta</th><th>Güncel</th><th>Satış</th><th>Top. Maliyet</th><th>Değer</th><th>Haftalık Getiri</th><th>Toplam K/Z</th><th>Getiri %</th><th>Kontrol</th></tr></thead><tbody id="fonTableBody"></tbody></table></div>
     </div>
 
     <div id="nasdaq-tab" class="tab-content">
         <div class="filter-bar">
             <label>Tarih:</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('nasdaqDateFilter', -1)">◀</button><input type="date" id="nasdaqDateFilter" onchange="renderAsset('nasdaq')"><button class="btn-stepper" onclick="stepDate('nasdaqDateFilter', 1)">▶</button></div>
             <div style="margin-left: auto; display: flex; gap: 10px; align-items:center;">
-                <button class="btn btn-warning" onclick="copyFromPrevious('nasdaq')">Dünden Kopyala</button><button class="btn btn-primary" onclick="exportCategoryToExcel('nasdaq')">Excel İndir</button>
+                <button class="btn btn-warning" onclick="copyFromPrevious('nasdaq')">Dünden Kopyala</button><button class="btn btn-success" onclick="bulkFetchPrices('nasdaq')" id="btnBulkFetch_nasdaq">🚀 Fiyatları Güncelle</button><button class="btn btn-primary" onclick="exportCategoryToExcel('nasdaq')">Excel İndir</button>
                 <label style="color:var(--t3); font-size:11px; margin-left:12px; font-weight:700;">USD/TRY</label><input type="number" id="usdTryRate" value="34.00" step="0.01" style="width:75px; padding:6px;" onchange="renderAsset('nasdaq'); updateDashboard();">
                 <button class="btn btn-primary" style="min-width:34px; height:28px; padding:2px;" onclick="fetchUSDRate()" title="Canlı Kur Çek">🔄</button><button class="btn btn-success" style="height:28px; padding:2px 10px; min-width:70px; font-size:10.5px;" onclick="renderAsset('nasdaq'); updateDashboard();">Uygula</button>
             </div>
@@ -1815,7 +2040,7 @@ function showAuthTab(tab) {
             <div class="input-group"><label>Adet</label><input type="number" id="nasdaqAdet" placeholder="0" step="0.01"></div>
             <div class="input-group"><label>Maliyet ($)</label><input type="number" id="nasdaqMaliyet" placeholder="0.00" step="0.01"></div>
             <div class="input-group"><label>Komisyon ($)</label><input type="number" id="nasdaqKomisyon" placeholder="0.00" step="0.01"></div>
-            <div class="input-group"><label>Güncel ($)</label><input type="number" id="nasdaqGuncel" placeholder="0.00" step="0.01"></div>
+            <div class="input-group"><label>Güncel ($)</label><div style="display:flex; gap:4px;"><input type="number" id="nasdaqGuncel" placeholder="0.00" step="0.01" style="flex:1;"><button class="btn btn-primary" onclick="autoFetchSinglePrice('nasdaq')" style="padding:0 8px; height:34px; font-size:11px;" title="İnternetten Fiyat Getir">⚡</button></div></div>
             <div class="input-group"><label style="color:var(--amber);">SATIŞ FİYATI ($)</label><input type="number" id="nasdaqSatis" placeholder="0.00" step="0.01"></div>
             <button class="btn btn-success" id="btnEkleSat_nasdaq" onclick="addAsset('nasdaq')">Ekle</button>
         </div></div>
@@ -1826,7 +2051,7 @@ function showAuthTab(tab) {
         <div class="filter-bar">
             <label>Tarih:</label><div class="date-stepper"><button class="btn-stepper" onclick="stepDate('avrupaDateFilter', -1)">◀</button><input type="date" id="avrupaDateFilter" onchange="renderAsset('avrupa')"><button class="btn-stepper" onclick="stepDate('avrupaDateFilter', 1)">▶</button></div>
             <div style="margin-left: auto; display: flex; gap: 10px; align-items:center;">
-                <button class="btn btn-warning" onclick="copyFromPrevious('avrupa')">Dünden Kopyala</button><button class="btn btn-primary" onclick="exportCategoryToExcel('avrupa')">Excel İndir</button>
+                <button class="btn btn-warning" onclick="copyFromPrevious('avrupa')">Dünden Kopyala</button><button class="btn btn-success" onclick="bulkFetchPrices('avrupa')" id="btnBulkFetch_avrupa">🚀 Fiyatları Güncelle</button><button class="btn btn-primary" onclick="exportCategoryToExcel('avrupa')">Excel İndir</button>
                 <label style="color:var(--t3); font-size:11px; margin-left:12px; font-weight:700;">EUR/TRY</label><input type="number" id="eurTryRate" value="37.00" step="0.01" style="width:75px; padding:6px;" onchange="renderAsset('avrupa'); updateDashboard();">
                 <button class="btn btn-primary" style="min-width:34px; height:28px; padding:2px;" onclick="fetchEURRate()" title="Canlı Kur Çek">🔄</button><button class="btn btn-success" style="height:28px; padding:2px 10px; min-width:70px; font-size:10.5px;" onclick="renderAsset('avrupa'); updateDashboard();">Uygula</button>
             </div>
@@ -1837,7 +2062,7 @@ function showAuthTab(tab) {
             <div class="input-group"><label>Adet</label><input type="number" id="avrupaAdet" placeholder="0" step="0.01"></div>
             <div class="input-group"><label>Maliyet (€)</label><input type="number" id="avrupaMaliyet" placeholder="0.00" step="0.01"></div>
             <div class="input-group"><label>Komisyon (€)</label><input type="number" id="avrupaKomisyon" placeholder="0.00" step="0.01"></div>
-            <div class="input-group"><label>Güncel (€)</label><input type="number" id="avrupaGuncel" placeholder="0.00" step="0.01"></div>
+            <div class="input-group"><label>Güncel (€)</label><div style="display:flex; gap:4px;"><input type="number" id="avrupaGuncel" placeholder="0.00" step="0.01" style="flex:1;"><button class="btn btn-primary" onclick="autoFetchSinglePrice('avrupa')" style="padding:0 8px; height:34px; font-size:11px;" title="İnternetten Fiyat Getir">⚡</button></div></div>
             <div class="input-group"><label style="color:var(--amber);">SATIŞ FİYATI (€)</label><input type="number" id="avrupaSatis" placeholder="0.00" step="0.01"></div>
             <button class="btn btn-success" id="btnEkleSat_avrupa" onclick="addAsset('avrupa')">Ekle</button>
         </div></div>
@@ -1892,6 +2117,12 @@ function showAuthTab(tab) {
 <!-- EN ALT TELİF İMZASI -->
 <div class="footer-copy">© 2026 Orion Yatırım Merkezi – Tüm Hakları Saklıdır.</div>
 <script>
+    function getLocalTodayStr() {
+        const localDate = new Date();
+        const offset = localDate.getTimezoneOffset();
+        const localTime = new Date(localDate.getTime() - (offset * 60 * 1000));
+        return localTime.toISOString().split('T')[0];
+    }
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
     // ============================================================
@@ -2171,7 +2402,22 @@ function showAuthTab(tab) {
     // ═══════════════════════════════════════════════════════════════
     let orionTickerCache = null;
     let orionTickerTime  = 0;
-    const ORION_CACHE_MS = 15 * 60 * 1000;
+    const ORION_CACHE_MS = 60 * 1000; // 1 dakika cache
+
+    // Mobil ve tablet uyumlu fetch timeout sarmalayıcısı
+    async function fetchSafe(url, options = {}, timeout = 8000) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeout);
+        try {
+            const response = await fetch(url, { ...options, signal: controller.signal });
+            clearTimeout(id);
+            return response;
+        } catch (e) {
+            clearTimeout(id);
+            throw e;
+        }
+    }
+    window.fetchSafe = fetchSafe;
 
     // Statik fallback — CORS tamamen başarısız olunca gösterilir
     const ORION_FALLBACK = [
@@ -2202,7 +2448,7 @@ function showAuthTab(tab) {
         try {
             const raceResult = await Promise.any(
                 proxies.slice(0, 3).map(makeUrl =>
-                    fetch(makeUrl(url), { signal: AbortSignal.timeout(timeout) })
+                    fetchSafe(makeUrl(url), {}, timeout)
                         .then(r => { if (!r.ok) throw new Error('not_ok'); return r; })
                 )
             );
@@ -2210,12 +2456,12 @@ function showAuthTab(tab) {
         } catch(e) {}
         // Paralel başarısızsa thingproxy dene
         try {
-            const r = await fetch(`https://thingproxy.freeboard.io/fetch/${url}`, { signal: AbortSignal.timeout(timeout) });
+            const r = await fetchSafe(`https://thingproxy.freeboard.io/fetch/${url}`, {}, timeout);
             if (r.ok) return r;
         } catch(e) {}
         // Son çare: doğrudan dene
         try {
-            const r = await fetch(url, { signal: AbortSignal.timeout(timeout) });
+            const r = await fetchSafe(url, {}, timeout);
             if (r.ok) return r;
         } catch(e) {}
         return null;
@@ -2267,7 +2513,7 @@ function showAuthTab(tab) {
 
         for (const proxyUrl of proxies) {
             try {
-                const r = await fetch(proxyUrl, { signal: AbortSignal.timeout(timeout) });
+                const r = await fetchSafe(proxyUrl, {}, timeout);
                 if (!r.ok) continue;
                 const text = await r.text();
                 if (!text || text.trim().startsWith('<')) continue; // HTML hata sayfası
@@ -2328,13 +2574,15 @@ function showAuthTab(tab) {
             return orionTickerCache;
         }
         const track = document.getElementById('orion-ticker-track');
-        if (track) track.innerHTML = '<div class="orion-tick-loading"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>';
+        if (track && (!track.children.length || track.querySelector('.orion-tick-loading'))) {
+            track.innerHTML = '<div class="orion-tick-loading"><span class="spinner">⏳</span> Piyasa verileri yükleniyor...</div>';
+        }
 
         const results = [];
 
         // ── 1. Döviz — open.er-api.com (CORS açık, proxy gerekmez) ─────────────
         try {
-            const erRes = await fetch('https://open.er-api.com/v6/latest/USD', { signal: AbortSignal.timeout(10000) });
+            const erRes = await fetchSafe('https://open.er-api.com/v6/latest/USD', {}, 10000);
             if (erRes.ok) {
                 const erData = await erRes.json();
                 const rates  = erData.rates || {};
@@ -2475,10 +2723,10 @@ function showAuthTab(tab) {
                     let meta = null;
                     try {
                         meta = await Promise.any([
-                            parseV8(fetch(direct1, { signal: AbortSignal.timeout(8000) })),
-                            parseV8(fetch(direct2, { signal: AbortSignal.timeout(8000) })),
-                            parseV8(fetch(proxy1,   { signal: AbortSignal.timeout(9000) })),
-                            parseV8(fetch(proxy2,   { signal: AbortSignal.timeout(9000) })),
+                            parseV8(fetchSafe(direct1, {}, 8000)),
+                            parseV8(fetchSafe(direct2, {}, 8000)),
+                            parseV8(fetchSafe(proxy1,   {}, 9000)),
+                            parseV8(fetchSafe(proxy2,   {}, 9000)),
                         ]);
                     } catch(e) {}
 
@@ -2589,7 +2837,7 @@ function showAuthTab(tab) {
             // Label rengi kategoriye göre
             const labelColor = isTRY ? '#60a5fa' : item.flag==='🥇'||item.flag==='🥈' ? '#f59e0b' : item.flag==='💎' ? '#a78bfa' : item.flag==='🇹🇷' ? '#10b981' : item.flag==='🇺🇸' ? '#60a5fa' : 'rgba(255,255,255,0.55)';
             return `<div class="orion-tick-item" style="gap:8px;">
-                <span style="font-size:13px;line-height:1;flex-shrink:0;">${item.flag}</span>
+                <span class="orion-flag" style="font-size:13px;line-height:1;flex-shrink:0;">${item.flag}</span>
                 <span style="font-size:10px;font-weight:700;color:${labelColor};letter-spacing:.4px;white-space:nowrap;">${item.label}</span>
                 <span style="font-size:12px;font-weight:800;color:#EFF4FF;font-family:var(--mono);white-space:nowrap;">${item.price > 0 ? fmt(item.price, dec) : '\u2014'}${unitLabel}</span>
                 ${chgHtml}
@@ -3554,9 +3802,12 @@ function showAuthTab(tab) {
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.sidebar-nav-btn').forEach(t => t.classList.remove('active'));
+        
         let targetTab = document.getElementById(tabId);
         if(targetTab) targetTab.classList.add('active');
-        let buttons = document.querySelectorAll('.tab-btn');
+        
+        let buttons = document.querySelectorAll('.tab-btn, .sidebar-nav-btn');
         for(let btn of buttons) {
             let onclickAttr = btn.getAttribute('onclick');
             if(onclickAttr && onclickAttr.includes(tabId)) btn.classList.add('active');
@@ -3573,6 +3824,40 @@ function showAuthTab(tab) {
         if (tabId === 'temettu-tab') renderTemettu();
     }
     window.switchTab = switchTab; 
+
+    // --- YAN AÇILIR MENÜ MOTORU ---
+    function dispatchResizeEventsForDuration(durationMs = 350) {
+        const startTime = performance.now();
+        function step() {
+            window.dispatchEvent(new Event('resize'));
+            if (performance.now() - startTime < durationMs) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+    window.dispatchResizeEventsForDuration = dispatchResizeEventsForDuration;
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('orionLeftSidebar');
+        const overlay = document.getElementById('orionSidebarOverlay');
+        const toggleBtn = document.getElementById('sidebarToggleBtn');
+        if (sidebar && overlay) {
+            const isOpen = sidebar.classList.contains('open');
+            if (isOpen) {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                if (toggleBtn) toggleBtn.innerHTML = '☰';
+            } else {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                if (toggleBtn) toggleBtn.innerHTML = '◀';
+            }
+            // Continuous chart resizing during sidebar transition
+            dispatchResizeEventsForDuration(350);
+        }
+    }
+    window.toggleSidebar = toggleSidebar; 
 
     // --- DİNAMİK AY MOTORU ---
     function buildDynamicMonthFilter() {
@@ -3621,6 +3906,7 @@ function showAuthTab(tab) {
         let satis = parseFloat(document.getElementById(type + 'Satis').value) || 0;
         let komisyon = parseFloat(document.getElementById(type + 'Komisyon')?.value) || 0;
         let tarih = document.getElementById(type + 'DateFilter').value;
+        let baslangicTarihi = document.getElementById(type + 'BaslangicTarihi')?.value || '';
 
         if (!varlik || adet <= 0) return alert("Lütfen varlık adı ve geçerli bir adet girin.");
 
@@ -3639,7 +3925,7 @@ function showAuthTab(tab) {
 
             db[tarih].push({
                 id: Date.now() + Math.random(), varlik, adet, maliyet, guncel, satis, isSatildi,
-                alisTutari, guncelTutar, karTL, karYuzde
+                alisTutari, guncelTutar, karTL, karYuzde, baslangicTarihi
             });
             saveData(dbName, db);
         }
@@ -3647,6 +3933,7 @@ function showAuthTab(tab) {
         document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = '';
         document.getElementById(type + 'Maliyet').value = ''; document.getElementById(type + 'Guncel').value = ''; document.getElementById(type + 'Satis').value = '';
         if(document.getElementById(type + 'Komisyon')) document.getElementById(type + 'Komisyon').value = '';
+        if(document.getElementById(type + 'BaslangicTarihi')) document.getElementById(type + 'BaslangicTarihi').value = '';
         
         updateHisseListesi(); renderAsset(type); updateDashboard(); renderIslemGecmisi(); renderToplamKar();
     }
@@ -4573,6 +4860,9 @@ function showAuthTab(tab) {
     function editAssetObj(type, id, date) {
         let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {}; let record = db[date].find(d => String(d.id) === String(id)); if(!record) return;
         document.getElementById(type + 'Varlik').value = record.varlik; document.getElementById(type + 'Adet').value = record.adet; document.getElementById(type + 'Maliyet').value = record.maliyet; document.getElementById(type + 'Guncel').value = record.isSatildi ? '' : record.guncel;
+        if (type === 'fon' && document.getElementById('fonBaslangicTarihi')) {
+            document.getElementById('fonBaslangicTarihi').value = record.baslangicTarihi || '';
+        }
         editingId = id; editingType = type; editingDate = date;
         let btn = document.getElementById(`btnEkleSat_${type}`); if(btn) { btn.innerHTML = "💾 GÜNCELLE"; btn.classList.remove('btn-success'); btn.classList.add('btn-warning'); btn.setAttribute('onclick', `saveEditAsset('${type}')`); }
     }
@@ -4589,10 +4879,13 @@ function showAuthTab(tab) {
     function saveEditAsset(type) {
         let varlik = document.getElementById(type + 'Varlik').value.toUpperCase(); let newAdet = parseFloat(document.getElementById(type + 'Adet').value) || 0;
         let maliyet = parseFloat(document.getElementById(type + 'Maliyet').value) || 0; let guncel = parseFloat(document.getElementById(type + 'Guncel').value) || 0;
+        let baslangicTarihi = document.getElementById(type + 'BaslangicTarihi')?.value || '';
         if (!varlik || newAdet <= 0) return;
         let dbName = `my_${type}_v9`; let db = JSON.parse(localStorage.getItem(dbName)) || {}; let idx = db[editingDate].findIndex(d => String(d.id) === String(editingId)); if(idx === -1) return;
         let r = db[editingDate][idx]; r.varlik = varlik; r.adet = newAdet; r.maliyet = maliyet; r.guncel = guncel; r.alisTutari = newAdet*maliyet; r.guncelTutar = newAdet*guncel; r.karTL = r.guncelTutar - r.alisTutari; r.karYuzde = r.alisTutari > 0 ? (r.karTL/r.alisTutari)*100 : 0;
+        if (type === 'fon') r.baslangicTarihi = baslangicTarihi;
         saveData(dbName, db); document.getElementById(type + 'Varlik').value = ''; document.getElementById(type + 'Adet').value = ''; document.getElementById(type + 'Maliyet').value = ''; document.getElementById(type + 'Guncel').value = '';
+        if (type === 'fon' && document.getElementById('fonBaslangicTarihi')) document.getElementById('fonBaslangicTarihi').value = '';
         let btn = document.getElementById(`btnEkleSat_${type}`); if(btn) { btn.innerHTML = "Ekle"; btn.setAttribute('onclick', `addAsset('${type}')`); btn.classList.remove('btn-warning'); btn.classList.add('btn-success'); }
         editingId = null; renderAsset(type); updateDashboard(); renderIslemGecmisi();
     }
@@ -4600,21 +4893,41 @@ function showAuthTab(tab) {
     function renderAsset(type) {
         let selectedDate = document.getElementById(type + 'DateFilter').value; let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
         let date = selectedDate; let fallbackBanner = '';
-        if (!db[date] || db[date].length === 0) { let available = Object.keys(db).filter(d => d <= selectedDate).sort(); if (available.length > 0) { date = available[available.length - 1]; fallbackBanner = `<tr><td colspan="12" style="background:rgba(245,158,11,0.08); color:var(--amber);">⚠ ${selectedDate} kaydı yok — gösterilen tarih: ${date}</td></tr>`; } }
+        let isFon = (type === 'fon');
+        let colspan = isFon ? 13 : 12;
+        if (!db[date] || db[date].length === 0) { let available = Object.keys(db).filter(d => d <= selectedDate).sort(); if (available.length > 0) { date = available[available.length - 1]; fallbackBanner = `<tr><td colspan="${colspan}" style="background:rgba(245,158,11,0.08); color:var(--amber);">⚠ ${selectedDate} kaydı yok — gösterilen tarih: ${date}</td></tr>`; } }
         let dates = Object.keys(db).sort(); let currentIndex = dates.indexOf(date); let prevDate = currentIndex > 0 ? dates[currentIndex - 1] : null; let prevData = prevDate ? db[prevDate] : [];
         let data = db[date] || [];
         let kur = type === 'nasdaq' ? (parseFloat(document.getElementById('usdTryRate')?.value) || 1) : (type === 'avrupa' ? (parseFloat(document.getElementById('eurTryRate')?.value) || 1) : 1);
         let sembol = type === 'nasdaq' ? '$' : (type === 'avrupa' ? '€' : '');
         let totalGunlukKar = 0; let totalAcikKar = 0; let html = '';
         
-        if (data.length === 0) { html = `<tr class="empty-row"><td colspan="12">BU TARİH İÇİN KAYIT BULUNAMADI.</td></tr>`; } else {
+        if (data.length === 0) { html = `<tr class="empty-row"><td colspan="${colspan}">BU TARİH İÇİN KAYIT BULUNAMADI.</td></tr>`; } else {
             if (fallbackBanner) html += fallbackBanner;
             data.forEach(d => {
                 let dunkuFiyat = null; let gunlukKarHtml = '-';
                 if (!d.isSatildi) { totalAcikKar += (Number(d.karTL) * kur); if (prevDate) { let prevRecord = prevData.find(p => p.varlik === d.varlik && !p.isSatildi); if (prevRecord) { dunkuFiyat = prevRecord.guncel; let gunlukTL = (Number(d.guncel) - Number(prevRecord.guncel)) * Number(d.adet) * kur; totalGunlukKar += gunlukTL; gunlukKarHtml = formatKar(gunlukTL); } else { gunlukKarHtml = `<span class="text-muted">YENİ GİRİŞ</span>`; } } } else { gunlukKarHtml = `<span class="text-muted">REALİZE</span>`; }
-                // data-attribute ile özel karakter sorunu çözüldü — onclick inline string bozulmasın
                 const safeVarlik = (d.varlik || '').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
-                html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
+                if (isFon) {
+                    let baslangicTarihiFormatted = d.baslangicTarihi ? d.baslangicTarihi.split('-').reverse().join('.') : '-';
+                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}">
+                        <td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td>
+                        <td>${baslangicTarihiFormatted}</td>
+                        <td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td>
+                        <td>${formatNumberStr(d.maliyet)} ${sembol}</td>
+                        <td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td>
+                        <td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td>
+                        <td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td>
+                        <td>${formatTL(Number(d.alisTutari) * kur)}</td>
+                        <td>${formatTL(Number(d.guncelTutar) * kur)}</td>
+                        <td>${gunlukKarHtml}</td>
+                        <td>${formatKar(Number(d.karTL) * kur)}</td>
+                        <td>${formatYuzde(d.karYuzde)}</td>
+                        <td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td>
+                    </tr>`;
+                } else {
+                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
+                }
             });
         }
         document.getElementById(type + 'TableBody').innerHTML = html;
@@ -4966,7 +5279,16 @@ function showAuthTab(tab) {
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        let today = new Date().toISOString().split('T')[0];
+        // Sol menüye logoyu taşıma işlemi
+        const logo = document.getElementById('orionMainLogo');
+        const container = document.getElementById('orionSidebarLogoContainer');
+        if (logo && container) {
+            container.appendChild(logo);
+            logo.style.width = "100%";
+            logo.style.height = "100%";
+        }
+
+        let today = getLocalTodayStr();
         let currentMonth = today.substring(0, 7);
         buildDynamicMonthFilter();
         loadTheme();
@@ -4983,8 +5305,8 @@ function showAuthTab(tab) {
 
         // Orion Ticker — Yahoo Finance v8, CORS açık, tüm endeksler dahil
         fetchOrionTicker(true);
-        // 15 dakikada bir otomatik güncelle
-        setInterval(() => fetchOrionTicker(true), 15 * 60 * 1000);
+        // 30 saniyede bir otomatik güncelle
+        setInterval(() => fetchOrionTicker(true), 30 * 1000);
 
         setTimeout(() => refreshAllMarketData(), 1500);
 
@@ -5106,6 +5428,673 @@ function showAuthTab(tab) {
         }
     }
 
+    // ═══════════════════════════════════════════════════════════════
+    // YAHOO FINANCE HISTORICAL & AUTO-PRICE FETCHING ENGINE
+    // ═══════════════════════════════════════════════════════════════
+    function getTimestampsForDate(dateStr) {
+        const date = new Date(dateStr);
+        const targetSec = Math.floor(date.getTime() / 1000);
+        const period1 = targetSec - (3 * 24 * 60 * 60); // 3 gün öncesi
+        const period2 = targetSec + (3 * 24 * 60 * 60); // 3 gün sonrası
+        return { period1, period2, targetSec };
+    }
+
+    function getYahooSymbol(symbol, type) {
+        symbol = symbol.trim().toUpperCase();
+        if (type === 'bist' && !symbol.includes('.')) {
+            return symbol + '.IS';
+        }
+        if (type === 'emtia') {
+            const emtiaYahooMap = {
+                'ALTIN ONS': 'GC=F',
+                'GÜMÜŞ': 'SI=F',
+                'ALTIN': 'GC=F',
+                'GUMUS': 'SI=F',
+                'GÜMÜŞ ONS': 'SI=F',
+                'ONS ALTIN': 'GC=F',
+                'ONS GÜMÜŞ': 'SI=F'
+            };
+            if (emtiaYahooMap[symbol]) return emtiaYahooMap[symbol];
+        }
+        return symbol;
+    }
+
+    async function fetchYahooPriceForDate(symbol, targetDateStr, type) {
+        const mappedSymbol = getYahooSymbol(symbol, type);
+        const todayStr = getLocalTodayStr();
+        
+        let url;
+        if (targetDateStr === todayStr) {
+            // Live or most recent price
+            url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(mappedSymbol)}?interval=1d&range=1d`;
+        } else {
+            // Historical price
+            const { period1, period2 } = getTimestampsForDate(targetDateStr);
+            url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(mappedSymbol)}?period1=${period1}&period2=${period2}&interval=1d`;
+        }
+        
+        const response = await fetchWithProxy(url, 10000);
+        if (!response) throw new Error("Fiyat sunucusuna bağlanılamadı.");
+        const text = await response.text();
+        if (!text || text.trim()[0] !== '{') throw new Error("Veri formatı hatalı.");
+        const json = JSON.parse(text);
+        
+        const chartResult = json?.chart?.result?.[0];
+        if (!chartResult) throw new Error("Hisse bulunamadı.");
+        
+        if (targetDateStr === todayStr) {
+            const livePrice = chartResult.meta?.regularMarketPrice;
+            if (livePrice === undefined || livePrice === null || isNaN(livePrice)) {
+                throw new Error("Güncel fiyat alınamadı.");
+            }
+            return {
+                price: parseFloat(livePrice),
+                date: todayStr
+            };
+        } else {
+            const timestamps = chartResult.timestamp || [];
+            const indicators = chartResult.indicators?.quote?.[0] || {};
+            const closes = chartResult.indicators?.adjclose?.[0]?.adjclose || indicators.close || [];
+            
+            if (timestamps.length === 0 || closes.length === 0) {
+                throw new Error("Seçilen tarih aralığında veri bulunamadı.");
+            }
+            
+            // Target seconds calculation
+            const date = new Date(targetDateStr);
+            const targetSec = Math.floor(date.getTime() / 1000);
+            
+            let closestIdx = -1;
+            let minDiff = Infinity;
+            for (let i = 0; i < timestamps.length; i++) {
+                if (closes[i] === null || closes[i] === undefined || isNaN(closes[i])) continue;
+                const diff = Math.abs(timestamps[i] - targetSec);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestIdx = i;
+                }
+            }
+            
+            if (closestIdx === -1) {
+                throw new Error("Geçerli fiyat bulunamadı.");
+            }
+            
+            const finalPrice = closes[closestIdx];
+            const finalDate = new Date(timestamps[closestIdx] * 1000);
+            const finalDateStr = finalDate.toISOString().split('T')[0];
+            
+            return {
+                price: parseFloat(finalPrice),
+                date: finalDateStr
+            };
+        }
+    }
+    window.fetchYahooPriceForDate = fetchYahooPriceForDate;
+
+    async function autoFetchSinglePrice(type) {
+        const symbolInput = document.getElementById(type + 'Varlik');
+        const dateInput = document.getElementById(type + 'DateFilter');
+        const priceInput = document.getElementById(type + 'Guncel');
+        
+        if (!symbolInput || !symbolInput.value) {
+            return alert("Lütfen önce hisse kodu girin.");
+        }
+        const symbol = symbolInput.value;
+        const targetDate = dateInput.value || getLocalTodayStr();
+        
+        const btn = event?.currentTarget;
+        let originalText = "";
+        if (btn) {
+            originalText = btn.innerHTML;
+            btn.innerHTML = "⏳";
+            btn.disabled = true;
+        }
+        
+        try {
+            const result = await fetchYahooPriceForDate(symbol, targetDate, type);
+            priceInput.value = result.price.toFixed(4);
+            alert(`${symbol} için ${result.date.split('-').reverse().join('.')} tarihli kapanış fiyatı başarıyla getirildi: ${result.price} ${type==='nasdaq'?'$':(type==='avrupa'?'€':'TL')}`);
+        } catch (e) {
+            alert("Hata: " + e.message);
+        } finally {
+            if (btn) {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+    }
+    window.autoFetchSinglePrice = autoFetchSinglePrice;
+
+    async function bulkFetchPrices(type) {
+        const dateInput = document.getElementById(type + 'DateFilter');
+        const targetDate = dateInput.value;
+        if (!targetDate) return alert("Lütfen önce tarih seçin.");
+        
+        const dbName = `my_${type}_v9`;
+        let db = JSON.parse(localStorage.getItem(dbName)) || {};
+        let records = db[targetDate] || [];
+        
+        if (records.length === 0) {
+            return alert("Bu tarihte güncellenecek hisse kaydı bulunamadı.");
+        }
+        
+        const btn = document.getElementById(`btnBulkFetch_${type}`);
+        let originalText = "";
+        if (btn) {
+            originalText = btn.innerHTML;
+            btn.disabled = true;
+        }
+        
+        let updatedCount = 0;
+        let errors = [];
+        
+        for (let i = 0; i < records.length; i++) {
+            const r = records[i];
+            if (r.isSatildi) continue;
+            
+            if (btn) {
+                btn.innerHTML = `⏳ (${i+1}/${records.length}) ${r.varlik}...`;
+            }
+            
+            try {
+                let price = 0;
+                if (type === 'emtia') {
+                    price = await fetchEmtiaPrice(r.varlik, targetDate);
+                } else {
+                    const result = await fetchYahooPriceForDate(r.varlik, targetDate, type);
+                    price = result.price;
+                }
+                r.guncel = price;
+                r.guncelTutar = r.adet * r.guncel;
+                r.karTL = r.guncelTutar - r.alisTutari;
+                r.karYuzde = r.alisTutari > 0 ? (r.karTL / r.alisTutari) * 100 : 0;
+                updatedCount++;
+            } catch (e) {
+                errors.push(`${r.varlik}: ${e.message}`);
+            }
+        }
+        
+        if (updatedCount > 0) {
+            db[targetDate] = records;
+            saveData(dbName, db);
+            renderAsset(type);
+            updateDashboard();
+            renderIslemGecmisi();
+            renderToplamKar();
+        }
+        
+        if (btn) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+        
+        if (errors.length > 0) {
+            alert(`${updatedCount} hisse güncellendi. Hatalar:\n` + errors.join('\n'));
+        } else {
+            alert(`Tüm hisselerin (${updatedCount}) güncel fiyatları ${targetDate.split('-').reverse().join('.')} tarihine göre internetten güncellendi!`);
+        }
+    }
+    window.bulkFetchPrices = bulkFetchPrices;
+
+    // ═══════════════════════════════════════════════════════════════
+    // GOOGLE NEWS & GEMINI AI COMMENTARY PIPELINE
+    // ═══════════════════════════════════════════════════════════════
+    function toggleApiKeyVisibility() {
+        const input = document.getElementById('geminiApiKeyInput');
+        if (input) {
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+    }
+    window.toggleApiKeyVisibility = toggleApiKeyVisibility;
+
+    async function fetchGoogleNews(symbol) {
+        const query = `${symbol} hisse haber`;
+        const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=tr&gl=TR&ceid=TR:tr`;
+        try {
+            const res = await fetchWithProxy(url, 8000);
+            if (!res) return [];
+            const xmlText = await res.text();
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+            const items = xmlDoc.getElementsByTagName("item");
+            const newsList = [];
+            for (let i = 0; i < Math.min(items.length, 5); i++) {
+                const title = items[i].getElementsByTagName("title")[0]?.textContent || "";
+                const link = items[i].getElementsByTagName("link")[0]?.textContent || "#";
+                const pubDate = items[i].getElementsByTagName("pubDate")[0]?.textContent || "";
+                newsList.push({ title, link, pubDate });
+            }
+            return newsList;
+        } catch (e) {
+            console.error("News fetch error:", e);
+            return [];
+        }
+    }
+    window.fetchGoogleNews = fetchGoogleNews;
+
+    async function callGeminiAPI(apiKey, prompt) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: prompt }]
+                }]
+            })
+        });
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error?.message || 'Gemini API call failed');
+        }
+        const data = await response.json();
+        return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    }
+    window.callGeminiAPI = callGeminiAPI;
+
+    function parseMarkdownToHtml(md) {
+        if (!md) return "";
+        let html = md
+            .replace(/### (.*)/g, '<h4 style="color:#38BDF8; margin: 12px 0 6px; font-size:13px; font-weight:800;">$1</h4>')
+            .replace(/## (.*)/g, '<h3 style="color:#8b5cf6; margin: 16px 0 8px; font-size:14px; font-weight:900;">$1</h3>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.08); padding:2px 4px; border-radius:4px; font-family:var(--mono); font-size:11px;">$1</code>')
+            .replace(/^\s*-\s+(.*)/gm, '<div style="padding-left:14px; position:relative; margin-bottom:4px;"><span style="position:absolute; left:2px; color:#8b5cf6;">•</span>$1</div>')
+            .replace(/\n/g, '<br>');
+        return html;
+    }
+
+    async function runOrionAiPipeline(symbol, stats, acikKarTL, acikKarPct, kapaliKar, tradeKar, toplamKar, portfoyPayi) {
+        const storedKey = localStorage.getItem('gemini_api_key') || '';
+        const keyInput = document.getElementById('geminiApiKeyInput');
+        if (keyInput) {
+            keyInput.value = storedKey;
+        }
+
+        const newsStatus = document.getElementById('news-loading-status');
+        const newsListEl = document.getElementById('orion-news-list');
+        const geminiStatus = document.getElementById('gemini-loading-status');
+        const geminiTextEl = document.getElementById('gemini-commentary-text');
+
+        if (newsStatus) newsStatus.innerText = "(Getiriliyor...)";
+        const news = await fetchGoogleNews(symbol);
+        if (newsStatus) newsStatus.innerText = "";
+        
+        let newsHtml = "";
+        if (news.length === 0) {
+            newsHtml = '<div style="color:rgba(255,255,255,0.4); font-size:11.5px; font-style:italic;">İnternetten son gelişmeler çekilemedi veya bu sembol için yeni haber bulunamadı.</div>';
+        } else {
+            news.forEach(n => {
+                let cleanTitle = n.title;
+                const lastDash = cleanTitle.lastIndexOf(" - ");
+                if (lastDash !== -1) cleanTitle = cleanTitle.substring(0, lastDash);
+                
+                let formattedDate = "";
+                try {
+                    const parsedDate = new Date(n.pubDate);
+                    formattedDate = parsedDate.toLocaleDateString('tr-TR', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+                } catch(err) {
+                    formattedDate = n.pubDate;
+                }
+                
+                newsHtml += `<div style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; flex-direction:column; gap:2px;">
+                    <a href="${n.link}" target="_blank" style="color:#EFF4FF; text-decoration:none; font-weight:700;" onmouseover="this.style.color='#38BDF8'" onmouseout="this.style.color='#EFF4FF'">
+                        🔗 ${cleanTitle}
+                    </a>
+                    <span style="font-size:9.5px; color:rgba(255,255,255,0.35); font-weight:600;">${formattedDate}</span>
+                </div>`;
+            });
+        }
+        if (newsListEl) newsListEl.innerHTML = newsHtml;
+
+        if (!storedKey) {
+            // Local Smart Sentiment Engine Fallback
+            if (geminiStatus) geminiStatus.innerText = "";
+            
+            let posCount = 0;
+            let negCount = 0;
+            
+            const posKeywords = ['artış', 'kar', 'büyüme', 'rekor', 'yükseliş', 'kazandı', 'alim', 'alım', 'destek', 'anlaşma', 'güçlü', 'pozitif', 'hedef', 'yatırım', 'ihale', 'ortaklık', 'hacim', 'arttı', 'kazanç', 'yeşil', 'yükseldi', 'kazandi', 'artisi', 'ortaklik', 'anlasma', 'guclu', 'yukselis'];
+            const negKeywords = ['düşüş', 'zarar', 'kayıp', 'geriledi', 'düştü', 'negatif', 'risk', 'satış', 'ceza', 'soruşturma', 'kriz', 'faiz', 'dava', 'zayıf', 'baskı', 'azaldı', 'iptal', 'kırmızı', 'sarkma', 'düşüşte', 'dusus', 'kayip', 'dustu', 'satis', 'sorusturma', 'zayif', 'baski', 'azaldi'];
+            
+            news.forEach(n => {
+                const txt = n.title.toLowerCase();
+                posKeywords.forEach(w => { if (txt.includes(w)) posCount++; });
+                negKeywords.forEach(w => { if (txt.includes(w)) negCount++; });
+            });
+            
+            let direction = "YATAY ➡️";
+            let badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🟡 YATAY/BELİRSİZ BEKLENTİ</span>';
+            let technicalOutlook = "";
+            let actionAdvice = "";
+            
+            if (posCount > negCount) {
+                direction = "YUKARI 📈";
+                badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🟢 YUKARI BEKLENTİ (BOĞA)</span>';
+                technicalOutlook = "Hissede pozitif haber akışı ve alıcı ilgisinin canlanması, yukarı yönlü momentumu desteklemektedir. Kısa vadeli teknik direnç seviyelerinin aşılmasıyla yükseliş ivme kazanabilir.";
+                actionAdvice = "Mevcut pozisyonlar korunabilir. Eğer hedeflenen kâr seviyelerine yaklaşıldıysa, kademeli kâr realizasyonu (kısmi satış) değerlendirilebilir. Yeni alımlar için destek seviyelerine geri çekilmeler beklenebilir.";
+            } else if (negCount > posCount) {
+                direction = "AŞAĞI 📉";
+                badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🔴 AŞAĞI BEKLENTİ (AYI)</span>';
+                technicalOutlook = "Haber akışında negatif baskının yoğunlaşması ve zayıflayan destekler, hissede kısa vadeli geri çekilme riskini artırmaktadır. Satış hacmindeki artış baskıyı derinleştirebilir.";
+                actionAdvice = "Risk toleransınıza bağlı olarak, maliyet seviyenizin altına sarkmalarda stop-loss (zarar kes) sınırları izlenmelidir. Destek bölgelerinin altında kalındığı sürece ek alımlardan kaçınılması önerilir.";
+            } else {
+                direction = "YATAY ➡️";
+                technicalOutlook = "Dengeli haber akışı ve yatay işlem hacmi, hissenin kısa vadede konsolidasyon (kararsızlık) aşamasında olduğunu göstermektedir. Belirgin bir katalizör oluşana dek yatay bant içi hareketler sürebilir.";
+                actionAdvice = "Pozisyonunuzu koruyarak hissenin konsolidasyon alanından çıkış yönünü (kırılımı) izleyin. Maliyet düşürmek veya ekleme yapmak için direnç kırılımı ya da güçlü ana destek testleri beklenebilir.";
+            }
+            
+            const totalMatches = posCount + negCount;
+            const sentimentScore = totalMatches > 0 ? Math.round((posCount / totalMatches) * 100) : 50;
+            
+            let riskEval = "Optimum seviyede.";
+            if (portfoyPayi > 25) {
+                riskEval = "Yüksek konsantrasyon riski. Portföy payı %25'in üzerinde olduğundan çeşitlendirme yapılması önerilebilir.";
+            } else if (portfoyPayi > 15) {
+                riskEval = "Orta seviye risk. Pozisyon ağırlığı portföy dengesi için makul sınırlardadır.";
+            }
+            
+            const localResponse = `### [YÖN BEKLENTİSİ: ${direction}]
+
+#### 1. Haber Sentiment Değerlendirmesi
+- İnternet üzerinden çekilen güncel haber akışında **${posCount} pozitif** ve **${negCount} negatif** duygu içeren anahtar kelime eşleşmesi tespit edildi.
+- Genel haber duyarlılık endeksi: **%${sentimentScore}** (Duyarlılık: ${sentimentScore > 50 ? 'Pozitif Ağırlıklı' : sentimentScore < 50 ? 'Negatif Ağırlıklı' : 'Nötr / Dengeli'}).
+
+#### 2. Portföy Pozisyon Durumu ve Risk Analizi
+- **Varlık Birim Maliyeti:** \`${stats.maliyetOrt ? stats.maliyetOrt.toFixed(4) : '0.00'} TL\`
+- **Güncel Piyasa Fiyatı:** \`${stats.guncelFiyat ? stats.guncelFiyat.toFixed(4) : '0.00'} TL\`
+- **Net Açık Kâr/Zarar:** \`${acikKarTL ? acikKarTL.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0,00'} TL\` (%${acikKarPct ? acikKarPct.toFixed(2) : '0.00'})
+- **Portföy Ağırlık Oranı:** \`%${portfoyPayi ? portfoyPayi.toFixed(2) : '0.00'}\`
+- **Risk Değerlendirmesi:** ${riskEval}
+
+#### 3. Kısa ve Orta Vadeli Teknik/Yön Beklentisi Raporu
+- ${technicalOutlook}
+- Hisse senedinin tarihsel fiyat hareketleri ve güncel kapanış verileri, piyasa kararlılığı açısından takip edilmektedir.
+
+#### 4. Yatırımcıya Özel Eylem Önerileri
+- ${actionAdvice}
+- Pozisyon büyüklüğünüzü genel portföy hedefleriniz doğrultusunda periyodik olarak güncellemeyi unutmayın.`;
+
+            if (geminiTextEl) {
+                geminiTextEl.innerHTML = badge + '<div style="margin-top:6px;">' + parseMarkdownToHtml(localResponse) + '</div>';
+            }
+            return;
+        }
+
+        if (geminiStatus) geminiStatus.innerText = "(Hazırlanıyor...)";
+        if (geminiTextEl) {
+            geminiTextEl.innerHTML = '<div style="color:rgba(255,255,255,0.4); font-size:11.5px; font-style:italic;">Gemini 1.5 Flash verileri yorumluyor ve yön beklentisini hesaplıyor...</div>';
+        }
+
+        try {
+            const newsSummaries = news.map(n => `- ${n.title}`).join('\n');
+            const prompt = `Hisse Kodu: ${symbol}
+Portföy İstatistikleri:
+- Aktif Adet: ${stats.toplamAdet} adet
+- Ortalama Maliyet: ${stats.maliyetOrt.toFixed(4)} TL
+- Güncel Fiyat: ${stats.guncelFiyat.toFixed(4)} TL
+- Açık Kar/Zarar: ${acikKarTL.toFixed(2)} TL (%${acikKarPct.toFixed(2)})
+- Kapalı Kar/Zarar (Satışlar): ${kapaliKar.toFixed(2)} TL
+- Al-Sat Kar/Zarar: ${tradeKar.toFixed(2)} TL
+- Toplam Net Kar/Zarar: ${toplamKar.toFixed(2)} TL
+- Portföydeki Payı: %${portfoyPayi.toFixed(2)}
+
+Son Haberler/Gelişmeler:
+${newsSummaries || "Son haber bulunamadı."}
+
+Lütfen bu verileri kapsamlı bir şekilde analiz ederek yatırımcı için profesyonel ve zengin bir rapor hazırla.
+Raporun en başında mutlaka [YÖN BEKLENTİSİ: YUKARI], [YÖN BEKLENTİSİ: AŞAĞI] veya [YÖN BEKLENTİSİ: YATAY] ifadesini net bir şekilde kullan.
+Rapor içeriğinde şunlar yer alsın:
+1. Haber Sentiment Değerlendirmesi
+2. Portföy Pozisyon Durumu ve Risk Analizi (Ağırlık vb.)
+3. Kısa ve Orta Vadeli Teknik/Yön Beklentisi Raporu
+4. Yatırımcıya Özel Eylem Önerileri
+
+Yanıtı zengin Türkçe formatında, markdown başlık ve listelerini kullanarak oluştur.`;
+
+            const aiResponse = await callGeminiAPI(storedKey, prompt);
+            if (geminiStatus) geminiStatus.innerText = "";
+            
+            let badge = "";
+            let directionText = aiResponse.toUpperCase();
+            if (directionText.includes("YÖN BEKLENTİSİ: YUKARI") || directionText.includes("YÖN BEKLENTİSİ:POZİTİF")) {
+                badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🟢 YUKARI BEKLENTİ (BOĞA)</span>';
+            } else if (directionText.includes("YÖN BEKLENTİSİ: AŞAĞI") || directionText.includes("YÖN BEKLENTİSİ:NEGATİF")) {
+                badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🔴 AŞAĞI BEKLENTİ (AYI)</span>';
+            } else {
+                badge = '<span style="display:inline-block; padding:4px 10px; border-radius:6px; background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); font-weight:800; font-size:11px; margin-bottom:12px;">🟡 YATAY/BELİRSİZ BEKLENTİ</span>';
+            }
+
+            const parsedHtml = parseMarkdownToHtml(aiResponse);
+            if (geminiTextEl) {
+                geminiTextEl.innerHTML = badge + '<div style="margin-top:6px;">' + parsedHtml + '</div>';
+            }
+        } catch (err) {
+            if (geminiStatus) geminiStatus.innerText = "";
+            if (geminiTextEl) {
+                geminiTextEl.innerHTML = `<div style="color:#ef4444; font-size:11.5px; font-weight:700;">Hata: Yapay zeka yorumu oluşturulamadı. (${err.message})</div>`;
+            }
+        }
+    }
+    window.runOrionAiPipeline = runOrionAiPipeline;
+
+    async function fetchEmtiaPrice(varlik, targetDate) {
+        varlik = varlik.trim().toUpperCase();
+        if (['ALTIN ONS', 'GÜMÜŞ', 'GC=F', 'SI=F'].includes(varlik)) {
+            const sym = varlik === 'ALTIN ONS' ? 'GC=F' : (varlik === 'GÜMÜŞ' ? 'SI=F' : varlik);
+            const res = await fetchYahooPriceForDate(sym, targetDate, 'emtia');
+            return res.price;
+        }
+        const todayStr = getLocalTodayStr();
+        if (targetDate === todayStr) {
+            try {
+                const haremDashUrl = 'https://www.haremaltin.com/dash-data';
+                const r = await fetchWithProxy(haremDashUrl, 9000);
+                if (r) {
+                    const d = await r.json();
+                    const data = d?.data || d;
+                    if (varlik.includes('HAS') || varlik.includes('GRAM') || varlik.includes('ALTIN')) {
+                        const val = parseFloat(data?.ALTIN?.satis || data?.HAS?.satis || 0);
+                        if (val > 0) return val;
+                    }
+                    if (varlik.includes('ÇEYREK')) {
+                        const val = parseFloat(data?.CEYREK_YENI?.satis || data?.CEYREK?.satis || 0);
+                        if (val > 0) return val;
+                    }
+                    if (varlik.includes('YARIM')) {
+                        const val = parseFloat(data?.YARIM?.satis || 0);
+                        if (val > 0) return val;
+                    }
+                    if (varlik.includes('TAM') || varlik.includes('CUMHURİYET')) {
+                        const val = parseFloat(data?.TEK_YENI?.satis || data?.TEK?.satis || 0);
+                        if (val > 0) return val;
+                    }
+                }
+            } catch(e) {}
+        }
+        try {
+            const onsRes = await fetchYahooPriceForDate('GC=F', targetDate, 'emtia');
+            const usdRes = await fetchYahooPriceForDate('USDTRY=X', targetDate, 'bist');
+            const gramTL = (onsRes.price / 31.1035) * usdRes.price;
+            if (varlik.includes('HAS') || varlik.includes('GRAM')) {
+                return gramTL;
+            }
+            if (varlik.includes('ÇEYREK')) {
+                return gramTL * 1.6066;
+            }
+            if (varlik.includes('YARIM')) {
+                return gramTL * 3.2133;
+            }
+            if (varlik.includes('TAM')) {
+                return gramTL * 6.4266;
+            }
+            return gramTL;
+        } catch(e) {}
+        throw new Error("Emtia fiyatı çekilemedi.");
+    }
+    window.fetchEmtiaPrice = fetchEmtiaPrice;
+
+    async function bulkFetchAllActivePrices() {
+        const btn = document.getElementById('btnBulkFetch_all');
+        if (btn) {
+            btn.innerHTML = "⏳ Fiyatlar Çekiliyor...";
+            btn.disabled = true;
+        }
+        try {
+            toast('⏳ Tüm piyasalarda aktif hisse fiyatları güncelleniyor...', 'info');
+            const categories = ['bist', 'nasdaq', 'avrupa', 'emtia'];
+            for (let cat of categories) {
+                const dateEl = document.getElementById(`${cat}DateFilter`);
+                if (dateEl && dateEl.value) {
+                    const dbName = `my_${cat}_v9`;
+                    let db = JSON.parse(localStorage.getItem(dbName)) || {};
+                    let records = db[dateEl.value] || [];
+                    if (records.length > 0) {
+                        for (let r of records) {
+                            if (r.isSatildi) continue;
+                            try {
+                                let price = 0;
+                                if (cat === 'emtia') {
+                                    price = await fetchEmtiaPrice(r.varlik, dateEl.value);
+                                } else {
+                                    const result = await fetchYahooPriceForDate(r.varlik, dateEl.value, cat);
+                                    price = result.price;
+                                }
+                                r.guncel = price;
+                                r.guncelTutar = r.adet * r.guncel;
+                                r.karTL = r.guncelTutar - r.alisTutari;
+                                r.karYuzde = r.alisTutari > 0 ? (r.karTL / r.alisTutari) * 100 : 0;
+                            } catch (e) {}
+                        }
+                        db[dateEl.value] = records;
+                        saveData(dbName, db);
+                    }
+                }
+            }
+            updateHisseListesi();
+            ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(c => renderAsset(c));
+            renderIslemGecmisi();
+            updateDashboard();
+            renderToplamKar();
+            toast('✅ Tüm aktif varlık fiyatları başarıyla güncellendi!', 'success');
+        } catch (err) {
+            toast('❌ Hata oluştu: ' + err.message, 'error');
+        } finally {
+            if (btn) {
+                btn.innerHTML = "⚡ Fiyatları Güncelle";
+                btn.disabled = false;
+            }
+        }
+    }
+    window.bulkFetchAllActivePrices = bulkFetchAllActivePrices;
+
+    function openBulkFonModal() {
+        const dateInput = document.getElementById('fonDateFilter');
+        const targetDate = dateInput.value;
+        if (!targetDate) return alert("Lütfen önce tarih seçin.");
+        document.getElementById('bulkFonSelectedDate').textContent = targetDate.split('-').reverse().join('.');
+        let db = JSON.parse(localStorage.getItem('my_fon_v9')) || {};
+        let records = db[targetDate] || [];
+        let html = '';
+        if (records.length === 0) {
+            html = '<tr><td colspan="3" style="padding:20px; text-align:center; color:var(--t3); font-style:italic;">Bu tarihte kayıtlı fon bulunamadı.</td></tr>';
+        } else {
+            records.forEach((r, idx) => {
+                if (r.isSatildi) return;
+                html += `<tr>
+                    <td style="text-align:left; padding-left:14px; font-weight:800; color:var(--blue);">${r.varlik}</td>
+                    <td>${formatNumberStr(r.maliyet)} TL</td>
+                    <td style="padding:4px 10px;">
+                        <input type="number" step="0.000001" class="bulk-fon-input" data-id="${r.id}" value="${r.guncel}" style="width:100%; height:30px; background:var(--surface-3); border:1px solid var(--border); border-radius:6px; color:#fff; text-align:center; font-weight:700; font-family:var(--mono); outline:none;">
+                    </td>
+                </tr>`;
+            });
+        }
+        document.getElementById('bulkFonTableBody').innerHTML = html;
+        openModal('bulkFonModal');
+    }
+    window.openBulkFonModal = openBulkFonModal;
+
+    function saveBulkFonPrices() {
+        const dateInput = document.getElementById('fonDateFilter');
+        const targetDate = dateInput.value;
+        if (!targetDate) return;
+        let db = JSON.parse(localStorage.getItem('my_fon_v9')) || {};
+        let records = db[targetDate] || [];
+        const inputs = document.querySelectorAll('.bulk-fon-input');
+        let updated = 0;
+        inputs.forEach(input => {
+            const id = parseFloat(input.dataset.id);
+            const val = parseFloat(input.value) || 0;
+            let record = records.find(r => r.id === id);
+            if (record) {
+                record.guncel = val;
+                record.guncelTutar = record.adet * val;
+                record.karTL = record.guncelTutar - record.alisTutari;
+                record.karYuzde = record.alisTutari > 0 ? (record.karTL / record.alisTutari) * 100 : 0;
+                updated++;
+            }
+        });
+        if (updated > 0) {
+            db[targetDate] = records;
+            saveData('my_fon_v9', db);
+            renderAsset('fon');
+            updateDashboard();
+            renderIslemGecmisi();
+            renderToplamKar();
+            toast(`✅ ${updated} adet fon fiyatı güncellendi!`, 'success');
+        }
+        closeModal('bulkFonModal');
+    }
+    window.saveBulkFonPrices = saveBulkFonPrices;
+
+    function openHesabimModal() {
+        const emailSpan = document.getElementById('hesabimUserEmail');
+        if (auth.currentUser) {
+            emailSpan.textContent = auth.currentUser.email;
+        } else {
+            emailSpan.textContent = "Giriş yapılmadı";
+        }
+        openModal('hesabimModal');
+    }
+    window.openHesabimModal = openHesabimModal;
+
+    async function sendResetPasswordEmail() {
+        if (!auth.currentUser) return toast('⚠️ Giriş yapmış bir kullanıcı bulunamadı.', 'warning');
+        try {
+            await auth.sendPasswordResetEmail(auth.currentUser.email);
+            toast('📧 Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.', 'success');
+        } catch(e) {
+            toast('❌ Şifre sıfırlama e-postası gönderilemedi: ' + e.message, 'error');
+        }
+    }
+    window.sendResetPasswordEmail = sendResetPasswordEmail;
+
+    function handleJSONUploadHesabim(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const backup = JSON.parse(e.target.result);
+                const keys = Object.keys(backup).filter(k => k.startsWith('my_'));
+                if (!keys.length) {
+                    return toast('❌ Geçerli yedek dosyası değil.', 'error');
+                }
+                Object.entries(backup).forEach(([k, v]) => saveData(k, v));
+                toast('✅ Yedek dosyası başarıyla yüklendi ve geri yüklendi!', 'success');
+                setTimeout(() => location.reload(), 1500);
+            } catch (err) {
+                toast('❌ Dosya işlenirken hata oluştu.', 'error');
+            }
+        };
+        reader.readAsText(file, 'UTF-8');
+    }
+    window.handleJSONUploadHesabim = handleJSONUploadHesabim;
+
     auth.onAuthStateChanged((user) => {
         if (user) {
             currentUser = user;
@@ -5114,6 +6103,10 @@ function showAuthTab(tab) {
             if (lbl) {
                 lbl.textContent = '👤 ' + (user.email || user.uid.substring(0,8));
                 lbl.style.display = 'block';
+            }
+            const sidebarEmail = document.getElementById('sidebarUserEmail');
+            if (sidebarEmail) {
+                sidebarEmail.textContent = user.email || user.uid.substring(0,8);
             }
             toast('Hoş geldin ' + (user.email || '') + ', veriler eşitleniyor...', 'success');
 
@@ -5145,6 +6138,20 @@ function showAuthTab(tab) {
 
                 // Her zaman UI'ı yenile
                 if (typeof updateHisseListesi === 'function') {
+                    // Tarih filtrelerini veri tabanındaki son tarihlere eşitle
+                    assetCategories.forEach(cat => {
+                        let el = document.getElementById(`${cat}DateFilter`);
+                        if (el) {
+                            let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
+                            let dates = Object.keys(db).sort();
+                            if (dates.length > 0) {
+                                el.value = dates[dates.length - 1];
+                            } else {
+                                el.value = getLocalTodayStr();
+                            }
+                        }
+                    });
+
                     updateHisseListesi();
                     ['bist', 'emtia', 'nasdaq', 'avrupa', 'fon'].forEach(cat => renderAsset(cat));
                     renderTrade(); renderArz(); renderTemettu(); renderIslemGecmisi(); renderToplamKar();
