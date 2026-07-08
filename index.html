@@ -71,13 +71,13 @@
         /* --- ENDEKS BAR & ORION TICKER --- */
         #endeks-bar {
             position: relative;
-            background: rgba(7, 11, 18, 0.18);
-            border: 1px solid rgba(255,255,255,0.09);
+            background: rgba(7, 11, 18, 0.08);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: var(--r-lg);
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.06);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
             margin-bottom: 8px;
             flex-shrink: 0;
         }
@@ -233,12 +233,12 @@
         /* ─── ANA KAPSAYICI ─── */
         .container {
             width: 100%; height: calc(100vh - 28px);
-            background: rgba(12, 16, 24, 0.10);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(9, 13, 22, 0.22);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: var(--r-xl);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.05);
             padding: 12px 18px 10px;
             display: flex; flex-direction: column; gap: 0;
             overflow: hidden;
@@ -357,12 +357,12 @@
         #orionSidebarOverlay.active { display: block; opacity: 1; }
         #orionLeftSidebar {
             position: fixed; top: 0; left: -300px; width: 275px; height: 100vh;
-            background: rgba(8, 12, 21, 0.82);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-right: 1px solid rgba(255,255,255,0.08);
+            background: rgba(8, 12, 21, 0.50);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-right: 1px solid rgba(255,255,255,0.06);
             z-index: 10000; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex; flex-direction: column; padding: 20px 16px;
-            box-shadow: 15px 0 45px rgba(0,0,0,0.55);
+            box-shadow: 15px 0 45px rgba(0,0,0,0.45);
             overflow-y: auto;
         }
         #orionLeftSidebar.open { left: 0; }
@@ -378,7 +378,7 @@
                 left: 0;
             }
             .container {
-                transition: margin-left 0.3s ease, width 0.3s ease;
+                transition: none !important;
             }
             #orionLeftSidebar.open ~ .container {
                 margin-left: 275px;
@@ -769,7 +769,7 @@
         /* ─── MODALS ─── */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,.85); z-index: 999;
+            background: rgba(0,0,0,.85); z-index: 90000;
             backdrop-filter: blur(12px); justify-content: center; align-items: center;
         }
         .modal-overlay.active { display: flex; animation: fadeUp .25s ease; }
@@ -861,6 +861,18 @@
         /* ═══════════════════════════════════════════════════
            MOBİL UYUMLULUK (RESPONSIVE) DÜZELTMELERİ
         ═══════════════════════════════════════════════════ */
+
+        /* ── ORTA EKRAN (1200px altı) ── */
+        @media (max-width: 1200px) {
+            .charts-container {
+                flex-direction: column !important;
+                gap: 12px;
+            }
+            .chart-box {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
 
         /* ── TABLET GENİŞ (900px altı) ── */
         @media (max-width: 900px) {
@@ -1329,7 +1341,7 @@
     <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:24px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:16px; position:relative; width:100%;">
         <div id="orionSidebarLogoContainer" style="width:50px; height:50px; border-radius:12px; overflow:hidden; margin-bottom:10px; box-shadow:0 6px 20px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246,0.25);"></div>
         <span class="orion-brand-name" style="font-size:18px; letter-spacing: 3px; color: #FFFFFF !important;">ORION</span>
-        <button class="modal-close" style="position:absolute; top:0; right:0; font-size:16px; color:var(--t3); border:none; background:transparent; cursor:pointer; padding: 4px;" onclick="toggleSidebar()" title="Menüyü Kapat">◀</button>
+        <button class="modal-close" style="position:absolute; top:8px; right:12px; font-size:24px; color:var(--t3); border:none; background:transparent; cursor:pointer; padding: 4px; transition:color 0.2s; line-height: 1;" onclick="toggleSidebar()" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t3)'" title="Menüyü Kapat">&times;</button>
     </div>
     <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
         <button class="sidebar-nav-btn active" data-tab="ozet-tab" onclick="switchTab('ozet-tab'); toggleSidebar()">📊 Özet</button>
@@ -2552,7 +2564,26 @@ function showAuthTab(tab) {
         return await fetchYahooV8(yahooSymbol, timeout);
     }
 
-    // localStorage'dan son başarılı ticker verisini yükle (offline fallback)
+    const ORION_DEFAULT_TICKER = [
+        { label: 'USD/TRY',    flag: '💵', price: 32.8540, chg: 0.12 },
+        { label: 'EUR/TRY',    flag: '💶', price: 35.6210, chg: -0.05 },
+        { label: 'BIST 100',   flag: '🇹🇷', price: 10452.30, chg: 1.24 },
+        { label: 'BIST 30',    flag: '🇹🇷', price: 11488.03, chg: 1.05 },
+        { label: 'NASDAQ 100', flag: '🇺🇸', price: 19852.56, chg: 0.45 },
+        { label: 'S&P 500',    flag: '🇺🇸', price: 5432.71, chg: 0.32 },
+        { label: 'DAX',        flag: '🇩🇪', price: 18125.40, chg: -0.15 },
+        { label: 'CAC 40',     flag: '🇫🇷', price: 7650.20, chg: -0.22 },
+        { label: 'FTSE 100',   flag: '🇬🇧', price: 8210.50, chg: 0.08 },
+        { label: 'EURO STOXX', flag: '🇪🇺', price: 4950.80, chg: -0.18 },
+        { label: 'ALTIN ONS',  flag: '🥇', price: 2355.40, chg: 0.65 },
+        { label: 'HAS ALTIN',  flag: '🥇', price: 2486.00, chg: 0.85, unit: '₺/g' },
+        { label: 'ÇEYREK',    flag: '🥇', price: 4085.00, chg: 0.85, unit: '₺' },
+        { label: 'YARIM',     flag: '🥇', price: 8170.00, chg: 0.85, unit: '₺' },
+        { label: 'TAM ALTIN', flag: '🥇', price: 16340.00, chg: 0.85, unit: '₺' },
+        { label: 'GÜMÜŞ',      flag: '🥈', price: 29.80, chg: 1.15 },
+        { label: 'BTC/USD',    flag: '💎', price: 61250.00, chg: 2.45 }
+    ];
+
     function loadTickerFromStorage() {
         try {
             const saved = localStorage.getItem('orion_ticker_cache_v2');
@@ -2564,7 +2595,7 @@ function showAuthTab(tab) {
                 }
             }
         } catch(e) {}
-        return null;
+        return { data: ORION_DEFAULT_TICKER, time: Date.now() };
     }
 
     async function fetchOrionTicker(forceRefresh) {
@@ -2770,12 +2801,28 @@ function showAuthTab(tab) {
         ];
         const ordered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
 
-        // ── 6. Hiç veri gelmediyse localStorage fallback ──────────────────────
-        if (ordered.length === 0) {
-            const stored = loadTickerFromStorage();
-            if (stored && stored.data.length > 0) {
-                const ageMin = Math.round((now - stored.time) / 60000);
-                renderOrionTicker(stored.data);
+        // Merge missing items from cache if available
+        const stored = loadTickerFromStorage();
+        const storedData = stored?.data || [];
+        
+        labelOrder.forEach(l => {
+            const exists = results.find(r => r.label === l);
+            if (!exists) {
+                const prevGoodVal = storedData.find(s => s.label === l);
+                if (prevGoodVal) {
+                    results.push(prevGoodVal);
+                }
+            }
+        });
+        
+        // Re-calculate ordered list to ensure proper ordering is preserved
+        const finalOrdered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
+
+        // ── 6. Hiç veri gelmediyse fallback ──────────────────────
+        if (finalOrdered.length === 0) {
+            if (storedData.length > 0) {
+                const ageMin = Math.round((now - (stored.time || now)) / 60000);
+                renderOrionTicker(storedData);
                 const bar = document.getElementById('endeks-bar');
                 if (bar && track) {
                     bar.style.position = 'relative';
@@ -2784,21 +2831,21 @@ function showAuthTab(tab) {
                     badge.textContent = `⚠ ${ageMin}dk önce`;
                     bar.appendChild(badge);
                 }
-                return stored.data;
+                return storedData;
             }
             if (track) track.innerHTML = '<div class="orion-tick-loading" style="color:var(--t3);">— Piyasa verisi bekleniyor</div>';
             return;
         }
 
-        orionTickerCache = ordered;
+        orionTickerCache = finalOrdered;
         orionTickerTime  = now;
         try {
-            localStorage.setItem('orion_ticker_cache_v2', JSON.stringify(ordered));
+            localStorage.setItem('orion_ticker_cache_v2', JSON.stringify(finalOrdered));
             localStorage.setItem('orion_ticker_time_v2', now.toString());
         } catch(e) {}
-        renderOrionTicker(ordered);
+        renderOrionTicker(finalOrdered);
         if (document.getElementById('marketDataPanel')) loadMarketDataPanel();
-        return ordered;
+        return finalOrdered;
     }
 
     function renderOrionTicker(items) {
