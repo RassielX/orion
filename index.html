@@ -596,7 +596,12 @@
             letter-spacing: 1px; text-transform: uppercase; text-align: center;
             margin-bottom: 8px; flex-shrink: 0;
         }
-        .canvas-container { position: relative; flex: 1; min-height: 180px; }
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            min-height: 200px;
+        }
 
         /* ─── FİLTRE BARI ─── */
         .filter-bar {
@@ -1963,7 +1968,10 @@ function showAuthTab(tab) {
         </div>
         <div id="quickAssetInfo" style="display:none; background: var(--surface-3); border: 1px dashed var(--blue); border-radius: var(--r); padding: 12px 18px; margin-bottom: 14px; align-items: center; justify-content: space-between; animation: fadeUp .3s ease;">
             <div style="display:flex; gap: 24px; align-items: center; flex-wrap:wrap;">
-                <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">SEÇİLİ VARLIK</span><strong id="qInfoVarlik" style="color:var(--blue); font-size:16px; font-family:var(--mono);">SASA</strong></div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <div id="qInfoLogoContainer" style="display:flex; align-items:center; justify-content:center;"></div>
+                    <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">SEÇİLİ VARLIK</span><strong id="qInfoVarlik" style="color:var(--blue); font-size:16px; font-family:var(--mono);">SASA</strong></div>
+                </div>
                 <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">AKTİF ADET</span><strong id="qInfoAdet" style="color:var(--t1); font-size:15px; font-family:var(--mono);">0</strong></div>
                 <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">ORT. MALİYET</span><strong id="qInfoMaliyet" style="color:var(--t1); font-size:15px; font-family:var(--mono);">0.00</strong></div>
                 <div><span style="font-size:10px; color:var(--t3); font-weight:800; display:block; margin-bottom:4px;">AÇIK KÂR/ZARAR</span><div id="qInfoKar" style="font-size:15px;">0,00 TL</div></div>
@@ -2161,6 +2169,108 @@ function showAuthTab(tab) {
         if (modal) modal.classList.remove('active');
     }
     window.closeModal = closeModal;
+
+    const LOGO_DOMAINS = {
+        // US Stocks
+        'AAPL': 'apple.com',
+        'MSFT': 'microsoft.com',
+        'GOOGL': 'google.com',
+        'GOOG': 'google.com',
+        'NVDA': 'nvidia.com',
+        'TSLA': 'tesla.com',
+        'AMZN': 'amazon.com',
+        'META': 'meta.com',
+        'NFLX': 'netflix.com',
+        'AMD': 'amd.com',
+        'INTC': 'intel.com',
+        'QCOM': 'qualcomm.com',
+        'COIN': 'coinbase.com',
+        'BABA': 'alibaba.com',
+        'NIO': 'nio.com',
+        
+        // Crypto
+        'BTC': 'bitcoin.org',
+        'BTC/USD': 'bitcoin.org',
+        'ETH': 'ethereum.org',
+        'ETH/USD': 'ethereum.org',
+        'SOL': 'solana.com',
+        'XRP': 'ripple.com',
+        
+        // BIST Stocks
+        'THYAO': 'turkishairlines.com',
+        'YKBNK': 'yapikredi.com.tr',
+        'AKBNK': 'akbank.com',
+        'ISCTR': 'isbank.com.tr',
+        'GARAN': 'garantibbva.com.tr',
+        'TUPRS': 'tupras.com.tr',
+        'EREGL': 'erdemir.com.tr',
+        'ASELS': 'aselsan.com.tr',
+        'SASA': 'sasa.com.tr',
+        'HEKTS': 'hektas.com.tr',
+        'BIMAS': 'bim.com.tr',
+        'KCHOL': 'koc.com.tr',
+        'SAHOL': 'sabanci.com.tr',
+        'FROTO': 'ford.com.tr',
+        'TOASO': 'tofas.com.tr',
+        'SISE': 'sisecam.com.tr',
+        'PGSUS': 'flypgs.com',
+        'PETKM': 'petkim.com.tr',
+        'TCELL': 'turkcell.com.tr',
+        'TTKOM': 'turktelekom.com.tr',
+        'MGROS': 'migros.com.tr',
+        'HALKB': 'halkbank.com.tr',
+        'VAKBN': 'vakifbank.com.tr'
+    };
+
+    function getAssetLogoHTML(symbol, size = 32) {
+        if (!symbol) return '';
+        const cleanSym = symbol.toUpperCase().trim();
+        
+        // Check gold/silver commodities
+        if (cleanSym === 'ALTIN' || cleanSym === 'HAS ALTIN' || cleanSym === 'ALTIN ONS') {
+            return `<div class="asset-logo-circle" style="width:${size}px; height:${size}px; font-size:${size*0.4}px; background:linear-gradient(135deg, #FBBF24 0%, #D97706 100%); border:1px solid rgba(251,191,36,0.3); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; box-shadow:0 2px 10px rgba(217,119,6,0.2); flex-shrink:0;">🥇</div>`;
+        }
+        if (cleanSym === 'GÜMÜŞ') {
+            return `<div class="asset-logo-circle" style="width:${size}px; height:${size}px; font-size:${size*0.4}px; background:linear-gradient(135deg, #E2E8F0 0%, #94A3B8 100%); border:1px solid rgba(226,232,240,0.3); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; box-shadow:0 2px 10px rgba(148,163,184,0.2); flex-shrink:0;">🥈</div>`;
+        }
+        
+        // Check domains map
+        const domain = LOGO_DOMAINS[cleanSym];
+        if (domain) {
+            const logoUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
+            return `<img src="${logoUrl}" class="asset-logo-img" style="width:${size}px; height:${size}px; border-radius:50%; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.02); object-fit:cover; display:inline-block; vertical-align:middle; flex-shrink:0;" onerror="this.outerHTML=getFallbackLetterBadge('${cleanSym}', ${size})">`;
+        }
+        
+        return getFallbackLetterBadge(cleanSym, size);
+    }
+    window.getAssetLogoHTML = getAssetLogoHTML;
+
+    function getFallbackLetterBadge(symbol, size) {
+        let hash = 0;
+        for (let i = 0; i < symbol.length; i++) {
+            hash = symbol.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        const colors = [
+            'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)', // Blue
+            'linear-gradient(135deg, #EF4444 0%, #B91C1C 100%)', // Red
+            'linear-gradient(135deg, #10B981 0%, #047857 100%)', // Emerald
+            'linear-gradient(135deg, #F59E0B 0%, #B45309 100%)', // Amber
+            'linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%)', // Purple
+            'linear-gradient(135deg, #EC4899 0%, #BE185D 100%)', // Pink
+            'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)', // Cyan
+            'linear-gradient(135deg, #64748B 0%, #475569 100%)'  // Slate
+        ];
+        const colorIndex = Math.abs(hash) % colors.length;
+        const color = colors[colorIndex];
+        
+        let letters = symbol.substring(0, 2);
+        if (symbol.includes('/')) {
+            letters = symbol.split('/')[0].substring(0, 2);
+        }
+        
+        return `<div class="asset-logo-circle" style="width:${size}px; height:${size}px; font-size:${size*0.35}px; background:${color}; border:1px solid rgba(255,255,255,0.08); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; text-shadow:0 1px 2px rgba(0,0,0,0.2); text-transform:uppercase; flex-shrink:0;">${letters}</div>`;
+    }
+    window.getFallbackLetterBadge = getFallbackLetterBadge;
 
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
@@ -3694,9 +3804,16 @@ function showAuthTab(tab) {
 
         const katLabel = { bist:'🇹🇷 BİST', nasdaq:'🇺🇸 NASDAQ', emtia:'🥇 Emtia', avrupa:'🇪🇺 Avrupa', fon:'📦 Fon' };
         document.getElementById('assetModalTitle').innerHTML = `
-            ${varlik}
-            <span style="font-size:10px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); padding:2px 8px; border-radius:4px; color:#38BDF8; letter-spacing:.4px; vertical-align:middle; margin-left:6px;">${katLabel[type] || type.toUpperCase()}</span>
-            <br><span style="font-size:10px; color:var(--t2); font-weight:700; letter-spacing:.5px;">DETAYLI PERFORMANS RADARI</span>`;
+            <div style="display:flex; align-items:center; gap:12px;">
+                ${getAssetLogoHTML(varlik, 36)}
+                <div>
+                    <div style="display:flex; align-items:center;">
+                        <span style="font-size:22px; font-weight:900;">${varlik}</span>
+                        <span style="font-size:10px; background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.3); padding:2px 8px; border-radius:4px; color:#38BDF8; letter-spacing:.4px; margin-left:8px;">${katLabel[type] || type.toUpperCase()}</span>
+                    </div>
+                    <span style="font-size:10px; color:var(--t2); font-weight:700; letter-spacing:.5px;">DETAYLI PERFORMANS RADARI</span>
+                </div>
+            </div>`;
 
         const totalKarZarar = unrealized + totalRealized;
         const getiriYuzde   = totalMaliyet > 0 ? ((totalGuncel - totalMaliyet) / totalMaliyet * 100) : 0;
@@ -4551,6 +4668,7 @@ function showAuthTab(tab) {
             let kar = ((aktifAdet * sonGuncel) - toplamMaliyet) * kur; // TL Cinsinden Kâr
             
             document.getElementById('qInfoVarlik').innerText = varlik;
+            document.getElementById('qInfoLogoContainer').innerHTML = getAssetLogoHTML(varlik, 32);
             document.getElementById('qInfoAdet').innerText = new Intl.NumberFormat('tr-TR').format(aktifAdet);
             document.getElementById('qInfoMaliyet').innerText = formatNumberStr(ortMaliyet) + ' ' + sembol;
             document.getElementById('qInfoKar').innerHTML = formatKar(kar);
@@ -4891,7 +5009,7 @@ function showAuthTab(tab) {
                     <td>${t.tarih.split('-').reverse().join('.')}</td>
                     <td style="${t.islem.includes('TAMAMLANDI')||t.islem.includes('SATIŞ')?'color:var(--amber)':'color:var(--blue)'}; font-weight:800;">${t.islem}</td>
                     <td>${t.piyasa}</td>
-                    <td><button class="asset-link" onclick="openAssetDetail('${t.cat==='trade'||t.cat==='arz'?'bist':t.cat}', '${t.varlik}')">${t.varlik}</button></td>
+                    <td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(t.varlik, 24)}<button class="asset-link" onclick="openAssetDetail('${t.cat==='trade'||t.cat==='arz'?'bist':t.cat}', '${t.varlik}')">${t.varlik}</button></div></td>
                     <td>${t.adet}</td><td>${t.fiyat}</td><td>${t.tutar}</td>
                     <td style="font-weight:900;">${t.kar === 0 ? '-' : formatKar(t.kar)}</td>
                     <td><button class="btn-warning" style="padding:4px 6px; font-size:9px;" onclick="globalEdit('${t.cat}', '${t.id}', '${t.tarih}')">Düzenle</button> <button class="btn-danger" style="padding:4px 6px; font-size:9px;" onclick="globalDelete('${t.cat}', '${t.id}', '${t.tarih}')">Sil</button></td>
@@ -4917,7 +5035,7 @@ function showAuthTab(tab) {
                     <td>${r.sonTarih.split('-').reverse().join('.')}</td>
                     <td style="color:${durumRenk}; font-weight:800;">${durum}</td>
                     <td>${r.piyasa}</td>
-                    <td><button class="asset-link" onclick="openAssetDetail('${r.cat==='trade'||r.cat==='arz'?'bist':r.cat}', '${r.varlik}')">${r.varlik}</button></td>
+                    <td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(r.varlik, 24)}<button class="asset-link" onclick="openAssetDetail('${r.cat==='trade'||r.cat==='arz'?'bist':r.cat}', '${r.varlik}')">${r.varlik}</button></div></td>
                     <td>${r.aktifAdet > 0 ? new Intl.NumberFormat('tr-TR').format(r.aktifAdet) : '-'}</td>
                     <td>${r.aktifAdet > 0 ? formatNumberStr(ortMaliyet) + ' ' + r.sembol : '-'}</td>
                     <td>${r.aktifAdet > 0 ? formatNumberStr(r.toplamMaliyet) + ' TL' : '-'}</td>
@@ -4988,7 +5106,7 @@ function showAuthTab(tab) {
                 if (isFon) {
                     let baslangicTarihiFormatted = d.baslangicTarihi ? d.baslangicTarihi.split('-').reverse().join('.') : '-';
                     html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}">
-                        <td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td>
+                        <td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.varlik, 24)}<button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></div></td>
                         <td>${baslangicTarihiFormatted}</td>
                         <td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td>
                         <td>${formatNumberStr(d.maliyet)} ${sembol}</td>
@@ -5003,7 +5121,7 @@ function showAuthTab(tab) {
                         <td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td>
                     </tr>`;
                 } else {
-                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
+                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.varlik, 24)}<button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></div></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
                 }
             });
         }
@@ -5021,7 +5139,7 @@ function showAuthTab(tab) {
             if (filterMonth !== "all" && !d.tarih.startsWith(filterMonth)) return;
             let kur = d.piyasa === 'NASDAQ' ? usdKur : (d.piyasa === 'AVRUPA' ? eurKur : 1);
             if(!d.isBekliyor) monthTotalKar += (Number(d.karTL) * kur);
-            html += `<tr><td>${d.tarih.split("-").reverse().join(".")}</td><td><button class="asset-link" onclick="openAssetDetail('trade', '${d.hisse}')">${d.hisse}</button> <span style="font-size:9px;color:var(--t2)">(${d.piyasa})</span></td><td>${d.adet}</td><td>${formatNumberStr(d.alis)}</td><td>${d.isBekliyor ? '-' : formatNumberStr(d.satis)}</td><td>${formatNumberStr(d.alisTutari)}</td><td>${d.isBekliyor ? '-' : formatNumberStr(d.satisTutari)}</td><td>${formatKar(Number(d.karTL) * kur, d.isBekliyor)}</td><td>${formatYuzde(d.karYuzde, d.isBekliyor)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="globalEdit('trade', '${d.id}', '${d.tarih}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('trade', '${d.id}', '${d.tarih}')">Sil</button></td></tr>`;
+            html += `<tr><td>${d.tarih.split("-").reverse().join(".")}</td><td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.hisse, 24)}<button class="asset-link" onclick="openAssetDetail('trade', '${d.hisse}')">${d.hisse}</button> <span style="font-size:9px;color:var(--t2)">(${d.piyasa})</span></div></td><td>${d.adet}</td><td>${formatNumberStr(d.alis)}</td><td>${d.isBekliyor ? '-' : formatNumberStr(d.satis)}</td><td>${formatNumberStr(d.alisTutari)}</td><td>${d.isBekliyor ? '-' : formatNumberStr(d.satisTutari)}</td><td>${formatKar(Number(d.karTL) * kur, d.isBekliyor)}</td><td>${formatYuzde(d.karYuzde, d.isBekliyor)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="globalEdit('trade', '${d.id}', '${d.tarih}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('trade', '${d.id}', '${d.tarih}')">Sil</button></td></tr>`;
             count++;
         });
         document.getElementById('tradeTableBody').innerHTML = count > 0 ? html : '<tr class="empty-row"><td colspan="10">Kayıt bulunamadı.</td></tr>';
@@ -5037,7 +5155,7 @@ function showAuthTab(tab) {
             totalKar += kar;
             html += `<tr>
                 <td>${d.tarih ? d.tarih.split('-').reverse().join('.') : '-'}</td>
-                <td><button class="asset-link" onclick="openAssetDetail('arz','${d.hisse}')">${d.hisse}</button></td>
+                <td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.hisse, 24)}<button class="asset-link" onclick="openAssetDetail('arz','${d.hisse}')">${d.hisse}</button></div></td>
                 <td>${d.adet}</td>
                 <td>${formatNumberStr(d.maliyet)} TL</td>
                 <td>${d.satis > 0 ? formatNumberStr(d.satis) + ' TL' : '-'}</td>
@@ -5067,7 +5185,7 @@ function showAuthTab(tab) {
             total += net;
             html += `<tr>
                 <td>${d.tarih ? d.tarih.split('-').reverse().join('.') : '-'}</td>
-                <td><button class="asset-link" onclick="openAssetDetail('temettu','${d.hisse}')">${d.hisse}</button></td>
+                <td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.hisse, 24)}<button class="asset-link" onclick="openAssetDetail('temettu','${d.hisse}')">${d.hisse}</button></div></td>
                 <td class="text-green">${formatTL(net)}</td>
                 <td>
                     <button class="btn-warning" style="padding:4px 8px;font-size:9px;" onclick="globalEdit('temettu','${d.id}','${d.tarih}')">Düzenle</button>
