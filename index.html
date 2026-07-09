@@ -696,7 +696,7 @@
         /* ─── GRAFİK KUTULARI ─── */
         .charts-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             min-height: 240px;
             flex-shrink: 0;
@@ -1125,7 +1125,7 @@
 
             /* Grafikler */
             .charts-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
             .chart-box {
@@ -2062,7 +2062,7 @@ function showAuthTab(tab) {
         </div>
         <div class="charts-container">
             <div class="chart-box"><h3>KÂR / ZARAR DAĞILIMI (TL)</h3><div class="canvas-container"><canvas id="karChart"></canvas></div></div>
-            <div class="chart-box" style="max-width: 450px;"><h3>VARLIK DAĞILIMI (GÜNCEL DEĞER)</h3><div class="canvas-container"><canvas id="varlikChart"></canvas></div></div>
+            <div class="chart-box"><h3>VARLIK DAĞILIMI (GÜNCEL DEĞER)</h3><div class="canvas-container"><canvas id="varlikChart"></canvas></div></div>
         </div>
     </div>
 
@@ -2867,7 +2867,7 @@ function showAuthTab(tab) {
         let usdTry = 32.8540;
         let eurTry = 35.6210;
         try {
-            const erRes = await fetchSafe('https://open.er-api.com/v6/latest/USD', {}, 10000);
+            const erRes = await fetchSafe('https://open.er-api.com/v6/latest/USD?_=' + Date.now(), {}, 10000);
             if (erRes.ok) {
                 const erData = await erRes.json();
                 const rates  = erData.rates || {};
@@ -2889,7 +2889,7 @@ function showAuthTab(tab) {
 
         // ── 2. Crypto (BTC) — Binance ─────────────
         try {
-            const btcRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', {}, 10000);
+            const btcRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT&_=' + Date.now(), {}, 10000);
             if (btcRes.ok) {
                 const btcData = await btcRes.json();
                 const price = parseFloat(btcData.lastPrice);
@@ -2904,7 +2904,7 @@ function showAuthTab(tab) {
         let goldONS = 2355.40;
         let goldChg = 0.65;
         try {
-            const paxgRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT', {}, 10000);
+            const paxgRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT&_=' + Date.now(), {}, 10000);
             if (paxgRes.ok) {
                 const paxgData = await paxgRes.json();
                 const price = parseFloat(paxgData.lastPrice);
@@ -3088,10 +3088,10 @@ function showAuthTab(tab) {
             ).join('');
         };
 
-        if (orionTickerCache && (Date.now() - orionTickerTime) < ORION_CACHE_MS) {
+        if (orionTickerCache) {
             buildPanel(orionTickerCache);
         } else {
-            fetchOrionTicker(true).then(() => buildPanel(orionTickerCache));
+            buildPanel(ORION_DEFAULT_TICKER);
         }
     }
 
@@ -3415,10 +3415,8 @@ function showAuthTab(tab) {
         assetCategories.forEach(cat => {
             let kur = cat === 'nasdaq' ? usdKur : (cat === 'avrupa' ? eurKur : 1);
             let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
-            let dates = Object.keys(db).sort();
-            if (dates.length > 0) {
-                let lastDate = dates[dates.length - 1];
-                db[lastDate].filter(d => !d.isSatildi).forEach(d => {
+            Object.keys(db).forEach(dk => {
+                (db[dk] || []).filter(d => !d.isSatildi).forEach(d => {
                     let guncel = Number(d.guncelTutar) * kur;
                     let k = Number(d.karTL) * kur;
                     allAssets.push({ varlik: d.varlik, guncelTutar: guncel, karTL: k, kategori: cat });
@@ -3426,7 +3424,7 @@ function showAuthTab(tab) {
                     kategoriDagilimi[cat] += guncel;
                     if(k > 0) winningAssets++; else if(k < 0) losingAssets++;
                 });
-            }
+            });
         });
 
         // 2. REALİZE EDİLMİŞ KÂRLAR
@@ -3701,7 +3699,7 @@ function showAuthTab(tab) {
                         maintainAspectRatio: false,
                         cutout: '65%',
                         plugins: {
-                            legend: { position: 'right', labels: { color: '#cbd5e1', font: {size: 10, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 10 } }
+                            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: {size: 9, weight: 600, family: "'Inter', sans-serif"}, boxWidth: 8, padding: 8 } }
                         }
                     }
                 });
@@ -5370,7 +5368,7 @@ function showAuthTab(tab) {
                 },
                 options: { 
                     maintainAspectRatio: false, 
-                    plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11, weight:600 }, color: tickColor, padding: 14 } } },
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10, weight:600 }, color: tickColor, padding: 8 } } },
                     cutout: '65%'
                 }
             });
