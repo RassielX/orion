@@ -405,8 +405,30 @@
         }
 
         /* ─── TAB İÇERİKLERİ ─── */
-        .tab-content { display: none; flex: 1; min-height: 0; flex-direction: column; gap: 8px; overflow: hidden; }
+        .tab-content {
+            display: none;
+            flex: 1;
+            min-height: 0;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            padding-right: 6px;
+        }
         .tab-content.active { display: flex; animation: fadeUp .3s cubic-bezier(.4,0,.2,1); }
+        .tab-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .tab-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .tab-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.08);
+            border-radius: 3px;
+        }
+        .tab-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.20);
+        }
         @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         
         /* Mobilde ve Tablette hareket/scroll sorununu çözen kurallar */
@@ -4049,6 +4071,18 @@ function showAuthTab(tab) {
             }
             // Continuous chart resizing during sidebar transition
             dispatchResizeEventsForDuration(350);
+            
+            // Forced instant chart resize steps
+            setTimeout(() => {
+                if (typeof chartKar !== 'undefined' && chartKar) { chartKar.resize(); chartKar.update('none'); }
+                if (typeof chartVarlik !== 'undefined' && chartVarlik) { chartVarlik.resize(); chartVarlik.update('none'); }
+                if (typeof chartYillikTrend !== 'undefined' && chartYillikTrend) { chartYillikTrend.resize(); chartYillikTrend.update('none'); }
+            }, 50);
+            setTimeout(() => {
+                if (typeof chartKar !== 'undefined' && chartKar) { chartKar.resize(); chartKar.update('none'); }
+                if (typeof chartVarlik !== 'undefined' && chartVarlik) { chartVarlik.resize(); chartVarlik.update('none'); }
+                if (typeof chartYillikTrend !== 'undefined' && chartYillikTrend) { chartYillikTrend.resize(); chartYillikTrend.update('none'); }
+            }, 320);
         }
     }
     window.toggleSidebar = toggleSidebar; 
@@ -4119,7 +4153,7 @@ function showAuthTab(tab) {
 
             db[tarih].push({
                 id: Date.now() + Math.random(), varlik, adet, maliyet, guncel, satis, isSatildi,
-                alisTutari, guncelTutar, karTL, karYuzde, baslangicTarihi
+                alisTutari, guncelTutar, karTL, karYuzde, baslangicTarihi, tarih
             });
             saveData(dbName, db);
         }
@@ -4813,12 +4847,12 @@ function showAuthTab(tab) {
             for (let lot of activeLots) {
                 if (kalanSatis <= 0) break;
                 if (Number(lot.adet) <= kalanSatis) {
-                    kalanSatis -= Number(lot.adet); lot.isSatildi = true; lot.satis = sellPrice; lot.guncel = sellPrice; lot.guncelTutar = Number(lot.adet) * sellPrice; lot.karTL = lot.guncelTutar - Number(lot.alisTutari); lot.karYuzde = Number(lot.alisTutari) > 0 ? (lot.karTL / Number(lot.alisTutari)) * 100 : 0;
+                    kalanSatis -= Number(lot.adet); lot.isSatildi = true; lot.satis = sellPrice; lot.guncel = sellPrice; lot.guncelTutar = Number(lot.adet) * sellPrice; lot.karTL = lot.guncelTutar - Number(lot.alisTutari); lot.karYuzde = Number(lot.alisTutari) > 0 ? (lot.karTL / Number(lot.alisTutari)) * 100 : 0; lot.satisTarihi = sellDate;
                 } else {
                     let satilanAdet = kalanSatis; let kalanAdet = Number(lot.adet) - satilanAdet;
                     lot.adet = kalanAdet; lot.alisTutari = kalanAdet * Number(lot.maliyet); lot.guncelTutar = kalanAdet * lot.guncel; lot.karTL = lot.guncelTutar - lot.alisTutari; lot.karYuzde = lot.alisTutari > 0 ? (lot.karTL / lot.alisTutari) * 100 : 0;
                     let _lotMaliyet = Number(lot.maliyet); let _satAlis = satilanAdet * _lotMaliyet; let _satSatis = satilanAdet * sellPrice;
-                    db[d].push({ id: Date.now() + Math.random(), varlik: varlik, adet: satilanAdet, maliyet: _lotMaliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: _satAlis, guncelTutar: _satSatis, karTL: _satSatis - _satAlis, karYuzde: _lotMaliyet > 0 ? ((sellPrice - _lotMaliyet) / _lotMaliyet) * 100 : 0 });
+                    db[d].push({ id: Date.now() + Math.random(), varlik: varlik, adet: satilanAdet, maliyet: _lotMaliyet, guncel: sellPrice, satis: sellPrice, isSatildi: true, alisTutari: _satAlis, guncelTutar: _satSatis, karTL: _satSatis - _satAlis, karYuzde: _lotMaliyet > 0 ? ((sellPrice - _lotMaliyet) / _lotMaliyet) * 100 : 0, satisTarihi: sellDate, tarih: d });
                     kalanSatis = 0;
                 }
             }
@@ -4852,7 +4886,7 @@ function showAuthTab(tab) {
             } else {
                 if (tSatis > 0 && tMaliyet === 0) { executeFIFO_Sell(cat, tTarih, tVarlik, tAdet, tSatis); } else {
                     let _alisTut = tAdet*tMaliyet; let _guncelTut = tSatis>0?tAdet*tSatis:tAdet*tGuncel; let _karTL = _guncelTut - _alisTut; let _karYuzde = tMaliyet>0 ? ((tSatis>0?tSatis:tGuncel)-tMaliyet)/tMaliyet*100 : 0;
-                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: _alisTut, guncelTutar: _guncelTut, karTL: _karTL, karYuzde: _karYuzde }); saveData(dbName, db);
+                    db[tTarih].push({ id: Date.now() + Math.random(), varlik: tVarlik, adet: tAdet, maliyet: tMaliyet, guncel: tGuncel, satis: tSatis, isSatildi: (tSatis>0), alisTutari: _alisTut, guncelTutar: _guncelTut, karTL: _karTL, karYuzde: _karYuzde, tarih: tTarih }); saveData(dbName, db);
                 }
             }
         } else if (cat === 'trade') {
@@ -5087,18 +5121,27 @@ function showAuthTab(tab) {
 
     function renderAsset(type) {
         let selectedDate = document.getElementById(type + 'DateFilter').value; let db = JSON.parse(localStorage.getItem(`my_${type}_v9`)) || {};
-        let date = selectedDate; let fallbackBanner = '';
+        let fallbackBanner = '';
         let isFon = (type === 'fon');
         let colspan = isFon ? 13 : 12;
-        if (!db[date] || db[date].length === 0) { let available = Object.keys(db).filter(d => d <= selectedDate).sort(); if (available.length > 0) { date = available[available.length - 1]; fallbackBanner = `<tr><td colspan="${colspan}" style="background:rgba(245,158,11,0.08); color:var(--amber);">⚠ ${selectedDate} kaydı yok — gösterilen tarih: ${date}</td></tr>`; } }
-        let dates = Object.keys(db).sort(); let currentIndex = dates.indexOf(date); let prevDate = currentIndex > 0 ? dates[currentIndex - 1] : null; let prevData = prevDate ? db[prevDate] : [];
-        let data = db[date] || [];
+        
+        let availableDates = Object.keys(db).filter(d => d <= selectedDate).sort();
+        let data = [];
+        availableDates.forEach(dk => {
+            (db[dk] || []).forEach(d => {
+                const showOnDate = !d.isSatildi || (d.satisTarihi && d.satisTarihi >= selectedDate);
+                if (showOnDate) {
+                    data.push(d);
+                }
+            });
+        });
+
+        let dates = Object.keys(db).sort(); let currentIndex = dates.indexOf(selectedDate); let prevDate = currentIndex > 0 ? dates[currentIndex - 1] : null; let prevData = prevDate ? db[prevDate] : [];
         let kur = type === 'nasdaq' ? (parseFloat(document.getElementById('usdTryRate')?.value) || 1) : (type === 'avrupa' ? (parseFloat(document.getElementById('eurTryRate')?.value) || 1) : 1);
         let sembol = type === 'nasdaq' ? '$' : (type === 'avrupa' ? '€' : '');
         let totalGunlukKar = 0; let totalAcikKar = 0; let html = '';
         
-        if (data.length === 0) { html = `<tr class="empty-row"><td colspan="${colspan}">BU TARİH İÇİN KAYIT BULUNAMADI.</td></tr>`; } else {
-            if (fallbackBanner) html += fallbackBanner;
+        if (data.length === 0) { html = `<tr class="empty-row"><td colspan="${colspan}">BU TARİH İÇİN AKTİF POZİSYON BULUNAMADI.</td></tr>`; } else {
             data.forEach(d => {
                 let dunkuFiyat = null; let gunlukKarHtml = '-';
                 if (!d.isSatildi) { totalAcikKar += (Number(d.karTL) * kur); if (prevDate) { let prevRecord = prevData.find(p => p.varlik === d.varlik && !p.isSatildi); if (prevRecord) { dunkuFiyat = prevRecord.guncel; let gunlukTL = (Number(d.guncel) - Number(prevRecord.guncel)) * Number(d.adet) * kur; totalGunlukKar += gunlukTL; gunlukKarHtml = formatKar(gunlukTL); } else { gunlukKarHtml = `<span class="text-muted">YENİ GİRİŞ</span>`; } } } else { gunlukKarHtml = `<span class="text-muted">REALİZE</span>`; }
@@ -5118,10 +5161,10 @@ function showAuthTab(tab) {
                         <td>${gunlukKarHtml}</td>
                         <td>${formatKar(Number(d.karTL) * kur)}</td>
                         <td>${formatYuzde(d.karYuzde)}</td>
-                        <td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td>
+                        <td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${d.tarih || selectedDate}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${d.tarih || selectedDate}')">Sil</button></td>
                     </tr>`;
                 } else {
-                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.varlik, 24)}<button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></div></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${date}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${date}')">Sil</button></td></tr>`;
+                    html += `<tr style="${d.isSatildi?'opacity:0.5; background:rgba(0,0,0,0.1)':''}"><td><div style="display:flex; align-items:center; gap:8px;">${getAssetLogoHTML(d.varlik, 24)}<button class="asset-link" data-type="${type}" data-varlik="${safeVarlik}">${d.varlik}</button></div></td><td>${new Intl.NumberFormat('tr-TR').format(Number(d.adet))}</td><td>${formatNumberStr(d.maliyet)} ${sembol}</td><td>${dunkuFiyat ? sembol+formatNumberStr(dunkuFiyat) : '-'}</td><td>${d.isSatildi?'-':sembol+formatNumberStr(d.guncel)}</td><td>${d.isSatildi?sembol+formatNumberStr(d.satis):'-'}</td><td>${formatTL(Number(d.alisTutari) * kur)}</td><td>${formatTL(Number(d.guncelTutar) * kur)}</td><td>${gunlukKarHtml}</td><td>${formatKar(Number(d.karTL) * kur)}</td><td>${formatYuzde(d.karYuzde)}</td><td><button class="btn-warning" style="padding:4px 8px; font-size:9px;" onclick="editAssetObj('${type}', '${d.id}', '${d.tarih || selectedDate}')">Düzenle</button> <button class="btn-danger" style="padding:4px 8px; font-size:9px;" onclick="globalDelete('${type}', '${d.id}', '${d.tarih || selectedDate}')">Sil</button></td></tr>`;
                 }
             });
         }
@@ -5222,12 +5265,17 @@ function showAuthTab(tab) {
                 });
             });
 
-            let dates = Object.keys(db).sort();
-            if (dates.length > 0) {
-                let bekleyenler = db[dates[dates.length - 1]].filter(d => !d.isSatildi);
-                unrealizedTotals[cat] = bekleyenler.reduce((sum, d) => sum + ((Number(d.karTL) || 0) * kur), 0); 
-                portfoyGuncelDeğer[cat] = bekleyenler.reduce((sum, d) => sum + ((Number(d.guncelTutar) || 0) * kur), 0);
-            }
+            // Calculate active lots across all dates
+            let activeLots = [];
+            Object.keys(db).forEach(date => {
+                (db[date] || []).forEach(d => {
+                    if (!d.isSatildi) {
+                        activeLots.push(d);
+                    }
+                });
+            });
+            unrealizedTotals[cat] = activeLots.reduce((sum, d) => sum + ((Number(d.karTL) || 0) * kur), 0); 
+            portfoyGuncelDeğer[cat] = activeLots.reduce((sum, d) => sum + ((Number(d.guncelTutar) || 0) * kur), 0);
         });
 
         let totalRealized = rTrade + rArz + rTemettu + Object.values(realizedSales).reduce((a, b) => a + b, 0);
@@ -5416,12 +5464,20 @@ function showAuthTab(tab) {
         let unrealizedNet = 0; let hasDataBefore = realizedNet !== 0;
         assetCategories.forEach(cat => {
             let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {};
-            let av = Object.keys(db).filter(d => d <= targetDate).sort();
-            if (av.length > 0) {
-                let lastDate = av[av.length-1];
-                unrealizedNet += (db[lastDate] || []).filter(d => !d.isSatildi).reduce((s, d) => s + ((Number(d.karTL) || 0) * (cat==='nasdaq'?usdKur:(cat==='avrupa'?eurKur:1))), 0);
-                hasDataBefore = true;
-            }
+            let kur = cat==='nasdaq'?usdKur:(cat==='avrupa'?eurKur:1);
+            
+            Object.keys(db).forEach(dk => {
+                if (dk <= targetDate) {
+                    (db[dk] || []).forEach(d => {
+                        // Lot was active on targetDate if it is not sold at all, OR sold on a date strictly after targetDate
+                        const activeOnTargetDate = !d.isSatildi || (d.satisTarihi && d.satisTarihi > targetDate);
+                        if (activeOnTargetDate) {
+                            unrealizedNet += (Number(d.karTL) || 0) * kur;
+                            hasDataBefore = true;
+                        }
+                    });
+                }
+            });
         });
 
         let isActiveToday = tradeData.some(d => d.tarih === targetDate) || assetCategories.some(cat => { let db = JSON.parse(localStorage.getItem(`my_${cat}_v9`)) || {}; return db[targetDate] !== undefined; });
