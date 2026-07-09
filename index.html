@@ -281,14 +281,14 @@
         /* Merkez başlık */
         .header-center-title {
             position: absolute; left: 50%; transform: translateX(-50%);
-            font-size: 12px; font-weight: 900; letter-spacing: 3px;
+            font-size: 18px; font-weight: 900; letter-spacing: 5px;
             color: #EFF4FF; text-transform: uppercase; white-space: nowrap;
             pointer-events: none;
             background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #38BDF8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: none;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.25);
         }
         .app-header { position: relative; }
 
@@ -355,36 +355,125 @@
             z-index: 9999; display: none; opacity: 0; transition: opacity 0.3s ease;
         }
         #orionSidebarOverlay.active { display: block; opacity: 1; }
+        
         #orionLeftSidebar {
-            position: fixed; top: 0; left: -300px; width: 275px; height: 100vh;
+            position: fixed; top: 0; height: 100vh;
             background: linear-gradient(135deg, rgba(8, 12, 21, 0.35) 0%, rgba(15, 23, 42, 0.20) 100%);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border-right: 1px solid rgba(255,255,255,0.06);
-            z-index: 10000; transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10000;
             display: flex; flex-direction: column; padding: 20px 16px;
             box-shadow: inset 0 0 20px rgba(255,255,255,0.02), 15px 0 45px rgba(0,0,0,0.45);
             overflow: hidden;
+            box-sizing: border-box;
         }
-        #orionLeftSidebar.open { left: 0; }
+
+        .sidebar-collapse-btn {
+            position: absolute;
+            right: 8px;
+            top: 22px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            cursor: pointer;
+            z-index: 10010;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .sidebar-collapse-btn:hover {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            transform: scale(1.1);
+        }
 
         @media (min-width: 901px) {
             #orionSidebarOverlay {
                 display: none !important;
             }
             #orionLeftSidebar {
-                left: -275px;
+                left: 0 !important;
+                width: 275px;
+                transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            #orionLeftSidebar.open {
-                left: 0;
+            #orionLeftSidebar .modal-close {
+                display: none !important;
             }
             .container {
-                transition: none !important;
-            }
-            #orionLeftSidebar.open ~ .container {
                 margin-left: 275px;
                 width: calc(100% - 275px) !important;
+                transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+            /* Collapsed State on PC */
+            #orionLeftSidebar.collapsed {
+                width: 80px !important;
+                padding: 20px 8px !important;
+            }
+            #orionLeftSidebar.collapsed ~ .container {
+                margin-left: 80px !important;
+                width: calc(100% - 80px) !important;
+            }
+            #orionLeftSidebar.collapsed .orion-brand-name,
+            #orionLeftSidebar.collapsed .sidebar-text,
+            #orionLeftSidebar.collapsed .sidebar-user-details,
+            #orionLeftSidebar.collapsed .sidebar-footer-btn-row .btn-text {
+                display: none !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-nav-btn {
+                justify-content: center !important;
+                padding: 12px 0 !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-nav-btn .sidebar-icon {
+                margin: 0 !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-footer-btn-row {
+                grid-template-columns: 1fr !important;
+                gap: 6px !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-footer-btn-row .btn {
+                padding: 0 !important;
+                height: 28px !important;
+                width: 100% !important;
+                justify-content: center !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-logo-wrap {
+                margin-bottom: 12px !important;
+            }
+            #orionLeftSidebar.collapsed .sidebar-user-row {
+                justify-content: center !important;
+                gap: 0 !important;
+                width: 100% !important;
+                padding: 0 !important;
+            }
+            #sidebarToggleBtn {
+                display: none !important;
             }
         }
+
+        @media (max-width: 900px) {
+            .sidebar-collapse-btn {
+                display: none !important;
+            }
+            #orionLeftSidebar {
+                left: -300px;
+                width: 275px;
+                transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            #orionLeftSidebar.open {
+                left: 0 !important;
+            }
+            .container {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+        }
+
         .sidebar-nav-btn {
             display: flex; align-items: center; gap: 12px; width: 100%;
             padding: 12px 14px; background: transparent; border: 1px solid transparent;
@@ -605,13 +694,21 @@
         }
 
         /* ─── GRAFİK KUTULARI ─── */
-        .charts-container { display: flex; gap: 10px; min-height: 240px; flex-shrink: 0; }
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 12px;
+            min-height: 240px;
+            flex-shrink: 0;
+            width: 100%;
+        }
         .chart-box {
-            flex: 1; background: rgba(17, 24, 39, 0.08);
+            background: rgba(17, 24, 39, 0.08);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--border); border-radius: var(--r);
             padding: 10px 14px; display: flex; flex-direction: column;
-            min-height: 220px; flex-shrink: 0;
+            min-height: 220px;
+            width: 100%;
         }
         .chart-box h3 {
             font-size: 10px; font-weight: 800; color: var(--t3);
@@ -889,17 +986,7 @@
            MOBİL UYUMLULUK (RESPONSIVE) DÜZELTMELERİ
         ═══════════════════════════════════════════════════ */
 
-        /* ── ORTA EKRAN (1300px altı) ── */
-        @media (max-width: 1300px) {
-            .charts-container {
-                flex-direction: column !important;
-                gap: 12px;
-            }
-            .chart-box {
-                width: 100% !important;
-                max-width: 100% !important;
-            }
-        }
+
 
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
@@ -1379,38 +1466,41 @@
 <!-- Sol Menü Overlay ve Sidebar -->
 <div id="orionSidebarOverlay" onclick="toggleSidebar()"></div>
 <div id="orionLeftSidebar" class="open">
-    <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:24px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:16px; position:relative; width:100%;">
-        <div id="orionSidebarLogoContainer" style="width:50px; height:50px; border-radius:12px; overflow:hidden; margin-bottom:10px; box-shadow:0 6px 20px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246,0.25);"></div>
+    <!-- COLLAPSE TOGGLE BUTTON -->
+    <button class="sidebar-collapse-btn" id="orionSidebarCollapseBtn" onclick="toggleSidebarCollapse()">◀</button>
+
+    <div class="sidebar-logo-wrap" style="display:flex; flex-direction:column; align-items:center; margin-bottom:24px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:16px; position:relative; width:100%;">
+        <div id="orionSidebarLogoContainer" style="width:50px; height:50px; border-radius:12px; overflow:hidden; margin-bottom:10px; box-shadow:0 6px 20px rgba(59,130,246,0.4), 0 0 0 1px rgba(59,130,246,0.25); flex-shrink:0;"></div>
         <span class="orion-brand-name" style="font-size:18px; letter-spacing: 3px; color: #FFFFFF !important;">ORION</span>
         <button class="modal-close" style="position:absolute; top:8px; right:12px; font-size:24px; color:var(--t3); border:none; background:transparent; cursor:pointer; padding: 4px; transition:color 0.2s; line-height: 1;" onclick="toggleSidebar()" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--t3)'" title="Menüyü Kapat">&times;</button>
     </div>
     <div style="display:flex; flex-direction:column; gap:4px; width:100%; flex: 1; overflow-y: auto; padding-right: 4px; margin-bottom: 12px;" class="custom-scrollbar">
-        <button class="sidebar-nav-btn active" data-tab="ozet-tab" onclick="switchTab('ozet-tab'); toggleSidebar()">📊 Özet</button>
-        <button class="sidebar-nav-btn" data-tab="ana-portfoy-tab" onclick="switchTab('ana-portfoy-tab'); toggleSidebar()">📋 İşlem Defteri</button>
-        <button class="sidebar-nav-btn" data-tab="bist-tab" onclick="switchTab('bist-tab'); toggleSidebar()">📈 BİST</button>
-        <button class="sidebar-nav-btn" data-tab="emtia-tab" onclick="switchTab('emtia-tab'); toggleSidebar()">🪙 Emtia</button>
-        <button class="sidebar-nav-btn" data-tab="fon-tab" onclick="switchTab('fon-tab'); toggleSidebar()">📦 Fonlar</button>
-        <button class="sidebar-nav-btn" data-tab="nasdaq-tab" onclick="switchTab('nasdaq-tab'); toggleSidebar()"><span class="orion-flag" style="margin-right:4px;">🇺🇸</span> Nasdaq</button>
-        <button class="sidebar-nav-btn" data-tab="avrupa-tab" onclick="switchTab('avrupa-tab'); toggleSidebar()"><span class="orion-flag" style="margin-right:4px;">🇪🇺</span> Avrupa</button>
-        <button class="sidebar-nav-btn" data-tab="alsat-tab" onclick="switchTab('alsat-tab'); toggleSidebar()">⚡ Al-Sat</button>
-        <button class="sidebar-nav-btn" data-tab="temettu-tab" onclick="switchTab('temettu-tab'); toggleSidebar()">💰 Temettü</button>
-        <button class="sidebar-nav-btn" data-tab="halkaarz-tab" onclick="switchTab('halkaarz-tab'); toggleSidebar()">🚀 Halka Arz</button>
-        <button class="sidebar-nav-btn" data-tab="toplam-kar-tab" onclick="switchTab('toplam-kar-tab'); toggleSidebar()">📈 K/Z Trendi</button>
-        <button class="sidebar-nav-btn" data-tab="import-tab" onclick="switchTab('import-tab'); toggleSidebar()">📥 Aktar</button>
+        <button class="sidebar-nav-btn active" data-tab="ozet-tab" onclick="switchTab('ozet-tab'); toggleSidebar()"><span class="sidebar-icon">📊</span><span class="sidebar-text"> Özet</span></button>
+        <button class="sidebar-nav-btn" data-tab="ana-portfoy-tab" onclick="switchTab('ana-portfoy-tab'); toggleSidebar()"><span class="sidebar-icon">📋</span><span class="sidebar-text"> İşlem Defteri</span></button>
+        <button class="sidebar-nav-btn" data-tab="bist-tab" onclick="switchTab('bist-tab'); toggleSidebar()"><span class="sidebar-icon">📈</span><span class="sidebar-text"> BİST</span></button>
+        <button class="sidebar-nav-btn" data-tab="emtia-tab" onclick="switchTab('emtia-tab'); toggleSidebar()"><span class="sidebar-icon">🪙</span><span class="sidebar-text"> Emtia</span></button>
+        <button class="sidebar-nav-btn" data-tab="fon-tab" onclick="switchTab('fon-tab'); toggleSidebar()"><span class="sidebar-icon">📦</span><span class="sidebar-text"> Fonlar</span></button>
+        <button class="sidebar-nav-btn" data-tab="nasdaq-tab" onclick="switchTab('nasdaq-tab'); toggleSidebar()"><span class="sidebar-icon"><span class="orion-flag" style="margin-right:4px;">🇺🇸</span></span><span class="sidebar-text"> Nasdaq</span></button>
+        <button class="sidebar-nav-btn" data-tab="avrupa-tab" onclick="switchTab('avrupa-tab'); toggleSidebar()"><span class="sidebar-icon"><span class="orion-flag" style="margin-right:4px;">🇪🇺</span></span><span class="sidebar-text"> Avrupa</span></button>
+        <button class="sidebar-nav-btn" data-tab="alsat-tab" onclick="switchTab('alsat-tab'); toggleSidebar()"><span class="sidebar-icon">⚡</span><span class="sidebar-text"> Al-Sat</span></button>
+        <button class="sidebar-nav-btn" data-tab="temettu-tab" onclick="switchTab('temettu-tab'); toggleSidebar()"><span class="sidebar-icon">💰</span><span class="sidebar-text"> Temettü</span></button>
+        <button class="sidebar-nav-btn" data-tab="halkaarz-tab" onclick="switchTab('halkaarz-tab'); toggleSidebar()"><span class="sidebar-icon">🚀</span><span class="sidebar-text"> Halka Arz</span></button>
+        <button class="sidebar-nav-btn" data-tab="toplam-kar-tab" onclick="switchTab('toplam-kar-tab'); toggleSidebar()"><span class="sidebar-icon">📈</span><span class="sidebar-text"> K/Z Trendi</span></button>
+        <button class="sidebar-nav-btn" data-tab="import-tab" onclick="switchTab('import-tab'); toggleSidebar()"><span class="sidebar-icon">📥</span><span class="sidebar-text"> Aktar</span></button>
     </div>
     
     <!-- Alt kullanıcı profil alanı -->
-    <div style="margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:10px; width:100%;">
-        <div style="display:flex; align-items:center; gap:10px;">
-            <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; border:1px solid rgba(59,130,246,0.3); font-size:14px; color:#38BDF8;">👤</div>
-            <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;">
+    <div style="margin-top:auto; padding-top:16px; border-top:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; gap:10px; width:100%; flex-shrink: 0;">
+        <div style="display:flex; align-items:center; gap:10px; justify-content: flex-start;" class="sidebar-user-row">
+            <div style="width:34px; height:34px; border-radius:50%; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center; border:1px solid rgba(59,130,246,0.3); font-size:14px; color:#38BDF8; flex-shrink:0;">👤</div>
+            <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;" class="sidebar-user-details">
                 <div id="sidebarUserEmail" style="font-size:11px; font-weight:800; color:var(--t1); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">yükleniyor...</div>
-                <div style="font-size:8px; font-weight:700; color:var(--t3); letter-spacing:.5px; text-transform:uppercase;">Aktif Kullanıcı</div>
+                <div style="font-size:8px; font-weight:700; color:var(--t3); letter-spacing:.5px; text-transform:uppercase;" class="sidebar-user-role-label">Aktif Kullanıcı</div>
             </div>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <button class="btn" onclick="openHesabimModal(); toggleSidebar();" style="height:28px; font-size:9px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:#fff; cursor:pointer; font-weight:700; border-radius:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">Ayarlar</button>
-            <button class="btn btn-danger" onclick="logoutUser()" style="height:28px; font-size:9px; font-weight:700; border-radius:6px; background:rgba(239,68,68,0.12); border:1px solid var(--red); color:#FF8A8A; cursor:pointer; transition:all 0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.12)'">Çıkış</button>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;" class="sidebar-footer-btn-row">
+            <button class="btn" onclick="openHesabimModal(); toggleSidebar();" style="height:28px; font-size:9px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:#fff; cursor:pointer; font-weight:700; border-radius:6px; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'"><span class="btn-icon">⚙️</span><span class="btn-text"> Ayarlar</span></button>
+            <button class="btn btn-danger" onclick="logoutUser()" style="height:28px; font-size:9px; font-weight:700; border-radius:6px; background:rgba(239,68,68,0.12); border:1px solid var(--red); color:#FF8A8A; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; gap:4px;" onmouseover="this.style.background='rgba(239,68,68,0.2)'" onmouseout="this.style.background='rgba(239,68,68,0.12)'"><span class="btn-icon">🚪</span><span class="btn-text"> Çıkış</span></button>
         </div>
     </div>
 </div>
@@ -1714,7 +1804,7 @@ function showAuthTab(tab) {
 <div class="container">
     <div class="app-header">
         <!-- Hamburger Menu Button -->
-        <button class="btn btn-primary" id="sidebarToggleBtn" style="padding:0 12px; height:34px; font-size:16px; border:1px solid var(--border-2); background:transparent; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#FFFFFF; margin-right: 6px;" onclick="toggleSidebar()">◀</button>
+        <button class="btn btn-primary" id="sidebarToggleBtn" style="padding:0 12px; height:34px; font-size:16px; border:1px solid var(--border-2); background:transparent; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#FFFFFF; margin-right: 6px;" onclick="toggleSidebar()">☰</button>
         <!-- Sol: Logo + ORION yazısı + Kısayollar -->
         <div class="orion-brand">
             <div style="display:flex; align-items:center; gap:10px;">
@@ -1786,7 +1876,10 @@ function showAuthTab(tab) {
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; overflow:hidden;">
             <!-- Format 1: İşlem Defteri -->
             <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.2); border-radius:10px; padding:14px; min-width:0; overflow:hidden;">
-              <div style="color:var(--green); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase;">📑 Format 1: İşlem Defteri</div>
+              <div style="color:var(--green); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+                <span>📑 Format 1: İşlem Defteri</span>
+                <button class="btn" style="padding:4px 8px; font-size:9px; font-weight:700; border-radius:6px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); color:#A7F3D0; cursor:pointer;" onclick="downloadExampleTemplate(1)">📥 Şablonu İndir (.xlsx)</button>
+              </div>
               <div style="color:var(--t3); font-size:10px; margin-bottom:8px; line-height:1.6;">İlk satırda <strong style="color:var(--t2);">"işlem"</strong> başlığı içeren sütun varsa bu format olarak tanınır.</div>
               <table style="width:100%; border-collapse:collapse; font-size:10px; table-layout:fixed;">
                 <thead><tr style="background:rgba(255,255,255,0.04);">
@@ -1811,7 +1904,10 @@ function showAuthTab(tab) {
             </div>
             <!-- Format 2: Günlük Tablo -->
             <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:10px; padding:14px; min-width:0; overflow:hidden;">
-              <div style="color:var(--amber); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase;">📊 Format 2: Günlük Portföy Tablosu</div>
+              <div style="color:var(--amber); font-size:11px; font-weight:800; letter-spacing:.4px; margin-bottom:10px; text-transform:uppercase; display:flex; align-items:center; justify-content:space-between; gap:10px;">
+                <span>📊 Format 2: Günlük Portföy Tablosu</span>
+                <button class="btn" style="padding:4px 8px; font-size:9px; font-weight:700; border-radius:6px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.3); color:#FDE68A; cursor:pointer;" onclick="downloadExampleTemplate(2)">📥 Şablonu İndir (.xlsx)</button>
+              </div>
               <div style="color:var(--t3); font-size:10px; margin-bottom:8px; line-height:1.6;">Her sayfanın adı tarih olmalıdır: <strong style="color:var(--t2);">15.01</strong> veya <strong style="color:var(--t2);">15.01.2025</strong></div>
               <table style="width:100%; border-collapse:collapse; font-size:10px; table-layout:fixed;">
                 <thead><tr style="background:rgba(255,255,255,0.04);">
@@ -2209,6 +2305,27 @@ function showAuthTab(tab) {
         'COIN': 'coinbase.com',
         'BABA': 'alibaba.com',
         'NIO': 'nio.com',
+        'AVGO': 'broadcom.com',
+        'PEP': 'pepsico.com',
+        'COST': 'costco.com',
+        'ADBE': 'adobe.com',
+        'CSCO': 'cisco.com',
+        'TMUS': 't-mobile.com',
+        'TXN': 'ti.com',
+        'AMGN': 'amgen.com',
+        'HON': 'honeywell.com',
+        'INTU': 'intuit.com',
+        'SBUX': 'starbucks.com',
+        'ISRG': 'intuitive.com',
+        'GILD': 'gilead.com',
+        'LRCX': 'lamresearch.com',
+        'BKNG': 'bookingholdings.com',
+        'PYPL': 'paypal.com',
+        'SQ': 'block.xyz',
+        'PLTR': 'palantir.com',
+        'UBER': 'uber.com',
+        'LYFT': 'lyft.com',
+        'SHOP': 'shopify.com',
         
         // Crypto
         'BTC': 'bitcoin.org',
@@ -2241,7 +2358,26 @@ function showAuthTab(tab) {
         'TTKOM': 'turktelekom.com.tr',
         'MGROS': 'migros.com.tr',
         'HALKB': 'halkbank.com.tr',
-        'VAKBN': 'vakifbank.com.tr'
+        'VAKBN': 'vakifbank.com.tr',
+        'ALARK': 'alarko.com.tr',
+        'ARCLK': 'arcelikglobal.com',
+        'ASTOR': 'astor.com.tr',
+        'DOHOL': 'doganholding.com.tr',
+        'EKGYO': 'emlakkonut.com.tr',
+        'ENJSA': 'enerjisa.com.tr',
+        'ENKAI': 'enka.com',
+        'KONTR': 'kontrolmatik.com',
+        'KOZAL': 'kozaaltin.com.tr',
+        'KOZAA': 'kozaderece.com.tr',
+        'ODAS': 'odas.com.tr',
+        'OYAKC': 'oyakcimento.com',
+        'VESTL': 'vestel.com.tr',
+        'YEOTK': 'yeo.com.tr',
+        'ZOREN': 'zorluenerji.com.tr',
+        'GUBRF': 'gubretas.com.tr',
+        'MIATK': 'miateknoloji.com',
+        'REEDER': 'reeder.com.tr',
+        'SDTTR': 'sdt.com.tr'
     };
 
     function getAssetLogoHTML(symbol, size = 32) {
@@ -2256,8 +2392,15 @@ function showAuthTab(tab) {
             return `<div class="asset-logo-circle" style="width:${size}px; height:${size}px; font-size:${size*0.4}px; background:linear-gradient(135deg, #E2E8F0 0%, #94A3B8 100%); border:1px solid rgba(226,232,240,0.3); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; box-shadow:0 2px 10px rgba(148,163,184,0.2); flex-shrink:0;">🥈</div>`;
         }
         
-        // Check domains map
-        const domain = LOGO_DOMAINS[cleanSym];
+        // Find domain
+        let domain = LOGO_DOMAINS[cleanSym];
+        if (!domain) {
+            // Heuristic fallback for US/global tickers: check if cleanSym is a standard 1-5 letter alphabetic string
+            if (/^[A-Z]{1,5}$/.test(cleanSym)) {
+                domain = cleanSym.toLowerCase() + '.com';
+            }
+        }
+        
         if (domain) {
             const logoUrl = `https://www.google.com/s2/favicons?sz=64&domain=${domain}`;
             return `<img src="${logoUrl}" class="asset-logo-img" style="width:${size}px; height:${size}px; border-radius:50%; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.02); object-fit:cover; display:inline-block; vertical-align:middle; flex-shrink:0;" onerror="this.outerHTML=getFallbackLetterBadge('${cleanSym}', ${size})">`;
@@ -2293,6 +2436,44 @@ function showAuthTab(tab) {
         return `<div class="asset-logo-circle" style="width:${size}px; height:${size}px; font-size:${size*0.35}px; background:${color}; border:1px solid rgba(255,255,255,0.08); color:#fff; font-weight:800; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; text-shadow:0 1px 2px rgba(0,0,0,0.2); text-transform:uppercase; flex-shrink:0;">${letters}</div>`;
     }
     window.getFallbackLetterBadge = getFallbackLetterBadge;
+
+    function downloadExampleTemplate(formatNum) {
+        if (typeof XLSX === 'undefined') {
+            alert('Excel kütüphanesi yüklenemedi. Lütfen internet bağlantınızı kontrol edin.');
+            return;
+        }
+        let wb = XLSX.utils.book_new();
+        if (formatNum === 1) {
+            let data = [
+                ["TARİH", "İŞLEM", "VARLIK", "ADET", "FİYAT"],
+                ["15.01.2025", "ALIŞ", "GARAN", 100, 125.50],
+                ["20.02.2025", "SATIŞ", "GARAN", 50, 140.00],
+                ["01.03.2025", "TEMETTÜ", "GARAN", 50, 350.00]
+            ];
+            let ws = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, "İşlem Defteri");
+            XLSX.writeFile(wb, "orion_sablon_islem_defteri.xlsx");
+        } else if (formatNum === 2) {
+            let data1 = [
+                ["VARLIK", "ADET", "MALİYET", "GÜNCEL", "KÂR"],
+                ["GARAN", 100, 125.50, 138.00, 1250],
+                ["THYAO", 50, 200.00, 215.00, 750]
+            ];
+            let ws1 = XLSX.utils.aoa_to_sheet(data1);
+            XLSX.utils.book_append_sheet(wb, ws1, "15.01.2025");
+            
+            let data2 = [
+                ["VARLIK", "ADET", "MALİYET", "GÜNCEL", "KÂR"],
+                ["GARAN", 100, 125.50, 140.00, 1450],
+                ["THYAO", 50, 200.00, 212.00, 600]
+            ];
+            let ws2 = XLSX.utils.aoa_to_sheet(data2);
+            XLSX.utils.book_append_sheet(wb, ws2, "16.01.2025");
+            
+            XLSX.writeFile(wb, "orion_sablon_gunluk_portfoy.xlsx");
+        }
+    }
+    window.downloadExampleTemplate = downloadExampleTemplate;
 
     // ============================================================
     // TOAST BİLDİRİM SİSTEMİ
@@ -2607,127 +2788,39 @@ function showAuthTab(tab) {
         { label: 'BTC/USD',    flag: '\u20BF',    price: 0, chg: 0, fallback: true },
     ];
 
-    async function fetchWithProxy(url, timeout = 8000) {
+    async function fetchWithProxy(url, timeout = 10000) {
+        const cbUrl = url + (url.includes('?') ? '&' : '?') + '_cb=' + Math.random().toString(36).substring(2, 8);
         const proxies = [
             u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-            u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+            u => `https://corsproxy.org/?${encodeURIComponent(u)}`,
             u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`,
-            u => `https://thingproxy.freeboard.io/fetch/${u}`,
-            u => u  // doğrudan son çare
+            u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+            u => u
         ];
-        // Önce ilk 3 proxy'i paralel dene — ilk başarılı olanı döndür
-        try {
-            const raceResult = await Promise.any(
-                proxies.slice(0, 3).map(makeUrl =>
-                    fetchSafe(makeUrl(url), {}, timeout)
-                        .then(r => { if (!r.ok) throw new Error('not_ok'); return r; })
-                )
-            );
-            if (raceResult) return raceResult;
-        } catch(e) {}
-        // Paralel başarısızsa thingproxy dene
-        try {
-            const r = await fetchSafe(`https://thingproxy.freeboard.io/fetch/${url}`, {}, timeout);
-            if (r.ok) return r;
-        } catch(e) {}
-        // Son çare: doğrudan dene
-        try {
-            const r = await fetchSafe(url, {}, timeout);
-            if (r.ok) return r;
-        } catch(e) {}
-        return null;
-    }
-
-    // ── Çoklu kaynak endeks/hisse fiyat çekici ──────────────────────────────
-    // Kaynak 1: Stooq CSV (CORS açık, hızlı, endeksler için ideal)
-    // Kaynak 2: Yahoo Finance v8 proxy üzerinden
-    // Kaynak 3: allorigins üzerinden Yahoo v8
-
-    async function fetchStooqPrice(stooqSymbol, timeout = 8000) {
-        // Stooq CSV: anlık fiyat — proxy zinciriyle dene (CORS engeli olabilir)
-        try {
-            const url = `https://stooq.com/q/l/?s=${encodeURIComponent(stooqSymbol)}&f=sd2t2ohlcv&h&e=csv`;
-            const res = await fetchWithProxy(url, timeout);
-            if (!res) return null;
-            const text = await res.text();
-            // CSV: Symbol,Date,Time,Open,High,Low,Close,Volume
-            const lines = text.trim().split('\n');
-            if (lines.length < 2) return null;
-            const cols = lines[1].split(',');
-            const close = parseFloat(cols[6]);
-            const open  = parseFloat(cols[3]);
-            if (isNaN(close) || close <= 0 || close === 0.01) return null; // stooq returns 0.01 for N/A
-            const chg = open > 0 ? ((close - open) / open) * 100 : 0;
-            return { price: close, chg };
-        } catch(e) { return null; }
-    }
-
-    async function fetchYahooV8(symbol, timeout = 10000) {
-        const enc = encodeURIComponent(symbol);
-        const baseUrl = `https://query2.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
-
-        const parseYahooJson = (json) => {
-            const meta = json?.chart?.result?.[0]?.meta;
-            if (!meta || !meta.regularMarketPrice) return null;
-            const price = meta.regularMarketPrice;
-            const prev  = meta.chartPreviousClose || meta.previousClose || price;
-            const chg   = prev > 0 ? ((price - prev) / prev) * 100 : 0;
-            return { price, chg };
-        };
-
-        // Proxy zinciri — CORS için
-        const proxies = [
-            `https://api.allorigins.win/raw?url=${encodeURIComponent(baseUrl)}`,
-            `https://corsproxy.io/?${encodeURIComponent(baseUrl)}`,
-            `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(baseUrl)}`,
-        ];
-
-        for (const proxyUrl of proxies) {
+        for (let makeUrl of proxies) {
             try {
-                const r = await fetchSafe(proxyUrl, {}, timeout);
-                if (!r.ok) continue;
-                const text = await r.text();
-                if (!text || text.trim().startsWith('<')) continue; // HTML hata sayfası
-                const json = JSON.parse(text);
-                const result = parseYahooJson(json);
-                if (result) return result;
+                const proxyUrl = makeUrl(cbUrl);
+                const res = await fetchSafe(proxyUrl, {}, timeout);
+                if (res && res.ok) {
+                    const text = await res.text();
+                    if (text && text.trim().length > 0 && !text.trim().startsWith('<html') && !text.trim().startsWith('<!DOCTYPE')) {
+                        return {
+                            ok: true,
+                            text: async () => text,
+                            json: async () => JSON.parse(text)
+                        };
+                    }
+                }
             } catch(e) {}
         }
-
         return null;
-    }
-
-    // Stooq sembolleri haritası (Yahoo sembolü → Stooq sembolü)
-    const STOOQ_MAP = {
-        'XU100.IS':  'xu100.pl',
-        'XU030.IS':  'xu030.pl',
-        'GC=F':      'gc.f',
-        'SI=F':      'si.f',
-        '^NDX':      'ndx.in',  // stooq'ta NDX için
-        '^GSPC':     'spy.us',  // SPY ETF (S&P proxy)
-        '^GDAXI':    '^dax',
-        '^FCHI':     '^cac',
-        '^FTSE':     '^ftse',
-        '^STOXX50E': '^stoxx50e',
-        'BTC-USD':   'btc.v',
-    };
-
-    // Önce Stooq dene, başarısız olursa Yahoo v8 proxy ile dene
-    async function fetchEndeksPrice(yahooSymbol, timeout = 10000) {
-        const stooqSym = STOOQ_MAP[yahooSymbol];
-        if (stooqSym) {
-            const stooqResult = await fetchStooqPrice(stooqSym, timeout);
-            if (stooqResult) return stooqResult;
-        }
-        // Stooq başarısız → Yahoo v8 proxy
-        return await fetchYahooV8(yahooSymbol, timeout);
     }
 
     const ORION_DEFAULT_TICKER = [
         { label: 'USD/TRY',    flag: '💵', price: 32.8540, chg: 0.12 },
         { label: 'EUR/TRY',    flag: '💶', price: 35.6210, chg: -0.05 },
-        { label: 'BIST 100',   flag: '🇹🇷', price: 10452.30, chg: 1.24 },
-        { label: 'BIST 30',    flag: '🇹🇷', price: 11488.03, chg: 1.05 },
+        { label: 'BIST 100',   flag: '🇹🇷', price: 14105.44, chg: 1.24 },
+        { label: 'BIST 30',    flag: '🇹🇷', price: 15400.00, chg: 1.05 },
         { label: 'NASDAQ 100', flag: '🇺🇸', price: 19852.56, chg: 0.45 },
         { label: 'S&P 500',    flag: '🇺🇸', price: 5432.71, chg: 0.32 },
         { label: 'DAX',        flag: '🇩🇪', price: 18125.40, chg: -0.15 },
@@ -2740,7 +2833,7 @@ function showAuthTab(tab) {
         { label: 'YARIM',     flag: '🥇', price: 8170.00, chg: 0.85, unit: '₺' },
         { label: 'TAM ALTIN', flag: '🥇', price: 16340.00, chg: 0.85, unit: '₺' },
         { label: 'GÜMÜŞ',      flag: '🥈', price: 29.80, chg: 1.15 },
-        { label: 'BTC/USD',    flag: '💎', price: 61250.00, chg: 2.45 }
+        { label: 'BTC/USD',    flag: '💎', price: 57250.00, chg: 2.45 }
     ];
 
     function loadTickerFromStorage() {
@@ -2770,186 +2863,104 @@ function showAuthTab(tab) {
 
         const results = [];
 
-        // ── 1. Döviz — open.er-api.com (CORS açık, proxy gerekmez) ─────────────
+        // ── 1. Döviz — open.er-api.com ─────────────
+        let usdTry = 32.8540;
+        let eurTry = 35.6210;
         try {
             const erRes = await fetchSafe('https://open.er-api.com/v6/latest/USD', {}, 10000);
             if (erRes.ok) {
                 const erData = await erRes.json();
                 const rates  = erData.rates || {};
-                const usdTry = rates.TRY || 0;
-                const eurUsd = rates.EUR ? (1 / rates.EUR) : 0;
-                const eurTry = eurUsd > 0 ? eurUsd * usdTry : 0;
-                if (usdTry > 0) results.push({ label: 'USD/TRY', flag: '💵', price: usdTry, chg: 0 });
-                if (eurTry > 0) results.push({ label: 'EUR/TRY', flag: '💶', price: eurTry, chg: 0 });
-                const usdIn = document.getElementById('usdTryRate');
-                const eurIn = document.getElementById('eurTryRate');
-                if (usdIn && usdTry > 0) usdIn.value = usdTry.toFixed(4);
-                if (eurIn && eurTry > 0) eurIn.value = eurTry.toFixed(4);
+                if (rates.TRY) {
+                    usdTry = rates.TRY;
+                    const eurUsd = rates.EUR ? (1 / rates.EUR) : 0;
+                    eurTry = eurUsd > 0 ? eurUsd * usdTry : usdTry * 1.08;
+                    
+                    results.push({ label: 'USD/TRY', flag: '💵', price: usdTry, chg: 0 });
+                    results.push({ label: 'EUR/TRY', flag: '💶', price: eurTry, chg: 0 });
+                    
+                    const usdIn = document.getElementById('usdTryRate');
+                    const eurIn = document.getElementById('eurTryRate');
+                    if (usdIn) usdIn.value = usdTry.toFixed(4);
+                    if (eurIn) eurIn.value = eurTry.toFixed(4);
+                }
             }
         } catch(e) {}
 
-        // ── 2. Altın fiyatları — çoklu kaynak (TL bazlı) ───────────────────────
-        // Kaynak A: Harem Altın dash-data (JSON, proxy üzerinden)
-        let goldFetched = false;
+        // ── 2. Crypto (BTC) — Binance ─────────────
         try {
-            const haremDashUrl = 'https://www.haremaltin.com/dash-data';
-            const r = await fetchWithProxy(haremDashUrl, 9000);
-            if (r) {
-                const d = await r.json();
-                // Harem format: { data: { ALTIN: {alis,satis}, CEYREK_YENI: {alis,satis}, YARIM: {alis,satis}, TEK_YENI: {alis,satis}, ... } }
-                const data = d?.data || d;
-                const gram   = parseFloat(data?.ALTIN?.satis    || data?.HAS?.satis    || 0);
-                const ceyrek = parseFloat(data?.CEYREK_YENI?.satis || data?.CEYREK?.satis || 0);
-                const yarim  = parseFloat(data?.YARIM?.satis    || 0);
-                const tam    = parseFloat(data?.TEK_YENI?.satis  || data?.TEK?.satis    || 0);
-                const ons    = parseFloat(data?.ONS?.satis       || 0);
-                if (gram   > 0) { results.push({ label: 'HAS ALTIN', flag: '🥇', price: gram,   chg: 0, unit: '₺/g' }); goldFetched = true; }
-                if (ceyrek > 0) { results.push({ label: 'ÇEYREK',    flag: '🥇', price: ceyrek, chg: 0, unit: '₺'   }); goldFetched = true; }
-                if (yarim  > 0) { results.push({ label: 'YARIM',     flag: '🥇', price: yarim,  chg: 0, unit: '₺'   }); goldFetched = true; }
-                if (tam    > 0) { results.push({ label: 'TAM ALTIN', flag: '🥇', price: tam,    chg: 0, unit: '₺'   }); goldFetched = true; }
-                if (ons    > 0) { results.push({ label: 'ALTIN ONS', flag: '🥇', price: ons,    chg: 0, unit: '₺'   }); goldFetched = true; }
+            const btcRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT', {}, 10000);
+            if (btcRes.ok) {
+                const btcData = await btcRes.json();
+                const price = parseFloat(btcData.lastPrice);
+                const chg = parseFloat(btcData.priceChangePercent);
+                if (price > 0) {
+                    results.push({ label: 'BTC/USD', flag: '💎', price, chg });
+                }
             }
         } catch(e) {}
 
-        // Kaynak B: Altın fiyatları hesapla — USD/TRY döviz × ONS USD (Stooq/Yahoo'dan gelecek)
-        // Bu adım Stooq/Yahoo sonrası tamamlanacak (aşağıda hesap yapılacak)
+        // ── 3. Gold (ALTIN ONS) — Binance PAXGUSDT ─────────────
+        let goldONS = 2355.40;
+        let goldChg = 0.65;
+        try {
+            const paxgRes = await fetchSafe('https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT', {}, 10000);
+            if (paxgRes.ok) {
+                const paxgData = await paxgRes.json();
+                const price = parseFloat(paxgData.lastPrice);
+                const chg = parseFloat(paxgData.priceChangePercent);
+                if (price > 0) {
+                    goldONS = price;
+                    goldChg = chg;
+                    results.push({ label: 'ALTIN ONS', flag: '🥇', price: goldONS, chg: goldChg });
+                }
+            }
+        } catch(e) {}
 
-        // ── 3. Stooq CSV — birincil kaynak (BIST, endeksler, emtia) ────────────
-        const stooqTargets = [
-            { sym: 'xu100.pl',   label: 'BIST 100',   flag: '🇹🇷' },
-            { sym: 'xu030.pl',   label: 'BIST 30',    flag: '🇹🇷' },
-            { sym: 'gc.f',       label: 'ALTIN ONS',  flag: '🥇'  },
-            { sym: 'si.f',       label: 'GÜMÜŞ',      flag: '🥈'  },
-            { sym: '^ndx',       label: 'NASDAQ 100', flag: '🇺🇸' },
-            { sym: '^spx',       label: 'S&P 500',    flag: '🇺🇸' },
-            { sym: '^dax',       label: 'DAX',        flag: '🇩🇪' },
-            { sym: '^cac',       label: 'CAC 40',     flag: '🇫🇷' },
-            { sym: '^ftse',      label: 'FTSE 100',   flag: '🇬🇧' },
-            { sym: '^stoxx50e',  label: 'EURO STOXX', flag: '🇪🇺' },
-            { sym: 'btc.v',      label: 'BTC/USD',    flag: '💎'  },
+        // ── 4. Has Altın & Çeyrek & Yarım & Tam Altın Hesaplama ─────────────
+        const gramTL  = (goldONS / 31.1035) * usdTry;
+        const ceyrekTL = gramTL * 1.63;
+        const yarimTL  = gramTL * 3.21;
+        const tamTL    = gramTL * 6.42;
+        
+        results.push({ label: 'HAS ALTIN', flag: '🥇', price: Math.round(gramTL), chg: goldChg, unit: '₺/g' });
+        results.push({ label: 'ÇEYREK',    flag: '🥇', price: Math.round(ceyrekTL), chg: goldChg, unit: '₺' });
+        results.push({ label: 'YARIM',     flag: '🥇', price: Math.round(yarimTL), chg: goldChg, unit: '₺' });
+        results.push({ label: 'TAM ALTIN', flag: '🥇', price: Math.round(tamTL), chg: goldChg, unit: '₺' });
+
+        // ── 5. Endeksler — Yahoo v8 proxy üzerinden paralel ─────────────
+        const indexTargets = [
+            { sym: 'XU100.IS',  label: 'BIST 100',   flag: '🇹🇷' },
+            { sym: 'XU030.IS',  label: 'BIST 30',    flag: '🇹🇷' },
+            { sym: '^NDX',      label: 'NASDAQ 100', flag: '🇺🇸' },
+            { sym: '^GSPC',     label: 'S&P 500',    flag: '🇺🇸' },
+            { sym: '^GDAXI',    label: 'DAX',        flag: '🇩🇪' },
+            { sym: '^FCHI',     label: 'CAC 40',     flag: '🇫🇷' },
+            { sym: '^FTSE',     label: 'FTSE 100',   flag: '🇬🇧' },
+            { sym: '^STOXX50E', label: 'EURO STOXX', flag: '🇪🇺' },
+            { sym: 'SI=F',      label: 'GÜMÜŞ',      flag: '🥈' }
         ];
 
-        // Zaten var olanları alma — Harem'den alınmışsa tekrar çekme
-        const toFetchStooq = stooqTargets.filter(s => !results.find(r => r.label === s.label));
-
-        await Promise.allSettled(toFetchStooq.map(async s => {
+        await Promise.allSettled(indexTargets.map(async target => {
             try {
-                const url = `https://stooq.com/q/l/?s=${encodeURIComponent(s.sym)}&f=sd2t2ohlcv&h&e=csv`;
-                const res = await fetchWithProxy(url, 9000);
-                if (!res) return;
-                const text = await res.text();
-                const lines = text.trim().split('\n');
-                if (lines.length < 2) return;
-                const cols  = lines[1].split(',');
-                const close = parseFloat(cols[6]);
-                const open  = parseFloat(cols[3]);
-                if (isNaN(close) || close <= 0) return;
-                const chg = open > 0 ? ((close - open) / open) * 100 : 0;
-                results.push({ label: s.label, flag: s.flag, price: close, chg });
+                const url = `https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(target.sym)}?interval=1d&range=2d`;
+                const res = await fetchWithProxy(url, 10000);
+                if (res) {
+                    const json = await res.json();
+                    const meta = json?.chart?.result?.[0]?.meta;
+                    if (meta) {
+                        const price = meta.regularMarketPrice;
+                        const prev = meta.chartPreviousClose || meta.previousClose || price;
+                        const chg = prev > 0 ? ((price - prev) / prev) * 100 : 0;
+                        if (price > 0) {
+                            results.push({ label: target.label, flag: target.flag, price, chg });
+                        }
+                    }
+                }
             } catch(e) {}
         }));
 
-        // ── 4. Yahoo Finance v7 — Stooq'dan eksik kalanlar için yedek ───────────
-        const yahooMap = [
-            { yahoo: 'XU100.IS',  label: 'BIST 100'   },
-            { yahoo: 'XU030.IS',  label: 'BIST 30'    },
-            { yahoo: 'GC=F',      label: 'ALTIN ONS'  },
-            { yahoo: 'SI=F',      label: 'GÜMÜŞ'      },
-            { yahoo: '^NDX',      label: 'NASDAQ 100' },
-            { yahoo: '^GSPC',     label: 'S&P 500'    },
-            { yahoo: '^GDAXI',    label: 'DAX'        },
-            { yahoo: '^FCHI',     label: 'CAC 40'     },
-            { yahoo: '^FTSE',     label: 'FTSE 100'   },
-            { yahoo: '^STOXX50E', label: 'EURO STOXX' },
-            { yahoo: 'BTC-USD',   label: 'BTC/USD'    },
-        ];
-        const stillMissing = yahooMap.filter(s => !results.find(r => r.label === s.label));
-        if (stillMissing.length > 0) {
-            try {
-                const syms  = stillMissing.map(s => s.yahoo).join(',');
-                const yUrl  = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
-                const yUrl2 = `https://query2.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(syms)}&fields=regularMarketPrice,regularMarketChangePercent`;
-                let yRes = await fetchWithProxy(yUrl, 10000) || await fetchWithProxy(yUrl2, 10000);
-                if (yRes) {
-                    const yData  = await yRes.json();
-                    const quotes = yData?.quoteResponse?.result || [];
-                    quotes.forEach(q => {
-                        const sym = yahooMap.find(s => s.yahoo === q.symbol);
-                        if (!sym) return;
-                        const price = q.regularMarketPrice;
-                        const chg   = q.regularMarketChangePercent || 0;
-                        if (price && price > 0 && !results.find(r => r.label === sym.label)) {
-                            const flagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'💎' };
-                            results.push({ label: sym.label, flag: flagMap[sym.label] || '📊', price, chg });
-                        }
-                    });
-                }
-            } catch(e) {}
-        }
-
-        // ── 4c. Yahoo Finance v8 chart — direkt + proxy race, son deneme ─────────
-        const stillMissing2 = yahooMap.filter(s => !results.find(r => r.label === s.label));
-        if (stillMissing2.length > 0) {
-            const v8FlagMap = { 'BIST 100':'🇹🇷','BIST 30':'🇹🇷','ALTIN ONS':'🥇','GÜMÜŞ':'🥈','NASDAQ 100':'🇺🇸','S&P 500':'🇺🇸','DAX':'🇩🇪','CAC 40':'🇫🇷','FTSE 100':'🇬🇧','EURO STOXX':'🇪🇺','BTC/USD':'💎' };
-            await Promise.allSettled(stillMissing2.map(async s => {
-                try {
-                    const enc    = encodeURIComponent(s.yahoo);
-                    const direct1 = `https://query1.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
-                    const direct2 = `https://query2.finance.yahoo.com/v8/finance/chart/${enc}?interval=1d&range=2d`;
-                    const proxy1  = `https://api.allorigins.win/raw?url=${encodeURIComponent(direct2)}`;
-                    const proxy2  = `https://corsproxy.io/?${encodeURIComponent(direct2)}`;
-
-                    const parseV8 = async (fetchPromise) => {
-                        const r = await fetchPromise;
-                        if (!r.ok) throw new Error('not_ok');
-                        const text = await r.text();
-                        if (!text || text.trim()[0] !== '{') throw new Error('not_json');
-                        const json = JSON.parse(text);
-                        const meta = json?.chart?.result?.[0]?.meta;
-                        if (!meta?.regularMarketPrice) throw new Error('no_price');
-                        return meta;
-                    };
-
-                    let meta = null;
-                    try {
-                        meta = await Promise.any([
-                            parseV8(fetchSafe(direct1, {}, 8000)),
-                            parseV8(fetchSafe(direct2, {}, 8000)),
-                            parseV8(fetchSafe(proxy1,   {}, 9000)),
-                            parseV8(fetchSafe(proxy2,   {}, 9000)),
-                        ]);
-                    } catch(e) {}
-
-                    if (!meta) return;
-                    const price = meta.regularMarketPrice;
-                    const prev  = meta.chartPreviousClose || meta.previousClose || price;
-                    const chg   = prev > 0 ? ((price - prev) / prev) * 100 : 0;
-                    if (price > 0 && !results.find(r2 => r2.label === s.label)) {
-                        results.push({ label: s.label, flag: v8FlagMap[s.label] || '📊', price, chg });
-                    }
-                } catch(e) {}
-            }));
-        }
-
-        // ── 4b. Altın TL hesabı — Harem başarısızsa ONS+döviz ile hesapla ───
-        if (!goldFetched) {
-            const onsItem  = results.find(r => r.label === 'ALTIN ONS');
-            const usdTryItem = results.find(r => r.label === 'USD/TRY');
-            if (onsItem && usdTryItem && onsItem.price > 0 && usdTryItem.price > 0) {
-                const onsUsd  = onsItem.price;
-                const usdTry  = usdTryItem.price;
-                const gramTL  = (onsUsd / 31.1035) * usdTry; // 1 troy ons = 31.1035 gram
-                const ceyrekTL = gramTL * 1.6066;  // 0.25 altın = ~1.6066 gram (22 ayar)
-                const yarimTL  = gramTL * 3.2133;
-                const tamTL    = gramTL * 6.4266;
-                if (gramTL > 0)   results.push({ label: 'HAS ALTIN', flag: '🥇', price: Math.round(gramTL),   chg: onsItem.chg, unit: '₺/g' });
-                if (ceyrekTL > 0) results.push({ label: 'ÇEYREK',    flag: '🥇', price: Math.round(ceyrekTL), chg: onsItem.chg, unit: '₺' });
-                if (yarimTL > 0)  results.push({ label: 'YARIM',     flag: '🥇', price: Math.round(yarimTL),  chg: onsItem.chg, unit: '₺' });
-                if (tamTL > 0)    results.push({ label: 'TAM ALTIN', flag: '🥇', price: Math.round(tamTL),    chg: onsItem.chg, unit: '₺' });
-            }
-        }
-
-        // ── 5. Sırala ────────────────────────────────────────────────────────
+        // ── 6. Sıralama ve Birleştirme ────────────────────────────────────────────────────────
         const labelOrder = [
             'USD/TRY', 'EUR/TRY',
             'BIST 100', 'BIST 30',
@@ -2958,9 +2969,7 @@ function showAuthTab(tab) {
             'ALTIN ONS', 'HAS ALTIN', 'ÇEYREK', 'YARIM', 'TAM ALTIN',
             'GÜMÜŞ', 'BTC/USD'
         ];
-        const ordered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
 
-        // Merge missing items from cache if available
         const stored = loadTickerFromStorage();
         const storedData = stored?.data || [];
         
@@ -2977,27 +2986,7 @@ function showAuthTab(tab) {
             }
         });
         
-        // Re-calculate ordered list to ensure proper ordering is preserved
         const finalOrdered = labelOrder.map(l => results.find(r => r.label === l)).filter(Boolean);
-
-        // ── 6. Hiç veri gelmediyse fallback ──────────────────────
-        if (finalOrdered.length === 0) {
-            if (storedData.length > 0) {
-                const ageMin = Math.round((now - (stored.time || now)) / 60000);
-                renderOrionTicker(storedData);
-                const bar = document.getElementById('endeks-bar');
-                if (bar && track) {
-                    bar.style.position = 'relative';
-                    const badge = document.createElement('div');
-                    badge.style.cssText = 'position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:9px;color:var(--t3);font-weight:700;background:var(--surface-3);padding:2px 8px;border-radius:4px;z-index:5;';
-                    badge.textContent = `⚠ ${ageMin}dk önce`;
-                    bar.appendChild(badge);
-                }
-                return storedData;
-            }
-            if (track) track.innerHTML = '<div class="orion-tick-loading" style="color:var(--t3);">— Piyasa verisi bekleniyor</div>';
-            return;
-        }
 
         orionTickerCache = finalOrdered;
         orionTickerTime  = now;
@@ -4055,24 +4044,38 @@ function showAuthTab(tab) {
     window.dispatchResizeEventsForDuration = dispatchResizeEventsForDuration;
 
     function toggleSidebar() {
-        const sidebar = document.getElementById('orionLeftSidebar');
-        const overlay = document.getElementById('orionSidebarOverlay');
-        const toggleBtn = document.getElementById('sidebarToggleBtn');
-        if (sidebar && overlay) {
-            const isOpen = sidebar.classList.contains('open');
-            if (isOpen) {
-                sidebar.classList.remove('open');
-                overlay.classList.remove('active');
-                if (toggleBtn) toggleBtn.innerHTML = '☰';
-            } else {
-                sidebar.classList.add('open');
-                overlay.classList.add('active');
-                if (toggleBtn) toggleBtn.innerHTML = '◀';
+        if (window.innerWidth <= 900) {
+            const sidebar = document.getElementById('orionLeftSidebar');
+            const overlay = document.getElementById('orionSidebarOverlay');
+            if (sidebar && overlay) {
+                const isOpen = sidebar.classList.contains('open');
+                if (isOpen) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                } else {
+                    sidebar.classList.add('open');
+                    overlay.classList.add('active');
+                }
             }
-            // Continuous chart resizing during sidebar transition
+        } else {
+            toggleSidebarCollapse();
+        }
+    }
+    window.toggleSidebar = toggleSidebar;
+
+    function toggleSidebarCollapse() {
+        const sidebar = document.getElementById('orionLeftSidebar');
+        const collapseBtn = document.getElementById('orionSidebarCollapseBtn');
+        if (sidebar) {
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            localStorage.setItem('orion_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+            if (collapseBtn) {
+                collapseBtn.innerText = isCollapsed ? '▶' : '◀';
+            }
+            // Continuous chart resizing during transition
             dispatchResizeEventsForDuration(350);
             
-            // Forced instant chart resize steps
+            // Force resize charts on transition complete
             setTimeout(() => {
                 if (typeof chartKar !== 'undefined' && chartKar) { chartKar.resize(); chartKar.update('none'); }
                 if (typeof chartVarlik !== 'undefined' && chartVarlik) { chartVarlik.resize(); chartVarlik.update('none'); }
@@ -4085,7 +4088,20 @@ function showAuthTab(tab) {
             }, 320);
         }
     }
-    window.toggleSidebar = toggleSidebar; 
+    window.toggleSidebarCollapse = toggleSidebarCollapse;
+
+    function initSidebarState() {
+        if (window.innerWidth > 900) {
+            const sidebar = document.getElementById('orionLeftSidebar');
+            const collapseBtn = document.getElementById('orionSidebarCollapseBtn');
+            const collapsed = localStorage.getItem('orion_sidebar_collapsed') === 'true';
+            if (sidebar && collapsed) {
+                sidebar.classList.add('collapsed');
+                if (collapseBtn) collapseBtn.innerText = '▶';
+            }
+        }
+    }
+    window.initSidebarState = initSidebarState; 
 
     // --- DİNAMİK AY MOTORU ---
     function buildDynamicMonthFilter() {
@@ -5491,30 +5507,26 @@ function showAuthTab(tab) {
         let btn = document.getElementById('market-refresh-btn');
         if (btn) { btn.innerHTML = '<span class="spinner">⏳</span> Yükleniyor...'; btn.disabled = true; }
 
-        let cachedUSD = localStorage.getItem('cached_usd_rate');
-        let cachedEUR = localStorage.getItem('cached_eur_rate');
-        let cacheTime = parseInt(localStorage.getItem('cached_rate_time') || '0');
-        let cacheValid = (Date.now() - cacheTime) < 1800000;
-
         let ratePromise = (async () => {
-            let usd, eur;
-            if (cacheValid && cachedUSD && cachedEUR) {
-                usd = parseFloat(cachedUSD); eur = parseFloat(cachedEUR);
-            } else {
-                usd = await tryFetchRate('USD');
-                eur = await tryFetchRate('EUR');
-                if (usd || eur) localStorage.setItem('cached_rate_time', Date.now().toString());
-                if (usd) localStorage.setItem('cached_usd_rate', usd.toFixed(2));
-                if (eur) localStorage.setItem('cached_eur_rate', eur.toFixed(2));
-            }
+            let usd = await tryFetchRate('USD');
+            let eur = await tryFetchRate('EUR');
+            
+            if (usd || eur) localStorage.setItem('cached_rate_time', Date.now().toString());
+            if (usd) localStorage.setItem('cached_usd_rate', usd.toFixed(4));
+            if (eur) localStorage.setItem('cached_eur_rate', eur.toFixed(4));
+            
             if (usd) {
-                document.getElementById('usdTryRate').value = usd.toFixed(2);
+                document.getElementById('usdTryRate').value = usd.toFixed(4);
                 let el = document.getElementById('ozet_usd_kur'); if (el) el.textContent = usd.toFixed(2);
             }
             if (eur) {
-                document.getElementById('eurTryRate').value = eur.toFixed(2);
+                document.getElementById('eurTryRate').value = eur.toFixed(4);
                 let el = document.getElementById('ozet_eur_kur'); if (el) el.textContent = eur.toFixed(2);
             }
+            
+            // Force refresh the index ticker at the top
+            await fetchOrionTicker(true);
+            
             renderAsset('nasdaq'); renderAsset('avrupa'); updateDashboard();
         })();
 
@@ -5544,6 +5556,7 @@ function showAuthTab(tab) {
         buildDynamicMonthFilter();
         loadTheme();
         loadHedef();
+        initSidebarState();
 
         // ── asset-link event delegation (data-attribute tabanlı, özel karakter güvenli) ──
         document.addEventListener('click', function(e) {
